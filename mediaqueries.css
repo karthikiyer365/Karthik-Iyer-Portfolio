@@ -1,3 +1,6 @@
+/* Adapt btn, btn-2, btn-3{width: fit-content, socials-container icon   */
+
+
 @media screen and (max-width: 1200px){
     .tech-item img {
         width: 50px; /* Adjust size */
@@ -60,98 +63,6 @@
 
 @media screen and (max-width: 900px){
     #desktop-nav{
-<<<<<<< Updated upstream
-        display: none;
-    }
-    #hamburger-nav{
-        display: flex;
-    }
-<<<<<<< Updated upstream
-    #profile,
-    .section-container{
-        display: block;
-=======
-    .profile-pic-container{
-        display: none;
-    }
-    .section{
-        padding-top: 10vh;
->>>>>>> Stashed changes
-    }
-    .tech-item img {
-        width: 50px; 
-        height: 50px;
-        object-fit: contain;
-    }
-<<<<<<< Updated upstream
-    section{
-        margin: 0 5%;
-    }
-    .section__pic-container{
-        width: 275px;
-        height: 275px;
-        margin: 0 auto;
-    }
-    .about-containers{
-        margin-top: 0;
-    }
-}
-@media screen and (max-width: 600px){
-    #contact,
-    footer{
-        height: 40vh;
-        width: auto;
-    }
-
-    #profile{
-        height: auto;
-        margin-bottom: 0;
-    }
-    article{
-        font-size: 1rem;
-    }
-    footer nav{
-        height: fit-content;
-        margin-bottom: 2rem;
-    }
-    .about-containers,
-    .contact-info-upper-container,
-    .btn-container{
-        flex-wrap: wrap;
-        margin: auto auto;
-    }
-    .contact-info-container{
-        margin: 0;
-
-    }
-    .contact-info-container p,.nav-links li a{
-        font-size: 1rem;
-
-    }
-    
-    .experience-sub-title{
-        font-size: 1.25rem;
-    }
-    .logo{
-        font-size: 1.5rem;
-    }
-    .nav-links{
-        flex-direction: column;
-        gap: 0.5rem;
-        text-align: center;
-    }
-    .section__pic-container{
-        width: auto;
-        height: 46vw;
-        justify-content: center;
-    }
-    .section__pic-p2{
-        font-size: 1.25rem;
-    }
-    .text-container{
-        text-align: justify;
-=======
-=======
         display: none;
     }
     #hamburger-nav{
@@ -168,7 +79,6 @@
         height: 50px;
         object-fit: contain;
     }
->>>>>>> Stashed changes
     .tech-grid {
         display: grid;
         grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
@@ -176,10 +86,6 @@
         justify-items: center;
         align-items: center;
         padding: 10px;
-<<<<<<< Updated upstream
->>>>>>> Stashed changes
-=======
->>>>>>> Stashed changes
     }
 }
 
@@ -199,16 +105,6 @@
     50%  { opacity: 1;  }
     100% { transform:translate(0,10px); opacity: 0; }
   }
-<<<<<<< Updated upstream
-<<<<<<< Updated upstream
-
-
-
-
-
-=======
-=======
->>>>>>> Stashed changes
   @keyframes scroll-left {
     from {
       transform: translateX(0%);
@@ -217,7 +113,3 @@
       transform: translateX(-100%);
     }
   }
-<<<<<<< Updated upstream
->>>>>>> Stashed changes
-=======
->>>>>>> Stashed changes

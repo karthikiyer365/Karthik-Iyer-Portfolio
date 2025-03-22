@@ -1,36 +1,39 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <!-- Google tag (gtag.js) -->
-    <!-- Google Analytics tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-WMVWTJ7M4X"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
+<!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-WMVWTJ7M4X"></script>
 
-  gtag('config', 'G-WMVWTJ7M4X');
-</script>
+<!-- Google Analytics tag (gtag.js) -->
+    <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-WMVWTJ7M4X');
+    </script>
 
-    <!-- Google Tag Manager -->
-<script>
-    (function(w,d,s,l,i){w[l]=w[l]||[];
-        w[l].push({'gtm.start':new Date().getTime(), event:'gtm.js'});
-        var f = d.getElementsByTagName(s)[0], j = d.createElement(s), dl = l != 'dataLayer'?'&l='+l:''; 
-        j.async =true;
-        j.src = 'https://www.googletagmanager.com/gtm.js?id='+ i + dl;
-        f.parentNode.insertBefore(j, f);
-    })
-    (window, document, 'script', 'dataLayer', 'GTM-NPXQTBL7');
-</script>
+<!-- Google Tag Manager -->
+    <script>
+        (function(w,d,s,l,i){w[l]=w[l]||[];
+            w[l].push({'gtm.start':new Date().getTime(), event:'gtm.js'});
+            var f = d.getElementsByTagName(s)[0], j = d.createElement(s), dl = l != 'dataLayer'?'&l='+l:''; 
+            j.async =true;
+            j.src = 'https://www.googletagmanager.com/gtm.js?id='+ i + dl;
+            f.parentNode.insertBefore(j, f);
+        })
+        (window, document, 'script', 'dataLayer', 'GTM-NPXQTBL7');
+    </script>
+    
 <!-- End Google Tag Manager -->
 
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Karthik Iyer's Portfolio</title>
+    <title>Karthik Iyer - Data Analyst</title>
     <link rel="stylesheet" href="style.css" />
     <link rel="stylesheet" href="mediaqueries.css" />
+    <script src="https://cdn.plot.ly/plotly-2.24.1.min.js"></script>
 </head>
+
 <body>
     <!-- Google Tag Manager (noscript) -->
 <noscript>
@@ -39,25 +42,25 @@
 </noscript>
     <!-- End Google Tag Manager (noscript) -->
     <nav id="desktop-nav">
-        <div class="logo">Karthik Iyer</div>
+        <div class="logo">
+            KSI.    
+        </div>
+        <!-- Navigation Links for Desktop -->
         <div>
             <ul class="nav-links">
-<<<<<<< Updated upstream
-                <li><a href="#about">About</a></li>
-                <li><a href="#experience">Experience</a></li>
-                <li><a href="#projects">Projects</a></li>
-                <li><a href="#contact">Contact</a></li>
-=======
                 <li><a href="#resume">RESUME</a></li>
                 <li><a href="#techstack">TECH STACK</a></li>
                 <li><a href="#projects">PROJECTS</a></li>
                 <li><a href="#contact">CONTACT</a></li>
->>>>>>> Stashed changes
             </ul>
         </div>
     </nav>
     <nav id="hamburger-nav">
-        <div class="logo">Karthik Iyer</div>
+        <div class="logo">
+                KSI.
+        </div>
+        
+        <!-- Navigation Links for Mobile -->
         <div class="hamburger-menu">
             <div class="hamburger-icon" onclick="toggleMenu()">
                 <span></span>
@@ -65,30 +68,14 @@
                 <span></span>
             </div>
             <div class="menu-links">
-<<<<<<< Updated upstream
-                <li><a href="#about" onclick="toggleMenu()">About</a></li>
-                <li><a href="#experience" onclick="toggleMenu()">Experience</a></li>
-                <li><a href="#projects" onclick="toggleMenu()">Projects</a></li>
-                <li><a href="#contact" onclick="toggleMenu()">Contact</a></li>
-=======
                 <li><a href="#resume" onclick="toggleMenu()">RESUME</a></li>
                 <li><a href="#techstack" onclick="toggleMenu()">TECH STACK</a></li>
                 <li><a href="#projects" onclick="toggleMenu()">PROJECTS</a></li>
                 <li><a href="#contact" onclick="toggleMenu()">CONTACT</a></li>
->>>>>>> Stashed changes
             </div>
         </div>
     </nav>
     <section id="profile">
-<<<<<<< Updated upstream
-        <div class="section__pic-container">
-            <img src="./assets/profile-pic.png" alt="Karthik Iyer Profile Picture" class="about-pic">
-        </div>
-        <div class="section__text">
-            <p class="section__text__p1"> Hello, I'm</p>
-            <h1 class="title"> Karthik Iyer</h1>
-            <p class="section__text__p2"> Data Analyst</p>
-=======
         <div class="profile-content">
             <h1 class="title">Karthik Iyer</h1>
             <div>
@@ -114,17 +101,11 @@
                 I ensure seamless information sharing through clear, engaging, and visually compelling communication. 
                 </p>
             </div>
->>>>>>> Stashed changes
             <div class="btn-container" >
-                <button class="btn btn-color-2" onclick="window.open('./assets/MyResume.pdf')">Download CV
+                <button class="btn" onclick="window.open('./assets/MyResume.pdf')">Download CV
                 </button>
-                <button class="btn btn-color-1" onclick="location.href='./#contact'">Contact Info
+                <button class="btn" onclick="location.href='./#contact'">Contact Info
                 </button>
-<<<<<<< Updated upstream
-<<<<<<< Updated upstream
-=======
-=======
->>>>>>> Stashed changes
                 <div class="socials-container">
                     <img src="./logos/linkedin.png" alt="LinkedIn Icon" class="icon" 
                     onclick="window.open('https://www.linkedin.com/in/kiyer8/', '_blank')">
@@ -133,22 +114,12 @@
                     <img src="./logos/instalogo.png" alt="My Instagram account" class="icon" 
                     onclick="window.open('https://www.instagram.com/iyer.karthik00/#', '_blank')">
                 </div>
->>>>>>> Stashed changes
-            </div>
-            <div id="socials-container">
-                <img src="./assets/linkedin.png" alt="My Linkedin page" class="icon" onclick="location.href='https://www.linkedin.com/in/kiyer8/'">
-                <img src="./assets/github.png" alt="My Github profile" class="icon" onclick="location.href='https://github.com/karthikiyer365'">
             </div>
         </div>
+        <div class="profile-pic-container">
+            <img src="./assets/profile-pic.png" alt="Karthik Iyer Profile Picture">
+        </div>
     </section>
-<<<<<<< Updated upstream
-    <section id="about">
-        <p class="section__text__p1">Get to know more</p>
-        <h1 class="title">About Me</h1>
-        <div class="section-container">
-            <div class="section__pic-container">
-                <img src="./assets/about-pic.png" alt="Profile Piction" class="about-pic">
-=======
     <section id="resume">
         <h1 class="title">Career Snapshot</h1>
         <div class="career-container">
@@ -157,117 +128,41 @@
                 <button class="btn-color-2" onclick="showContent('experience')">EXPERIENCE</button>
                 <button class="btn-color-2" onclick="showContent('education')">EDUCATION</button>
                 <button class="btn-color-2" onclick="showContent('skills')">SKILLS</button>
-<<<<<<< Updated upstream
->>>>>>> Stashed changes
-=======
->>>>>>> Stashed changes
             </div>
-            <div class="about-details-container">
-                <div class="about-containers">
-                    <div class="details-container">
-                        <img src="./assets/experience.png" alt="Experience Icon" class="icon">
-                        <h3>Experience</h3>
-                        <p>2+ years <br>Data Analyst</p>
-                    </div>
-                    <div class="details-container">
-                        <img src="./assets/education.png" alt="Education Icon" class="icon">
-                        <h3>Education</h3>
-                        <p>B.Eng Computer Engineering <br>M.Sc Data Analytics</p>
-                    </div>
-                </div>
-<<<<<<< Updated upstream
-                <div class="text-container">
-                    <p>
-                    I am a <b>Data Analyst</b> and <b>Visual Storyteller</b>.<br> 
-                    As a data enthusiast, I work with my niche of skills in sharing information 
-                    with the most <b>captivating means of communication</b>. 
-                    Having tackled, a wide range of data projects in a variety of industries, I have been able to understand numerous issues, currently in the industry.
-                </p>
-                </div>
-            </div>
-        </div>
-    </section>
-    <section id="experience">
-        <p class="section__text__p1"> Explore My </p>
-        <h1 class="title"> Experience</h1>
-        <b><p class="experience-description">Data Cleaning, API Handling, Statistical Modelling, Data Visualization,  Multivariate Analytics, Machine Learning, Data Mining, Feature Engineering, NLP </p></b>
-        <div class="experience-details-container">
-            <div class="about-containers">
-                <div class="details-container">
-                    <h2 class="experience-sub-title">Analytical Software</h2>
-                    <div class="article-container">
-                        <article>
-                            <img src="./assets/checkmark.png" alt="Experience Icon" class="icon">
-                            <div>
-                                <h3>Python</h3>
-                                <b>Experienced</b>
-                                <p>Numpy, Pandas, Matplotlib, sci-kit learn, seaborn, plotly & dash</p>
-                            </div>
-                        </article>
-                        <article>
-                            <img src="./assets/checkmark.png" alt="Experience Icon" class="icon">
-                            <div>
-                                <h3>SQL</h3>
-                                <b>Intermediate</b>
-                                <p>MySQL, PostgreSQL, Data Aggregation, Table Joins</p>
-                            </div>
-                        </article>
-                        <article>
-                            <img src="./assets/checkmark.png" alt="Experience Icon" class="icon">
-                            <div>
-                                <h3>Excel</h3>
-                                <b>Intermediate</b>
-                                <p>VLookup, Query Editor, Charts and Visualization</p>
-
-                            </div>
-                        </article>
-                        <article>
-                            <img src="./assets/checkmark.png" alt="Experience Icon" class="icon">
-                            <div>
-                                <h3>Tableau</h3>
-                                <b>Basic</b>
-                                <p>Data Visualization, Report Generation</p>
-                            </div>
-                        </article>
+            <div class="content">
+                <!-- Overview Section -->
+                <div id="overview" class="content-section active">
+                    <h1>About Me</h1>
+                    <p>As a Data Analyst, I have undertaken various roles and projects to 
+                        accomplish 4+ years of experience, working in Medical, Sports, Financial, Operational,
+                        Marketing and Technical Support.</p>
+                    <div class="cards" style="flex-direction: row; max-height: max-content;">
+                        <div class="card" style="width: 45%; align-self: center;">
+                            <h2>Location</h2>
+                            <p>Arlington, VA</p>
                         </div>
+                        <div class="card" style="width: 45%; align-self: center;">
+                            <h2>Email</h2>
+                            <p>karthikiyer365@gmail.com</p>
+                        </div>
+                        <div class="card" style="width: 45%; align-self: center;">
+                            <h2>Age</h2>
+                            <p>24 years</p>
+                        </div>
+                        <div class="card" style="width: 45%; align-self: center;">
+                            <h2>Languages</h2>
+                            <p>Engligh, Hindi, Marathi, Tamil, French</p>
+                        </div>
+                        <div class="card" style="width: 45%; align-self: center;">
+                            <h2>Contact No.</h2>
+                            <p>+1(202)713-1699</p>
+                        </div>
+                        <div class="card" style="width: 45%; align-self: center;">
+                            <h2>Nationality</h2>
+                            <p>South Asian</p>
+                        </div>
+                    </div>
                 </div>
-                <div class="details-container">
-                    <h2 class="experience-sub-title">Additional Tools</h2>
-                    <div class="article-container">
-                        <article>
-                            <img src="./assets/checkmark.png" alt="Experience Icon" class="icon">
-                            <div>
-                                <h3>Git, Slack </h3>
-                                <b>Intermediate</b>
-                                <p>Version Control, Workflow, Team coordination</p>
-                            </div>
-                        </article>
-                        <article>
-                            <img src="./assets/checkmark.png" alt="Experience Icon" class="icon">
-                            <div>
-                                <h3>Minitab</h3>
-                                <b>Intermediate</b>
-                                <p>Statistical Analysis, Probabilistic Analysis, Time Series Analysis</p>
-                            </div>
-                        </article>
-                        <article>
-                            <img src="./assets/checkmark.png" alt="Experience Icon" class="icon">
-                            <div>
-                                <h3>Database</h3>
-                                <b>Basic</b>
-                                <p>MongoDB, AWS, Databricks, Azure pipeline</p>
-                            </div>
-                        </article>
-                        <article>
-                            <img src="./assets/checkmark.png" alt="Experience Icon" class="icon">
-                            <div>
-                                <h3>PHP, HTML, Node.js</h3>
-                                <b>Basic</b>
-                                <p>Website Developement, Server Connection</p>
-                            </div>
-                        </article>
-
-=======
 
                 <!-- Experience Section -->
                 <div id="experience" class="content-section">
@@ -504,14 +399,10 @@
                         <p style="text-align:center"><progress value="60" max="100">60%</progress>Minitab/SAS<progress value="55" max="100">55%</progress>Google Analytics</p>
                         <p style="text-align:center"><progress value="20" max="100">20%</progress><progress value="60" max="100">60%</progress>Machine Learning</p>
                         </div>
->>>>>>> Stashed changes
                     </div>
                 </div>
             </div>
         </div>
-<<<<<<< Updated upstream
-    </section>
-=======
         <script src="script.js"></script>    
     </section>
     <section id="techstack">
@@ -718,19 +609,13 @@
             </div> -->
 
 
-<<<<<<< Updated upstream
->>>>>>> Stashed changes
-=======
->>>>>>> Stashed changes
     <section id="projects">
-        <p class="section__text__p1">Browse my Recent</p>
         <h1 class="title">Projects</h1>
         <div class="category-buttons">
             <button class="category-btn active" onclick="showProjects('financial')">Financial Analysis</button>
             <button class="category-btn" onclick="showProjects('ml')">Machine Learning</button>
             <button class="category-btn" onclick="showProjects('database')">Database Management</button>
             <button class="category-btn" onclick="showProjects('cloud')">Cloud Computing</button>
-<<<<<<< Updated upstream
         </div>
         <div class="projects-container" id="projects-container">
         </div>
@@ -767,86 +652,6 @@
                         about: "Analyzed diamond market in-terms of competitor pricing, inventory and seasonal trend for investment risk and reccomendations."
                     }
 
-<<<<<<< Updated upstream
-    </section>
-    <section id="contact">
-        <p class="section__text__p1">Get in Touch</p>
-        <h1 class="title">Contact Me</h1>
-        <div class="contact-info-upper-container">
-            <div class="contact-info-container">
-                <img src="./assets/email.png" alt="Email Icon" class="icon contact-icon email-icon">
-                <p>
-                    <a href="mailto:karthikiyer365@gmail.com">karthikiyer365@gmail.com</a>
-                </p>
-                </p>
-            </div>
-            <div class="contact-info-container">
-                <img src="./assets/linkedin.png" alt="LinkedIn Icon" class="icon contact-icon">
-                <p>
-                    <a href="https://www.linkedin.com/in/kiyer8/">LinkedIn</a>
-                </p>
-                </p>
-            </div>
-            <div class="contact-info-container">
-                <img src="./assets/phoneicon.png" alt="Phone Icon" class="icon contact-icon">
-                <p>
-                    <a href="tel:+1(202)713-1699">Connect</a>
-                </p>
-                </p>
-            </div>
-=======
->>>>>>> Stashed changes
-        </div>
-        <div class="projects-container" id="projects-container">
-        </div>
-        <script>
-            // Project Data
-            const projects = {
-                financial: [
-                    { 
-                        title: "Stock Price Prediction", 
-                        image: "/projects/stock.png", 
-                        link: "https://github.com/your-repo",
-                        skills: ["LSTM", "Time-series", "NumPy"],
-                        about: "Developed LSTM based predictive model, for S&P 500 stock prices, to optimize portfolio management with future predictions. Acheived 85% accuracy"
-                    },
-                    { 
-                        title: "Insurance Market Analysis Dashboard", 
-                        image: "/projects/risk_analysis.png", 
-                        link: "https://github.com/your-repo",
-                        skills: ["SQL", "Power BI", "Pandas", "Web Scraping"],
-                        about: "Analyzed 12 fiscal quarters of insurance data to identify claim trends, and insurance investments in NBFCs. Developed a Power BI dashboard for real-time insights."
-                    },
-                    { 
-                        title: "Jewelry Market - Investment Portfolio Analysis", 
-                        image: "/projects/diamond.png", 
-                        link: "https://github.com/karthikiyer365?tab=repositories",
-                        skills: ["Tableau", "Excel", "Data Reconcilation", "Statistical Analysis"],
-                        about: "Analyzed diamond market in-terms of competitor pricing, inventory and seasonal trend for investment risk and reccomendations."
-                    },
-                    { 
-                        title: "Google Playstore Analysis", 
-                        image: "/projects/google.png", 
-                        link: "https://github.com/karthikiyer365?tab=repositories",
-                        skills: ["Matplotlib", "Pandas", "GCP", "Databricks"],
-                        about: "Analyzed diamond market in-terms of competitor pricing, inventory and seasonal trend for investment risk and reccomendations."
-                    }
-
-<<<<<<< Updated upstream
-    </section>
-    <footer class="footer-box">
-        <nav>
-            <div class="nav-links-container">
-                <ul class="nav-links">
-                    <li><a href="#about">About</a></li>
-                    <li><a href="#experience">Experience</a></li>
-                    <li><a href="#projects">Projects</a></li>
-                    <li><a href="#contact">Contact</a></li>
-                </ul>
-            </div>
-        </nav>
-        <p>Copyright &#169; 2024 Karthik Iyer. All rights Reserved.</p>
-=======
 
                 ],
                 ml: [
@@ -953,114 +758,6 @@
         </script>
     </section>
 
-=======
-
-                ],
-                ml: [
-                    { 
-                        title: "Athelete Performance and Market Value Prediction", 
-                        image: "/projects/athlete.png", 
-                        link: "https://github.com/your-repo",
-                        skills: ["Multi Variate Regression", "TensorFlow", "Scikit-Learn"]
-                    },
-                    { 
-                        title: "Panic Attack Predictions using Smartwatch sensors", 
-                        image: "/projects/panic.png", 
-                        link: "https://github.com/your-repo",
-                        skills: ["Deep Learning", "Data Wrangling", "Feature Engineering"]
-                    },
-                    { 
-                        title: "Audio Mapping - Artist Recommendation", 
-                        image: "/projects/audiomap.png", 
-                        link: "https://github.com/your-repo",
-                        skills: ["PCA", "SVC", "Pandas","Regex","Beautiful Soup"]
-                    },
-                    {
-                        title: "Drug User Classification",
-                        image: "/projects/drug.png",
-                        link: "",
-                        skills: ["Logistic Regression", "Feature Engineering", "NumPy", "Pandas", "Statistical Analysis"]
-                    },
-                    {
-                        title: "Stock Price Forecasting",
-                        image: "/projects/stock.png",
-                        link: "",
-                        skills: ["LSTM", "Time-Series", "Data Visualization"]
-                    } 
-                ],
-                database: [
-                    { 
-                        title: "YELP - Customer Review Analysis", 
-                        image: "/projects/yelp.png", 
-                        link: "https://github.com/your-repo",
-                        skills: ["Text Embedding", "Spark", "Databricks"]
-                    },
-                    { 
-                        title: "Train Scheduling System", 
-                        image: "/projects/train.png", 
-                        link: "https://github.com/your-repo",
-                        skills: ["MongoDB", "MySQL", "RDBMS", "API Integration"]
-                    },
-                    { 
-                        title: "Government Salary Analysis", 
-                        image: "/projects/salary.png", 
-                        link: "https://github.com/your-repo",
-                        skills: ["ETL", "SQL", "Time-Series", "Data Visualization"]
-                    }
-                ],
-                cloud: [
-                { 
-                        title: "Train Scheduling System", 
-                        image: "/projects/train.png", 
-                        link: "https://github.com/your-repo",
-                        skills: ["MongoDB", "MySQL", "RDBMS", "API Integration"]
-                    },
-                    { 
-                        title: "College Online Learning Website", 
-                        image: "/projects/collegeconnect.png", 
-                        link: "https://github.com/your-repo",
-                        skills: ["AWS", "IAM", "S3", "API Integration"]
-                    }
-                ]
-            };
-    
-            // Function to Display Projects
-            function showProjects(category) {
-                const container = document.getElementById("projects-container");
-                container.innerHTML = ""; // Clear existing projects
-    
-                projects[category].forEach(project => {
-                    const card = document.createElement("div");
-                    card.classList.add("project-card");
-    
-                    card.innerHTML = `
-                        <div class="project-image">
-                            <img src="${project.image}" alt="${project.about}">
-                            <div class="overlay">
-                                <a href="${project.link}" target="_blank">
-                                    <i class="fas fa-external-link-alt"></i></a>
-                            </div>
-                        </div>
-                        <h3>${project.title}</h3>
-                        <div class="tech-stack">
-                            ${project.skills.map(skill => `<span class="skill">${skill}</span>`).join("")}
-                        </div>
-                    `;
-    
-                    container.appendChild(card);
-                });
-    
-                // Update Active Button Styling
-                document.querySelectorAll(".category-btn").forEach(btn => btn.classList.remove("active"));
-                document.querySelector(`button[onclick="showProjects('${category}')"]`).classList.add("active");
-            }
-    
-            // Load Financial Projects by Default
-            document.addEventListener("DOMContentLoaded", () => showProjects('financial'));
-        </script>
-    </section>
-
->>>>>>> Stashed changes
     <footer id="contact" class="footer-box">
         <h1 class="title" style="margin: 0 15vw">Contact Me</h1>
         <p>Have questions or want to start a new project? 
@@ -1089,16 +786,8 @@
         </div>      
         <p style="padding-bottom: 5vh; align-content: center; ">Developed by Karthik Sivaraman Iyer.
             Copyright &#169; 2025. All rights Reserved. Creative Visualizations Used.</p>
-<<<<<<< Updated upstream
->>>>>>> Stashed changes
-=======
->>>>>>> Stashed changes
     </footer>
 
     <script src="script.js"></script>  
 </body>
 </html>
-
-
-
-
