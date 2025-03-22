@@ -121,7 +121,10 @@
                 <button class="btn btn-color-1" onclick="location.href='./#contact'">Contact Info
                 </button>
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
 =======
+=======
+>>>>>>> Stashed changes
                 <div class="socials-container">
                     <img src="./logos/linkedin.png" alt="LinkedIn Icon" class="icon" 
                     onclick="window.open('https://www.linkedin.com/in/kiyer8/', '_blank')">
@@ -154,6 +157,9 @@
                 <button class="btn-color-2" onclick="showContent('experience')">EXPERIENCE</button>
                 <button class="btn-color-2" onclick="showContent('education')">EDUCATION</button>
                 <button class="btn-color-2" onclick="showContent('skills')">SKILLS</button>
+<<<<<<< Updated upstream
+>>>>>>> Stashed changes
+=======
 >>>>>>> Stashed changes
             </div>
             <div class="about-details-container">
@@ -712,6 +718,9 @@
             </div> -->
 
 
+<<<<<<< Updated upstream
+>>>>>>> Stashed changes
+=======
 >>>>>>> Stashed changes
     <section id="projects">
         <p class="section__text__p1">Browse my Recent</p>
@@ -721,6 +730,7 @@
             <button class="category-btn" onclick="showProjects('ml')">Machine Learning</button>
             <button class="category-btn" onclick="showProjects('database')">Database Management</button>
             <button class="category-btn" onclick="showProjects('cloud')">Cloud Computing</button>
+<<<<<<< Updated upstream
         </div>
         <div class="projects-container" id="projects-container">
         </div>
@@ -784,8 +794,45 @@
                 </p>
                 </p>
             </div>
+=======
+>>>>>>> Stashed changes
         </div>
+        <div class="projects-container" id="projects-container">
+        </div>
+        <script>
+            // Project Data
+            const projects = {
+                financial: [
+                    { 
+                        title: "Stock Price Prediction", 
+                        image: "/projects/stock.png", 
+                        link: "https://github.com/your-repo",
+                        skills: ["LSTM", "Time-series", "NumPy"],
+                        about: "Developed LSTM based predictive model, for S&P 500 stock prices, to optimize portfolio management with future predictions. Acheived 85% accuracy"
+                    },
+                    { 
+                        title: "Insurance Market Analysis Dashboard", 
+                        image: "/projects/risk_analysis.png", 
+                        link: "https://github.com/your-repo",
+                        skills: ["SQL", "Power BI", "Pandas", "Web Scraping"],
+                        about: "Analyzed 12 fiscal quarters of insurance data to identify claim trends, and insurance investments in NBFCs. Developed a Power BI dashboard for real-time insights."
+                    },
+                    { 
+                        title: "Jewelry Market - Investment Portfolio Analysis", 
+                        image: "/projects/diamond.png", 
+                        link: "https://github.com/karthikiyer365?tab=repositories",
+                        skills: ["Tableau", "Excel", "Data Reconcilation", "Statistical Analysis"],
+                        about: "Analyzed diamond market in-terms of competitor pricing, inventory and seasonal trend for investment risk and reccomendations."
+                    },
+                    { 
+                        title: "Google Playstore Analysis", 
+                        image: "/projects/google.png", 
+                        link: "https://github.com/karthikiyer365?tab=repositories",
+                        skills: ["Matplotlib", "Pandas", "GCP", "Databricks"],
+                        about: "Analyzed diamond market in-terms of competitor pricing, inventory and seasonal trend for investment risk and reccomendations."
+                    }
 
+<<<<<<< Updated upstream
     </section>
     <footer class="footer-box">
         <nav>
@@ -906,6 +953,114 @@
         </script>
     </section>
 
+=======
+
+                ],
+                ml: [
+                    { 
+                        title: "Athelete Performance and Market Value Prediction", 
+                        image: "/projects/athlete.png", 
+                        link: "https://github.com/your-repo",
+                        skills: ["Multi Variate Regression", "TensorFlow", "Scikit-Learn"]
+                    },
+                    { 
+                        title: "Panic Attack Predictions using Smartwatch sensors", 
+                        image: "/projects/panic.png", 
+                        link: "https://github.com/your-repo",
+                        skills: ["Deep Learning", "Data Wrangling", "Feature Engineering"]
+                    },
+                    { 
+                        title: "Audio Mapping - Artist Recommendation", 
+                        image: "/projects/audiomap.png", 
+                        link: "https://github.com/your-repo",
+                        skills: ["PCA", "SVC", "Pandas","Regex","Beautiful Soup"]
+                    },
+                    {
+                        title: "Drug User Classification",
+                        image: "/projects/drug.png",
+                        link: "",
+                        skills: ["Logistic Regression", "Feature Engineering", "NumPy", "Pandas", "Statistical Analysis"]
+                    },
+                    {
+                        title: "Stock Price Forecasting",
+                        image: "/projects/stock.png",
+                        link: "",
+                        skills: ["LSTM", "Time-Series", "Data Visualization"]
+                    } 
+                ],
+                database: [
+                    { 
+                        title: "YELP - Customer Review Analysis", 
+                        image: "/projects/yelp.png", 
+                        link: "https://github.com/your-repo",
+                        skills: ["Text Embedding", "Spark", "Databricks"]
+                    },
+                    { 
+                        title: "Train Scheduling System", 
+                        image: "/projects/train.png", 
+                        link: "https://github.com/your-repo",
+                        skills: ["MongoDB", "MySQL", "RDBMS", "API Integration"]
+                    },
+                    { 
+                        title: "Government Salary Analysis", 
+                        image: "/projects/salary.png", 
+                        link: "https://github.com/your-repo",
+                        skills: ["ETL", "SQL", "Time-Series", "Data Visualization"]
+                    }
+                ],
+                cloud: [
+                { 
+                        title: "Train Scheduling System", 
+                        image: "/projects/train.png", 
+                        link: "https://github.com/your-repo",
+                        skills: ["MongoDB", "MySQL", "RDBMS", "API Integration"]
+                    },
+                    { 
+                        title: "College Online Learning Website", 
+                        image: "/projects/collegeconnect.png", 
+                        link: "https://github.com/your-repo",
+                        skills: ["AWS", "IAM", "S3", "API Integration"]
+                    }
+                ]
+            };
+    
+            // Function to Display Projects
+            function showProjects(category) {
+                const container = document.getElementById("projects-container");
+                container.innerHTML = ""; // Clear existing projects
+    
+                projects[category].forEach(project => {
+                    const card = document.createElement("div");
+                    card.classList.add("project-card");
+    
+                    card.innerHTML = `
+                        <div class="project-image">
+                            <img src="${project.image}" alt="${project.about}">
+                            <div class="overlay">
+                                <a href="${project.link}" target="_blank">
+                                    <i class="fas fa-external-link-alt"></i></a>
+                            </div>
+                        </div>
+                        <h3>${project.title}</h3>
+                        <div class="tech-stack">
+                            ${project.skills.map(skill => `<span class="skill">${skill}</span>`).join("")}
+                        </div>
+                    `;
+    
+                    container.appendChild(card);
+                });
+    
+                // Update Active Button Styling
+                document.querySelectorAll(".category-btn").forEach(btn => btn.classList.remove("active"));
+                document.querySelector(`button[onclick="showProjects('${category}')"]`).classList.add("active");
+            }
+    
+            // Load Financial Projects by Default
+            document.addEventListener("DOMContentLoaded", () => showProjects('financial'));
+        </script>
+    </section>
+
+>>>>>>> Stashed changes
     <footer id="contact" class="footer-box">
         <h1 class="title" style="margin: 0 15vw">Contact Me</h1>
         <p>Have questions or want to start a new project? 
@@ -934,6 +1089,9 @@
         </div>      
         <p style="padding-bottom: 5vh; align-content: center; ">Developed by Karthik Sivaraman Iyer.
             Copyright &#169; 2025. All rights Reserved. Creative Visualizations Used.</p>
+<<<<<<< Updated upstream
+>>>>>>> Stashed changes
+=======
 >>>>>>> Stashed changes
     </footer>
 
