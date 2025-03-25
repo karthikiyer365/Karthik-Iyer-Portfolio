@@ -489,6 +489,10 @@ p{
     font-size: 24px;
     text-decoration: none;
 }
+.overlay :hover {
+    cursor:pointer
+}
+
 i {
     color: #ff7f0e;  /* Orange */
     font-size: 16px;
