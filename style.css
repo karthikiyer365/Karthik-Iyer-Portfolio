@@ -14,7 +14,7 @@ html {
 body {
     font-family: "Inter", serif;
     font-weight: 400;
-    background-color: #ECF1F8
+    background-color: #ECF1F8;
 }
 section{
     height: 80vh;
@@ -22,7 +22,6 @@ section{
     margin: 0 15vw;
     box-sizing: border-box;
     min-height: fit-content;
-    
 }
 
 
@@ -65,7 +64,7 @@ a {
     color: white;
     transition: 300ms ease;
     display: inline;  /* Ensures link stays within the text flow */
-    text-decoration: none
+    text-decoration: none;
 }
 
 a:hover {
@@ -256,15 +255,9 @@ p{
     display: flex;
     flex-direction: column;
     gap: 15px;
-    margin-top: 1vh
+    margin-top: 1vh;
 }
-.highlight {
-    font-family: 'Sans'; /* or any distinctive font */
-    color: #FF6347; /* tomato red for emphasis */
-    font-weight: bold;
-    display: inline-block;
-    
-}
+
 .btn-color-2 {
     font-family: "Inter", serif;
     width: 100%;
