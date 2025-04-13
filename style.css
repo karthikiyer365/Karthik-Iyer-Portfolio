@@ -14,7 +14,7 @@ html {
 body {
     font-family: "Inter", serif;
     font-weight: 400;
-    background-color: #96BBD4
+    background-color: #ECF1F8
 }
 section{
     height: 80vh;
@@ -55,7 +55,7 @@ section{
 } 
 .btn:hover, .btn-color-2:hover{
     cursor: pointer;
-    background: rgb(0, 7, 80);
+    background: #1616AF;
     color: white;
     border: rgb(53,53,53) 0.1rem solid;
 }
@@ -69,7 +69,7 @@ a {
 }
 
 a:hover {
-  color: #96BBD4;
+  color: #ECF1F8;
 }
 
 /* Nav Bar */
@@ -79,7 +79,7 @@ nav {
     align-items: center;
     height: 15vh;
     min-height: max-content;
-    background-color: rgb(0, 7, 80);
+    background-color: #1616AF;
     position: sticky;
     top: 0;
     z-index: 1000;
@@ -90,7 +90,7 @@ nav {
     font-size: 40px;
     /* shape-image-threshold: inherit; */
     overflow: hidden;
-    color: #96BBD4;
+    color: #ECF1F8;
     padding:0 0;
     margin: 0 0;
     margin-left: 15vw;
@@ -138,7 +138,7 @@ nav {
     position: absolute;
     top: 100%;
     right: 0;
-    background:rgb(0, 7, 80);
+    background:#1616AF;
     width: fit-content;
     max-height: 0;
     overflow: hidden;
@@ -158,10 +158,9 @@ nav {
 }
 .menu-links.open{
     max-height: fit-content;
-  
 }
 
-/* Hamburger icon tranformationinteraction */
+/* Hamburger icon tranformation interaction */
 .hamburger-icon.open span:first-child{
     transform: rotate(45deg) translate(10px,5px);
 }
@@ -214,12 +213,26 @@ p{
     display: flex;
     justify-content: left;
     font-size: 12px;
-    /* margin-top: 6px; */
+    word-wrap: break-word;
+    word-break: normal;
 }
-.profile-pic-container{
-    height: max-content;
-    /* margin-right: 30vw; */
+.profile-insight{
+    display: flex;
+    justify-content: left;
+    font-size: 12px;
+    margin-top: 2vh;
+    margin-bottom: 2vh;
 }
+.profile-pic-container {
+    display: inline-block; 
+    max-height: min-content;
+  }
+  
+  .profile-pic-container img {
+    width: 100%;    /* fill container width */
+    height: auto;   /* maintain aspect ratio */
+    display: block; /* remove any inline-gap issues */
+  }
 .socials-container{
     display: flex;
     justify-content: center;
@@ -244,7 +257,13 @@ p{
     flex-direction: column;
     gap: 15px;
     margin-top: 1vh
-
+}
+.highlight {
+    font-family: 'Sans'; /* or any distinctive font */
+    color: #FF6347; /* tomato red for emphasis */
+    font-weight: bold;
+    display: inline-block;
+    
 }
 .btn-color-2 {
     font-family: "Inter", serif;
@@ -262,7 +281,7 @@ p{
 
 }
 .btn-color-2.active {
-    background: rgb(0, 7, 80);
+    background: #1616AF;
     color: white;
     /* font-weight: ; */
 }
@@ -296,21 +315,21 @@ p{
     overflow-x: hidden; /* Prevents horizontal scrolling */
     max-height: 45vh; /* Fixed height */
     scrollbar-width: thin;
-    scrollbar-color: rgb(0, 7, 80) #96BBD4;
+    scrollbar-color: #1616AF #ECF1F8;
 }
 .card {
     width: 100%;
     background: transparent;
     padding-left: 15px;
     border-radius: 10px;
-    border: rgb(0, 7, 80) solid;
+    border: #1616AF solid;
     margin: 0 0;
     cursor: pointer;
     border-width: 1.25px;
 }
 .card p{
     font-size: 12px;
-    color: rgb(0, 7, 80);
+    color: #1616AF;
     font-weight: bold;
     padding-bottom: 1vh;
     margin-bottom: 0vh;
@@ -356,7 +375,7 @@ p{
     background: transparent;
     border: black 1px solid;
     border-radius: 10px;
-    color: rgb(0, 7, 80);
+    color: #1616AF;
     font-size: 16px;
     cursor: pointer;
     font-weight: bold;
@@ -430,13 +449,13 @@ p{
     cursor: pointer;
     font-size: 16px;
     gap: 5px;
-    text-decoration-line: underline rgb(0, 7, 80) solid 3px ;  
+    text-decoration-line: underline #1616AF solid 3px ;  
     transition: all 300ms ease;
 
 }
 .category-btn:hover, .category-btn.active {
-    /* background: rgb(0, 7, 80); */
-    color: white;
+    /* background: #1616AF; */
+    color: #1616AF;
     /* border: rgb(53,53,53) 0.1rem solid; */
 }
 .projects-container{
@@ -448,7 +467,7 @@ p{
 }
 .project-card {
     width: 300px;
-    background: #96BBD4;
+    background: #FFFFFF;
     padding: 15px;
     border-radius: 10px;
     text-align: center;
@@ -493,17 +512,12 @@ p{
     cursor:pointer
 }
 
-i {
-    color: #ff7f0e;  /* Orange */
-    font-size: 16px;
-    /* margin-left: 5px; */
-}
 .tech-stack {
     margin-top: 10px;
     
 }
 .skill {
-    background: rgb(0, 7, 80);
+    background: #1616AF;
     color: white;
     padding: 5px 10px;
     margin: 5px;
@@ -527,7 +541,7 @@ footer{
     display: flex;
     flex-direction: column;
     justify-content: center;
-    background: rgb(0, 7, 80);
+    background: #1616AF;
     color: white;
     padding-top: 40px;
     gap: 20px;
@@ -562,7 +576,7 @@ footer p{
 .message-box{
     width: 100%;
     color: black;
-    background-color: #96BBD4; 
+    background-color: #ECF1F8; 
     opacity: .9;
     height: 30px;
     border-radius: 10px;
@@ -570,13 +584,14 @@ footer p{
 }
 .message-box.hover{
     width: 100%;
-    color: #96BBD4; 
+    color: #ECF1F8; 
     opacity: 1;
 }
 .contact-info-container{
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
     justify-content: baseline;
+    margin: 0 15vw;
     gap: 20px;
 }
 footer .icon{

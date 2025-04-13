@@ -87,3 +87,11 @@ function sendEmail() {
     // Open email client
     window.open(mailtoLink, '_blank');
 }
+
+// Get the hovering button element
+const hoveringButton = document.getElementById('hoveringButton');
+
+// Add an event listener for the scroll event
+window.addEventListener('scroll', () => {
+  hoveringButton.style.display = 'block';
+});

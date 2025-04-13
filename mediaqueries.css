@@ -1,55 +1,96 @@
 /* Adapt btn, btn-2, btn-3{width: fit-content, socials-container icon   */
 
+@media screen and (max-width: 500px){
+    #desktop-nav{
+        display: none;
+    }
+    #hamburger-nav{
+        display: flex;
+    }
+    .menu-links a{
+        display: inline-flex;
+        padding: 10px;
+        text-align: left;
+        font-size: 1rem;
+        color: white;
+        text-decoration: none;
+        transition: all 0.3 ease-in-out;
+    }
 
-@media screen and (max-width: 1200px){
+    .profile-pic-container{
+        display: none;
+    }
+    .section{
+        padding-top: 10vh;
+    }
     .tech-item img {
-        width: 50px; /* Adjust size */
+        width: 50px; 
         height: 50px;
         object-fit: contain;
     }
     .tech-grid {
         display: grid;
-        grid-template-columns: repeat(auto-fill, minmax(120px, 1fr)); /* Responsive columns */
-        gap: 10px; /* Space between items */
+        grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+        gap: 10px; 
+        justify-items: center;
+        align-items: center;
+        padding: 10px;
+    }
+    .profile-insight{
+        display:none;
+    }
+}
+
+
+/* @media screen and (max-width: 1200px){
+    .tech-item img {
+        width: 50px; 
+        height: 50px;
+        object-fit: contain;
+    }
+    .tech-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+        gap: 10px; 
         justify-items: center;
         align-items: center;
         padding: 10px;
     }
 
-}
+} */
 
-@media screen and (max-height:625px){
+/* @media screen and (max-height:625px){
     section{
         margin: 0vh 15vw;
         padding-top: 7.5vh;
     }
     .tech-item img {
-        width: 40px; /* Adjust size */
+        width: 40px; 
         height: 40px;
         object-fit: contain;
     }
     .tech-grid {
         display: grid;
-        grid-template-columns: repeat(auto-fill, minmax(120px, 1fr)); /* Responsive columns */
-        gap: 5px; /* Space between items */
+        grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+        gap: 5px; 
         justify-items: center;
         align-items: center;
         padding: 5px;
     }
     
 
-}
+} */
 
-@media screen and (max-height:500px){
+/* @media screen and (max-height:500px){
     section{
         margin: 0vh 15vw;
         padding-top: 5vh;
         height: fit-content;
     }
 
-}
+} */
 
-@media screen and (max-width: 1100px){
+/* @media screen and (max-width: 1100px){
     #desktop-nav{
         display: none;
     }
@@ -59,9 +100,9 @@
     .section{
         padding-top: 10vh;
     }
-}
+} */
 
-@media screen and (max-width: 900px){
+/* @media screen and (max-width: 900px){
     #desktop-nav{
         display: none;
     }
@@ -87,7 +128,7 @@
         align-items: center;
         padding: 10px;
     }
-}
+} */
 
 
 @-webkit-keyframes fade_move_down {

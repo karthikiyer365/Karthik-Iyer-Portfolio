@@ -79,7 +79,7 @@
         <div class="profile-content">
             <h1 class="title">Karthik Iyer</h1>
             <div>
-                <p class="profile-textbox"><span class="auto-type"></span>
+                <p><span class="auto-type"></span>
                 <script src="https://unpkg.com/typed.js@2.1.0/dist/typed.umd.js"></script>
                 <script>
                     var typed = new Typed('.auto-type', {
@@ -92,13 +92,12 @@
                 </script>
                 </p>
                 <p class="profile-textbox">
-                Storyteller turned Data Analyst.<br>
-                I transform raw data into meaningful insights, bridging gaps between technology & communication. 
-                With a strong foundation in data analytics, programming, and diverse technologies, 
-                I thrive on uncovering patterns, optimizing processes, & delivering impactful solutions. My work goes beyond numbers - 
-                I craft compelling narratives that drive informed decision-making & enhance efficiency. 
-                Passionate about making data accessible and actionable, 
-                I ensure seamless information sharing through clear, engaging, and visually compelling communication. 
+                    Presented by Storytelling, Directed by Data...<br><br>
+                    This ML and NLP based thriller has a star-studded cast featuring
+                    Python, R, SQL, Pandas, TensorFlow, Spark, and Tableau.
+                    The show follows a Data Artist solving the mysteries of
+                    Business, Finance, and Sports using Statistical Modelling, Data Engineering,
+                    and Visualization Techniques to uncover Data-driven Insights.
                 </p>
             </div>
             <div class="btn-container" >
@@ -117,7 +116,7 @@
             </div>
         </div>
         <div class="profile-pic-container">
-            <img src="./assets/profile-pic.png" alt="Karthik Iyer Profile Picture">
+            <img src="./assets/profile-pic2.png" alt="Karthik Iyer Profile Picture">
         </div>
     </section>
     <section id="resume">
@@ -270,7 +269,7 @@
                                     }
                                     },
                                     showlegend: false,
-                                    paper_bgcolor: '#96BBD4',
+                                    paper_bgcolor: '#ECF1F8',
                                 };
                             
                                 const techInfo = {
@@ -292,7 +291,7 @@
                                 const techData = getRadarChartData(techInfo);
                                 Plotly.newPlot("radar-tech", [{
                                     type: "scatterpolar",
-                                    fillcolor: "rgba(0, 7, 80, ,.9)",
+                                    fillcolor: "#1616AF",
                                     r: techData.values,
                                     theta: techData.labels,
                                     fill: "toself",
@@ -318,7 +317,7 @@
                                         }
                                         },
                                         showlegend: false,
-                                        paper_bgcolor: '#96BBD4',
+                                        paper_bgcolor: '#ECF1F8',
                                     };
                                 
                                 const softInfo = {
@@ -334,7 +333,7 @@
                                 const softData = getRadarChartData(softInfo);
                                 Plotly.newPlot("radar-soft", [{
                                     type: "scatterpolar",
-                                    fillcolor: "rgba(0, 7, 80,.9)",
+                                    fillcolor: "#1616AF",
                                     r: softData.values,
                                     theta: softData.labels,
                                     fill: "toself",
@@ -711,7 +710,7 @@
         I’d love to hear from you! Whether you’re looking for 
         web design, brand identity, or a custom project. 
         <br> Feel free to reach out. Let’s create something amazing together.</p>
-        <div class="contact-footer-box">
+        <!-- <div class="contact-footer-box">
             <div class="contact-form">
                 <input class="message-box" type="text" id="name" placeholder="Name">
                 <input class="message-box" type="email" id="email" placeholder="Email ID ">
@@ -747,7 +746,7 @@
                         alert("Failed to send message.");
                     });
                 }
-            </script>
+            </script> -->
             
             <div class="contact-info-container">
                 <img src="./logos/emailwhite.png" alt="Email Icon" class="icon" 
