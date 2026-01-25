@@ -1,0 +1,209 @@
+[00:00:00.625] Server  LOG     ✓ Ready in 448ms
+[00:00:01.570] Server  ERROR   ⨯ ./app/globals.css:971:8
+Parsing CSS source code failed
+  969 | }
+  970 |
+> 971 | @import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&display=swap');
+      |        ^
+  972 |
+  973 | :root {
+  974 |   --bg-base: #0a0a0a;
+
+@import rules must precede all rules aside from @charset and @layer statements
+
+Import trace:
+  Client Component Browser:
+    ./app/globals.css [Client Component Browser]
+    ./app/layout.tsx [Server Component]
+
+
+[00:00:01.584] Server  ERROR   ⨯ ./app/globals.css:971:8
+Parsing CSS source code failed
+  969 | }
+  970 |
+> 971 | @import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&display=swap');
+      |        ^
+  972 |
+  973 | :root {
+  974 |   --bg-base: #0a0a0a;
+
+@import rules must precede all rules aside from @charset and @layer statements
+
+Import trace:
+  Client Component Browser:
+    ./app/globals.css [Client Component Browser]
+    ./app/layout.tsx [Server Component]
+
+
+[00:00:01.598] Server  ERROR   ⨯ ./app/globals.css:971:8
+Parsing CSS source code failed
+  969 | }
+  970 |
+> 971 | @import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&display=swap');
+      |        ^
+  972 |
+  973 | :root {
+  974 |   --bg-base: #0a0a0a;
+
+@import rules must precede all rules aside from @charset and @layer statements
+
+Import trace:
+  Client Component Browser:
+    ./app/globals.css [Client Component Browser]
+    ./app/layout.tsx [Server Component]
+
+
+[00:00:02.150] Browser ERROR   uncaughtError: Error: ./app/globals.css:971:8
+Parsing CSS source code failed
+  969 | }
+  970 |
+> 971 | @import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&display=swap');
+      |        ^
+  972 |
+  973 | :root {
+  974 |   --bg-base: #0a0a0a;
+
+@import rules must precede all rules aside from @charset and @layer statements
+
+Import trace:
+  Client Component Browser:
+    ./app/globals.css [Client Component Browser]
+    ./app/layout.tsx [Server Component]
+
+
+[00:00:02.175] Browser ERROR   uncaughtError: Error: ./app/globals.css:971:8
+Parsing CSS source code failed
+  969 | }
+  970 |
+> 971 | @import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&display=swap');
+      |        ^
+  972 |
+  973 | :root {
+  974 |   --bg-base: #0a0a0a;
+
+@import rules must precede all rules aside from @charset and @layer statements
+
+Import trace:
+  Client Component Browser:
+    ./app/globals.css [Client Component Browser]
+    ./app/layout.tsx [Server Component]
+
+
+[00:00:02.235] Browser ERROR   uncaughtError: Error: ./app/globals.css:971:8
+Parsing CSS source code failed
+  969 | }
+  970 |
+> 971 | @import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&display=swap');
+      |        ^
+  972 |
+  973 | :root {
+  974 |   --bg-base: #0a0a0a;
+
+@import rules must precede all rules aside from @charset and @layer statements
+
+Import trace:
+  Client Component Browser:
+    ./app/globals.css [Client Component Browser]
+    ./app/layout.tsx [Server Component]
+
+
+[00:00:02.411] Browser ERROR   ./app/globals.css:971:8
+Parsing CSS source code failed
+  969 | }
+  970 |
+> 971 | @import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&display=swap');
+      |        ^
+  972 |
+  973 | :root {
+  974 |   --bg-base: #0a0a0a;
+
+@import rules must precede all rules aside from @charset and @layer statements
+
+Import trace:
+  Client Component Browser:
+    ./app/globals.css [Client Component Browser]
+    ./app/layout.tsx [Server Component]
+[00:00:02.411] Browser ERROR   ./app/globals.css:971:8
+Parsing CSS source code failed
+  969 | }
+  970 |
+> 971 | @import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&display=swap');
+      |        ^
+  972 |
+  973 | :root {
+  974 |   --bg-base: #0a0a0a;
+
+@import rules must precede all rules aside from @charset and @layer statements
+
+Import trace:
+  Client Component Browser:
+    ./app/globals.css [Client Component Browser]
+    ./app/layout.tsx [Server Component]
+[00:00:02.411] Browser ERROR   ./app/globals.css:971:8
+Parsing CSS source code failed
+  969 | }
+  970 |
+> 971 | @import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&display=swap');
+      |        ^
+  972 |
+  973 | :root {
+  974 |   --bg-base: #0a0a0a;
+
+@import rules must precede all rules aside from @charset and @layer statements
+
+Import trace:
+  Client Component Browser:
+    ./app/globals.css [Client Component Browser]
+    ./app/layout.tsx [Server Component]
+[00:00:02.411] Browser ERROR   ./app/globals.css:971:8
+Parsing CSS source code failed
+  969 | }
+  970 |
+> 971 | @import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&display=swap');
+      |        ^
+  972 |
+  973 | :root {
+  974 |   --bg-base: #0a0a0a;
+
+@import rules must precede all rules aside from @charset and @layer statements
+
+Import trace:
+  Client Component Browser:
+    ./app/globals.css [Client Component Browser]
+    ./app/layout.tsx [Server Component]
+[00:00:02.411] Browser ERROR   ./app/globals.css:971:8
+Parsing CSS source code failed
+  969 | }
+  970 |
+> 971 | @import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&display=swap');
+      |        ^
+  972 |
+  973 | :root {
+  974 |   --bg-base: #0a0a0a;
+
+@import rules must precede all rules aside from @charset and @layer statements
+
+Import trace:
+  Client Component Browser:
+    ./app/globals.css [Client Component Browser]
+    ./app/layout.tsx [Server Component]
+[00:00:02.411] Browser ERROR   ./app/globals.css:971:8
+Parsing CSS source code failed
+  969 | }
+  970 |
+> 971 | @import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&display=swap');
+      |        ^
+  972 |
+  973 | :root {
+  974 |   --bg-base: #0a0a0a;
+
+@import rules must precede all rules aside from @charset and @layer statements
+
+Import trace:
+  Client Component Browser:
+    ./app/globals.css [Client Component Browser]
+    ./app/layout.tsx [Server Component]
+[00:00:22.713] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+[00:00:22.739] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+[00:00:22.777] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+[00:00:30.842] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
