@@ -1,18 +1,28 @@
 "use client";
 
-export default function TopBar() {
+type TopBarProps = {
+  onClose?: () => void;
+};
+
+export default function TopBar({ onClose }: TopBarProps) {
   return (
-    <div className="flex items-center justify-between h-9 px-3 bg-[#141414] border-b border-[#1f1f1f] select-none shrink-0">
+    <div className="flex items-center justify-between h-9 px-3 bg-[#323233] border-b border-[#1f1f1f] select-none shrink-0">
       {/* Left - Window Controls */}
       <div className="flex items-center gap-2">
-        <div className="w-3 h-3 rounded-full bg-[#ff5f57] hover:brightness-90 cursor-pointer" />
+        <button
+          type="button"
+          aria-label="Close"
+          title="Back to landing"
+          onClick={onClose}
+          className="w-3 h-3 rounded-full bg-[#ff5f57] hover:brightness-90 cursor-pointer"
+        />
         <div className="w-3 h-3 rounded-full bg-[#febc2e] hover:brightness-90 cursor-pointer" />
         <div className="w-3 h-3 rounded-full bg-[#28c840] hover:brightness-90 cursor-pointer" />
       </div>
 
       {/* Center - Repository Name */}
       <div className="absolute left-1/2 transform -translate-x-1/2 text-[#666666] text-sm">
-        Karthik-Iyer-Portfolio
+        Karthik Iyer's Portfolio
       </div>
 
       {/* Right - Utility Icons */}

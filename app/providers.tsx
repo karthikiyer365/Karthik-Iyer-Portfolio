@@ -11,6 +11,7 @@ interface EditorContextType {
   closeFile: (path: string) => void;
   setActiveFile: (path: string) => void;
   toggleFolder: (folder: string) => void;
+  resetEditor: () => void;
 }
 
 const EditorContext = createContext<EditorContextType | null>(null);
@@ -34,6 +35,10 @@ export function EditorProvider({ children }: { children: ReactNode }) {
     dispatch({ type: "TOGGLE_FOLDER", payload: folder });
   };
 
+  const resetEditor = () => {
+    dispatch({ type: "RESET" });
+  };
+
   return (
     <EditorContext.Provider
       value={{
@@ -43,6 +48,7 @@ export function EditorProvider({ children }: { children: ReactNode }) {
         closeFile,
         setActiveFile,
         toggleFolder,
+        resetEditor,
       }}
     >
       {children}

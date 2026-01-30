@@ -11,6 +11,9 @@ export function editorReducer(
   action: EditorAction
 ): EditorState {
   switch (action.type) {
+    case "RESET": {
+      return initialEditorState;
+    }
     case "OPEN_FILE": {
       const { path, name } = action.payload;
       const isAlreadyOpen = state.openFiles.some((f) => f.path === path);

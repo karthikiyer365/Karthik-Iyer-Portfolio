@@ -20,7 +20,8 @@ export type EditorAction =
   | { type: "OPEN_FILE"; payload: { path: string; name: string } }
   | { type: "CLOSE_FILE"; payload: string }
   | { type: "SET_ACTIVE"; payload: string }
-  | { type: "TOGGLE_FOLDER"; payload: string };
+  | { type: "TOGGLE_FOLDER"; payload: string }
+  | { type: "RESET" };
 
 export type Persona = "recruiter" | "tech-lead" | "executive";
 

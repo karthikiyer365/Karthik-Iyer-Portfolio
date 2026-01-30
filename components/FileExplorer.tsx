@@ -141,10 +141,9 @@ function TreeNode({ node, depth }: TreeNodeProps) {
 
 export default function FileExplorer() {
   return (
-    <div className="flex flex-col w-60 h-full bg-[#141414] border-r border-[#1f1f1f] shrink-0 overflow-hidden">
+    <div className="flex flex-col w-60 h-full bg-[#1e1e1e] border-r border-[#1f1f1f] shrink-0 overflow-hidden">
       {/* Header */}
-      <div className="flex items-center h-9 px-4 text-[11px] font-medium uppercase tracking-wider text-[#666666] border-b border-[#1f1f1f] shrink-0">
-        Explorer
+      <div className="flex items-center h-9 px-4 text-[11px] font-medium uppercase tracking-wider text-[#666666] shrink-0">
       </div>
 
       {/* File Tree */}

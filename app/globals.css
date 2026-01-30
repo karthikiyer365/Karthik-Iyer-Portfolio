@@ -35,7 +35,7 @@ body {
 }
 
 body {
-  font-family: 'JetBrains Mono', 'Fira Code', 'Consolas', monospace;
+  font-family: 'Helvetica', 'Consolas', monospace;
   background: var(--bg-base);
   color: var(--text-primary);
   font-size: 13px;
