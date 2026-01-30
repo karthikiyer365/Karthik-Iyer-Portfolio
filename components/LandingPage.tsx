@@ -22,10 +22,10 @@
           onClick={disabled ? undefined : onClick}
           className={[
             "group flex items-center gap-2 rounded-lg border border-[#2a2a2a]",
-            "bg-[#e7e7e7] px-4 py-2 text-[13px] font-medium text-[#111111]",
+            "bg-[#dddddd] px-5 py-3 text-[13px] font-medium text-[#111111]",
             "shadow-[0_1px_0_rgba(255,255,255,0.35)_inset] transition",
-            "hover:bg-[#f1f1f1] active:bg-[#dddddd]",
-            "disabled:cursor-not-allowed disabled:opacity-70",
+            "hover:bg-[#ffffff] active:bg-[#888888] cursor-pointer",
+            "disabled:cursor-not-allowed disabled:opacity-30",
           ].join(" ")}
         >
           <span className="text-[#111111]">{icon}</span>
@@ -40,7 +40,7 @@
           <div className="w-full max-w-[820px] px-6">
             <div className="flex flex-col items-center text-center">
               {/* Logo + Title */}
-              <div className="flex items-center gap-3">
+              <div className="flex items-center gap-3 w-full max-w-[560px]">
                 <div className="grid h-10 w-10 place-items-center rounded-xl bg-[#141414] ring-1 ring-[#1f1f1f]">
                   <div className="h-5 w-5 rotate-45 rounded-[4px] bg-[#e5e5e5]" />
                 </div>
@@ -49,12 +49,12 @@
                 </div>
               </div>
 
-              <div className="mt-2 text-sm text-[#a3a3a3]">Developer • Engineer</div>
+              <div className="text-sm text-[#a3a3a3] font-mono text-left mt-2 w-full max-w-[455px]">Developer • Engineer</div>
 
               {/* Action buttons */}
-              <div className="mt-8 flex flex-wrap items-center justify-center gap-3">
+              <div className="mt-8 w-full max-w-[560px] flex flex-wrap justify-between gap-7">
                 <ActionButton
-                  icon={<FolderOpen className="h-4 w-4" aria-hidden="true" />}
+                  icon={<FolderOpen className="h-4 w-4 ml-1" aria-hidden="true" />}
                   label="Open portfolio"
                   onClick={() => onNavigate?.("portfolio/README.md")}
                 />
@@ -66,6 +66,7 @@
                 <ActionButton
                   icon={<MessageSquare className="h-4 w-4" aria-hidden="true" />}
                   label="Connect via SMS"
+                  onClick={() => onNavigate?.("portfolio/contact.css")}
                 />
               </div>
 
