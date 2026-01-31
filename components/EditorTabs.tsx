@@ -35,7 +35,7 @@ export default function EditorTabs() {
   if (openFiles.length === 0) return null;
 
   return (
-    <div className="flex bg-[#0a0a0a] border-b border-[#1f1f1f] overflow-x-auto shrink-0">
+    <div className="flex bg-[#141414]  overflow-x-auto shrink-0">
       {openFiles.map((file) => {
         const isActive = file.path === activeFile;
         
@@ -45,8 +45,8 @@ export default function EditorTabs() {
             onClick={() => setActiveFile(file.path)}
             className={`group flex items-center gap-2 px-3 h-9 cursor-pointer border-r border-[#1f1f1f] shrink-0 ${
               isActive
-                ? "bg-[#141414] text-[#e5e5e5] border-t-2 border-t-[#3b82f6]"
-                : "bg-[#0a0a0a] text-[#666666] hover:text-[#a3a3a3] border-t-2 border-t-transparent"
+                ? "bg-[#0a0a0a] text-[#e5e5e5] border-t-2 border-t-[#3b82f6]"
+                : "bg-[#141414] text-[#666666] hover:text-[#a3a3a3] border-t-2 border-t-transparent"
             }`}
           >
             <FileIcon name={file.name} />

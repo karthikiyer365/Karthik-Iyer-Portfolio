@@ -2,156 +2,152 @@
 
 import { useEditor } from "@/app/providers";
 import { FileNode } from "@/types/editor";
+import { useEffect, useState } from "react";
+import { trpc } from "@/server/trpc/react";
 
-// File tree structure
-const fileTree: FileNode[] = [
+/* ---------------- File Explorer ---------------- */
+
+type TreeItem = { id: string; title?: string | null; organization?: string | null; skill?: string | null; type?: string | null; tech_domain?: string | null; contact_type?: string | null; contact_detail?: string | null };
+
+const EMPTY_TREE: FileNode[] = [
   {
     name: "portfolio",
     type: "folder",
     path: "portfolio",
-    children: [
-      {
-        name: "projects",
-        type: "folder",
-        path: "portfolio/projects",
-        children: [
-          { name: "crime-prediction.md", type: "file", path: "portfolio/projects/crime-prediction.md" },
-          { name: "football-analytics.md", type: "file", path: "portfolio/projects/football-analytics.md" },
-          { name: "yelp-analysis.md", type: "file", path: "portfolio/projects/yelp-analysis.md" },
-        ],
-      },
-      {
-        name: "experience",
-        type: "folder",
-        path: "portfolio/experience",
-        children: [
-          { name: "timeline.md", type: "file", path: "portfolio/experience/timeline.md" },
-        ],
-      },
-      { name: "README.md", type: "file", path: "portfolio/README.md" },
-      { name: "tools.css", type: "file", path: "portfolio/tools.css" },
-      { name: "contact.css", type: "file", path: "portfolio/contact.css" },
-    ],
+    children: [],
   },
 ];
 
-function FileIcon({ name }: { name: string }) {
-  const ext = name.split(".").pop();
-  
-  if (ext === "md") {
-    return (
-      <svg className="w-4 h-4 text-[#519aba]" viewBox="0 0 24 24" fill="currentColor">
-        <path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8l-6-6zm-1 2l5 5h-5V4zM9.5 17v-4l1.5 2 1.5-2v4h1v-5h-1l-1.5 2-1.5-2h-1v5h1z" />
-      </svg>
-    );
-  }
-  
-  if (ext === "css") {
-    return (
-      <svg className="w-4 h-4 text-[#56b6c2]" viewBox="0 0 24 24" fill="currentColor">
-        <path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8l-6-6zm-1 2l5 5h-5V4zM8 13h2v1H8v-1zm0 2h4v1H8v-1zm0 2h3v1H8v-1z" />
-      </svg>
-    );
-  }
-  
+export default function FileExplorer() {
+  const { data, isLoading, isError } = trpc.explorer.getTree.useQuery();
+  const [tree, setTree] = useState<FileNode[]>(EMPTY_TREE);
+
+  useEffect(() => {
+    if (isError || !data) {
+      setTree(EMPTY_TREE);
+      return;
+    }
+
+    const projects = (data.projects ?? []) as TreeItem[];
+    const exp = (data.exp ?? []) as TreeItem[];
+    const skillset = (data.skillset ?? []) as TreeItem[];
+    const contact = (data.contact ?? []) as TreeItem[];
+
+    const fileTree: FileNode[] = [
+      {
+        name: "portfolio",
+        type: "folder",
+        path: "portfolio",
+        children: [
+          {
+            name: "projects",
+            type: "folder",
+            path: "portfolio/projects",
+            children: projects.map((p) => {
+              const label = p.title || p.id;
+              return {
+                name: `${label}.md`,
+                type: "file" as const,
+                path: `portfolio/projects/${label}.md`,
+                table: "projects" as const,
+                recordId: p.id,
+              };
+            }),
+          },
+          {
+            name: "experience",
+            type: "folder",
+            path: "portfolio/experience",
+            children: exp.map((e) => {
+              const label = e.title || e.organization || e.id;
+              return {
+                name: `${label}.md`,
+                type: "file" as const,
+                path: `portfolio/experience/${label}.md`,
+                table: "exp" as const,
+                recordId: e.id,
+              };
+            }),
+          },
+          {
+            name: "skillset",
+            type: "folder",
+            path: "portfolio/skillset",
+            children: skillset.map((s) => {
+              const label = s.skill || s.type || s.tech_domain || s.id;
+              return {
+                name: `${label}.md`,
+                type: "file" as const,
+                path: `portfolio/skillset/${label}.md`,
+                table: "skillset" as const,
+                recordId: s.id,
+              };
+            }),
+          },
+          {
+            name: "contact",
+            type: "folder",
+            path: "portfolio/contact",
+            children: contact.map((c) => {
+              const label = c.contact_type || c.contact_detail || c.id;
+              return {
+                name: `${label}.md`,
+                type: "file" as const,
+                path: `portfolio/contact/${label}.md`,
+                table: "contact" as const,
+                recordId: c.id,
+              };
+            }),
+          },
+        ],
+      },
+    ];
+
+    setTree(fileTree);
+  }, [data, isError]);
+
   return (
-    <svg className="w-4 h-4 text-[#666666]" viewBox="0 0 24 24" fill="currentColor">
-      <path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8l-6-6zm-1 2l5 5h-5V4z" />
-    </svg>
+    <div className="flex flex-col w-60 h-full bg-[#1e1e1e] border-r border-[#1f1f1f]">
+      <div className="flex-1 overflow-y-auto py-2">
+        {isLoading ? (
+          <div className="px-3 py-2 text-xs text-[#666666]">Loading...</div>
+        ) : (
+          tree.map((node) => (
+            <TreeNode key={node.path} node={node} depth={0} />
+          ))
+        )}
+      </div>
+    </div>
   );
 }
 
-function FolderIcon({ isOpen }: { isOpen: boolean }) {
-  if (isOpen) {
-    return (
-      <svg className="w-4 h-4 text-[#dcb67a]" viewBox="0 0 24 24" fill="currentColor">
-        <path d="M20 6h-8l-2-2H4a2 2 0 00-2 2v12a2 2 0 002 2h16a2 2 0 002-2V8a2 2 0 00-2-2zm0 12H4V8h16v10z" />
-      </svg>
-    );
-  }
-  
-  return (
-    <svg className="w-4 h-4 text-[#dcb67a]" viewBox="0 0 24 24" fill="currentColor">
-      <path d="M10 4H4a2 2 0 00-2 2v12a2 2 0 002 2h16a2 2 0 002-2V8a2 2 0 00-2-2h-8l-2-2z" />
-    </svg>
-  );
-}
+/* ---------------- Tree Node ---------------- */
 
-function ChevronIcon({ isOpen }: { isOpen: boolean }) {
-  return (
-    <svg
-      className={`w-3 h-3 text-[#666666] transition-transform duration-150 ${
-        isOpen ? "rotate-90" : ""
-      }`}
-      viewBox="0 0 24 24"
-      fill="none"
-      stroke="currentColor"
-    >
-      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
-    </svg>
-  );
-}
-
-interface TreeNodeProps {
-  node: FileNode;
-  depth: number;
-}
-
-function TreeNode({ node, depth }: TreeNodeProps) {
+function TreeNode({ node, depth }: { node: FileNode; depth: number }) {
   const { state, openFile, toggleFolder } = useEditor();
   const isFolder = node.type === "folder";
   const isExpanded = state.expandedFolders.includes(node.path);
   const isActive = state.activeFile === node.path;
 
-  const handleClick = () => {
-    if (isFolder) {
-      toggleFolder(node.path);
-    } else {
-      openFile(node.path, node.name);
-    }
-  };
-
   return (
     <div>
       <button
-        onClick={handleClick}
-        className={`flex items-center gap-1 w-full py-[3px] pr-2 text-left text-sm transition-colors ${
-          isActive
-            ? "bg-[#1f1f1f] text-[#e5e5e5] border-l-2 border-l-[#3b82f6]"
-            : "text-[#a3a3a3] hover:bg-[#1a1a1a] border-l-2 border-l-transparent"
+        onClick={() =>
+          isFolder ? toggleFolder(node.path) : openFile(node.path, node.name)
+        }
+        className={`flex items-center gap-1 w-full py-[3px] pr-2 text-sm ${
+          isActive ? "bg-[#04395e]" : "hover:bg-[#1a1a1a]"
         }`}
         style={{ paddingLeft: `${depth * 12 + 8}px` }}
       >
-        {isFolder && <ChevronIcon isOpen={isExpanded} />}
-        {!isFolder && <span className="w-3" />}
-        {isFolder ? <FolderIcon isOpen={isExpanded} /> : <FileIcon name={node.name} />}
-        <span className="ml-1 truncate">{node.name}</span>
+        <span>{node.name}</span>
       </button>
 
-      {isFolder && isExpanded && node.children && (
-        <div>
-          {node.children.map((child) => (
-            <TreeNode key={child.path} node={child} depth={depth + 1} />
-          ))}
-        </div>
-      )}
-    </div>
-  );
-}
-
-export default function FileExplorer() {
-  return (
-    <div className="flex flex-col w-60 h-full bg-[#1e1e1e] border-r border-[#1f1f1f] shrink-0 overflow-hidden">
-      {/* Header */}
-      <div className="flex items-center h-9 px-4 text-[11px] font-medium uppercase tracking-wider text-[#666666] shrink-0">
-      </div>
-
-      {/* File Tree */}
-      <div className="flex-1 overflow-y-auto py-2">
-        {fileTree.map((node) => (
-          <TreeNode key={node.path} node={node} depth={0} />
+      {isFolder &&
+        isExpanded &&
+        node.children?.map((child) => (
+          <TreeNode key={child.path} node={child} depth={depth + 1} />
         ))}
-      </div>
     </div>
   );
 }

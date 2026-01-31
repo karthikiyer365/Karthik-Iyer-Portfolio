@@ -38,12 +38,12 @@ export default function EditorWorkspace() {
   const lines = content.split("\n");
 
   return (
-    <div className="flex-1 flex flex-col bg-[#171717] overflow-hidden">
+    <div className="flex-1 flex flex-col bg-[#0a0a0a] overflow-hidden">
       {/* Tabs */}
       <EditorTabs />
 
       {/* Breadcrumb */}
-      <div className="flex items-center h-6 px-4 bg-[#10100e] text-[11px] text-[#666666] shrink-0">
+      <div className="flex items-center h-6 px-4 bg-[#0a0a0a] text-[11px] text-[#666666] shrink-0">
         {activeFile.split("/").map((part: string, idx: number, arr: string[]) => (
           <span key={idx} className="flex items-center">
             {idx > 0 && (
@@ -72,7 +72,7 @@ export default function EditorWorkspace() {
       <div className="flex-1 overflow-auto">
         <div className="flex min-h-full">
           {/* Line Numbers */}
-          <div className="sticky left-0 flex flex-col items-end py-4 px-3 bg-[#10100e] text-[#444444] select-none shrink-0">
+          <div className="sticky left-0 flex flex-col items-end py-4 px-3 bg-[#0a0a0a] text-[#444444] select-none shrink-0">
             {lines.map((_, idx) => (
               <div key={idx} className="leading-6 text-right text-xs">
                 {idx + 1}
@@ -81,7 +81,7 @@ export default function EditorWorkspace() {
           </div>
 
           {/* Code Content */}
-          <div className="flex-1 py-4 px-4 bg-[#101010]">
+          <div className="flex-1 py-4 px-4 bg-[#0a0a0a]">
             {lines.map((line, idx) => (
               <div key={idx} className="leading-6">
                 {renderLine(line, activeFile)}

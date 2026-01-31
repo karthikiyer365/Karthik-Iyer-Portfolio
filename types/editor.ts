@@ -1,8 +1,12 @@
 export interface FileNode {
   name: string;
-  type: "file" | "folder";
+  type: "folder" | "file";
   path: string;
   children?: FileNode[];
+
+  // NEW (optional)
+  table?: "projects" | "exp" | "skillset" | "contact";
+  recordId?: string;
 }
 
 export interface EditorTab {

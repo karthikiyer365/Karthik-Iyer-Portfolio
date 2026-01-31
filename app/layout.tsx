@@ -1,5 +1,5 @@
 import "./globals.css";
-import { Providers } from "./providers";
+import { AppProviders } from "./providers";
 
 export const metadata = {
   title: "Karthik Iyer",
@@ -14,7 +14,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body>
-        <Providers>{children}</Providers>
+        <AppProviders>{children}</AppProviders>
       </body>
     </html>
   );

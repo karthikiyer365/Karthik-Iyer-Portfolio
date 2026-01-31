@@ -1,8 +1,15 @@
 "use client";
 
-import React, { createContext, useContext, useReducer, ReactNode } from "react";
+import React, { createContext, useContext, useReducer, ReactNode, useState } from "react";
 import { EditorState, EditorAction, Persona } from "@/types/editor";
 import { editorReducer, initialEditorState } from "@/lib/editorState";
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+import { trpc } from "@/server/trpc/react";
+import { httpLink } from "@trpc/client";
+
+/* =========================
+   Editor Context
+========================= */
 
 interface EditorContextType {
   state: EditorState;
@@ -16,28 +23,23 @@ interface EditorContextType {
 
 const EditorContext = createContext<EditorContextType | null>(null);
 
-export function EditorProvider({ children }: { children: ReactNode }) {
+function EditorProvider({ children }: { children: ReactNode }) {
   const [state, dispatch] = useReducer(editorReducer, initialEditorState);
 
-  const openFile = (path: string, name: string) => {
+  const openFile = (path: string, name: string) =>
     dispatch({ type: "OPEN_FILE", payload: { path, name } });
-  };
 
-  const closeFile = (path: string) => {
+  const closeFile = (path: string) =>
     dispatch({ type: "CLOSE_FILE", payload: path });
-  };
 
-  const setActiveFile = (path: string) => {
+  const setActiveFile = (path: string) =>
     dispatch({ type: "SET_ACTIVE", payload: path });
-  };
 
-  const toggleFolder = (folder: string) => {
+  const toggleFolder = (folder: string) =>
     dispatch({ type: "TOGGLE_FOLDER", payload: folder });
-  };
 
-  const resetEditor = () => {
+  const resetEditor = () =>
     dispatch({ type: "RESET" });
-  };
 
   return (
     <EditorContext.Provider
@@ -59,12 +61,15 @@ export function EditorProvider({ children }: { children: ReactNode }) {
 export function useEditor() {
   const context = useContext(EditorContext);
   if (!context) {
-    throw new Error("useEditor must be used within an EditorProvider");
+    throw new Error("useEditor must be used within EditorProvider");
   }
   return context;
 }
 
-// Persona context
+/* =========================
+   Persona Context
+========================= */
+
 interface PersonaContextType {
   persona: Persona;
   setPersona: (persona: Persona) => void;
@@ -72,8 +77,8 @@ interface PersonaContextType {
 
 const PersonaContext = createContext<PersonaContextType | null>(null);
 
-export function PersonaProvider({ children }: { children: ReactNode }) {
-  const [persona, setPersona] = React.useState<Persona>("tech-lead");
+function PersonaProvider({ children }: { children: ReactNode }) {
+  const [persona, setPersona] = useState<Persona>("tech-lead");
 
   return (
     <PersonaContext.Provider value={{ persona, setPersona }}>
@@ -85,16 +90,34 @@ export function PersonaProvider({ children }: { children: ReactNode }) {
 export function usePersona() {
   const context = useContext(PersonaContext);
   if (!context) {
-    throw new Error("usePersona must be used within a PersonaProvider");
+    throw new Error("usePersona must be used within PersonaProvider");
   }
   return context;
 }
 
-// Combined providers
-export function Providers({ children }: { children: ReactNode }) {
+/* =========================
+   ROOT PROVIDER (ONLY ONE)
+========================= */
+
+export function AppProviders({ children }: { children: ReactNode }) {
+  const [queryClient] = useState(() => new QueryClient());
+  const [trpcClient] = useState(() =>
+    trpc.createClient({
+      links: [
+        httpLink({
+          url: "/api/trpc",
+        }),
+      ],
+    })
+  );
+
   return (
-    <EditorProvider>
-      <PersonaProvider>{children}</PersonaProvider>
-    </EditorProvider>
+    <trpc.Provider client={trpcClient} queryClient={queryClient}>
+      <QueryClientProvider client={queryClient}>
+        <EditorProvider>
+          <PersonaProvider>{children}</PersonaProvider>
+        </EditorProvider>
+      </QueryClientProvider>
+    </trpc.Provider>
   );
 }
