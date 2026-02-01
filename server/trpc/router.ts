@@ -1,6 +1,8 @@
 import { router, publicProcedure } from "@/server/trpc/trpc";
 import { z } from "zod";
 import { prisma } from "@/server/db/prisma";
+import { addMessage, clearSession } from "@/server/ai/memory";
+import { createChatAgent } from "@/server/ai/agent";
 
 function serializeRecord(record: Record<string, unknown>): Record<string, unknown> {
   const out: Record<string, unknown> = {};
@@ -62,6 +64,38 @@ export const appRouter = router({
         }
         if (row == null) return null;
         return serializeRecord(row as Record<string, unknown>);
+      }),
+  }),
+
+  chat: router({
+    send: publicProcedure
+      .input(
+        z.object({
+          sessionId: z.string(),
+          persona: z.enum(["recruiter", "tech-lead", "executive"]),
+          message: z.string(),
+        })
+      )
+      .mutation(async ({ input }) => {
+        const { sessionId, persona, message } = input;
+        console.info("[chat] send", { sessionId, persona, messageLength: message.length });
+
+        addMessage(sessionId, { role: "user", content: message, timestamp: Date.now() });
+
+        const agent = await createChatAgent(persona, sessionId);
+        const output = await agent.invoke();
+        console.info("[chat] send: response", { outputLength: output.length });
+
+        addMessage(sessionId, { role: "assistant", content: output, timestamp: Date.now() });
+
+        return { response: output };
+      }),
+
+    clearSession: publicProcedure
+      .input(z.object({ sessionId: z.string() }))
+      .mutation(({ input }) => {
+        clearSession(input.sessionId);
+        return { success: true };
       }),
   }),
 });
