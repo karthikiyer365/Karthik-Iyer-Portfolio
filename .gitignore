@@ -1,6 +1,9 @@
 # Next.js
 .next/
 out/
+.next/*
+!.next/cache
+
 
 # Node
 node_modules/
