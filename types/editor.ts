@@ -3,10 +3,6 @@ export interface FileNode {
   type: "folder" | "file";
   path: string;
   children?: FileNode[];
-
-  // NEW (optional)
-  table?: "projects" | "exp" | "skillset" | "contact";
-  recordId?: string;
 }
 
 export interface EditorTab {
