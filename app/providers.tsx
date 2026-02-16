@@ -1,11 +1,14 @@
 "use client";
 
-import React, { createContext, useContext, useReducer, ReactNode, useState } from "react";
-import { EditorState, EditorAction, Persona } from "@/types/editor";
+import React, {
+  createContext,
+  useContext,
+  useReducer,
+  ReactNode,
+  useState,
+} from "react";
+import { EditorState, EditorAction, FileNode, Persona } from "@/types/editor";
 import { editorReducer, initialEditorState } from "@/lib/editorState";
-import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import { trpc } from "@/server/trpc/react";
-import { httpLink } from "@trpc/client";
 
 /* =========================
    Editor Context
@@ -38,8 +41,7 @@ function EditorProvider({ children }: { children: ReactNode }) {
   const toggleFolder = (folder: string) =>
     dispatch({ type: "TOGGLE_FOLDER", payload: folder });
 
-  const resetEditor = () =>
-    dispatch({ type: "RESET" });
+  const resetEditor = () => dispatch({ type: "RESET" });
 
   return (
     <EditorContext.Provider
@@ -60,9 +62,7 @@ function EditorProvider({ children }: { children: ReactNode }) {
 
 export function useEditor() {
   const context = useContext(EditorContext);
-  if (!context) {
-    throw new Error("useEditor must be used within EditorProvider");
-  }
+  if (!context) throw new Error("useEditor must be used within EditorProvider");
   return context;
 }
 
@@ -79,7 +79,6 @@ const PersonaContext = createContext<PersonaContextType | null>(null);
 
 function PersonaProvider({ children }: { children: ReactNode }) {
   const [persona, setPersona] = useState<Persona>("tech-lead");
-
   return (
     <PersonaContext.Provider value={{ persona, setPersona }}>
       {children}
@@ -89,35 +88,57 @@ function PersonaProvider({ children }: { children: ReactNode }) {
 
 export function usePersona() {
   const context = useContext(PersonaContext);
-  if (!context) {
+  if (!context)
     throw new Error("usePersona must be used within PersonaProvider");
-  }
   return context;
 }
 
 /* =========================
-   ROOT PROVIDER (ONLY ONE)
+   Content Context
+========================= */
+
+interface ContentContextType {
+  fileTree: FileNode[];
+  fileContents: Record<string, string>;
+  getContent: (path: string) => string;
+}
+
+const ContentContext = createContext<ContentContextType | null>(null);
+
+export function ContentProvider({
+  fileTree,
+  fileContents,
+  children,
+}: {
+  fileTree: FileNode[];
+  fileContents: Record<string, string>;
+  children: ReactNode;
+}) {
+  const getContent = (path: string) =>
+    fileContents[path] ?? `// File not found: ${path}`;
+
+  return (
+    <ContentContext.Provider value={{ fileTree, fileContents, getContent }}>
+      {children}
+    </ContentContext.Provider>
+  );
+}
+
+export function useContent() {
+  const context = useContext(ContentContext);
+  if (!context)
+    throw new Error("useContent must be used within ContentProvider");
+  return context;
+}
+
+/* =========================
+   ROOT PROVIDER
 ========================= */
 
 export function AppProviders({ children }: { children: ReactNode }) {
-  const [queryClient] = useState(() => new QueryClient());
-  const [trpcClient] = useState(() =>
-    trpc.createClient({
-      links: [
-        httpLink({
-          url: "/api/trpc",
-        }),
-      ],
-    })
-  );
-
   return (
-    <trpc.Provider client={trpcClient} queryClient={queryClient}>
-      <QueryClientProvider client={queryClient}>
-        <EditorProvider>
-          <PersonaProvider>{children}</PersonaProvider>
-        </EditorProvider>
-      </QueryClientProvider>
-    </trpc.Provider>
+    <EditorProvider>
+      <PersonaProvider>{children}</PersonaProvider>
+    </EditorProvider>
   );
 }
