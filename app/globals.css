@@ -88,3 +88,33 @@ body {
 .caret-blink {
   animation: blink 1s step-end infinite;
 }
+
+/* Notebook HTML output (pandas DataFrames, etc.) */
+.notebook-html-output table {
+  border-collapse: collapse;
+  font-size: 12px;
+  font-family: 'Consolas', monospace;
+  margin: 4px 0;
+}
+
+.notebook-html-output th,
+.notebook-html-output td {
+  border: 1px solid #333;
+  padding: 3px 8px;
+  text-align: left;
+  color: #d4d4d4;
+}
+
+.notebook-html-output th {
+  background: #1a1a1a;
+  color: #e5e5e5;
+  font-weight: 600;
+}
+
+.notebook-html-output tr:nth-child(even) {
+  background: #141414;
+}
+
+.notebook-html-output img {
+  max-width: 100%;
+}

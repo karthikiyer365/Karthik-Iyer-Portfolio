@@ -197,27 +197,201 @@ EDA]
 
 ---
 mermaid
-flowchart LR
-    A[2018
-University of Mumbai
-B.E. Computer Engineering]
-    B[2022
-Graduation]
-    C[2023
-Financial Analyst Intern
-DPSY & Associates]
-    D[2023
-GWU MS Data Analytics]
-    E[2024
-Research & ML Projects]
-    F[2024
-Teaching Assistant]
-    G[2024‑Present
-Systems Administration]
-    H[2025
-MS Graduation]
+erDiagram
+	direction TB
+	CONSENT_EVENTS {
+		UUID consent_event_id PK ""  
+		UUID party_id FK ""  
+		VARCHAR event_type  ""  
+		VARCHAR keyword  ""  
+		VARCHAR event_source  ""  
+		TIMESTAMP event_timestamp  ""  
+		VARCHAR opt_in_source  ""  
+		VARCHAR a2p_campaign_id  ""  
+		VARCHAR recorded_by  ""  
+		TEXT notes  ""  
+	}
 
-    A --> B --> C --> D --> E --> F --> G --> H
+	INTERACTIONS {
+		UUID interaction_id PK ""  
+		UUID party_id FK ""  
+		UUID correlation_id  ""  
+		VARCHAR session_id  ""  
+		TIMESTAMP start_time  ""  
+		channel_type channel  ""  
+		message_direction direction  ""  
+		VARCHAR locale  ""  
+		JSONB metadata  ""  
+		TIMESTAMP last_updated  ""  
+	}
+
+	SMS_MESSAGES {
+		UUID message_id PK ""  
+		UUID interaction_id FK ""  
+		UUID party_id FK ""  
+		TIMESTAMP message_timestamp  ""  
+		VARCHAR from_number  ""  
+		VARCHAR to_number  ""  
+		TEXT raw_text  ""  
+		TEXT transcript  ""  
+		TEXT[] media_urls  ""  
+		message_status status  ""  
+		VARCHAR provider_message_id  ""  
+		VARCHAR provider_signature  ""  
+		JSONB event_payload  ""  
+		VARCHAR idempotency_key  ""  
+		TIMESTAMP created_at  ""  
+	}
+
+	CALLS {
+		UUID call_id PK ""  
+		UUID interaction_id FK ""  
+		UUID party_id FK ""  
+		TIMESTAMP call_timestamp  ""  
+		VARCHAR call_session_id  ""  
+		VARCHAR from_number  ""  
+		VARCHAR to_number  ""  
+		INTEGER duration_seconds  ""  
+		TEXT raw_audio_url  ""  
+		TEXT transcript  ""  
+		call_status status  ""  
+		TEXT ivr_script_response  ""  
+		JSONB metadata  ""  
+		VARCHAR idempotency_key  ""  
+		TIMESTAMP created_at  ""  
+	}
+
+	NLP_EVENTS {
+		UUID nlp_event_id PK ""  
+		UUID interaction_id FK ""  
+		UUID message_id FK ""  
+		UUID call_id FK ""  
+		TIMESTAMP nlp_timestamp  ""  
+		VARCHAR intent  ""  
+		JSONB entities  ""  
+		NUMERIC confidence  ""  
+		VARCHAR model_version  ""  
+		JSONB router_output  ""  
+		TIMESTAMP created_at  ""  
+	}
+
+	AUTH_SESSIONS {
+		UUID auth_session_id PK ""  
+		UUID party_id FK ""  
+		VARCHAR session_id  ""  
+		auth_method verification_method  ""  
+		VARCHAR phone_number  ""  
+		VARCHAR email  ""  
+		VARCHAR code_hash  ""  
+		auth_status status  ""  
+		TIMESTAMP created_at  ""  
+		TIMESTAMP expires_at  ""  
+		TIMESTAMP verified_at  ""  
+		JSONB metadata  ""  
+	}
+
+	ACTIONS {
+		UUID action_id PK ""  
+		UUID interaction_id FK ""  
+		UUID nlp_event_id FK ""  
+		TIMESTAMP action_timestamp  ""  
+		VARCHAR target_system  ""  
+		VARCHAR operation  ""  
+		JSONB parameters  ""  
+		BOOLEAN dry_run  ""  
+		action_status status  ""  
+		TIMESTAMP created_at  ""  
+	}
+
+	RESULTS {
+		UUID result_id PK ""  
+		UUID action_id FK ""  
+		UUID interaction_id FK ""  
+		TIMESTAMP result_timestamp  ""  
+		result_status status  ""  
+		TEXT artifact_url  ""  
+		TEXT summary  ""  
+		VARCHAR error_code  ""  
+		TEXT error_message  ""  
+		VARCHAR handoff_ticket_id  ""  
+		TIMESTAMP created_at  ""  
+	}
+
+	ROUTING_EVENTS {
+		UUID routing_event_id PK ""  
+		UUID interaction_id FK ""  
+		UUID nlp_event_id FK ""  
+		TIMESTAMP routing_timestamp  ""  
+		VARCHAR queue  ""  
+		INTEGER priority  ""  
+		VARCHAR agent_id  ""  
+		TIMESTAMP routed_at  ""  
+		TEXT route_notes  ""  
+	}
+
+	COMPLIANCE_RECORDS {
+		UUID compliance_id PK ""  
+		UUID interaction_id FK ""  
+		UUID party_id FK ""  
+		TIMESTAMP recorded_at  ""  
+		VARCHAR opt_in_source  ""  
+		JSONB keyword_events  ""  
+		VARCHAR a2p_campaign_id  ""  
+		TEXT notes  ""  
+	}
+
+	IDEMPOTENCY_KEYS {
+		VARCHAR idempotency_key PK ""  
+		TIMESTAMP created_at  ""  
+		TIMESTAMP last_seen_at  ""  
+		TEXT description  ""  
+	}
+
+	CORRELATION_MAPPING {
+		UUID correlation_id PK ""  
+		VARCHAR service_name PK ""  
+		UUID event_id PK ""  
+		VARCHAR event_table  ""  
+		TIMESTAMP created_at  ""  
+	}
+
+	Untitled-Entity {
+
+	}
+
+	EMPLOYEE {
+		UUID party_id PK ""  
+		VARCHAR external_user_id  ""  
+		VARCHAR phone_number  ""  
+		VARCHAR phone_number_hash  ""  
+		consent_status consent_status  ""  
+		VARCHAR locale  ""  
+		TIMESTAMP created_at  ""  
+		TIMESTAMP updated_at  ""  
+	}
+
+	EMPLOYEE||--o{CONSENT_EVENTS:"party_id"
+	EMPLOYEE||--o{INTERACTIONS:"party_id"
+	EMPLOYEE||--o{SMS_MESSAGES:"party_id"
+	EMPLOYEE||--o{CALLS:"party_id"
+	EMPLOYEE||--o{AUTH_SESSIONS:"party_id"
+	EMPLOYEE||--o{COMPLIANCE_RECORDS:"party_id"
+	INTERACTIONS||--o{SMS_MESSAGES:"interaction_id"
+	INTERACTIONS||--o{CALLS:"interaction_id"
+	INTERACTIONS||--o{NLP_EVENTS:"interaction_id"
+	INTERACTIONS||--o{ACTIONS:"interaction_id"
+	INTERACTIONS||--o{RESULTS:"interaction_id"
+	INTERACTIONS||--o{ROUTING_EVENTS:"interaction_id"
+	INTERACTIONS||--o{COMPLIANCE_RECORDS:"interaction_id"
+	SMS_MESSAGES||--o{NLP_EVENTS:"message_id"
+	CALLS||--o{NLP_EVENTS:"call_id"
+	NLP_EVENTS||--o{ACTIONS:"nlp_event_id"
+	ACTIONS||--o{RESULTS:"action_id"
+	NLP_EVENTS||--o{ROUTING_EVENTS:"nlp_event_id"
+	INTERACTIONS||--o{CORRELATION_MAPPING:"correlation_id"
+	NLP_EVENTS}|--|{Untitled-Entity:"  "
+
+
 ```
 
 ---

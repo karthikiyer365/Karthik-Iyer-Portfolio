@@ -1,5 +1,5 @@
 const OPENROUTER_BASE = "https://openrouter.ai/api/v1";
-export const OPENROUTER_MODEL = "upstage/solar-pro-3:free";
+export const OPENROUTER_MODEL = "google/gemini-3-flash-preview";
 
 export function getOpenRouterApiKey(): string | null {
   return process.env.OPENROUTER_API_KEY ?? null;

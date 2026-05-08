@@ -7,6 +7,7 @@ import CursorCaret from "./CursorCaret";
 import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
 import MermaidDiagram from "./MermaidDiagram";
+import NotebookRenderer from "./NotebookRenderer";
 
 type ViewMode = "code" | "preview";
 
@@ -42,6 +43,8 @@ export default function EditorWorkspace() {
 
   const content = getContent(activeFile);
   const isMd = activeFile.endsWith(".md");
+  const isNotebook = activeFile.endsWith(".ipynb");
+  const hasPreview = isMd || isNotebook;
 
   return (
     <div className="flex-1 flex flex-col bg-[#0a0a0a] overflow-hidden">
@@ -78,7 +81,7 @@ export default function EditorWorkspace() {
             ))}
         </div>
 
-        {isMd && (
+        {hasPreview && (
           <button
             onClick={() =>
               setViewMode((v) => (v === "code" ? "preview" : "code"))
@@ -91,8 +94,12 @@ export default function EditorWorkspace() {
       </div>
 
       {/* Content */}
-      {isMd && viewMode === "preview" ? (
-        <MarkdownPreview content={content} />
+      {hasPreview && viewMode === "preview" ? (
+        isNotebook ? (
+          <NotebookRenderer content={content} />
+        ) : (
+          <MarkdownPreview content={content} />
+        )
       ) : (
         <CodeView content={content} filePath={activeFile} />
       )}
