@@ -20,6 +20,7 @@ export async function callOpenRouterChat(opts: {
   messages: OpenRouterMessage[];
   model?: string;
   temperature?: number;
+  max_tokens?: number;
   tools?: Array<{ type: "function"; function: { name: string; description: string; parameters: object } }>;
 }): Promise<OpenRouterChatResult> {
   const key = getOpenRouterApiKey();
@@ -27,7 +28,8 @@ export async function callOpenRouterChat(opts: {
   const body: Record<string, unknown> = {
     model: opts.model ?? OPENROUTER_MODEL,
     messages: opts.messages,
-    temperature: opts.temperature ?? 0.9,
+    temperature: opts.temperature ?? 0.4,
+    max_tokens: opts.max_tokens ?? 700,
   };
   if (opts.tools?.length) {
     body.tools = opts.tools;
