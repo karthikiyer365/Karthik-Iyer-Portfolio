@@ -1,12 +1,16 @@
 # Next.js
 .next/
 out/
-.next/*
-!.next/cache
+next-env.d.ts
 
+# TypeScript build cache
+*.tsbuildinfo
 
 # Node
 node_modules/
+
+# Python
+.venv/
 
 # Env
 .env*
