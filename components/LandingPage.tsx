@@ -23,14 +23,14 @@ function ActionButton({ icon, label, disabled, onClick }: ActionButtonProps) {
       disabled={disabled}
       onClick={disabled ? undefined : onClick}
       className={[
-        "group flex items-center gap-2 rounded-lg border border-[#2a2a2a]",
-        "bg-[#dddddd] px-5 py-3 text-[13px] font-medium text-[#111111]",
-        "shadow-[0_1px_0_rgba(255,255,255,0.35)_inset] transition",
-        "hover:bg-[#ffffff] active:bg-[#888888] cursor-pointer",
+        "group inline-flex items-center gap-3.5 rounded-md border border-[#dd0077]",
+        "bg-transparent px-4 py-1.5 text-[13px] font-mono font-medium text-[#e5e5e5]",
+        "transition",
+        "hover:bg-[#dd0077]/30 active:bg-[#dd0077]/40 cursor-pointer",
         "disabled:cursor-not-allowed disabled:opacity-30",
       ].join(" ")}
     >
-      <span className="text-[#111111]">{icon}</span>
+      <span className="text-[#e5e5e5]">{icon}</span>
       <span className="whitespace-nowrap">{label}</span>
     </button>
   );
@@ -62,29 +62,28 @@ export default function LandingPage({ onNavigate }: LandingPageProps) {
               className="h-5 w-5 rounded-[4px] bg-[#e5e5e5]"
             />
             <div className="text-[28px] font-semibold tracking-[0.22em] text-[#e5e5e5]">
-              KARTHIK
+              KARTHIK S IYER
             </div>
           </div>
 
-          <div className="text-sm text-[#a3a3a3] font-mono text-left mt-2 w-full max-w-[395px]">
-            Developer &bull; Engineer
+          <div className="text-sm text-[#4ec9b0] font-mono text-left mt-2 w-full max-w-[500px]">
+            Developer &bull; Engineer &bull; Data
           </div>
 
           {/* Action buttons */}
-          <div className="mt-8 w-full max-w-[500px] flex flex-wrap justify-between gap-1">
+          <div className="mt-8 w-full max-w-[500px] flex flex-wrap justify-between gap-3">
             <ActionButton
               icon={
                 <FolderOpen className="h-4 w-4 ml-1" aria-hidden="true" />
               }
-              label="Open portfolio"
-              disabled={!firstFile}
-              onClick={() => firstFile && onNavigate?.(firstFile)}
+              label="Open Portfolio"
+              onClick={() => onNavigate?.("portfolio/resume.md")}
             />
             <ActionButton
               icon={
                 <GitBranchPlus className="h-4 w-4" aria-hidden="true" />
               }
-              label="Clone skills"
+              label="Clone Skills"
               disabled={!firstFile}
               onClick={() => firstFile && onNavigate?.(firstFile)}
             />
@@ -92,9 +91,8 @@ export default function LandingPage({ onNavigate }: LandingPageProps) {
               icon={
                 <MessageSquare className="h-4 w-4" aria-hidden="true" />
               }
-              label="Connect via SMS"
-              disabled={!firstFile}
-              onClick={() => firstFile && onNavigate?.(firstFile)}
+              label="Connect"
+              onClick={() => onNavigate?.("portfolio/contact.md")}
             />
           </div>
 
@@ -105,7 +103,7 @@ export default function LandingPage({ onNavigate }: LandingPageProps) {
             </div>
             <ul className="mt-3 space-y-1 text-[13px] text-[#a3a3a3]">
               <li className="flex gap-2 justify-between">
-                <span className="text-[#a3a3a3] font-mono text-left">
+                <span className="text-white font-mono font-semibold text-left">
                   Data Systems Engineer
                 </span>
                 <span className="text-[#444444] font-mono text-right">
@@ -113,7 +111,7 @@ export default function LandingPage({ onNavigate }: LandingPageProps) {
                 </span>
               </li>
               <li className="flex gap-2 justify-between">
-                <span className="text-[#a3a3a3] font-mono text-left">
+                <span className="text-white font-mono font-semibold text-left">
                   Technical Systems Assistant
                 </span>
                 <span className="text-[#444444] font-mono text-right">
@@ -121,7 +119,7 @@ export default function LandingPage({ onNavigate }: LandingPageProps) {
                 </span>
               </li>
               <li className="flex gap-2 justify-between">
-                <span className="text-[#a3a3a3] font-mono text-left">
+                <span className="text-white font-mono font-semibold text-left">
                   M.Sc Data Analytics
                 </span>
                 <span className="text-[#444444] font-mono text-right">
@@ -129,7 +127,7 @@ export default function LandingPage({ onNavigate }: LandingPageProps) {
                 </span>
               </li>
               <li className="flex gap-2 justify-between">
-                <span className="text-[#a3a3a3] font-mono text-left">
+              <span className="text-white font-mono font-semibold text-left">
                   Data Analyst
                 </span>
                 <span className="text-[#444444] font-mono text-right">

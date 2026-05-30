@@ -101,7 +101,7 @@ export default function ChatPanel() {
     }
 
     setCurrentState([]);
-    setThinkingExpanded(false);
+    setThinkingExpanded(true);
     setThinkingWordIndex(0);
 
     const userMessage: ChatMessage = {
@@ -160,6 +160,7 @@ export default function ChatPanel() {
               typeof data.response === "string"
             ) {
               gotDone = true;
+              setThinkingExpanded(false);
               const fullResponse = data.response;
               let index = 0;
               typingIntervalRef.current = setInterval(() => {
@@ -260,14 +261,55 @@ export default function ChatPanel() {
       </div>
 
       <div className="flex-1 overflow-y-auto p-1 space-y-2 typed-messages">
-        {messages.map((msg) => (
+        {messages.map((msg, idx) => (
           <div key={msg.id}>
             {msg.role === "user" ? (
               <div className="w-full max-h-20 text-white text-sm leading-relaxed px-4 py-2 bg-[#3C3C3C] rounded-xl border border-[#3a3a3a]">
                 {msg.content.slice(0, 80)}
               </div>
             ) : (
-              <div className="text-sm leading-relaxed text-white px-1">
+              <>
+                {idx === messages.length - 1 && currentState.length > 0 && (
+                  <div className="mb-1.5 px-1">
+                    <div
+                      className="flex items-center gap-1 cursor-pointer select-none"
+                      onClick={() => setThinkingExpanded((v) => !v)}
+                    >
+                      <svg
+                        className={`w-3 h-3 text-[#666] transition-transform ${thinkingExpanded ? "rotate-90" : ""}`}
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        stroke="currentColor"
+                      >
+                        <path
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                          strokeWidth={2}
+                          d="M9 5l7 7-7 7"
+                        />
+                      </svg>
+                      <span className="text-[10px] text-[#666] font-mono truncate max-w-[260px]">
+                        {displayedLastStep}
+                        {isTyping && (
+                          <span className="inline-block w-1 h-2.5 bg-[#666] ml-0.5 animate-pulse" />
+                        )}
+                      </span>
+                    </div>
+                    {thinkingExpanded && (
+                      <div className="mt-1 ml-4 space-y-0.5 max-h-32 overflow-y-auto">
+                        {currentState.slice(0, -1).map((step, i) => (
+                          <div
+                            key={i}
+                            className="text-[10px] text-[#555] font-mono truncate"
+                          >
+                            {step}
+                          </div>
+                        ))}
+                      </div>
+                    )}
+                  </div>
+                )}
+                <div className="text-sm leading-relaxed text-white px-1">
                 <ReactMarkdown
                   remarkPlugins={[remarkGfm]}
                   components={{
@@ -302,7 +344,8 @@ export default function ChatPanel() {
                 >
                   {msg.content}
                 </ReactMarkdown>
-              </div>
+                </div>
+              </>
             )}
           </div>
         ))}
@@ -358,47 +401,6 @@ export default function ChatPanel() {
           </div>
         </div>
 
-        {/* Thinking thread */}
-        {currentState.length > 0 && (
-          <div className="mt-2 px-1">
-            <div
-              className="flex items-center gap-1 cursor-pointer select-none"
-              onClick={() => setThinkingExpanded((v) => !v)}
-            >
-              <svg
-                className={`w-3 h-3 text-[#666] transition-transform ${thinkingExpanded ? "rotate-90" : ""}`}
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth={2}
-                  d="M9 5l7 7-7 7"
-                />
-              </svg>
-              <span className="text-[10px] text-[#666] font-mono truncate max-w-[260px]">
-                {displayedLastStep}
-                {isTyping && (
-                  <span className="inline-block w-1 h-2.5 bg-[#666] ml-0.5 animate-pulse" />
-                )}
-              </span>
-            </div>
-            {thinkingExpanded && (
-              <div className="mt-1 ml-4 space-y-0.5 max-h-32 overflow-y-auto">
-                {currentState.slice(0, -1).map((step, i) => (
-                  <div
-                    key={i}
-                    className="text-[10px] text-[#555] font-mono truncate"
-                  >
-                    {step}
-                  </div>
-                ))}
-              </div>
-            )}
-          </div>
-        )}
       </div>
     </div>
   );

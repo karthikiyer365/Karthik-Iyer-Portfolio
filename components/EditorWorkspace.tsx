@@ -9,6 +9,7 @@ import remarkGfm from "remark-gfm";
 import MermaidDiagram from "./MermaidDiagram";
 import CareerTimeline from "./CareerTimeline";
 import NotebookRenderer from "./NotebookRenderer";
+import { Mail, Phone, Link } from "lucide-react";
 
 type ViewMode = "code" | "preview";
 
@@ -111,6 +112,8 @@ export default function EditorWorkspace() {
 /* ===================== Markdown Preview ===================== */
 
 function MarkdownPreview({ content }: { content: string }) {
+  const { openFile } = useEditor();
+  const navigateToContact = () => openFile("portfolio/contact.md", "contact.md");
   return (
     <div className="flex-1 overflow-auto px-8 py-6 prose-invert max-w-none">
       <ReactMarkdown
@@ -131,6 +134,50 @@ function MarkdownPreview({ content }: { content: string }) {
               {children}
             </h3>
           ),
+          h4: ({ children }) => {
+            const iconMap: Record<string, React.ReactNode> = {
+              ":mail:": <button type="button" onClick={navigateToContact} className="inline cursor-pointer hover:text-[#4ec9b0] transition-colors"><Mail className="inline h-3.5 w-3.5 -mt-0.5" /></button>,
+              ":phone:": <button type="button" onClick={navigateToContact} className="inline cursor-pointer hover:text-[#4ec9b0] transition-colors"><Phone className="inline h-3.5 w-3.5 -mt-0.5" /></button>,
+              ":link:": <button type="button" onClick={navigateToContact} className="inline cursor-pointer hover:text-[#4ec9b0] transition-colors"><Link className="inline h-3.5 w-3.5 -mt-0.5" /></button>,
+            };
+            const replaceTokens = (node: React.ReactNode): React.ReactNode => {
+              if (typeof node === "string") {
+                const parts: React.ReactNode[] = [];
+                let remaining = node;
+                let key = 0;
+                while (remaining.length > 0) {
+                  let earliest = -1;
+                  let match = "";
+                  for (const token of Object.keys(iconMap)) {
+                    const idx = remaining.indexOf(token);
+                    if (idx !== -1 && (earliest === -1 || idx < earliest)) {
+                      earliest = idx;
+                      match = token;
+                    }
+                  }
+                  if (earliest === -1) {
+                    parts.push(remaining);
+                    break;
+                  }
+                  if (earliest > 0) parts.push(remaining.slice(0, earliest));
+                  parts.push(<span key={key++}>{iconMap[match]}</span>);
+                  remaining = remaining.slice(earliest + match.length);
+                }
+                return parts.length === 1 ? parts[0] : <>{parts}</>;
+              }
+              if (Array.isArray(node)) return node.map((n, i) => <span key={i}>{replaceTokens(n)}</span>);
+              if (node && typeof node === "object" && "props" in node) {
+                const el = node as React.ReactElement<{ children?: React.ReactNode }>;
+                return { ...el, props: { ...el.props, children: replaceTokens(el.props.children) } };
+              }
+              return node;
+            };
+            return (
+              <h4 className="text-sm text-[#a3a3a3] mb-4">
+                {replaceTokens(children)}
+              </h4>
+            );
+          },
           p: ({ children }) => (
             <p className="text-sm text-[#d4d4d4] leading-relaxed mb-3">
               {children}
