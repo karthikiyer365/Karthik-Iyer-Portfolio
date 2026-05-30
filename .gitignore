@@ -19,6 +19,9 @@ node_modules/
 # OS
 .DS_Store
 
+# Brainstorm visual companion
+.superpowers/
+
 # Logs
 npm-debug.log*
 yarn-debug.log*
