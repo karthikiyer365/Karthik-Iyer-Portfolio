@@ -7,6 +7,7 @@ import CursorCaret from "./CursorCaret";
 import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
 import MermaidDiagram from "./MermaidDiagram";
+import CareerTimeline from "./CareerTimeline";
 import NotebookRenderer from "./NotebookRenderer";
 
 type ViewMode = "code" | "preview";
@@ -195,10 +196,14 @@ function MarkdownPreview({ content }: { content: string }) {
               return <MermaidDiagram chart={codeStr} />;
             }
 
+            if (lang === "timeline") {
+              return <CareerTimeline data={codeStr} />;
+            }
+
             if (lang) {
               return (
                 <pre className="bg-[#1a1a1a] rounded-lg p-4 overflow-auto my-3 border border-[#2a2a2a]">
-                  <code className="text-xs text-[#d4d4d4] font-mono">
+                  <code className="text-sm text-[#d4d4d4] font-mono">
                     {codeStr}
                   </code>
                 </pre>
