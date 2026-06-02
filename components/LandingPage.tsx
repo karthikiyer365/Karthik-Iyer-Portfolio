@@ -24,14 +24,14 @@ function ActionButton({ icon, label, disabled, onClick }: ActionButtonProps) {
       disabled={disabled}
       onClick={disabled ? undefined : onClick}
       className={[
-        "group inline-flex items-center gap-3.5 rounded-md border border-[#dd0077]",
-        "bg-transparent px-4 py-1.5 text-[13px] font-mono font-medium text-[#e5e5e5]",
+        "group inline-flex items-center gap-3.5 rounded-md border border-accent-pink",
+        "bg-transparent px-4 py-1.5 text-body font-mono font-medium text-ink",
         "transition",
-        "hover:bg-[#dd0077]/30 active:bg-[#dd0077]/40 cursor-pointer",
+        "hover:bg-accent-pink/30 active:bg-accent-pink/40 cursor-pointer",
         "disabled:cursor-not-allowed disabled:opacity-30",
       ].join(" ")}
     >
-      <span className="text-[#e5e5e5]">{icon}</span>
+      <span className="text-ink">{icon}</span>
       <span className="whitespace-nowrap">{label}</span>
     </button>
   );
@@ -61,14 +61,14 @@ export default function LandingPage({ onNavigate }: LandingPageProps) {
             <img
               src="/img.png"
               alt="Karthik Iyer"
-              className="h-5 w-5 rounded-[4px] bg-[#e5e5e5]"
+              className="h-5 w-5 rounded-[4px] bg-ink"
             />
-            <div className="text-[28px] font-semibold tracking-[0.22em] text-[#e5e5e5]">
+            <div className="text-[28px] font-semibold tracking-[0.22em] text-ink">
               KARTHIK S IYER
             </div>
           </div>
 
-          <div className="text-sm text-[#4ec9b0] font-mono text-left mt-2 w-full max-w-[500px]">
+          <div className="text-body text-accent-teal font-mono text-left mt-2 w-full max-w-[500px]">
             Developer &bull; Engineer &bull; Data
           </div>
 
@@ -103,31 +103,31 @@ export default function LandingPage({ onNavigate }: LandingPageProps) {
 
           {/* Recent experience */}
           <div className="mt-10 w-full max-w-[500px] text-left">
-            <div className="text-xs font-mono tracking-widest text-[#444444]">
+            <div className="text-meta font-mono tracking-widest text-ink-faint">
               RECENT EXPERIENCE
             </div>
-            <ul className="mt-3 space-y-1 text-[13px] text-[#a3a3a3]">
+            <ul className="mt-3 space-y-1 text-body text-ink-secondary">
               <li className="flex gap-2 justify-between">
-                <span className="text-white font-mono font-semibold text-left">
+                <span className="text-ink font-mono font-semibold text-left">
                   Data Systems Engineer
                 </span>
-                <span className="text-[#444444] font-mono text-right">
+                <span className="text-ink-faint font-mono text-right">
                   ~/restorefast/ai-dev
                 </span>
               </li>
               <li className="flex gap-2 justify-between">
-                <span className="text-white font-mono font-semibold text-left">
+                <span className="text-ink font-mono font-semibold text-left">
                   Technical Systems Assistant
                 </span>
-                <span className="text-[#444444] font-mono text-right">
+                <span className="text-ink-faint font-mono text-right">
                   ~/gwu/it
                 </span>
               </li>
               <li className="flex gap-2 justify-between">
-                <span className="text-white font-mono font-semibold text-left">
+                <span className="text-ink font-mono font-semibold text-left">
                   M.Sc Data Analytics
                 </span>
-                <span className="text-[#444444] font-mono text-right">
+                <span className="text-ink-faint font-mono text-right">
                   ~/gwu/seas/data-analytics
                 </span>
               </li>
@@ -135,7 +135,7 @@ export default function LandingPage({ onNavigate }: LandingPageProps) {
               <span className="text-white font-mono font-semibold text-left">
                   Data Analyst
                 </span>
-                <span className="text-[#444444] font-mono text-right">
+                <span className="text-ink-faint font-mono text-right">
                   ~/dpsy/financial-data-analysis
                 </span>
               </li>
