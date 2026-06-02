@@ -23,10 +23,10 @@ export default function EditorWorkspace() {
 
   if (openFiles.length === 0 || !activeFile) {
     return (
-      <div className="flex-1 flex flex-col items-center justify-center bg-[#171717] text-[#666666]">
+      <div className="flex-1 flex flex-col items-center justify-center bg-surface-1 text-ink-muted">
         <div className="text-center">
           <svg
-            className="w-16 h-16 mx-auto mb-4 text-[#1f1f1f]"
+            className="w-16 h-16 mx-auto mb-4 text-line-subtle"
             viewBox="0 0 24 24"
             fill="none"
             stroke="currentColor"
@@ -38,8 +38,8 @@ export default function EditorWorkspace() {
               d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4"
             />
           </svg>
-          <p className="text-sm mb-1">Select a file to open</p>
-          <p className="text-xs text-[#444444]">or explore the file tree</p>
+          <p className="text-body mb-1">Select a file to open</p>
+          <p className="text-meta text-ink-faint">or explore the file tree</p>
         </div>
       </div>
     );
@@ -47,7 +47,7 @@ export default function EditorWorkspace() {
 
   if (activeFile === SETTINGS_PATH) {
     return (
-      <div className="flex-1 flex flex-col bg-[#0a0a0a] overflow-hidden">
+      <div className="flex-1 flex flex-col bg-bg overflow-hidden">
         <EditorTabs />
         <SettingsView />
       </div>
@@ -60,12 +60,12 @@ export default function EditorWorkspace() {
   const hasPreview = isMd || isNotebook;
 
   return (
-    <div className="flex-1 flex flex-col bg-[#0a0a0a] overflow-hidden">
+    <div className="flex-1 flex flex-col bg-bg overflow-hidden">
       <EditorTabs />
 
       {/* Breadcrumb + view toggle */}
-      <div className="flex items-center justify-between h-7 px-4 bg-[#0a0a0a] shrink-0">
-        <div className="flex items-center text-[11px] text-[#666666]">
+      <div className="flex items-center justify-between h-7 px-4 bg-bg shrink-0">
+        <div className="flex items-center font-mono text-meta text-ink-muted">
           {activeFile
             .split("/")
             .map((part: string, idx: number, arr: string[]) => (
@@ -86,7 +86,7 @@ export default function EditorWorkspace() {
                   </svg>
                 )}
                 <span
-                  className={idx === arr.length - 1 ? "text-[#a3a3a3]" : ""}
+                  className={idx === arr.length - 1 ? "text-ink-secondary" : ""}
                 >
                   {part}
                 </span>
@@ -99,7 +99,7 @@ export default function EditorWorkspace() {
             onClick={() =>
               setViewMode((v) => (v === "code" ? "preview" : "code"))
             }
-            className="text-[10px] px-2 py-0.5 rounded bg-[#2a2a2a] text-[#888] hover:text-[#ccc] transition-colors"
+            className="font-mono text-[10px] px-2 py-0.5 rounded bg-line text-ink-secondary hover:text-ink transition-colors"
           >
             {viewMode === "preview" ? "< >" : "Preview"}
           </button>
@@ -130,159 +130,161 @@ function MarkdownPreview({ content }: { content: string }) {
     openFile(SETTINGS_PATH, SETTINGS_LABEL);
   };
   return (
-    <div className="flex-1 overflow-auto px-8 py-6 prose-invert max-w-none">
-      <ReactMarkdown
-        remarkPlugins={[remarkGfm]}
-        components={{
-          h1: ({ children }) => (
-            <h1 className="text-2xl font-bold text-[#e5e5e5] mb-4 mt-2 border-b border-[#2a2a2a] pb-2">
-              {children}
-            </h1>
-          ),
-          h2: ({ children }) => (
-            <h2 className="text-xl font-semibold text-[#4ec9b0] mb-3 mt-6">
-              {children}
-            </h2>
-          ),
-          h3: ({ children }) => (
-            <h3 className="text-lg font-medium text-[#dcdcaa] mb-2 mt-4">
-              {children}
-            </h3>
-          ),
-          h4: ({ children }) => {
-            const iconMap: Record<string, React.ReactNode> = {
-              ":mail:": <button type="button" onClick={navigateToContact} className="inline cursor-pointer hover:text-[#4ec9b0] transition-colors"><Mail className="inline h-3.5 w-3.5 -mt-0.5" /></button>,
-              ":phone:": <button type="button" onClick={navigateToContact} className="inline cursor-pointer hover:text-[#4ec9b0] transition-colors"><Phone className="inline h-3.5 w-3.5 -mt-0.5" /></button>,
-              ":link:": <button type="button" onClick={navigateToContact} className="inline cursor-pointer hover:text-[#4ec9b0] transition-colors"><Link className="inline h-3.5 w-3.5 -mt-0.5" /></button>,
-            };
-            const replaceTokens = (node: React.ReactNode): React.ReactNode => {
-              if (typeof node === "string") {
-                const parts: React.ReactNode[] = [];
-                let remaining = node;
-                let key = 0;
-                while (remaining.length > 0) {
-                  let earliest = -1;
-                  let match = "";
-                  for (const token of Object.keys(iconMap)) {
-                    const idx = remaining.indexOf(token);
-                    if (idx !== -1 && (earliest === -1 || idx < earliest)) {
-                      earliest = idx;
-                      match = token;
+    <div className="flex-1 overflow-auto">
+      <div className="mx-auto max-w-[760px] px-8 py-7">
+        <ReactMarkdown
+          remarkPlugins={[remarkGfm]}
+          components={{
+            h1: ({ children }) => (
+              <h1 className="text-[19px] font-semibold text-ink mb-3 mt-1 border-b border-line-subtle pb-2">
+                {children}
+              </h1>
+            ),
+            h2: ({ children }) => (
+              <h2 className="text-[15px] font-semibold text-accent-teal mb-2 mt-6">
+                {children}
+              </h2>
+            ),
+            h3: ({ children }) => (
+              <h3 className="text-body font-semibold text-ink mb-1.5 mt-4">
+                {children}
+              </h3>
+            ),
+            h4: ({ children }) => {
+              const iconMap: Record<string, React.ReactNode> = {
+                ":mail:": <button type="button" onClick={navigateToContact} className="inline cursor-pointer hover:text-accent-teal transition-colors"><Mail className="inline h-3.5 w-3.5 -mt-0.5" /></button>,
+                ":phone:": <button type="button" onClick={navigateToContact} className="inline cursor-pointer hover:text-accent-teal transition-colors"><Phone className="inline h-3.5 w-3.5 -mt-0.5" /></button>,
+                ":link:": <button type="button" onClick={navigateToContact} className="inline cursor-pointer hover:text-accent-teal transition-colors"><Link className="inline h-3.5 w-3.5 -mt-0.5" /></button>,
+              };
+              const replaceTokens = (node: React.ReactNode): React.ReactNode => {
+                if (typeof node === "string") {
+                  const parts: React.ReactNode[] = [];
+                  let remaining = node;
+                  let key = 0;
+                  while (remaining.length > 0) {
+                    let earliest = -1;
+                    let match = "";
+                    for (const token of Object.keys(iconMap)) {
+                      const idx = remaining.indexOf(token);
+                      if (idx !== -1 && (earliest === -1 || idx < earliest)) {
+                        earliest = idx;
+                        match = token;
+                      }
                     }
+                    if (earliest === -1) {
+                      parts.push(remaining);
+                      break;
+                    }
+                    if (earliest > 0) parts.push(remaining.slice(0, earliest));
+                    parts.push(<span key={key++}>{iconMap[match]}</span>);
+                    remaining = remaining.slice(earliest + match.length);
                   }
-                  if (earliest === -1) {
-                    parts.push(remaining);
-                    break;
-                  }
-                  if (earliest > 0) parts.push(remaining.slice(0, earliest));
-                  parts.push(<span key={key++}>{iconMap[match]}</span>);
-                  remaining = remaining.slice(earliest + match.length);
+                  return parts.length === 1 ? parts[0] : <>{parts}</>;
                 }
-                return parts.length === 1 ? parts[0] : <>{parts}</>;
-              }
-              if (Array.isArray(node)) return node.map((n, i) => <span key={i}>{replaceTokens(n)}</span>);
-              if (node && typeof node === "object" && "props" in node) {
-                const el = node as React.ReactElement<{ children?: React.ReactNode }>;
-                return { ...el, props: { ...el.props, children: replaceTokens(el.props.children) } };
-              }
-              return node;
-            };
-            return (
-              <h4 className="text-sm text-[#a3a3a3] mb-4">
-                {replaceTokens(children)}
-              </h4>
-            );
-          },
-          p: ({ children }) => (
-            <p className="text-sm text-[#d4d4d4] leading-relaxed mb-3">
-              {children}
-            </p>
-          ),
-          ul: ({ children }) => (
-            <ul className="list-disc pl-5 mb-3 text-sm text-[#d4d4d4] space-y-1">
-              {children}
-            </ul>
-          ),
-          ol: ({ children }) => (
-            <ol className="list-decimal pl-5 mb-3 text-sm text-[#d4d4d4] space-y-1">
-              {children}
-            </ol>
-          ),
-          li: ({ children }) => <li className="leading-relaxed">{children}</li>,
-          blockquote: ({ children }) => (
-            <blockquote className="border-l-2 border-[#4ec9b0] pl-4 my-3 text-[#999]">
-              {children}
-            </blockquote>
-          ),
-          a: ({ children, href }) => (
-            <a
-              href={href}
-              className="text-[#569cd6] underline hover:text-[#7cb8f0]"
-              target="_blank"
-              rel="noreferrer"
-            >
-              {children}
-            </a>
-          ),
-          table: ({ children }) => (
-            <div className="overflow-auto my-3">
-              <table className="border-collapse text-sm w-full">
-                {children}
-              </table>
-            </div>
-          ),
-          th: ({ children }) => (
-            <th className="border border-[#333] bg-[#1a1a1a] px-3 py-1.5 text-left text-[#e5e5e5]">
-              {children}
-            </th>
-          ),
-          td: ({ children }) => (
-            <td className="border border-[#333] px-3 py-1.5 text-[#d4d4d4]">
-              {children}
-            </td>
-          ),
-          hr: () => <hr className="border-[#2a2a2a] my-6" />,
-          img: ({ src, alt }) => (
-            <img
-              src={src}
-              alt={alt ?? ""}
-              className="max-w-full rounded-lg my-4"
-            />
-          ),
-          code: ({ className, children }) => {
-            const match = /language-(\w+)/.exec(className || "");
-            const lang = match ? match[1] : "";
-            const codeStr = String(children).replace(/\n$/, "");
-
-            if (lang === "mermaid") {
-              return <MermaidDiagram chart={codeStr} />;
-            }
-
-            if (lang === "timeline") {
-              return <CareerTimeline data={codeStr} />;
-            }
-
-            if (lang) {
+                if (Array.isArray(node)) return node.map((n, i) => <span key={i}>{replaceTokens(n)}</span>);
+                if (node && typeof node === "object" && "props" in node) {
+                  const el = node as React.ReactElement<{ children?: React.ReactNode }>;
+                  return { ...el, props: { ...el.props, children: replaceTokens(el.props.children) } };
+                }
+                return node;
+              };
               return (
-                <pre className="bg-[#1a1a1a] rounded-lg p-4 overflow-auto my-3 border border-[#2a2a2a]">
-                  <code className="text-sm text-[#d4d4d4] font-mono">
-                    {codeStr}
-                  </code>
-                </pre>
+                <h4 className="text-desc text-ink-secondary mb-3">
+                  {replaceTokens(children)}
+                </h4>
               );
-            }
-
-            return (
-              <code className="bg-[#2a2a2a] text-[#ce9178] px-1.5 py-0.5 rounded text-xs">
+            },
+            p: ({ children }) => (
+              <p className="text-body text-ink-body leading-relaxed mb-2.5">
                 {children}
-              </code>
-            );
-          },
-          pre: ({ children }) => <>{children}</>,
-        }}
-      >
-        {content}
-      </ReactMarkdown>
+              </p>
+            ),
+            ul: ({ children }) => (
+              <ul className="list-disc pl-5 mb-2.5 text-body text-ink-body space-y-1">
+                {children}
+              </ul>
+            ),
+            ol: ({ children }) => (
+              <ol className="list-decimal pl-5 mb-2.5 text-body text-ink-body space-y-1">
+                {children}
+              </ol>
+            ),
+            li: ({ children }) => <li className="leading-relaxed">{children}</li>,
+            blockquote: ({ children }) => (
+              <blockquote className="border-l-2 border-accent-teal pl-4 my-3 text-ink-secondary">
+                {children}
+              </blockquote>
+            ),
+            a: ({ children, href }) => (
+              <a
+                href={href}
+                className="text-accent-teal hover:underline"
+                target="_blank"
+                rel="noreferrer"
+              >
+                {children}
+              </a>
+            ),
+            table: ({ children }) => (
+              <div className="overflow-auto my-3">
+                <table className="border-collapse text-desc w-full">
+                  {children}
+                </table>
+              </div>
+            ),
+            th: ({ children }) => (
+              <th className="border border-line-strong bg-surface-raised px-3 py-1.5 text-left text-ink font-medium">
+                {children}
+              </th>
+            ),
+            td: ({ children }) => (
+              <td className="border border-line-strong px-3 py-1.5 text-ink-body">
+                {children}
+              </td>
+            ),
+            hr: () => <hr className="border-line-subtle my-6" />,
+            img: ({ src, alt }) => (
+              <img
+                src={src}
+                alt={alt ?? ""}
+                className="max-w-full rounded-lg my-4"
+              />
+            ),
+            code: ({ className, children }) => {
+              const match = /language-(\w+)/.exec(className || "");
+              const lang = match ? match[1] : "";
+              const codeStr = String(children).replace(/\n$/, "");
+
+              if (lang === "mermaid") {
+                return <MermaidDiagram chart={codeStr} />;
+              }
+
+              if (lang === "timeline") {
+                return <CareerTimeline data={codeStr} />;
+              }
+
+              if (lang) {
+                return (
+                  <pre className="bg-surface-raised rounded-lg p-4 overflow-auto my-3 border border-line">
+                    <code className="text-code text-ink-body font-mono">
+                      {codeStr}
+                    </code>
+                  </pre>
+                );
+              }
+
+              return (
+                <code className="bg-surface-raised text-[#ce9178] px-1.5 py-0.5 rounded text-[11px] font-mono">
+                  {children}
+                </code>
+              );
+            },
+            pre: ({ children }) => <>{children}</>,
+          }}
+        >
+          {content}
+        </ReactMarkdown>
+      </div>
     </div>
   );
 }
@@ -299,16 +301,16 @@ function CodeView({
   const lines = content.split("\n");
 
   return (
-    <div className="flex-1 overflow-auto">
+    <div className="flex-1 overflow-auto font-mono text-code">
       <div className="flex min-h-full">
-        <div className="sticky left-0 flex flex-col items-end py-4 px-3 bg-[#0a0a0a] text-[#444444] select-none shrink-0">
+        <div className="sticky left-0 flex flex-col items-end py-4 px-3 bg-bg text-ink-faint select-none shrink-0">
           {lines.map((_, idx) => (
-            <div key={idx} className="leading-6 text-right text-xs">
+            <div key={idx} className="leading-6 text-right text-[11px]">
               {idx + 1}
             </div>
           ))}
         </div>
-        <div className="flex-1 py-4 px-4 bg-[#0a0a0a]">
+        <div className="flex-1 py-4 px-4 bg-bg">
           {lines.map((line, idx) => (
             <div key={idx} className="leading-6">
               {renderLine(line, filePath)}
@@ -353,7 +355,7 @@ function renderLine(line: string, filePath: string) {
       return (
         <span>
           <span className="text-[#9cdcfe]">{prop}</span>
-          <span className="text-[#666666]">:</span>
+          <span className="text-ink-muted">:</span>
           <span className="text-[#ce9178]">{value}</span>
         </span>
       );
@@ -372,5 +374,5 @@ function renderLine(line: string, filePath: string) {
       return <span className="text-[#d7ba7d]">{line}</span>;
   }
 
-  return <span className="text-[#d4d4d4]">{line}</span>;
+  return <span className="text-ink-body">{line}</span>;
 }
