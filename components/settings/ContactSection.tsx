@@ -27,8 +27,8 @@ export default function ContactSection() {
 
   return (
     <div>
-      <h1 className="text-2xl font-semibold text-[#e5e5e5]">Contact</h1>
-      <p className="text-[#888] text-sm mt-1 mb-5">
+      <h1 className="text-[18px] font-semibold text-ink">Contact</h1>
+      <p className="text-desc text-ink-secondary mt-1 mb-4">
         How to reach me and where to find my work.
       </p>
 
@@ -46,16 +46,16 @@ export default function ContactSection() {
       <SurfaceCard>
         {channels.length === 0 ? (
           <SettingRow>
-            <span className="text-[13px] text-[#666]">Nothing here yet.</span>
+            <span className="text-desc text-ink-muted">Nothing here yet.</span>
           </SettingRow>
         ) : (
           channels.map((c) => (
             <SettingRow key={c.label}>
               <div className="flex items-center justify-between gap-4">
-                <span className="text-[15px] text-[#e5e5e5]">
+                <span className="text-body font-medium text-ink">
                   {c.label}
                   {c.badge && (
-                    <span className="ml-2 text-[10px] text-[#dd0077] align-middle">
+                    <span className="ml-2 text-[10px] text-accent-pink align-middle">
                       {c.badge}
                     </span>
                   )}
@@ -66,15 +66,15 @@ export default function ContactSection() {
                       href={c.href}
                       target="_blank"
                       rel="noreferrer"
-                      className="text-[#4ec9b0] text-[14px] hover:underline"
+                      className="text-desc text-accent-teal hover:underline"
                     >
                       {c.value}
                     </a>
                   ) : (
-                    <span className="text-[#4ec9b0] text-[14px]">{c.value}</span>
+                    <span className="text-desc text-accent-teal">{c.value}</span>
                   )}
                   {c.subtext && (
-                    <span className="block text-[#888] text-[12px]">
+                    <span className="block text-meta text-ink-muted">
                       {c.subtext}
                     </span>
                   )}

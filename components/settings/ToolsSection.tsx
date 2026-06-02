@@ -25,8 +25,10 @@ const TABS: { id: ToolTab; label: string }[] = [
 function ToolRow({ item }: { item: ToolItem }) {
   return (
     <SettingRow>
-      <div className="text-[15px] text-[#e5e5e5]">{item.name}</div>
-      <div className="text-[13px] text-[#888] mt-0.5">{item.description}</div>
+      <div className="text-body font-medium text-ink">{item.name}</div>
+      <div className="text-desc text-ink-secondary mt-0.5">
+        {item.description}
+      </div>
     </SettingRow>
   );
 }
@@ -39,10 +41,10 @@ export default function ToolsSection() {
 
   return (
     <div>
-      <h1 className="text-2xl font-semibold text-[#e5e5e5]">
+      <h1 className="text-[18px] font-semibold text-ink">
         Tools &amp; tech stack
       </h1>
-      <p className="text-[#888] text-sm mt-1 mb-5">
+      <p className="text-desc text-ink-secondary mt-1 mb-4">
         Languages, frameworks, and platforms I build with day to day.
       </p>
 
@@ -60,7 +62,7 @@ export default function ToolsSection() {
           const groupItems = items.filter((t) => t.group === group);
           if (groupItems.length === 0) return null;
           return (
-            <div key={group} className="mb-8 last:mb-0">
+            <div key={group} className="mb-7 last:mb-0">
               <SectionHeader title={group} info />
               <SurfaceCard>
                 {groupItems.map((item) => (
@@ -76,7 +78,7 @@ export default function ToolsSection() {
           <SurfaceCard>
             {items.length === 0 ? (
               <SettingRow>
-                <span className="text-[13px] text-[#666]">
+                <span className="text-desc text-ink-muted">
                   Nothing here yet.
                 </span>
               </SettingRow>

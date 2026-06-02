@@ -27,10 +27,10 @@ export default function SkillsSection() {
 
   return (
     <div>
-      <h1 className="text-2xl font-semibold text-[#e5e5e5]">
+      <h1 className="text-[18px] font-semibold text-ink">
         Skills &amp; techniques
       </h1>
-      <p className="text-[#888] text-sm mt-1 mb-5">
+      <p className="text-desc text-ink-secondary mt-1 mb-4">
         Capabilities I bring to data, ML, and systems work.
       </p>
 
@@ -48,13 +48,13 @@ export default function SkillsSection() {
       <SurfaceCard>
         {skills.length === 0 ? (
           <SettingRow>
-            <span className="text-[13px] text-[#666]">Nothing here yet.</span>
+            <span className="text-desc text-ink-muted">Nothing here yet.</span>
           </SettingRow>
         ) : (
           skills.map((s) => (
             <SettingRow key={s.name}>
-              <div className="text-[15px] text-[#e5e5e5]">{s.name}</div>
-              <div className="text-[13px] text-[#888] mt-0.5">
+              <div className="text-body font-medium text-ink">{s.name}</div>
+              <div className="text-desc text-ink-secondary mt-0.5">
                 {s.description}
               </div>
             </SettingRow>

@@ -18,39 +18,39 @@ export default function SettingsSidebar() {
   const { activeSubsection, setActiveSubsection } = useSettings();
 
   return (
-    <div className="w-64 shrink-0 bg-[#171717] border-r border-[#1f1f1f] overflow-y-auto px-3 py-3 flex flex-col gap-2">
+    <div className="w-60 shrink-0 bg-surface-1 border-r border-line-subtle overflow-y-auto px-2.5 py-3 flex flex-col gap-1.5">
       {/* profile */}
       <div className="flex items-center gap-2 px-1">
         <img
           src="/img.png"
           alt="Karthik Iyer"
-          className="w-8 h-8 rounded bg-[#e5e5e5] object-cover shrink-0"
+          className="w-7 h-7 rounded bg-ink object-cover shrink-0"
         />
-        <div className="leading-tight">
-          <div className="text-[13px] text-[#e5e5e5] truncate max-w-[180px]">
+        <div className="leading-tight min-w-0">
+          <div className="text-desc text-ink truncate">
             karthikiyer365@gmail.com
           </div>
-          <div className="text-[11px] text-[#777]">Portfolio</div>
+          <div className="text-meta text-ink-muted">Portfolio</div>
         </div>
       </div>
 
       {/* search (decorative) */}
-      <div className="flex items-center gap-2 px-2 py-1.5 rounded bg-[#202020] text-[#666] text-[12px]">
+      <div className="flex items-center gap-2 px-2 py-1.5 rounded bg-titlebar text-ink-muted text-desc">
         <Search className="w-3.5 h-3.5" />
         Search settings ⌘F
       </div>
 
       {/* disabled top group */}
-      <div className="mt-1 rounded bg-[#202020] opacity-50 select-none">
+      <div className="mt-1 rounded bg-titlebar opacity-50 select-none">
         {DISABLED_TOP.map((label) => (
-          <div key={label} className="px-3 py-1.5 text-[13px] text-[#777]">
+          <div key={label} className="px-3 py-1.5 text-desc text-ink-muted">
             {label}
           </div>
         ))}
       </div>
 
       {/* portfolio group */}
-      <div className="px-2 pt-2 pb-1 text-[11px] tracking-wide text-[#777]">
+      <div className="px-2 pt-2 pb-0.5 text-meta tracking-wide text-ink-muted">
         Portfolio
       </div>
       {NAV.map((n) => {
@@ -59,10 +59,10 @@ export default function SettingsSidebar() {
           <button
             key={n.id}
             onClick={() => setActiveSubsection(n.id)}
-            className={`text-left px-3 py-2 rounded text-[13px] text-[#e5e5e5] border ${
+            className={`text-left px-3 py-1.5 rounded text-body text-ink border-l-2 ${
               active
-                ? "bg-[#2a2a2a] border-[#333] border-l-2 border-l-[#dd0077]"
-                : "border-transparent border-l-2 border-l-transparent hover:bg-[#1f1f1f]"
+                ? "bg-line border-l-accent-pink"
+                : "border-l-transparent hover:bg-surface-2"
             }`}
           >
             {n.label}
@@ -71,14 +71,14 @@ export default function SettingsSidebar() {
       })}
 
       {/* more group (disabled) */}
-      <div className="px-2 pt-2 pb-1 text-[11px] tracking-wide text-[#777]">
+      <div className="px-2 pt-2 pb-0.5 text-meta tracking-wide text-ink-muted">
         More
       </div>
-      <div className="rounded bg-[#202020] opacity-50 select-none">
+      <div className="rounded bg-titlebar opacity-50 select-none">
         {DISABLED_MORE.map((label) => (
           <div
             key={label}
-            className="px-3 py-1.5 text-[13px] text-[#777] flex items-center justify-between"
+            className="px-3 py-1.5 text-desc text-ink-muted flex items-center justify-between"
           >
             {label}
             {label === "Docs" && <span>↗</span>}
@@ -89,9 +89,9 @@ export default function SettingsSidebar() {
       {/* résumé download (decorative, pink) */}
       <button
         type="button"
-        className="mt-2 flex items-center gap-2 px-3 py-2.5 rounded border border-[#dd0077] bg-transparent hover:bg-[#dd0077]/30 active:bg-[#dd0077]/40 text-[13px] text-[#e5e5e5] text-left transition-colors"
+        className="mt-2 flex items-center gap-2 px-3 py-2 rounded border border-accent-pink bg-transparent hover:bg-accent-pink/30 active:bg-accent-pink/40 text-body text-ink text-left transition-colors"
       >
-        <Download className="w-4 h-4 text-[#dd0077]" />
+        <Download className="w-4 h-4 text-accent-pink" />
         Download résumé (PDF)
       </button>
     </div>

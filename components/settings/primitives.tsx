@@ -6,7 +6,7 @@ import type { ReactNode } from "react";
 /** Borderless elevated "context box" that holds rows. */
 export function SurfaceCard({ children }: { children: ReactNode }) {
   return (
-    <div className="rounded-[14px] bg-[#1a1a1a] overflow-hidden">
+    <div className="rounded-[14px] bg-surface-raised overflow-hidden">
       {children}
     </div>
   );
@@ -15,7 +15,7 @@ export function SurfaceCard({ children }: { children: ReactNode }) {
 /** A single row inside a SurfaceCard. Divider drawn via border-top on all but first. */
 export function SettingRow({ children }: { children: ReactNode }) {
   return (
-    <div className="px-5 py-4 border-t border-[#232323] first:border-t-0 hover:bg-[#1f1f1f] transition-colors">
+    <div className="px-5 py-3 border-t border-line-subtle first:border-t-0 hover:bg-surface-2 transition-colors">
       {children}
     </div>
   );
@@ -30,9 +30,9 @@ export function SectionHeader({
   info?: boolean;
 }) {
   return (
-    <div className="flex items-center gap-2 mb-3">
-      <h2 className="text-[17px] text-[#e5e5e5]">{title}</h2>
-      {info && <span className="text-[#dd0077] text-sm">&#9432;</span>}
+    <div className="flex items-center gap-2 mb-2">
+      <h2 className="text-title font-medium text-ink">{title}</h2>
+      {info && <span className="text-accent-pink text-xs">&#9432;</span>}
     </div>
   );
 }
@@ -48,15 +48,15 @@ export function SegmentedTabs<T extends string>({
   onChange: (id: T) => void;
 }) {
   return (
-    <div className="flex gap-6 text-sm border-b border-[#2a2a2a] mb-5">
+    <div className="flex gap-5 text-desc border-b border-line mb-4">
       {tabs.map((t) => (
         <button
           key={t.id}
           onClick={() => onChange(t.id)}
           className={`pb-2 transition-colors ${
             active === t.id
-              ? "text-[#e5e5e5] border-b-2 border-[#4ec9b0]"
-              : "text-[#666] border-b-2 border-transparent hover:text-[#999]"
+              ? "text-ink border-b-2 border-accent-teal"
+              : "text-ink-muted border-b-2 border-transparent hover:text-ink-secondary"
           }`}
         >
           {t.label}
@@ -79,23 +79,23 @@ export function SettingsToggle({
   onToggle: () => void;
 }) {
   return (
-    <div className="flex items-center justify-between rounded-[14px] bg-[#1a1a1a] px-5 py-4 mb-8">
+    <div className="flex items-center justify-between rounded-[14px] bg-surface-raised px-5 py-3.5 mb-7">
       <div>
-        <div className="text-[15px] text-[#e5e5e5]">{title}</div>
-        <div className="text-[13px] text-[#888]">{description}</div>
+        <div className="text-body font-medium text-ink">{title}</div>
+        <div className="text-desc text-ink-secondary">{description}</div>
       </div>
       <button
         type="button"
         role="switch"
         aria-checked={on}
         onClick={onToggle}
-        className={`w-11 h-6 rounded-full relative transition-colors shrink-0 ${
-          on ? "bg-[#4ec9b0]" : "bg-[#3a3a3a]"
+        className={`w-9 h-5 rounded-full relative transition-colors shrink-0 ${
+          on ? "bg-accent-teal" : "bg-line-strong"
         }`}
       >
         <span
-          className={`absolute top-0.5 left-0.5 w-5 h-5 rounded-full bg-[#0a0a0a] transition-transform ${
-            on ? "translate-x-5" : ""
+          className={`absolute top-0.5 left-0.5 w-4 h-4 rounded-full bg-bg transition-transform ${
+            on ? "translate-x-4" : ""
           }`}
         />
       </button>
