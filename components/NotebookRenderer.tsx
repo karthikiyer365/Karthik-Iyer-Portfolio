@@ -72,7 +72,7 @@ export default function NotebookRenderer({ content }: { content: string }) {
 
   if (!notebook.cells?.length) {
     return (
-      <div className="flex-1 overflow-auto px-8 py-6 text-[#666] text-sm">
+      <div className="flex-1 overflow-auto px-8 py-6 text-ink-muted text-body">
         Empty notebook.
       </div>
     );
@@ -106,7 +106,7 @@ function CellBlock({ cell }: { cell: NotebookCell }) {
 
   // raw cell
   return (
-    <div className="px-4 py-2 text-xs text-[#888] font-mono whitespace-pre-wrap bg-[#111] rounded border border-[#1f1f1f]">
+    <div className="px-4 py-2 text-xs text-ink-secondary font-mono whitespace-pre-wrap bg-bg rounded border border-line-subtle">
       {joinSource(cell.source)}
     </div>
   );
@@ -142,22 +142,22 @@ function CodeCell({
     executionCount != null ? `[${executionCount}]:` : "[ ]:";
 
   return (
-    <div className="rounded-lg border border-[#2a2a2a] overflow-hidden">
+    <div className="rounded-lg border border-line overflow-hidden">
       {/* Input */}
-      <div className="flex bg-[#1a1a1a]">
+      <div className="flex bg-surface-raised">
         <div className="flex items-start shrink-0 w-14 pt-2.5 pr-1 text-right">
           <span className="w-full text-[10px] font-mono text-[#4e7aab]">
             {label}
           </span>
         </div>
-        <pre className="flex-1 py-2.5 pr-4 overflow-x-auto text-xs font-mono leading-5 text-[#d4d4d4]">
+        <pre className="flex-1 py-2.5 pr-4 overflow-x-auto text-code font-mono leading-5 text-ink-body">
           {colorizePython(source)}
         </pre>
       </div>
 
       {/* Outputs */}
       {outputs.length > 0 && (
-        <div className="border-t border-[#2a2a2a] bg-[#111]">
+        <div className="border-t border-line bg-bg">
           {outputs.map((out, i) => (
             <OutputBlock key={i} output={out} />
           ))}
@@ -175,7 +175,7 @@ function OutputBlock({ output }: { output: CellOutput }) {
     return (
       <div className="flex">
         <div className="shrink-0 w-14" />
-        <pre className="flex-1 py-2 pr-4 text-xs font-mono text-[#ccc] whitespace-pre-wrap overflow-x-auto">
+        <pre className="flex-1 py-2 pr-4 text-code font-mono text-ink-body whitespace-pre-wrap overflow-x-auto">
           {text}
         </pre>
       </div>
@@ -281,7 +281,7 @@ function OutputBlock({ output }: { output: CellOutput }) {
     return (
       <div className="flex">
         <div className="shrink-0 w-14" />
-        <pre className="flex-1 py-2 pr-4 text-xs font-mono text-[#ccc] whitespace-pre-wrap overflow-x-auto">
+        <pre className="flex-1 py-2 pr-4 text-code font-mono text-ink-body whitespace-pre-wrap overflow-x-auto">
           {text}
         </pre>
       </div>
@@ -330,7 +330,7 @@ function HtmlIframe({ html }: { html: string }) {
       ref={iframeRef}
       srcDoc={srcdoc}
       sandbox="allow-scripts"
-      className="w-full border-0 rounded bg-[#111]"
+      className="w-full border-0 rounded bg-bg"
       style={{ height: `${height}px` }}
       title="notebook output"
     />
@@ -460,30 +460,30 @@ function colorizeLine(line: string): React.ReactNode[] {
 
 const markdownComponents = {
   h1: ({ children }: { children?: React.ReactNode }) => (
-    <h1 className="text-2xl font-bold text-[#e5e5e5] mb-4 mt-2 border-b border-[#2a2a2a] pb-2">
+    <h1 className="text-[19px] font-semibold text-ink mb-3 mt-1 border-b border-line-subtle pb-2">
       {children}
     </h1>
   ),
   h2: ({ children }: { children?: React.ReactNode }) => (
-    <h2 className="text-xl font-semibold text-[#4ec9b0] mb-3 mt-6">
+    <h2 className="text-[15px] font-semibold text-accent-teal mb-2 mt-6">
       {children}
     </h2>
   ),
   h3: ({ children }: { children?: React.ReactNode }) => (
-    <h3 className="text-lg font-medium text-[#dcdcaa] mb-2 mt-4">
+    <h3 className="text-body font-semibold text-ink mb-1.5 mt-4">
       {children}
     </h3>
   ),
   p: ({ children }: { children?: React.ReactNode }) => (
-    <p className="text-sm text-[#d4d4d4] leading-relaxed mb-3">{children}</p>
+    <p className="text-body text-ink-body leading-relaxed mb-2.5">{children}</p>
   ),
   ul: ({ children }: { children?: React.ReactNode }) => (
-    <ul className="list-disc pl-5 mb-3 text-sm text-[#d4d4d4] space-y-1">
+    <ul className="list-disc pl-5 mb-2.5 text-body text-ink-body space-y-1">
       {children}
     </ul>
   ),
   ol: ({ children }: { children?: React.ReactNode }) => (
-    <ol className="list-decimal pl-5 mb-3 text-sm text-[#d4d4d4] space-y-1">
+    <ol className="list-decimal pl-5 mb-2.5 text-body text-ink-body space-y-1">
       {children}
     </ol>
   ),
@@ -491,7 +491,7 @@ const markdownComponents = {
     <li className="leading-relaxed">{children}</li>
   ),
   blockquote: ({ children }: { children?: React.ReactNode }) => (
-    <blockquote className="border-l-2 border-[#4ec9b0] pl-4 my-3 text-[#999]">
+    <blockquote className="border-l-2 border-accent-teal pl-4 my-3 text-ink-secondary">
       {children}
     </blockquote>
   ),
@@ -504,7 +504,7 @@ const markdownComponents = {
   }) => (
     <a
       href={href}
-      className="text-[#569cd6] underline hover:text-[#7cb8f0]"
+      className="text-accent-teal hover:underline"
       target="_blank"
       rel="noreferrer"
     >
@@ -513,20 +513,20 @@ const markdownComponents = {
   ),
   table: ({ children }: { children?: React.ReactNode }) => (
     <div className="overflow-auto my-3">
-      <table className="border-collapse text-sm w-full">{children}</table>
+      <table className="border-collapse text-desc w-full">{children}</table>
     </div>
   ),
   th: ({ children }: { children?: React.ReactNode }) => (
-    <th className="border border-[#333] bg-[#1a1a1a] px-3 py-1.5 text-left text-[#e5e5e5]">
+    <th className="border border-line-strong bg-surface-raised px-3 py-1.5 text-left text-ink font-medium">
       {children}
     </th>
   ),
   td: ({ children }: { children?: React.ReactNode }) => (
-    <td className="border border-[#333] px-3 py-1.5 text-[#d4d4d4]">
+    <td className="border border-line-strong px-3 py-1.5 text-ink-body">
       {children}
     </td>
   ),
-  hr: () => <hr className="border-[#2a2a2a] my-6" />,
+  hr: () => <hr className="border-line-subtle my-6" />,
   img: ({ src, alt }: { src?: string; alt?: string }) => (
     <img
       src={src}
@@ -551,14 +551,14 @@ const markdownComponents = {
 
     if (lang) {
       return (
-        <pre className="bg-[#1a1a1a] rounded-lg p-4 overflow-auto my-3 border border-[#2a2a2a]">
-          <code className="text-xs text-[#d4d4d4] font-mono">{codeStr}</code>
+        <pre className="bg-surface-raised rounded-lg p-4 overflow-auto my-3 border border-line">
+          <code className="text-code text-ink-body font-mono">{codeStr}</code>
         </pre>
       );
     }
 
     return (
-      <code className="bg-[#2a2a2a] text-[#ce9178] px-1.5 py-0.5 rounded text-xs">
+      <code className="bg-surface-raised text-[#ce9178] px-1.5 py-0.5 rounded text-[11px] font-mono">
         {children}
       </code>
     );
