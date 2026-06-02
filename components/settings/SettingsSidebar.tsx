@@ -21,9 +21,11 @@ export default function SettingsSidebar() {
     <div className="w-64 shrink-0 bg-[#171717] border-r border-[#1f1f1f] overflow-y-auto px-3 py-3 flex flex-col gap-2">
       {/* profile */}
       <div className="flex items-center gap-2 px-1">
-        <div className="w-8 h-8 rounded bg-[#2a1c27] border border-[#5a3a52] flex items-center justify-center text-[#e6a9d6] text-sm font-medium">
-          K
-        </div>
+        <img
+          src="/img.png"
+          alt="Karthik Iyer"
+          className="w-8 h-8 rounded bg-[#e5e5e5] object-cover shrink-0"
+        />
         <div className="leading-tight">
           <div className="text-[13px] text-[#e5e5e5] truncate max-w-[180px]">
             karthikiyer365@gmail.com
@@ -59,7 +61,7 @@ export default function SettingsSidebar() {
             onClick={() => setActiveSubsection(n.id)}
             className={`text-left px-3 py-2 rounded text-[13px] text-[#e5e5e5] border ${
               active
-                ? "bg-[#2a2a2a] border-[#333] border-l-2 border-l-[#c586c0]"
+                ? "bg-[#2a2a2a] border-[#333] border-l-2 border-l-[#dd0077]"
                 : "border-transparent border-l-2 border-l-transparent hover:bg-[#1f1f1f]"
             }`}
           >
@@ -87,9 +89,9 @@ export default function SettingsSidebar() {
       {/* résumé download (decorative, pink) */}
       <button
         type="button"
-        className="mt-2 flex items-center gap-2 px-3 py-2.5 rounded bg-[#2a1c27] hover:bg-[#34232f] border border-[#5a3a52] text-[13px] text-[#e6a9d6] text-left transition-colors"
+        className="mt-2 flex items-center gap-2 px-3 py-2.5 rounded border border-[#dd0077] bg-transparent hover:bg-[#dd0077]/30 active:bg-[#dd0077]/40 text-[13px] text-[#e5e5e5] text-left transition-colors"
       >
-        <Download className="w-4 h-4 text-[#c586c0]" />
+        <Download className="w-4 h-4 text-[#dd0077]" />
         Download résumé (PDF)
       </button>
     </div>

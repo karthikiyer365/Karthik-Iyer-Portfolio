@@ -32,7 +32,7 @@ export function SectionHeader({
   return (
     <div className="flex items-center gap-2 mb-3">
       <h2 className="text-[17px] text-[#e5e5e5]">{title}</h2>
-      {info && <span className="text-[#c586c0] text-sm">&#9432;</span>}
+      {info && <span className="text-[#dd0077] text-sm">&#9432;</span>}
     </div>
   );
 }

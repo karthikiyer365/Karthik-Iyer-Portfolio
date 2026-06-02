@@ -143,8 +143,9 @@ Tokens reused from the existing app; pink is added.
 | Row hover | `#1f1f1f` | row hover |
 | Teal accent | `#4ec9b0` | active segmented tab underline, "on" toggles, contact link values |
 | Active tab top border | `#3b82f6` | editor tab (existing) |
-| **Pink accent** | **`#c586c0`** | active nav left bar, avatar tint, ⓘ info icons, résumé download button |
-| Pink button bg / border / text | `#2a1c27` / `#5a3a52` / `#e6a9d6` | résumé download button + avatar chip |
+| **Pink accent** | **`#dd0077`** | active nav left bar, ⓘ info icons, settings-tab gear, contact badge, résumé download button (matches CareerTimeline + landing buttons) |
+| Pink button | `border-[#dd0077]` transparent, `hover:bg-[#dd0077]/30` | résumé download button (mirrors landing ActionButton) |
+| Profile avatar | `/img.png` | landing logo image (replaces "K" chip) |
 | Muted text | `#888` / `#666` | descriptions, disabled groups |
 
 **Layout rules (the "context box + grey padding" requirement):**

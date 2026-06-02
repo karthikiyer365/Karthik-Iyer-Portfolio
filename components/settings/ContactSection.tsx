@@ -55,7 +55,7 @@ export default function ContactSection() {
                 <span className="text-[15px] text-[#e5e5e5]">
                   {c.label}
                   {c.badge && (
-                    <span className="ml-2 text-[10px] text-[#c586c0] align-middle">
+                    <span className="ml-2 text-[10px] text-[#dd0077] align-middle">
                       {c.badge}
                     </span>
                   )}
