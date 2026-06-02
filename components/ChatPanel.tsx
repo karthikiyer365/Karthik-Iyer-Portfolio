@@ -234,14 +234,14 @@ export default function ChatPanel() {
   };
 
   return (
-    <div className="flex flex-col w-80 h-full bg-[#1e1e1e] border-l border-[#1f1f1f] shrink-0 overflow-hidden">
-      <div className="flex items-center justify-between h-9 px-3 border-b border-[#1f1f1f] shrink-0">
-        <span className="text-xs font-medium text-[#a3a3a3]">
+    <div className="flex flex-col w-80 h-full bg-surface-2 border-l border-line-subtle shrink-0 overflow-hidden">
+      <div className="flex items-center justify-between h-9 px-3 border-b border-line-subtle shrink-0">
+        <span className="text-meta font-medium text-ink-secondary">
           Ask about my work
         </span>
         <button
           onClick={handleReset}
-          className="p-1 text-[#666666] hover:text-[#a3a3a3] transition-colors"
+          className="p-1 text-ink-muted hover:text-ink-secondary transition-colors"
           title="Reset Chat"
         >
           <svg
@@ -276,7 +276,7 @@ export default function ChatPanel() {
                       onClick={() => setThinkingExpanded((v) => !v)}
                     >
                       <svg
-                        className={`w-3 h-3 text-[#666] transition-transform ${thinkingExpanded ? "rotate-90" : ""}`}
+                        className={`w-3 h-3 text-ink-muted transition-transform ${thinkingExpanded ? "rotate-90" : ""}`}
                         viewBox="0 0 24 24"
                         fill="none"
                         stroke="currentColor"
@@ -288,10 +288,10 @@ export default function ChatPanel() {
                           d="M9 5l7 7-7 7"
                         />
                       </svg>
-                      <span className="text-[10px] text-[#666] font-mono truncate max-w-[260px]">
+                      <span className="text-[10px] text-ink-muted font-mono truncate max-w-[260px]">
                         {displayedLastStep}
                         {isTyping && (
-                          <span className="inline-block w-1 h-2.5 bg-[#666] ml-0.5 animate-pulse" />
+                          <span className="inline-block w-1 h-2.5 bg-ink-muted ml-0.5 animate-pulse" />
                         )}
                       </span>
                     </div>
@@ -300,7 +300,7 @@ export default function ChatPanel() {
                         {currentState.slice(0, -1).map((step, i) => (
                           <div
                             key={i}
-                            className="text-[10px] text-[#555] font-mono truncate"
+                            className="text-[10px] text-ink-faint font-mono truncate"
                           >
                             {step}
                           </div>
@@ -309,7 +309,7 @@ export default function ChatPanel() {
                     )}
                   </div>
                 )}
-                <div className="text-sm leading-relaxed text-white px-1">
+                <div className="text-body leading-relaxed text-ink px-1">
                 <ReactMarkdown
                   remarkPlugins={[remarkGfm]}
                   components={{
@@ -326,7 +326,7 @@ export default function ChatPanel() {
                       <li className="mb-1 last:mb-0">{children}</li>
                     ),
                     code: ({ children }) => (
-                      <code className="bg-[#2a2a2a] px-1 py-0.5 rounded text-xs">
+                      <code className="bg-line px-1 py-0.5 rounded text-meta font-mono">
                         {children}
                       </code>
                     ),
@@ -361,14 +361,14 @@ export default function ChatPanel() {
               onKeyDown={handleKeyDown}
               placeholder="questions "
               rows={2}
-              className="w-full bg-transparent text-sm text-[#e5e5e5] placeholder-[#555555] resize-none focus:outline-none"
+              className="w-full bg-transparent text-body text-ink placeholder-ink-faint resize-none focus:outline-none"
             />
           </div>
           <div className="flex items-center justify-between px-3 pb-3">
             <select
               value={persona}
               onChange={(e) => setPersona(e.target.value as Persona)}
-              className="px-3 py-1.5 bg-[#2a2a2a] text-[#a3a3a3] text-xs rounded-full border-none cursor-pointer focus:outline-none hover:bg-[#333333] transition-colors appearance-none pr-7"
+              className="px-3 py-1.5 bg-line text-ink-secondary text-meta rounded-full border-none cursor-pointer focus:outline-none hover:bg-line-strong transition-colors appearance-none pr-7"
               style={{
                 backgroundImage: `url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' stroke='%23666666'%3E%3Cpath stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M19 9l-7 7-7-7'%3E%3C/path%3E%3C/svg%3E")`,
                 backgroundRepeat: "no-repeat",
