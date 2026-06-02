@@ -1,29 +1,30 @@
 # KARTHIK S IYER 
 #### :mail:  ·  :phone:  ·   :link:
 
-```text
+
 AI & Data Engineer with 2+ years building 
 - ETL pipelines, LLM/Agentic AI frameworks and connecting multiple CRMs through MCP systems for AIOps. 
 - Skilled in Data Architecture and Design, BI Dashboarding and Agentic Application Development
 - Focusing on Operations and Supply Chain Automation, Resource Managment, Financial analytics and Sports Analytics.
-```
+
 ---
 
 ## SKILLS
 
 ```text
-ML / AI                           │  Data / ETL                      │  Languages                      
-────────────────────              │  ────────────                    │  ────────────                     
-MCP + RAG integration   ▰▰▰▰▰▰▱▱  │   Supabase · MySQL   ▰▰▰▰▰▰▰▱    │  Python    ▰▰▰▰▰▰▰▱    
-Predictive Modelling    ▰▰▰▰▰▰▱▱  │   Spark              ▰▰▰▰▰▱▱▱    │  SQL       ▰▰▰▰▰▱▱▱    
-Multi-turn LLM Ops      ▰▰▰▰▱▱▱▱  │   Databricks         ▰▰▰▱▱▱▱▱    │  Next.js   ▰▰▰▱▱▱▱▱    
-                                  │   Schema Design      ▰▰▰▰▰▰▱▱    │  C++       ▰▰▱▱▱▱▱▱   
- 
-Cloud                      │   Vizuallization             │   Tools
-───────────                │   ────────────               │   ─────────
-AWS (S3, EC2)   ▰▰▰▰▰▱▱▱   │   Power BI        ▰▰▰▰▰▱▱▱   │   Claude · Codex   ▰▰▰▰▰▰▱▱
-Azure (ADF)     ▰▰▰▱▱▱▱▱   │   Tableau         ▰▰▰▰▰▰▱▱   │   Git              ▰▰▰▰▰▱▱▱
-GCP(Docker)     ▰▰▱▱▱▱▱▱   │   Plotly · Dash   ▰▰▰▰▰▰▱▱          
+ML / AI                               │  Data / ETL                          │  Languages                      
+────────────────────                  │  ────────────                        │  ────────────                     
+MCP + RAG integration   ▰▰▰▰▰▰▱▱      │   Supabase · MySQL   ▰▰▰▰▰▰▰▱        │  Python    ▰▰▰▰▰▰▰▱    
+Predictive Modelling    ▰▰▰▰▰▰▱▱      │   Spark              ▰▰▰▰▰▱▱▱        │  SQL       ▰▰▰▰▰▱▱▱    
+Multi-turn LLM Ops      ▰▰▰▰▱▱▱▱      │   Databricks         ▰▰▰▱▱▱▱▱        │  Next.js   ▰▰▰▱▱▱▱▱    
+                                      │   Schema Design      ▰▰▰▰▰▰▱▱        │  C++       ▰▰▱▱▱▱▱▱   
+
+
+Cloud                                 │   Vizuallization                     │   Tools
+───────────                           │   ────────────                       │   ─────────
+AWS (S3, EC2)   ▰▰▰▰▰▱▱▱              │   Power BI        ▰▰▰▰▰▱▱▱           │   Claude · Codex   ▰▰▰▰▰▰▱▱
+Azure (ADF)     ▰▰▰▱▱▱▱▱              │   Tableau         ▰▰▰▰▰▰▱▱           │   Git              ▰▰▰▰▰▱▱▱
+GCP(Docker)     ▰▰▱▱▱▱▱▱              │   Plotly · Dash   ▰▰▰▰▰▰▱▱          
 
 ```
 

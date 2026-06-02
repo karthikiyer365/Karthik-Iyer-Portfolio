@@ -68,7 +68,7 @@ export default function LandingPage({ onNavigate }: LandingPageProps) {
             </div>
           </div>
 
-          <div className="text-body text-accent-teal font-mono text-left mt-2 w-full max-w-[500px]">
+          <div className="text-sm text-[#4ec9b0] font-mono text-left mt-2 w-full max-w-[500px]">
             Developer &bull; Engineer &bull; Data
           </div>
 
@@ -87,7 +87,10 @@ export default function LandingPage({ onNavigate }: LandingPageProps) {
               }
               label="Clone Skills"
               disabled={!firstFile}
-              onClick={() => firstFile && onNavigate?.(firstFile)}
+              onClick={() => {
+                setActiveSubsection("skills");
+                onNavigate?.(SETTINGS_PATH);
+              }}
             />
             <ActionButton
               icon={
@@ -103,31 +106,31 @@ export default function LandingPage({ onNavigate }: LandingPageProps) {
 
           {/* Recent experience */}
           <div className="mt-10 w-full max-w-[500px] text-left">
-            <div className="text-meta font-mono tracking-widest text-ink-faint">
+            <div className="text-xs font-mono tracking-widest text-[#444444]">
               RECENT EXPERIENCE
             </div>
-            <ul className="mt-3 space-y-1 text-body text-ink-secondary">
+            <ul className="mt-3 space-y-1 text-[13px] text-[#a3a3a3]">
               <li className="flex gap-2 justify-between">
-                <span className="text-ink font-mono font-semibold text-left">
+                <span className="text-white font-mono font-semibold text-left">
                   Data Systems Engineer
                 </span>
-                <span className="text-ink-faint font-mono text-right">
+                <span className="text-[#444444] font-mono text-right">
                   ~/restorefast/ai-dev
                 </span>
               </li>
               <li className="flex gap-2 justify-between">
-                <span className="text-ink font-mono font-semibold text-left">
+                <span className="text-white font-mono font-semibold text-left">
                   Technical Systems Assistant
                 </span>
-                <span className="text-ink-faint font-mono text-right">
+                <span className="text-[#444444] font-mono text-right">
                   ~/gwu/it
                 </span>
               </li>
               <li className="flex gap-2 justify-between">
-                <span className="text-ink font-mono font-semibold text-left">
+                <span className="text-white font-mono font-semibold text-left">
                   M.Sc Data Analytics
                 </span>
-                <span className="text-ink-faint font-mono text-right">
+                <span className="text-[#444444] font-mono text-right">
                   ~/gwu/seas/data-analytics
                 </span>
               </li>
@@ -135,7 +138,7 @@ export default function LandingPage({ onNavigate }: LandingPageProps) {
               <span className="text-white font-mono font-semibold text-left">
                   Data Analyst
                 </span>
-                <span className="text-ink-faint font-mono text-right">
+                <span className="text-[#444444] font-mono text-right">
                   ~/dpsy/financial-data-analysis
                 </span>
               </li>

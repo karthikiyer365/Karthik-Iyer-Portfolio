@@ -83,12 +83,12 @@ export default function CareerTimeline({ data }: { data: string }) {
             {/* Years — end (bright) on top, start (dim) below */}
             <div className="flex w-10 shrink-0 flex-col gap-0.5 pt-px text-right leading-none">
               {entry.to != null && (
-                <div className="text-[10px] font-semibold" style={{ color: PINK }}>
+                <div className="text-[12px] font-semibold" style={{ color: PINK }}>
                   {entry.to}
                 </div>
               )}
               {entry.from != null && entry.from !== entry.to && (
-                <div className="text-[10px]" style={{ color: PINK, opacity: 0.35 }}>
+                <div className="text-[12px]" style={{ color: PINK, opacity: 0.35 }}>
                   {entry.from}
                 </div>
               )}
@@ -106,9 +106,9 @@ export default function CareerTimeline({ data }: { data: string }) {
             {/* Content — no padding-bottom so its bottom aligns with the nested rail */}
             <div className="flex-1">
               {entry.role && (
-                <div className="text-[12px] font-semibold text-ink">{entry.role}</div>
+                <div className="text-[14px] font-semibold text-ink">{entry.role}</div>
               )}
-              <div className="mt-px text-[10px] text-ink-secondary">
+              <div className="mt-px text-[12px] text-ink-secondary">
                 {entry.org}
                 {entry.location ? `, ${entry.location}` : ""}
               </div>
@@ -122,7 +122,7 @@ export default function CareerTimeline({ data }: { data: string }) {
                   {entry.stack && (
                     <div>
                       <span
-                        className="inline-flex items-center rounded-md px-2.5 py-1 text-[10px] font-medium text-ink"
+                        className="inline-flex items-center rounded-md px-2.5 py-1 text-[12px] font-medium text-ink"
                         style={{ backgroundColor: "rgba(221,0,119,0.30)" }}
                       >
                         {entry.stack}
@@ -134,7 +134,7 @@ export default function CareerTimeline({ data }: { data: string }) {
                   {entry.concurrent && entry.concurrent.length > 0 && (
                     <div className="flex flex-col gap-1">
                       {entry.concurrent.map((c, j) => (
-                        <div key={j} className="text-[11px] leading-snug text-accent-teal">
+                        <div key={j} className="text-[14px] leading-snug text-accent-teal">
                           <span className="font-semibold">{c.role}</span>
                           <span className="text-ink-secondary">{c.note ? ` ${c.note}` : ""}</span>
                         </div>
@@ -147,12 +147,12 @@ export default function CareerTimeline({ data }: { data: string }) {
                     (entry.projects && entry.projects.length > 0)) && (
                     <div className="flex flex-col gap-0.5">
                       {entry.details?.map((d, j) => (
-                        <div key={`d${j}`} className="text-[11px] leading-snug text-ink-secondary">
+                        <div key={`d${j}`} className="text-[14px] leading-snug text-ink-secondary">
                           <span className="text-accent-teal">›</span> {d}
                         </div>
                       ))}
                       {entry.projects?.map((p, j) => (
-                        <div key={`p${j}`} className="text-[11px] leading-snug text-ink-secondary">
+                        <div key={`p${j}`} className="text-[14px] leading-snug text-ink-secondary">
                           <span className="text-accent-teal">›</span> {p.title}
                           <a href={p.link} className="text-accent-teal hover:underline">{p.note ? ` ${p.note}` : ""}</a>
                           {p.year ? ` · ${p.year}` : ""}

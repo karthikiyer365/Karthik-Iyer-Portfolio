@@ -65,7 +65,7 @@ export default function EditorWorkspace() {
 
       {/* Breadcrumb + view toggle */}
       <div className="flex items-center justify-between h-7 px-4 bg-bg shrink-0">
-        <div className="flex items-center font-mono text-meta text-ink-muted">
+        <div className="flex items-center font-mono text-desc text-ink-muted">
           {activeFile
             .split("/")
             .map((part: string, idx: number, arr: string[]) => (
@@ -131,22 +131,22 @@ function MarkdownPreview({ content }: { content: string }) {
   };
   return (
     <div className="flex-1 overflow-auto">
-      <div className="mx-auto max-w-[760px] px-8 py-7">
+      <div className="mx-auto max-w-[1160px] px-8 py-7">
         <ReactMarkdown
           remarkPlugins={[remarkGfm]}
           components={{
             h1: ({ children }) => (
-              <h1 className="text-[19px] font-semibold text-ink mb-3 mt-1 border-b border-line-subtle pb-2">
+              <h1 className="text-[22px] font-semibold text-ink mb-3 mt-1 border-b border-line-subtle pb-2">
                 {children}
               </h1>
             ),
             h2: ({ children }) => (
-              <h2 className="text-[15px] font-semibold text-accent-teal mb-2 mt-6">
+              <h2 className="text-[17px] font-semibold text-accent-teal mb-2 mt-6">
                 {children}
               </h2>
             ),
             h3: ({ children }) => (
-              <h3 className="text-body font-semibold text-ink mb-1.5 mt-4">
+              <h3 className="text-[15px] font-semibold text-ink mb-1.5 mt-4">
                 {children}
               </h3>
             ),
@@ -189,23 +189,23 @@ function MarkdownPreview({ content }: { content: string }) {
                 return node;
               };
               return (
-                <h4 className="text-desc text-ink-secondary mb-3">
+                <h4 className="text-[13px] text-ink-secondary mb-3">
                   {replaceTokens(children)}
                 </h4>
               );
             },
             p: ({ children }) => (
-              <p className="text-body text-ink-body leading-relaxed mb-2.5">
+              <p className="text-[14px] text-ink-body leading-relaxed mb-2.5">
                 {children}
               </p>
             ),
             ul: ({ children }) => (
-              <ul className="list-disc pl-5 mb-2.5 text-body text-ink-body space-y-1">
+              <ul className="list-disc pl-5 mb-2.5 text-[14px] text-ink-body space-y-1">
                 {children}
               </ul>
             ),
             ol: ({ children }) => (
-              <ol className="list-decimal pl-5 mb-2.5 text-body text-ink-body space-y-1">
+              <ol className="list-decimal pl-5 mb-2.5 text-[14px] text-ink-body space-y-1">
                 {children}
               </ol>
             ),
@@ -227,7 +227,7 @@ function MarkdownPreview({ content }: { content: string }) {
             ),
             table: ({ children }) => (
               <div className="overflow-auto my-3">
-                <table className="border-collapse text-desc w-full">
+                <table className="border-collapse text-body w-full">
                   {children}
                 </table>
               </div>
@@ -266,7 +266,7 @@ function MarkdownPreview({ content }: { content: string }) {
               if (lang) {
                 return (
                   <pre className="bg-surface-raised rounded-lg p-4 overflow-auto my-3 border border-line">
-                    <code className="text-code text-ink-body font-mono">
+                    <code className="text-[13px] text-ink-body font-mono">
                       {codeStr}
                     </code>
                   </pre>
@@ -274,7 +274,7 @@ function MarkdownPreview({ content }: { content: string }) {
               }
 
               return (
-                <code className="bg-surface-raised text-[#ce9178] px-1.5 py-0.5 rounded text-[11px] font-mono">
+                <code className="bg-surface-raised text-[#ce9178] px-1.5 py-0.5 rounded text-[12px] font-mono">
                   {children}
                 </code>
               );
