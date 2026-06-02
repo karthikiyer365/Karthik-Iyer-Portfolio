@@ -32,7 +32,7 @@ function FileIcon({ name, path }: { name: string; path: string }) {
   }
   
   return (
-    <svg className="w-3.5 h-3.5 text-[#666666]" viewBox="0 0 24 24" fill="currentColor">
+    <svg className="w-3.5 h-3.5 text-ink-muted" viewBox="0 0 24 24" fill="currentColor">
       <path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8l-6-6zm-1 2l5 5h-5V4z" />
     </svg>
   );
@@ -45,7 +45,7 @@ export default function EditorTabs() {
   if (openFiles.length === 0) return null;
 
   return (
-    <div className="flex bg-[#141414]  overflow-x-auto shrink-0">
+    <div className="flex bg-surface-3 overflow-x-auto shrink-0">
       {openFiles.map((file) => {
         const isActive = file.path === activeFile;
         
@@ -53,20 +53,20 @@ export default function EditorTabs() {
           <div
             key={file.path}
             onClick={() => setActiveFile(file.path)}
-            className={`group flex items-center gap-2 px-3 h-9 cursor-pointer border-r border-[#1f1f1f] shrink-0 ${
+            className={`group flex items-center gap-2 px-3 h-9 cursor-pointer border-r border-line-subtle shrink-0 ${
               isActive
-                ? "bg-[#0a0a0a] text-[#e5e5e5] border-t-2 border-t-[#3b82f6]"
-                : "bg-[#141414] text-[#666666] hover:text-[#a3a3a3] border-t-2 border-t-transparent"
+                ? "bg-bg text-ink border-t-2 border-t-[#3b82f6]"
+                : "bg-surface-3 text-ink-muted hover:text-ink-secondary border-t-2 border-t-transparent"
             }`}
           >
             <FileIcon name={file.name} path={file.path} />
-            <span className="text-sm">{file.name}</span>
+            <span className="text-body">{file.name}</span>
             <button
               onClick={(e) => {
                 e.stopPropagation();
                 closeFile(file.path);
               }}
-              className="p-0.5 rounded hover:bg-[#1f1f1f] opacity-0 group-hover:opacity-100 transition-opacity ml-1"
+              className="p-0.5 rounded hover:bg-line-subtle opacity-0 group-hover:opacity-100 transition-opacity ml-1"
             >
               <svg
                 className="w-3 h-3"

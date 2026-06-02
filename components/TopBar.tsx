@@ -17,7 +17,7 @@ export default function TopBar({ onClose }: TopBarProps) {
   };
 
   return (
-    <div className="flex items-center justify-between h-9 px-3 bg-[#323233] border-b border-[#1f1f1f] select-none shrink-0">
+    <div className="flex items-center justify-between h-9 px-3 bg-titlebar border-b border-line-subtle select-none shrink-0">
       {/* Left - Window Controls */}
       <div className="flex items-center gap-2">
         <button
@@ -32,7 +32,7 @@ export default function TopBar({ onClose }: TopBarProps) {
       </div>
 
       {/* Center - Repository Name */}
-      <div className="absolute left-1/2 transform -translate-x-1/2 text-[#666666] text-sm">
+      <div className="absolute left-1/2 transform -translate-x-1/2 text-ink-muted text-desc">
         Karthik Iyer's Portfolio
       </div>
 
@@ -40,7 +40,7 @@ export default function TopBar({ onClose }: TopBarProps) {
       <div className="flex items-center gap-3">
         {/* Search */}
         <button
-          className="p-1 text-[#666666] hover:text-[#a3a3a3] transition-colors"
+          className="p-1 text-ink-muted hover:text-ink-secondary transition-colors"
           title="Search"
         >
           <svg
@@ -60,7 +60,7 @@ export default function TopBar({ onClose }: TopBarProps) {
 
         {/* Split View */}
         <button
-          className="p-1 text-[#666666] hover:text-[#a3a3a3] transition-colors"
+          className="p-1 text-ink-muted hover:text-ink-secondary transition-colors"
           title="Split View"
         >
           <svg
@@ -82,7 +82,7 @@ export default function TopBar({ onClose }: TopBarProps) {
         <button
           type="button"
           onClick={openSettings}
-          className="p-1 text-[#666666] hover:text-[#a3a3a3] transition-colors cursor-pointer"
+          className="p-1 text-ink-muted hover:text-ink-secondary transition-colors cursor-pointer"
           title="Settings"
         >
           <svg

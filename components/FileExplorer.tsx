@@ -7,7 +7,7 @@ export default function FileExplorer() {
   const { fileTree } = useContent();
 
   return (
-    <div className="flex flex-col w-60 h-full bg-[#1e1e1e] border-r border-[#1f1f1f]">
+    <div className="flex flex-col w-60 h-full bg-surface-2 border-r border-line-subtle">
       <div className="flex-1 overflow-y-auto py-2">
         {fileTree.map((node) => (
           <TreeNode key={node.path} node={node} depth={0} />
@@ -29,8 +29,8 @@ function TreeNode({ node, depth }: { node: FileNode; depth: number }) {
         onClick={() =>
           isFolder ? toggleFolder(node.path) : openFile(node.path, node.name)
         }
-        className={`flex items-center gap-1 w-full py-[3px] pr-2 text-sm ${
-          isActive ? "bg-[#04395e]" : "hover:bg-[#1a1a1a]"
+        className={`flex items-center gap-1 w-full py-[3px] pr-2 text-body ${
+          isActive ? "bg-selection text-ink" : "text-ink-secondary hover:bg-surface-raised"
         }`}
         style={{ paddingLeft: `${depth * 12 + 8}px` }}
       >
