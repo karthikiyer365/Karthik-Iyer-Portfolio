@@ -9,6 +9,7 @@ import React, {
 } from "react";
 import { EditorState, EditorAction, FileNode, Persona } from "@/types/editor";
 import { editorReducer, initialEditorState } from "@/lib/editorState";
+import type { Subsection } from "@/lib/settings";
 
 /* =========================
    Editor Context
@@ -132,13 +133,43 @@ export function useContent() {
 }
 
 /* =========================
+   Settings Context
+========================= */
+
+interface SettingsContextType {
+  activeSubsection: Subsection;
+  setActiveSubsection: (s: Subsection) => void;
+}
+
+const SettingsContext = createContext<SettingsContextType | null>(null);
+
+function SettingsProvider({ children }: { children: ReactNode }) {
+  const [activeSubsection, setActiveSubsection] =
+    useState<Subsection>("tools");
+  return (
+    <SettingsContext.Provider value={{ activeSubsection, setActiveSubsection }}>
+      {children}
+    </SettingsContext.Provider>
+  );
+}
+
+export function useSettings() {
+  const context = useContext(SettingsContext);
+  if (!context)
+    throw new Error("useSettings must be used within SettingsProvider");
+  return context;
+}
+
+/* =========================
    ROOT PROVIDER
 ========================= */
 
 export function AppProviders({ children }: { children: ReactNode }) {
   return (
     <EditorProvider>
-      <PersonaProvider>{children}</PersonaProvider>
+      <PersonaProvider>
+        <SettingsProvider>{children}</SettingsProvider>
+      </PersonaProvider>
     </EditorProvider>
   );
 }

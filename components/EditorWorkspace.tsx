@@ -1,8 +1,10 @@
 "use client";
 
 import { useState } from "react";
-import { useEditor, useContent } from "@/app/providers";
+import { useEditor, useContent, useSettings } from "@/app/providers";
+import { SETTINGS_PATH, SETTINGS_LABEL } from "@/lib/settings";
 import EditorTabs from "./EditorTabs";
+import SettingsView from "./settings/SettingsView";
 import CursorCaret from "./CursorCaret";
 import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
@@ -39,6 +41,15 @@ export default function EditorWorkspace() {
           <p className="text-sm mb-1">Select a file to open</p>
           <p className="text-xs text-[#444444]">or explore the file tree</p>
         </div>
+      </div>
+    );
+  }
+
+  if (activeFile === SETTINGS_PATH) {
+    return (
+      <div className="flex-1 flex flex-col bg-[#0a0a0a] overflow-hidden">
+        <EditorTabs />
+        <SettingsView />
       </div>
     );
   }
@@ -113,7 +124,11 @@ export default function EditorWorkspace() {
 
 function MarkdownPreview({ content }: { content: string }) {
   const { openFile } = useEditor();
-  const navigateToContact = () => openFile("portfolio/contact.md", "contact.md");
+  const { setActiveSubsection } = useSettings();
+  const navigateToContact = () => {
+    setActiveSubsection("contact");
+    openFile(SETTINGS_PATH, SETTINGS_LABEL);
+  };
   return (
     <div className="flex-1 overflow-auto px-8 py-6 prose-invert max-w-none">
       <ReactMarkdown

@@ -1,10 +1,21 @@
 "use client";
 
+import { useEditor, useSettings } from "@/app/providers";
+import { SETTINGS_PATH, SETTINGS_LABEL } from "@/lib/settings";
+
 type TopBarProps = {
   onClose?: () => void;
 };
 
 export default function TopBar({ onClose }: TopBarProps) {
+  const { openFile } = useEditor();
+  const { setActiveSubsection } = useSettings();
+
+  const openSettings = () => {
+    setActiveSubsection("tools");
+    openFile(SETTINGS_PATH, SETTINGS_LABEL);
+  };
+
   return (
     <div className="flex items-center justify-between h-9 px-3 bg-[#323233] border-b border-[#1f1f1f] select-none shrink-0">
       {/* Left - Window Controls */}
@@ -69,7 +80,9 @@ export default function TopBar({ onClose }: TopBarProps) {
 
         {/* Settings */}
         <button
-          className="p-1 text-[#666666] hover:text-[#a3a3a3] transition-colors"
+          type="button"
+          onClick={openSettings}
+          className="p-1 text-[#666666] hover:text-[#a3a3a3] transition-colors cursor-pointer"
           title="Settings"
         >
           <svg

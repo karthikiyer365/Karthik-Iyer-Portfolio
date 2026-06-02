@@ -2,7 +2,8 @@
 
 import type { ReactNode } from "react";
 import { FolderOpen, GitBranchPlus, MessageSquare } from "lucide-react";
-import { useContent } from "@/app/providers";
+import { useContent, useSettings } from "@/app/providers";
+import { SETTINGS_PATH } from "@/lib/settings";
 import type { FileNode } from "@/types/editor";
 
 type LandingPageProps = {
@@ -47,6 +48,7 @@ function collectFiles(nodes: FileNode[]): string[] {
 
 export default function LandingPage({ onNavigate }: LandingPageProps) {
   const { fileTree } = useContent();
+  const { setActiveSubsection } = useSettings();
   const allFiles = collectFiles(fileTree);
   const firstFile = allFiles[0];
 
@@ -92,7 +94,10 @@ export default function LandingPage({ onNavigate }: LandingPageProps) {
                 <MessageSquare className="h-4 w-4" aria-hidden="true" />
               }
               label="Connect"
-              onClick={() => onNavigate?.("portfolio/contact.md")}
+              onClick={() => {
+                setActiveSubsection("contact");
+                onNavigate?.(SETTINGS_PATH);
+              }}
             />
           </div>
 

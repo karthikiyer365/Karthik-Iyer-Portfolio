@@ -7,6 +7,7 @@ import FileExplorer from "@/components/FileExplorer";
 import EditorWorkspace from "@/components/EditorWorkspace";
 import ChatPanel from "@/components/ChatPanel";
 import { useEditor, ContentProvider } from "@/app/providers";
+import { SETTINGS_PATH, SETTINGS_LABEL } from "@/lib/settings";
 import type { FileNode } from "@/types/editor";
 
 type ViewMode = "landing" | "ide";
@@ -22,7 +23,10 @@ export default function HomePage({ fileTree, fileContents }: HomePageProps) {
 
   const handleNavigate = useCallback(
     (filePath: string) => {
-      const name = filePath.split("/").pop() || filePath;
+      const name =
+        filePath === SETTINGS_PATH
+          ? SETTINGS_LABEL
+          : filePath.split("/").pop() || filePath;
       setView("ide");
       openFile(filePath, name);
     },
