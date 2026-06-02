@@ -117,7 +117,16 @@ interface ContactChannel {
   - **Make contact details public** (Contact): on → show all; off → hide email/phone rows (others remain).
 - All toggle/tab state is **local component state** (`useState`); nothing persists across reloads.
 
-> Real contact values (email, phone, links, location) to be supplied by the user at implementation time; mockup uses placeholders.
+**Real contact data** (sourced from `content/contact.md`, which this section replaces):
+
+| Label | Value | Tabs | Note |
+|---|---|---|---|
+| Email | karthikiyer365@gmail.com | all, primary | `mailto:` |
+| Phone | +1 (202) 713-1699 | all, primary | pink "fastest via SMS" badge (from Preferred Methods) · `tel:` |
+| LinkedIn | linkedin.com/in/kiyer8 | all, social | `https:` |
+| Location | Arlington, VA | all | subtext "Open to remote & hybrid" |
+
+No GitHub channel (not present in `contact.md`).
 
 ---
 
@@ -176,9 +185,22 @@ Tokens reused from the existing app; pink is added.
 
 ---
 
-## 10. Open questions for implementation
+## 10. Resolved decisions
 
-1. Real values for Contact (email, phone, LinkedIn, GitHub, location).
-2. Does the résumé download button point at an existing PDF/route, or stay decorative for now?
-3. Exact tool/skill content (mockup uses representative placeholders).
-4. Should the mockup file (`docs/mockups/settings-mockup.html`) be kept as a reference artifact or removed after implementation?
+1. **Contact data** — sourced from `content/contact.md` (see §5 table). GitHub dropped. This section **replaces** `contact.md` (see §11).
+2. **Résumé download** — **decorative for now** (styled button, no download action). Real PDF/route deferred.
+3. **Tool/Skill content** — **build the template with placeholder content**; user will provide a résumé later to parse for the real Tools & Skills entries.
+4. **Mockup file** — kept as reference artifact at `docs/mockups/settings-mockup.html`.
+
+---
+
+## 11. `contact.md` replacement (dependency to handle in the plan)
+
+The Contact subsection supersedes `content/contact.md`. Removing that file has two ripple effects that the plan must address:
+
+1. **`navigateToContact` in `EditorWorkspace.tsx`** — the `:mail:` / `:phone:` / `:link:` icons in markdown currently call `openFile("portfolio/contact.md", "contact.md")`. After removal this must instead **open the settings tab and select the Contact subsection** (e.g., open `SETTINGS_PATH` with an initial subsection of `contact`). This implies `SettingsView` should accept an optional initial-subsection signal.
+2. **File tree** — `contact.md` disappears from `FileExplorer` automatically once the file is deleted (tree is generated from `/content`). No code change needed there, but resume/other markdown links pointing at contact must be re-checked.
+
+**Decision needed at implementation:** delete `content/contact.md` outright, or keep the file but stop linking to it. Recommended: delete it and rewire `navigateToContact` to the settings Contact subsection, so there's a single source of truth.
+
+> Minor: the sidebar profile header in the mockup still shows a placeholder `karthik.iyer@resto… / RestoreFast`. Align to real identity (`karthikiyer365@gmail.com`) at implementation, or keep the company subtitle — cosmetic, confirm during build.
