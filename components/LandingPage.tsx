@@ -26,12 +26,15 @@ function ActionButton({ icon, label, disabled, onClick }: ActionButtonProps) {
       className={[
         "group inline-flex items-center gap-3.5 rounded-md border border-accent-pink",
         "bg-transparent px-4 py-1.5 text-body font-mono font-medium text-ink",
-        "transition",
-        "hover:bg-accent-pink/30 active:bg-accent-pink/40 cursor-pointer",
-        "disabled:cursor-not-allowed disabled:opacity-30",
+        "transition-colors duration-150",
+        "hover:bg-accent-pink/30 hover:text-accent-pink hover:border-accent-pink",
+        "active:bg-accent-pink/40 cursor-pointer",
+        "disabled:cursor-not-allowed disabled:opacity-30 disabled:hover:bg-transparent disabled:hover:text-ink",
       ].join(" ")}
     >
-      <span className="text-ink">{icon}</span>
+      <span className="text-ink transition-colors group-hover:text-accent-pink">
+        {icon}
+      </span>
       <span className="whitespace-nowrap">{label}</span>
     </button>
   );
@@ -61,14 +64,14 @@ export default function LandingPage({ onNavigate }: LandingPageProps) {
             <img
               src="/img.png"
               alt="Karthik Iyer"
-              className="h-5 w-5 rounded-[4px] bg-ink"
+              className="w-12 h-17 object-cover"
             />
-            <div className="text-[28px] font-semibold tracking-[0.22em] text-ink">
-              KARTHIK S IYER
+            <div className="text-[28px] font-semibold tracking-[.13em] text-ink">
+              KARTHIK IYER
             </div>
           </div>
 
-          <div className="text-sm text-[#4ec9b0] font-mono text-left mt-2 w-full max-w-[500px]">
+          <div className="text-sm text-[#4ec9b0] pl-12 font-mono text-left w-full max-w-[475px]">
             Developer &bull; Engineer &bull; Data
           </div>
 
