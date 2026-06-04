@@ -48,14 +48,6 @@ function joinSource(source: string | string[]): string {
   return Array.isArray(source) ? source.join("") : source;
 }
 
-function stripAnsi(str: string): string {
-  return str.replace(
-    // eslint-disable-next-line no-control-regex
-    /[\u001b\u009b]\[[()#;?]*(?:[0-9]{1,4}(?:;[0-9]{0,4})*)?[0-9A-ORZcf-nqry=><]/g,
-    ""
-  );
-}
-
 /* ===================== component ===================== */
 
 export default function NotebookRenderer({ content }: { content: string }) {
@@ -95,13 +87,7 @@ function CellBlock({ cell }: { cell: NotebookCell }) {
   }
 
   if (cell.cell_type === "code") {
-    return (
-      <CodeCell
-        source={joinSource(cell.source)}
-        executionCount={cell.execution_count ?? null}
-        outputs={cell.outputs ?? []}
-      />
-    );
+    return <CodeCell outputs={cell.outputs ?? []} />;
   }
 
   // raw cell
@@ -129,40 +115,15 @@ function MarkdownCell({ source }: { source: string }) {
 
 /* ===================== Code Cell ===================== */
 
-function CodeCell({
-  source,
-  executionCount,
-  outputs,
-}: {
-  source: string;
-  executionCount: number | null;
-  outputs: CellOutput[];
-}) {
-  const label =
-    executionCount != null ? `[${executionCount}]:` : "[ ]:";
-
+function CodeCell({ outputs }: { outputs: CellOutput[] }) {
+  // Code input is intentionally hidden — only rendered outputs (charts,
+  // tables, images) are shown. Cells with no rich output render nothing.
+  if (!outputs || outputs.length === 0) return null;
   return (
-    <div className="rounded-lg border border-line overflow-hidden">
-      {/* Input */}
-      <div className="flex bg-surface-raised">
-        <div className="flex items-start shrink-0 w-14 pt-2.5 pr-1 text-right">
-          <span className="w-full text-[10px] font-mono text-[#4e7aab]">
-            {label}
-          </span>
-        </div>
-        <pre className="flex-1 py-2.5 pr-4 overflow-x-auto text-code font-mono leading-5 text-ink-body">
-          {colorizePython(source)}
-        </pre>
-      </div>
-
-      {/* Outputs */}
-      {outputs.length > 0 && (
-        <div className="border-t border-line bg-bg">
-          {outputs.map((out, i) => (
-            <OutputBlock key={i} output={out} />
-          ))}
-        </div>
-      )}
+    <div className="my-3">
+      {outputs.map((out, i) => (
+        <OutputBlock key={i} output={out} />
+      ))}
     </div>
   );
 }
@@ -170,29 +131,10 @@ function CodeCell({
 /* ===================== Output Block ===================== */
 
 function OutputBlock({ output }: { output: CellOutput }) {
-  if (output.output_type === "stream") {
-    const text = joinSource(output.text);
-    return (
-      <div className="flex">
-        <div className="shrink-0 w-14" />
-        <pre className="flex-1 py-2 pr-4 text-code font-mono text-ink-body whitespace-pre-wrap overflow-x-auto">
-          {text}
-        </pre>
-      </div>
-    );
-  }
-
-  if (output.output_type === "error") {
-    const tb = (output.traceback ?? []).map(stripAnsi).join("\n");
-    return (
-      <div className="flex">
-        <div className="shrink-0 w-14" />
-        <pre className="flex-1 py-2 pr-4 text-xs font-mono text-[#f44747] whitespace-pre-wrap overflow-x-auto">
-          {output.ename}: {output.evalue}
-          {tb && `\n${tb}`}
-        </pre>
-      </div>
-    );
+  // Bare-text outputs (stdout, plain reprs, tracebacks) are suppressed —
+  // only rich visuals (images, SVG, HTML tables, embedded charts) render.
+  if (output.output_type === "stream" || output.output_type === "error") {
+    return null;
   }
 
   // execute_result or display_data
@@ -205,30 +147,24 @@ function OutputBlock({ output }: { output: CellOutput }) {
 
   if (typeof imgPng === "string") {
     return (
-      <div className="flex">
-        <div className="shrink-0 w-14" />
-        <div className="py-2 pr-4">
-          <img
-            src={`data:image/png;base64,${imgPng}`}
-            alt="output"
-            className="max-w-full rounded"
-          />
-        </div>
+      <div className="my-2">
+        <img
+          src={`data:image/png;base64,${imgPng}`}
+          alt="output"
+          className="max-w-full rounded"
+        />
       </div>
     );
   }
 
   if (typeof imgJpg === "string") {
     return (
-      <div className="flex">
-        <div className="shrink-0 w-14" />
-        <div className="py-2 pr-4">
-          <img
-            src={`data:image/jpeg;base64,${imgJpg}`}
-            alt="output"
-            className="max-w-full rounded"
-          />
-        </div>
+      <div className="my-2">
+        <img
+          src={`data:image/jpeg;base64,${imgJpg}`}
+          alt="output"
+          className="max-w-full rounded"
+        />
       </div>
     );
   }
@@ -236,58 +172,33 @@ function OutputBlock({ output }: { output: CellOutput }) {
   if (typeof imgSvg === "string" || Array.isArray(imgSvg)) {
     const svgStr = Array.isArray(imgSvg) ? imgSvg.join("") : imgSvg;
     return (
-      <div className="flex">
-        <div className="shrink-0 w-14" />
-        <div
-          className="py-2 pr-4 overflow-auto"
-          dangerouslySetInnerHTML={{ __html: svgStr }}
-        />
-      </div>
+      <div
+        className="my-2 overflow-auto"
+        dangerouslySetInnerHTML={{ __html: svgStr }}
+      />
     );
   }
 
-  // HTML output
+  // HTML output (Plotly charts run in an iframe; tables render inline)
   const html = data["text/html"];
   if (html) {
     const htmlStr = Array.isArray(html) ? html.join("") : String(html);
-    const hasScript = /<script[\s>]/i.test(htmlStr);
-
-    if (hasScript) {
+    if (/<script[\s>]/i.test(htmlStr)) {
       return (
-        <div className="flex">
-          <div className="shrink-0 w-14" />
-          <div className="flex-1 py-2 pr-4">
-            <HtmlIframe html={htmlStr} />
-          </div>
+        <div className="my-3">
+          <HtmlIframe html={htmlStr} />
         </div>
       );
     }
-
     return (
-      <div className="flex">
-        <div className="shrink-0 w-14" />
-        <div
-          className="flex-1 py-2 pr-4 text-xs overflow-auto notebook-html-output"
-          dangerouslySetInnerHTML={{ __html: htmlStr }}
-        />
-      </div>
+      <div
+        className="my-3 overflow-auto notebook-html-output"
+        dangerouslySetInnerHTML={{ __html: htmlStr }}
+      />
     );
   }
 
-  // text/plain fallback
-  const plain = data["text/plain"];
-  if (plain) {
-    const text = Array.isArray(plain) ? plain.join("") : String(plain);
-    return (
-      <div className="flex">
-        <div className="shrink-0 w-14" />
-        <pre className="flex-1 py-2 pr-4 text-code font-mono text-ink-body whitespace-pre-wrap overflow-x-auto">
-          {text}
-        </pre>
-      </div>
-    );
-  }
-
+  // text/plain and everything else: suppressed
   return null;
 }
 
@@ -335,125 +246,6 @@ function HtmlIframe({ html }: { html: string }) {
       title="notebook output"
     />
   );
-}
-
-/* ===================== Python syntax coloring ===================== */
-
-const PY_KEYWORDS = new Set([
-  "import",
-  "from",
-  "as",
-  "def",
-  "class",
-  "return",
-  "if",
-  "elif",
-  "else",
-  "for",
-  "while",
-  "in",
-  "not",
-  "and",
-  "or",
-  "is",
-  "with",
-  "try",
-  "except",
-  "finally",
-  "raise",
-  "pass",
-  "break",
-  "continue",
-  "yield",
-  "lambda",
-  "global",
-  "nonlocal",
-  "assert",
-  "del",
-  "True",
-  "False",
-  "None",
-  "async",
-  "await",
-]);
-
-function colorizePython(code: string): React.ReactNode[] {
-  return code.split("\n").map((line, lineIdx, arr) => (
-    <span key={lineIdx}>
-      {colorizeLine(line)}
-      {lineIdx < arr.length - 1 && "\n"}
-    </span>
-  ));
-}
-
-function colorizeLine(line: string): React.ReactNode[] {
-  const nodes: React.ReactNode[] = [];
-  let i = 0;
-
-  // leading whitespace
-  const leadingMatch = line.match(/^(\s+)/);
-  if (leadingMatch) {
-    nodes.push(leadingMatch[0]);
-    i = leadingMatch[0].length;
-  }
-
-  // comment
-  if (line.trimStart().startsWith("#")) {
-    nodes.push(
-      <span key="cmt" className="text-[#6a9955]">
-        {line.slice(i)}
-      </span>
-    );
-    return nodes;
-  }
-
-  // tokenize rest
-  const rest = line.slice(i);
-  const tokenRe =
-    /(\b\d+\.?\d*\b)|("""[\s\S]*?"""|'''[\s\S]*?'''|"(?:[^"\\]|\\.)*"|'(?:[^'\\]|\\.)*')|([a-zA-Z_]\w*)|([^\w\s]+|\s+)/g;
-  let match: RegExpExecArray | null;
-  let key = 0;
-
-  while ((match = tokenRe.exec(rest)) !== null) {
-    const [token] = match;
-    const isNum = match[1] !== undefined;
-    const isStr = match[2] !== undefined;
-    const isIdent = match[3] !== undefined;
-
-    if (isNum) {
-      nodes.push(
-        <span key={key++} className="text-[#b5cea8]">
-          {token}
-        </span>
-      );
-    } else if (isStr) {
-      nodes.push(
-        <span key={key++} className="text-[#ce9178]">
-          {token}
-        </span>
-      );
-    } else if (isIdent && PY_KEYWORDS.has(token)) {
-      nodes.push(
-        <span key={key++} className="text-[#569cd6]">
-          {token}
-        </span>
-      );
-    } else if (isIdent) {
-      nodes.push(
-        <span key={key++} className="text-[#d4d4d4]">
-          {token}
-        </span>
-      );
-    } else {
-      nodes.push(
-        <span key={key++} className="text-[#d4d4d4]">
-          {token}
-        </span>
-      );
-    }
-  }
-
-  return nodes;
 }
 
 /* ===================== Shared markdown components ===================== */

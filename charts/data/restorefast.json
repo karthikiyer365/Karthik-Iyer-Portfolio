@@ -1,0 +1,210 @@
+{
+  "output": "content/experiences/AI & Data Engineer - RestoreFast.ipynb",
+  "meta": {
+    "company": "RestoreFast Operations LLC",
+    "role": "AI & Data Engineer",
+    "duration": "Jun 2025 – Present",
+    "location": "North Bethesda, MD"
+  },
+  "hero": "# RestoreFast · AI & Data Engineer\n\n**Jun 2025 – Present · North Bethesda, MD**\n\n## Hero Overview\n\nArchitected and built the operational AI systems behind RestoreFast's workforce platform — agentic worker matching, a retrieval-augmented knowledge layer, a 24/7 hotline triage agent, cross-tool communications routing, and compliance document management.\n\nConnected fragmented tools (Gmail, Drive, Nutshell, Xero, Twilio) into a unified internal data layer, turning manual, siloed workflows into a connected pipeline from worker discovery through project execution.",
+  "domain_colors": {
+    "AI / ML": "#dd0077",
+    "Integration": "#c98aa0",
+    "Backend Engineering": "#b8b8b8",
+    "Cloud & Infra": "#a8b8b0",
+    "Data Engineering": "#88c0b4",
+    "Workflow / Ops": "#4ec9b0"
+  },
+  "radar": {
+    "AI / ML": 8,
+    "Data Engineering": 9,
+    "Backend Engineering": 8,
+    "Systems Integration": 8,
+    "Workflow / Product": 7,
+    "Cloud & Infra": 5,
+    "Operations / Automation": 7,
+    "Analytics / Insights": 3
+  },
+  "bubble_chart": {
+    "x_axis": "system",
+    "y_axis": "ownership",
+    "size_metric": "implementation_strength",
+    "color_metric": "domain",
+    "points": [
+      {
+        "system": "Agentic Recommender",
+        "domain": "AI / ML",
+        "ownership": 9,
+        "implementation_strength": 8.2,
+        "complexity": 8.3,
+        "impact": 7.0,
+        "maturity": 5.3,
+        "subsystems": [
+          "DS-CAR Matching Framework",
+          "Agentic Recommender Flow",
+          "Project Requirement Extraction"
+        ],
+        "evidence": "AI-driven worker matching and requirement extraction stack spanning DS-CAR scoring, recommender logic and intake interpretation."
+      },
+      {
+        "system": "Knowledge Platform",
+        "domain": "Data Engineering",
+        "ownership": 8,
+        "implementation_strength": 8.0,
+        "complexity": 8.3,
+        "impact": 7.3,
+        "maturity": 7.0,
+        "subsystems": [
+          "RAGBrain ETL Workflow",
+          "Semantic Chunking Pipeline",
+          "Vector Retrieval Layer"
+        ],
+        "evidence": "End-to-end knowledge infrastructure for extraction, chunking, embedding and retrieval over Gmail and Drive content."
+      },
+      {
+        "system": "API / MCP Integration",
+        "domain": "Integration",
+        "ownership": 9,
+        "implementation_strength": 8.0,
+        "complexity": 8.0,
+        "impact": 8.0,
+        "maturity": 7.0,
+        "subsystems": [
+          "MCP Tooling Layer"
+        ],
+        "evidence": "Unified external systems and internal workflows through MCP tooling and REST-based integrations."
+      },
+      {
+        "system": "Comms Infra",
+        "domain": "Integration",
+        "ownership": 8,
+        "implementation_strength": 8.0,
+        "complexity": 8.0,
+        "impact": 8.0,
+        "maturity": 8.0,
+        "subsystems": [
+          "Central Communications Layer"
+        ],
+        "evidence": "Routing layer for voice, SMS and email communication across operational workflows."
+      },
+      {
+        "system": "Hotline Agent",
+        "domain": "AI / ML",
+        "ownership": 7,
+        "implementation_strength": 7.0,
+        "complexity": 7.0,
+        "impact": 7.0,
+        "maturity": 8.0,
+        "subsystems": [
+          "Hotline Triage Workflow"
+        ],
+        "evidence": "LLM-backed hotline handling call triage and escalation support for inbound issue management."
+      },
+      {
+        "system": "Worker Onboarding",
+        "domain": "Workflow / Ops",
+        "ownership": 8,
+        "implementation_strength": 7.2,
+        "complexity": 7.0,
+        "impact": 8.0,
+        "maturity": 7.0,
+        "subsystems": [
+          "Worker Onboarding Flow"
+        ],
+        "evidence": "Multi-channel onboarding flow spanning web, mobile and SMS with conversion-sensitive workflow design."
+      },
+      {
+        "system": "Compliance Workflow",
+        "domain": "Workflow / Ops",
+        "ownership": 8,
+        "implementation_strength": 7.0,
+        "complexity": 6.5,
+        "impact": 7.5,
+        "maturity": 7.0,
+        "subsystems": [
+          "Compliance Data Model",
+          "Document Expiry Tracking"
+        ],
+        "evidence": "Structured compliance layer covering worker records, document lifecycle and payment/compliance boundaries."
+      }
+    ]
+  },
+  "network_graph": {
+    "title": "Technology Capability Network",
+    "description": "Maps core technical concepts to the tools and platforms used to implement them.",
+    "nodes": [
+      { "id": "Agentic Recommender", "type": "system", "domain": "AI / ML" },
+      { "id": "Knowledge Platform", "type": "system", "domain": "Data Engineering" },
+      { "id": "Compliance Agent", "type": "system", "domain": "Workflow / Ops" },
+      { "id": "Comms Infra", "type": "system", "domain": "Integration" },
+      { "id": "Hotline Agent", "type": "system", "domain": "AI / ML" },
+      { "id": "Agentic AI", "type": "concept", "domain": "AI / ML" },
+      { "id": "RAG / Vector Search", "type": "concept", "domain": "AI / ML" },
+      { "id": "ETL Pipelines", "type": "concept", "domain": "Data Engineering" },
+      { "id": "Schema Design", "type": "concept", "domain": "Data Engineering" },
+      { "id": "API / MCP Integration", "type": "concept", "domain": "Integration" },
+      { "id": "Communication Automation", "type": "concept", "domain": "Integration" },
+      { "id": "Infra Setup", "type": "concept", "domain": "Backend Engineering" },
+      { "id": "Workflow Automation", "type": "concept", "domain": "Workflow / Ops" },
+      { "id": "Python", "type": "tool", "category": "Language" },
+      { "id": "SQL", "type": "tool", "category": "Query Language" },
+      { "id": "Supabase / Postgres", "type": "tool", "category": "Database" },
+      { "id": "Pinecone", "type": "tool", "category": "Vector DB" },
+      { "id": "LangChain", "type": "tool", "category": "AI Framework" },
+      { "id": "Gemini / LLM APIs", "type": "tool", "category": "AI Platform" },
+      { "id": "MCP Tools", "type": "tool", "category": "Integration" },
+      { "id": "Gmail / Drive APIs", "type": "tool", "category": "Workspace APIs" },
+      { "id": "Twilio", "type": "tool", "category": "Communications" },
+      { "id": "Docker / GHCR", "type": "tool", "category": "Containerization" },
+      { "id": "AWS S3 / EC2", "type": "tool", "category": "Cloud" }
+    ],
+    "edges": [
+      { "source": "Agentic Recommender", "target": "Agentic AI", "weight": 3 },
+      { "source": "Agentic Recommender", "target": "API / MCP Integration", "weight": 2 },
+      { "source": "Agentic Recommender", "target": "Schema Design", "weight": 2 },
+      { "source": "Knowledge Platform", "target": "RAG / Vector Search", "weight": 3 },
+      { "source": "Knowledge Platform", "target": "ETL Pipelines", "weight": 3 },
+      { "source": "Knowledge Platform", "target": "Schema Design", "weight": 2 },
+      { "source": "Compliance Agent", "target": "Workflow Automation", "weight": 3 },
+      { "source": "Compliance Agent", "target": "Schema Design", "weight": 2 },
+      { "source": "Compliance Agent", "target": "Infra Setup", "weight": 1 },
+      { "source": "Comms Infra", "target": "Communication Automation", "weight": 3 },
+      { "source": "Comms Infra", "target": "API / MCP Integration", "weight": 3 },
+      { "source": "Comms Infra", "target": "Infra Setup", "weight": 2 },
+      { "source": "Hotline Agent", "target": "Agentic AI", "weight": 2 },
+      { "source": "Hotline Agent", "target": "Communication Automation", "weight": 2 },
+      { "source": "Hotline Agent", "target": "RAG / Vector Search", "weight": 2 },
+      { "source": "Agentic AI", "target": "Python", "weight": 3 },
+      { "source": "Agentic AI", "target": "Gemini / LLM APIs", "weight": 3 },
+      { "source": "Agentic AI", "target": "LangChain", "weight": 2 },
+      { "source": "RAG / Vector Search", "target": "Pinecone", "weight": 3 },
+      { "source": "RAG / Vector Search", "target": "LangChain", "weight": 2 },
+      { "source": "RAG / Vector Search", "target": "Gemini / LLM APIs", "weight": 2 },
+      { "source": "ETL Pipelines", "target": "Python", "weight": 3 },
+      { "source": "ETL Pipelines", "target": "Gmail / Drive APIs", "weight": 2 },
+      { "source": "ETL Pipelines", "target": "Supabase / Postgres", "weight": 2 },
+      { "source": "Schema Design", "target": "SQL", "weight": 3 },
+      { "source": "Schema Design", "target": "Supabase / Postgres", "weight": 3 },
+      { "source": "Schema Design", "target": "AWS S3 / EC2", "weight": 1 },
+      { "source": "API / MCP Integration", "target": "MCP Tools", "weight": 3 },
+      { "source": "API / MCP Integration", "target": "Gmail / Drive APIs", "weight": 2 },
+      { "source": "API / MCP Integration", "target": "Twilio", "weight": 2 },
+      { "source": "Communication Automation", "target": "Twilio", "weight": 3 },
+      { "source": "Communication Automation", "target": "Gmail / Drive APIs", "weight": 2 },
+      { "source": "Infra Setup", "target": "Docker / GHCR", "weight": 3 },
+      { "source": "Infra Setup", "target": "AWS S3 / EC2", "weight": 3 },
+      { "source": "Infra Setup", "target": "Supabase / Postgres", "weight": 1 },
+      { "source": "Workflow Automation", "target": "Python", "weight": 2 },
+      { "source": "Workflow Automation", "target": "MCP Tools", "weight": 2 },
+      { "source": "Workflow Automation", "target": "Twilio", "weight": 1 }
+    ]
+  },
+  "outcomes": {
+    "Profiles Evaluated": "400+",
+    "Routine Escalations Reduced": "~60%",
+    "Internal Tools Routed": "15+",
+    "Platforms Integrated": "5+",
+    "Active Projects": "5+"
+  },
+  "storyline": "# Storyline\n\n## Context\n\nRestoreFast's operations ran across disconnected third-party tools with no unified data layer — worker discovery, compliance, and client communication each lived in a silo, slowing project execution and burying staff in manual triage.\n\n## Workflow\n\nThe platform connects worker discovery → evaluation & matching → onboarding & compliance → live project communication, with an AI knowledge layer and a 24/7 hotline agent across the flow to triage inbound work and surface answers from internal data.\n\n## Technical Implementation\n\n- **Agentic matching (DS-CAR):** multi-step agentic flows that identify, evaluate, and select worker profiles against project requirements across five dimensions, wired into integrated communication channels.\n- **Integration layer:** 5+ third-party platforms (Gmail, Drive, Nutshell, Xero, Twilio) unified through custom MCP tools, RAG connectors, and REST services.\n- **Knowledge platform:** ingestion and retrieval layer over 3 connected Agentic/RAG/MCP setups on Pinecone with custom schema design.\n- **Hotline agent:** 24/7 LLM-backed tier-1 call triage on a queued audio-processing backend with Twilio, cutting routine escalations ~60%.\n- **Communications layer:** event routing from 15+ internal tools to SMS, Voice, and Email through a containerized Twilio integration.\n- **Compliance hub:** document hub with expiration tracking and attachment references across 5+ active projects on Supabase + S3.\n\n## Outcomes\n\nConsolidated five fragmented operational areas into connected systems, reduced routine call escalations ~60%, and gave the team a single AI-assisted layer across worker discovery, compliance, and communication."
+}
