@@ -1,0 +1,184 @@
+{
+  "output": "content/education/MSc Data Analytics - GWU.ipynb",
+  "meta": {
+    "company": "George Washington University",
+    "role": "MSc Data Analytics / Technical Assistant",
+    "duration": "2023 – 2025",
+    "location": "Washington, DC"
+  },
+  "hero": "# GWU · MSc Data Analytics / Technical Assistant\n\n**2023 – 2025 · Washington, DC**\n\n## Hero Overview\n\nBuilt applied analytics, machine learning, and data engineering projects across graduate coursework, assistantship work, and academic support systems.\n\nThe experience combined large-scale text processing, biomedical signal modeling, sports analytics, inventory analysis, and LLM-assisted evaluation workflows into a practical portfolio of analytical systems.",
+  "domain_colors": {
+    "AI / ML": "#dd0077",
+    "Integration": "#c98aa0",
+    "Backend Engineering": "#b8b8b8",
+    "Cloud & Infra": "#a8b8b0",
+    "Data Engineering": "#88c0b4",
+    "Workflow / Ops": "#4ec9b0"
+  },
+  "radar": {
+    "AI / ML": 8,
+    "Data Engineering": 8,
+    "Backend Engineering": 5,
+    "Systems Integration": 5,
+    "Workflow / Product": 5,
+    "Cloud & Infra": 4,
+    "Operations / Automation": 6,
+    "Analytics / Insights": 9
+  },
+  "bubble_chart": {
+    "x_axis": "system",
+    "y_axis": "ownership",
+    "size_metric": "implementation_strength",
+    "color_metric": "domain",
+    "points": [
+      {
+        "system": "Yelp Sentiment Pipeline",
+        "domain": "Data Engineering",
+        "ownership": 8,
+        "implementation_strength": 8.4,
+        "complexity": 8.2,
+        "impact": 7.5,
+        "maturity": 7.0,
+        "subsystems": [
+          "Spark Processing",
+          "Databricks Workflow",
+          "Text Sentiment Modeling"
+        ],
+        "evidence": "Processed 10M+ reviews through distributed data workflows for sentiment-oriented analysis."
+      },
+      {
+        "system": "LLM Auto-Grader",
+        "domain": "AI / ML",
+        "ownership": 7,
+        "implementation_strength": 7.8,
+        "complexity": 7.6,
+        "impact": 8.0,
+        "maturity": 6.5,
+        "subsystems": [
+          "Assignment Evaluation",
+          "BERT-Based Scoring",
+          "Feedback Workflow"
+        ],
+        "evidence": "Supported grading automation for 400+ assignments with BERT/LLM-assisted evaluation and roughly 60% time reduction."
+      },
+      {
+        "system": "WESAD Panic Detection",
+        "domain": "AI / ML",
+        "ownership": 8,
+        "implementation_strength": 7.5,
+        "complexity": 8.0,
+        "impact": 7.0,
+        "maturity": 6.5,
+        "subsystems": [
+          "Sensor Feature Extraction",
+          "Bi-LSTM Modeling",
+          "Cross Validation"
+        ],
+        "evidence": "Modeled panic detection from HRV/BP sensor data with Bi-LSTM validation and reported 72% accuracy."
+      },
+      {
+        "system": "Cross-Sport Valuation",
+        "domain": "AI / ML",
+        "ownership": 8,
+        "implementation_strength": 8.0,
+        "complexity": 7.8,
+        "impact": 7.4,
+        "maturity": 7.0,
+        "subsystems": [
+          "Player Metric Mapping",
+          "PCA Feature Reduction",
+          "Dash/Plotly Analysis"
+        ],
+        "evidence": "Mapped FIFA and NBA-style player features across 25K+ records with PCA and valuation modeling near 85% R²."
+      },
+      {
+        "system": "Inventory Usage Analysis",
+        "domain": "Workflow / Ops",
+        "ownership": 7,
+        "implementation_strength": 6.8,
+        "complexity": 6.2,
+        "impact": 7.0,
+        "maturity": 7.0,
+        "subsystems": [
+          "Inventory Tracking",
+          "Usage Pattern Analysis",
+          "Breakpoint Identification"
+        ],
+        "evidence": "Analyzed inventory and product usage patterns to identify system breakpoints in technical assistant work."
+      },
+      {
+        "system": "Sports Analytics Portfolio",
+        "domain": "Data Engineering",
+        "ownership": 8,
+        "implementation_strength": 7.6,
+        "complexity": 7.0,
+        "impact": 7.0,
+        "maturity": 7.0,
+        "subsystems": [
+          "Statistical Modeling",
+          "Player Comparison",
+          "Visualization Layer"
+        ],
+        "evidence": "Applied statistical modeling and visual analysis to sports analytics coursework and player valuation projects."
+      }
+    ]
+  },
+  "network_graph": {
+    "title": "Academic Analytics Capability Network",
+    "description": "Maps graduate analytics systems to modeling concepts and implementation tools.",
+    "nodes": [
+      { "id": "Yelp Sentiment Pipeline", "type": "system", "domain": "Data Engineering" },
+      { "id": "LLM Auto-Grader", "type": "system", "domain": "AI / ML" },
+      { "id": "WESAD Panic Detection", "type": "system", "domain": "AI / ML" },
+      { "id": "Cross-Sport Valuation", "type": "system", "domain": "AI / ML" },
+      { "id": "Inventory Usage Analysis", "type": "system", "domain": "Workflow / Ops" },
+      { "id": "Distributed ETL", "type": "concept", "domain": "Data Engineering" },
+      { "id": "NLP Classification", "type": "concept", "domain": "AI / ML" },
+      { "id": "Sequence Modeling", "type": "concept", "domain": "AI / ML" },
+      { "id": "Feature Engineering", "type": "concept", "domain": "Data Engineering" },
+      { "id": "Sports Valuation", "type": "concept", "domain": "AI / ML" },
+      { "id": "Operational Analysis", "type": "concept", "domain": "Workflow / Ops" },
+      { "id": "Python", "type": "tool", "category": "Language" },
+      { "id": "Spark", "type": "tool", "category": "Distributed Processing" },
+      { "id": "Databricks", "type": "tool", "category": "Analytics Platform" },
+      { "id": "BERT", "type": "tool", "category": "NLP Model" },
+      { "id": "Bi-LSTM", "type": "tool", "category": "Deep Learning" },
+      { "id": "Scikit-learn", "type": "tool", "category": "ML Library" },
+      { "id": "Dash / Plotly", "type": "tool", "category": "Visualization" },
+      { "id": "SQL", "type": "tool", "category": "Query Language" }
+    ],
+    "edges": [
+      { "source": "Yelp Sentiment Pipeline", "target": "Distributed ETL", "weight": 3 },
+      { "source": "Yelp Sentiment Pipeline", "target": "NLP Classification", "weight": 2 },
+      { "source": "LLM Auto-Grader", "target": "NLP Classification", "weight": 3 },
+      { "source": "LLM Auto-Grader", "target": "Operational Analysis", "weight": 2 },
+      { "source": "WESAD Panic Detection", "target": "Sequence Modeling", "weight": 3 },
+      { "source": "WESAD Panic Detection", "target": "Feature Engineering", "weight": 2 },
+      { "source": "Cross-Sport Valuation", "target": "Sports Valuation", "weight": 3 },
+      { "source": "Cross-Sport Valuation", "target": "Feature Engineering", "weight": 2 },
+      { "source": "Inventory Usage Analysis", "target": "Operational Analysis", "weight": 3 },
+      { "source": "Inventory Usage Analysis", "target": "Feature Engineering", "weight": 1 },
+      { "source": "Distributed ETL", "target": "Spark", "weight": 3 },
+      { "source": "Distributed ETL", "target": "Databricks", "weight": 3 },
+      { "source": "Distributed ETL", "target": "Python", "weight": 2 },
+      { "source": "NLP Classification", "target": "BERT", "weight": 3 },
+      { "source": "NLP Classification", "target": "Python", "weight": 2 },
+      { "source": "Sequence Modeling", "target": "Bi-LSTM", "weight": 3 },
+      { "source": "Sequence Modeling", "target": "Python", "weight": 2 },
+      { "source": "Feature Engineering", "target": "Scikit-learn", "weight": 3 },
+      { "source": "Feature Engineering", "target": "SQL", "weight": 2 },
+      { "source": "Sports Valuation", "target": "Dash / Plotly", "weight": 3 },
+      { "source": "Sports Valuation", "target": "Scikit-learn", "weight": 2 },
+      { "source": "Operational Analysis", "target": "SQL", "weight": 2 },
+      { "source": "Operational Analysis", "target": "Python", "weight": 2 }
+    ]
+  },
+  "outcomes": {
+    "Graduate GPA": "3.68",
+    "Reviews Processed": "10M+",
+    "Assignments Supported": "400+",
+    "Grading Time Reduced": "~60%",
+    "Player Records Modeled": "25K+"
+  },
+  "storyline": "# Storyline\n\n## Context\n\nGraduate analytics work at GWU combined academic modeling, assistantship operations, and applied project delivery. The work spanned text analytics, sensor modeling, sports valuation, and technical support workflows.\n\n## Workflow\n\nThe experience moved from raw data collection and cleaning into feature engineering, model development, validation, and visualization. Assistantship work added an operational layer through inventory analysis and LLM-assisted assignment evaluation.\n\n## Technical Implementation\n\n- **Distributed text analytics:** processed large-scale Yelp review data through Spark and Databricks workflows for sentiment analysis.\n- **LLM grading workflow:** supported an auto-grading pipeline using BERT/LLM-assisted evaluation for 400+ assignments.\n- **Biomedical signal modeling:** modeled panic detection from HRV/BP sensor features with Bi-LSTM and cross-validation.\n- **Sports valuation analytics:** mapped player value indicators across FIFA and NBA-style data with PCA, regression, and Dash/Plotly visualization.\n- **Technical systems analysis:** analyzed inventory and usage patterns to identify breakpoints in technical assistant workflows.\n\n## Outcomes\n\nThe work produced a broad applied analytics portfolio across data engineering, ML modeling, visualization, and operational analysis, with measurable scale across 10M+ reviews, 400+ assignments, and 25K+ player records."
+}

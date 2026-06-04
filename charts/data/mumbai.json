@@ -1,0 +1,176 @@
+{
+  "output": "content/education/B.E. Computer Engineering - University of Mumbai.ipynb",
+  "meta": {
+    "company": "University of Mumbai",
+    "role": "B.E. Computer Engineering",
+    "duration": "2018 – 2022",
+    "location": "Mumbai, India"
+  },
+  "hero": "# University of Mumbai · B.E. Computer Engineering\n\n**2018 – 2022 · Mumbai, India**\n\n## Hero Overview\n\nBuilt the engineering foundation across data structures, database systems, NLP, web development, cloud storage, and computer vision projects.\n\nThe experience centered on translating core computer engineering concepts into project work, including a train scheduling system and an OpenCV-based social-distancing tracker.",
+  "domain_colors": {
+    "AI / ML": "#dd0077",
+    "Integration": "#c98aa0",
+    "Backend Engineering": "#b8b8b8",
+    "Cloud & Infra": "#a8b8b0",
+    "Data Engineering": "#88c0b4",
+    "Workflow / Ops": "#4ec9b0"
+  },
+  "radar": {
+    "Computer Vision": 7,
+    "Backend Engineering": 7,
+    "Database Systems": 7,
+    "Cloud & Infra": 5,
+    "NLP": 5,
+    "Web Development": 6,
+    "Data Structures": 8,
+    "Analytics / Insights": 4
+  },
+  "bubble_chart": {
+    "x_axis": "system",
+    "y_axis": "ownership",
+    "size_metric": "implementation_strength",
+    "color_metric": "domain",
+    "points": [
+      {
+        "system": "Train Scheduling System",
+        "domain": "Backend Engineering",
+        "ownership": 8,
+        "implementation_strength": 7.2,
+        "complexity": 7.4,
+        "impact": 6.5,
+        "maturity": 6.5,
+        "subsystems": [
+          "Scheduling Logic",
+          "MongoDB Storage",
+          "AWS S3/IAM Setup"
+        ],
+        "evidence": "Built a train scheduling project using database design and AWS storage/IAM concepts."
+      },
+      {
+        "system": "Social-Distancing Tracker",
+        "domain": "AI / ML",
+        "ownership": 8,
+        "implementation_strength": 7.5,
+        "complexity": 7.6,
+        "impact": 6.8,
+        "maturity": 6.5,
+        "subsystems": [
+          "OpenCV Detection",
+          "Bounding Boxes",
+          "Bird's-Eye View"
+        ],
+        "evidence": "Built an OpenCV-based tracker using bounding boxes and perspective transformation for distance monitoring."
+      },
+      {
+        "system": "Database Coursework",
+        "domain": "Data Engineering",
+        "ownership": 7,
+        "implementation_strength": 6.8,
+        "complexity": 6.5,
+        "impact": 6.0,
+        "maturity": 7.0,
+        "subsystems": [
+          "DBMS Concepts",
+          "Schema Modeling",
+          "Query Design"
+        ],
+        "evidence": "Developed database systems grounding through DBMS coursework and project-oriented schema work."
+      },
+      {
+        "system": "Web Development Foundation",
+        "domain": "Backend Engineering",
+        "ownership": 7,
+        "implementation_strength": 6.6,
+        "complexity": 6.2,
+        "impact": 6.0,
+        "maturity": 6.5,
+        "subsystems": [
+          "Application Structure",
+          "Frontend/Backend Basics",
+          "Project Interfaces"
+        ],
+        "evidence": "Built web development fundamentals across academic project interfaces and application structure."
+      },
+      {
+        "system": "NLP Foundations",
+        "domain": "AI / ML",
+        "ownership": 6,
+        "implementation_strength": 6.2,
+        "complexity": 6.0,
+        "impact": 5.8,
+        "maturity": 6.0,
+        "subsystems": [
+          "Text Processing",
+          "Language Features",
+          "Modeling Concepts"
+        ],
+        "evidence": "Built NLP foundations through coursework and applied text-processing concepts."
+      },
+      {
+        "system": "Engineering Core",
+        "domain": "Workflow / Ops",
+        "ownership": 8,
+        "implementation_strength": 7.0,
+        "complexity": 7.0,
+        "impact": 6.5,
+        "maturity": 7.5,
+        "subsystems": [
+          "DSA",
+          "Project Planning",
+          "Implementation Practice"
+        ],
+        "evidence": "Completed computer engineering coursework across DSA, DBMS, NLP, web development, and image processing."
+      }
+    ]
+  },
+  "network_graph": {
+    "title": "Computer Engineering Foundation Network",
+    "description": "Maps undergraduate systems to engineering concepts and implementation tools.",
+    "nodes": [
+      { "id": "Train Scheduling System", "type": "system", "domain": "Backend Engineering" },
+      { "id": "Social-Distancing Tracker", "type": "system", "domain": "AI / ML" },
+      { "id": "Database Coursework", "type": "system", "domain": "Data Engineering" },
+      { "id": "Web Development Foundation", "type": "system", "domain": "Backend Engineering" },
+      { "id": "NLP Foundations", "type": "system", "domain": "AI / ML" },
+      { "id": "Scheduling Logic", "type": "concept", "domain": "Backend Engineering" },
+      { "id": "Computer Vision", "type": "concept", "domain": "AI / ML" },
+      { "id": "Schema Design", "type": "concept", "domain": "Data Engineering" },
+      { "id": "Application Architecture", "type": "concept", "domain": "Backend Engineering" },
+      { "id": "Text Processing", "type": "concept", "domain": "AI / ML" },
+      { "id": "Cloud Storage", "type": "concept", "domain": "Cloud & Infra" },
+      { "id": "C++", "type": "tool", "category": "Language" },
+      { "id": "OpenCV", "type": "tool", "category": "Computer Vision" },
+      { "id": "MongoDB", "type": "tool", "category": "Database" },
+      { "id": "AWS S3", "type": "tool", "category": "Cloud Storage" },
+      { "id": "AWS IAM", "type": "tool", "category": "Cloud Access" },
+      { "id": "SQL", "type": "tool", "category": "Query Language" },
+      { "id": "Web Stack", "type": "tool", "category": "Application Development" }
+    ],
+    "edges": [
+      { "source": "Train Scheduling System", "target": "Scheduling Logic", "weight": 3 },
+      { "source": "Train Scheduling System", "target": "Cloud Storage", "weight": 2 },
+      { "source": "Train Scheduling System", "target": "Schema Design", "weight": 2 },
+      { "source": "Social-Distancing Tracker", "target": "Computer Vision", "weight": 3 },
+      { "source": "Database Coursework", "target": "Schema Design", "weight": 3 },
+      { "source": "Web Development Foundation", "target": "Application Architecture", "weight": 3 },
+      { "source": "NLP Foundations", "target": "Text Processing", "weight": 3 },
+      { "source": "Scheduling Logic", "target": "C++", "weight": 2 },
+      { "source": "Scheduling Logic", "target": "MongoDB", "weight": 2 },
+      { "source": "Computer Vision", "target": "OpenCV", "weight": 3 },
+      { "source": "Schema Design", "target": "MongoDB", "weight": 3 },
+      { "source": "Schema Design", "target": "SQL", "weight": 2 },
+      { "source": "Application Architecture", "target": "Web Stack", "weight": 3 },
+      { "source": "Text Processing", "target": "C++", "weight": 1 },
+      { "source": "Cloud Storage", "target": "AWS S3", "weight": 3 },
+      { "source": "Cloud Storage", "target": "AWS IAM", "weight": 2 }
+    ]
+  },
+  "outcomes": {
+    "Degree Completed": "2022",
+    "GPA": "3.50/4.00",
+    "Core Project Areas": "Scheduling · CV · DBMS",
+    "Cloud Concepts Applied": "AWS S3 · IAM",
+    "Primary Foundation": "DSA · DBMS · NLP · Web Dev"
+  },
+  "storyline": "# Storyline\n\n## Context\n\nThe University of Mumbai experience established the computer engineering foundation behind later analytics and AI work. Coursework and projects covered data structures, databases, NLP, web development, cloud concepts, and image processing.\n\n## Workflow\n\nThe work moved from core engineering coursework into project implementation. Systems were scoped around concrete technical problems, then implemented through database design, application structure, cloud storage, and computer vision logic.\n\n## Technical Implementation\n\n- **Train scheduling system:** implemented scheduling logic with MongoDB-backed storage and AWS S3/IAM concepts.\n- **Social-distancing tracker:** used OpenCV, bounding boxes, and bird's-eye perspective logic for distance monitoring.\n- **Database systems:** built DBMS and schema design foundations through coursework and project work.\n- **Application development:** developed web and backend fundamentals through academic project interfaces.\n- **NLP and image processing:** built early applied AI foundations through text-processing and computer-vision concepts.\n\n## Outcomes\n\nThe experience created the engineering base for later data analytics, machine learning, and systems work, with applied projects spanning scheduling, cloud storage, database design, and computer vision."
+}

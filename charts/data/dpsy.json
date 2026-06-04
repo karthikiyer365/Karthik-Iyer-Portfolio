@@ -1,0 +1,181 @@
+{
+  "output": "content/experiences/Financial Analyst - DPSY & Associates.ipynb",
+  "meta": {
+    "company": "DPSY & Associates",
+    "role": "Financial Analyst",
+    "duration": "2022 – 2023",
+    "location": "Mumbai, India"
+  },
+  "hero": "# DPSY & Associates · Financial Analyst\n\n**2022 – 2023 · Mumbai, India**\n\n## Hero Overview\n\nBuilt financial analytics and reporting workflows across CRM reconciliation, dashboarding, inventory analysis, and data consolidation.\n\nThe experience focused on converting fragmented client and operational data into cleaner reporting surfaces for risk review, audit support, and recurring business analysis.",
+  "domain_colors": {
+    "AI / ML": "#dd0077",
+    "Integration": "#c98aa0",
+    "Backend Engineering": "#b8b8b8",
+    "Cloud & Infra": "#a8b8b0",
+    "Data Engineering": "#88c0b4",
+    "Workflow / Ops": "#4ec9b0"
+  },
+  "radar": {
+    "Financial Analytics": 9,
+    "Data Engineering": 7,
+    "Dashboarding": 8,
+    "Workflow / Ops": 7,
+    "Forecasting": 6,
+    "SQL / Python": 7,
+    "Client Reporting": 8,
+    "Automation": 5
+  },
+  "bubble_chart": {
+    "x_axis": "system",
+    "y_axis": "ownership",
+    "size_metric": "implementation_strength",
+    "color_metric": "domain",
+    "points": [
+      {
+        "system": "CRM Reconciliation",
+        "domain": "Workflow / Ops",
+        "ownership": 8,
+        "implementation_strength": 7.8,
+        "complexity": 7.0,
+        "impact": 8.0,
+        "maturity": 7.0,
+        "subsystems": [
+          "Account Filtering",
+          "Risk Flagging",
+          "Routine Case Reduction"
+        ],
+        "evidence": "Filtered roughly 80% routine account records and surfaced higher-risk cases for review."
+      },
+      {
+        "system": "Client BI Dashboards",
+        "domain": "Data Engineering",
+        "ownership": 8,
+        "implementation_strength": 8.0,
+        "complexity": 7.2,
+        "impact": 8.0,
+        "maturity": 7.5,
+        "subsystems": [
+          "Power BI Reporting",
+          "Tableau Views",
+          "Client Metric Tracking"
+        ],
+        "evidence": "Built 10+ BI dashboards for 3+ client reporting workflows."
+      },
+      {
+        "system": "Data Consolidation",
+        "domain": "Data Engineering",
+        "ownership": 8,
+        "implementation_strength": 7.6,
+        "complexity": 7.5,
+        "impact": 7.5,
+        "maturity": 7.0,
+        "subsystems": [
+          "ETL Pipelines",
+          "Data Drift Checks",
+          "Report Source Normalization"
+        ],
+        "evidence": "Built 5+ ETL-style consolidation workflows to reduce reporting inconsistency and mitigate data drift."
+      },
+      {
+        "system": "Inventory Optimization",
+        "domain": "Workflow / Ops",
+        "ownership": 7,
+        "implementation_strength": 7.0,
+        "complexity": 6.8,
+        "impact": 7.0,
+        "maturity": 6.5,
+        "subsystems": [
+          "Market Research",
+          "Stocking-Level Analysis",
+          "Operational Recommendations"
+        ],
+        "evidence": "Analyzed market and inventory signals to support stocking-level recommendations."
+      },
+      {
+        "system": "Forecasting Workbook",
+        "domain": "Data Engineering",
+        "ownership": 7,
+        "implementation_strength": 6.8,
+        "complexity": 6.5,
+        "impact": 6.8,
+        "maturity": 6.5,
+        "subsystems": [
+          "Excel Modeling",
+          "Python Analysis",
+          "Scenario Review"
+        ],
+        "evidence": "Used Python, SQL, Excel, and forecasting workflows to support recurring financial analysis."
+      },
+      {
+        "system": "Audit Support Analytics",
+        "domain": "Workflow / Ops",
+        "ownership": 7,
+        "implementation_strength": 6.8,
+        "complexity": 6.4,
+        "impact": 7.0,
+        "maturity": 6.8,
+        "subsystems": [
+          "Exception Review",
+          "Account Segmentation",
+          "Client Report Preparation"
+        ],
+        "evidence": "Prepared segmented financial reporting and exception review outputs for client and audit support workflows."
+      }
+    ]
+  },
+  "network_graph": {
+    "title": "Financial Analytics Capability Network",
+    "description": "Maps financial analytics systems to reporting concepts and analysis tools.",
+    "nodes": [
+      { "id": "CRM Reconciliation", "type": "system", "domain": "Workflow / Ops" },
+      { "id": "Client BI Dashboards", "type": "system", "domain": "Data Engineering" },
+      { "id": "Data Consolidation", "type": "system", "domain": "Data Engineering" },
+      { "id": "Inventory Optimization", "type": "system", "domain": "Workflow / Ops" },
+      { "id": "Audit Support Analytics", "type": "system", "domain": "Workflow / Ops" },
+      { "id": "Financial Reporting", "type": "concept", "domain": "Data Engineering" },
+      { "id": "Risk Segmentation", "type": "concept", "domain": "Workflow / Ops" },
+      { "id": "ETL Normalization", "type": "concept", "domain": "Data Engineering" },
+      { "id": "Dashboard Design", "type": "concept", "domain": "Data Engineering" },
+      { "id": "Forecasting", "type": "concept", "domain": "AI / ML" },
+      { "id": "Operational Review", "type": "concept", "domain": "Workflow / Ops" },
+      { "id": "SQL", "type": "tool", "category": "Query Language" },
+      { "id": "Python", "type": "tool", "category": "Language" },
+      { "id": "Tableau", "type": "tool", "category": "BI Platform" },
+      { "id": "Power BI", "type": "tool", "category": "BI Platform" },
+      { "id": "Excel", "type": "tool", "category": "Spreadsheet Modeling" },
+      { "id": "CRM Data", "type": "tool", "category": "Business Data Source" }
+    ],
+    "edges": [
+      { "source": "CRM Reconciliation", "target": "Risk Segmentation", "weight": 3 },
+      { "source": "CRM Reconciliation", "target": "Operational Review", "weight": 2 },
+      { "source": "Client BI Dashboards", "target": "Dashboard Design", "weight": 3 },
+      { "source": "Client BI Dashboards", "target": "Financial Reporting", "weight": 3 },
+      { "source": "Data Consolidation", "target": "ETL Normalization", "weight": 3 },
+      { "source": "Data Consolidation", "target": "Financial Reporting", "weight": 2 },
+      { "source": "Inventory Optimization", "target": "Forecasting", "weight": 2 },
+      { "source": "Inventory Optimization", "target": "Operational Review", "weight": 3 },
+      { "source": "Audit Support Analytics", "target": "Risk Segmentation", "weight": 2 },
+      { "source": "Audit Support Analytics", "target": "Financial Reporting", "weight": 3 },
+      { "source": "Financial Reporting", "target": "Excel", "weight": 3 },
+      { "source": "Financial Reporting", "target": "SQL", "weight": 2 },
+      { "source": "Risk Segmentation", "target": "CRM Data", "weight": 3 },
+      { "source": "Risk Segmentation", "target": "SQL", "weight": 2 },
+      { "source": "ETL Normalization", "target": "Python", "weight": 3 },
+      { "source": "ETL Normalization", "target": "SQL", "weight": 3 },
+      { "source": "Dashboard Design", "target": "Tableau", "weight": 3 },
+      { "source": "Dashboard Design", "target": "Power BI", "weight": 3 },
+      { "source": "Forecasting", "target": "Excel", "weight": 2 },
+      { "source": "Forecasting", "target": "Python", "weight": 2 },
+      { "source": "Operational Review", "target": "Excel", "weight": 2 },
+      { "source": "Operational Review", "target": "CRM Data", "weight": 2 }
+    ]
+  },
+  "outcomes": {
+    "Routine Accounts Filtered": "~80%",
+    "BI Dashboards Built": "10+",
+    "Client Report Workflows": "3+",
+    "Consolidation Pipelines": "5+",
+    "Primary Stack": "SQL · Python · Tableau · Excel"
+  },
+  "storyline": "# Storyline\n\n## Context\n\nDPSY & Associates required financial reporting workflows that could turn fragmented account, CRM, inventory, and client data into cleaner review outputs.\n\n## Workflow\n\nThe work moved from source review and data consolidation into segmentation, dashboarding, forecasting, and recurring report preparation. CRM reconciliation separated routine records from higher-risk cases, while BI dashboards made client-facing reporting easier to scan.\n\n## Technical Implementation\n\n- **CRM reconciliation:** filtered routine account records and surfaced higher-risk cases through segmentation logic.\n- **Dashboarding:** built Tableau and Power BI reporting surfaces for recurring client metrics.\n- **Data consolidation:** created 5+ ETL-style workflows to normalize source data and reduce drift across reports.\n- **Inventory analysis:** combined market research and stocking-level analysis to support operational recommendations.\n- **Financial modeling:** used SQL, Python, Excel, and forecasting workflows for recurring financial analysis.\n\n## Outcomes\n\nThe work improved reporting consistency, supported 10+ dashboard outputs, reduced routine review load through CRM filtering, and created cleaner data surfaces for client and audit support."
+}
