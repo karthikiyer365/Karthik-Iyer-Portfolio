@@ -120,7 +120,7 @@ function CodeCell({ outputs }: { outputs: CellOutput[] }) {
   // tables, images) are shown. Cells with no rich output render nothing.
   if (!outputs || outputs.length === 0) return null;
   return (
-    <div className="my-3">
+    <div className="my-4">
       {outputs.map((out, i) => (
         <OutputBlock key={i} output={out} />
       ))}
@@ -185,7 +185,7 @@ function OutputBlock({ output }: { output: CellOutput }) {
     const htmlStr = Array.isArray(html) ? html.join("") : String(html);
     if (/<script[\s>]/i.test(htmlStr)) {
       return (
-        <div className="my-3">
+        <div className="my-4">
           <HtmlIframe html={htmlStr} />
         </div>
       );
@@ -217,19 +217,30 @@ function HtmlIframe({ html }: { html: string }) {
 </style>
 </head><body>${html}
 <script>
+  var heightTimer;
   function notifyHeight() {
     var h = document.body.scrollHeight || document.documentElement.scrollHeight;
     window.parent.postMessage({ type: 'iframe-height', height: h }, '*');
   }
+  function scheduleHeight() {
+    clearTimeout(heightTimer);
+    heightTimer = setTimeout(notifyHeight, 50);
+  }
   window.addEventListener('load', function() { setTimeout(notifyHeight, 500); });
-  new MutationObserver(notifyHeight).observe(document.body, { childList: true, subtree: true });
+  window.addEventListener('resize', scheduleHeight);
+  if (window.ResizeObserver) {
+    new ResizeObserver(scheduleHeight).observe(document.body);
+  }
+  new MutationObserver(scheduleHeight).observe(document.body, { childList: true, subtree: true });
 </script>
 </body></html>`;
 
   useEffect(() => {
     function handleMsg(e: MessageEvent) {
+      if (e.source !== iframeRef.current?.contentWindow) return;
+
       if (e.data?.type === "iframe-height" && typeof e.data.height === "number") {
-        setHeight(Math.min(e.data.height + 16, 900));
+        setHeight(Math.min(e.data.height + 24, 1200));
       }
     }
     window.addEventListener("message", handleMsg);
