@@ -92,24 +92,24 @@ def _radar_fragment(radar):
         polar=dict(bgcolor="#111", radialaxis=dict(
             visible=True, range=[0, 10], tickfont=dict(size=9),
             angle=90, tickangle=90), angularaxis=dict(tickfont=dict(size=9.5))),
-        showlegend=False, height=460, margin=dict(l=60, r=60, t=60, b=50))
+        showlegend=False, height=500, margin=dict(l=72, r=72, t=70, b=60))
     return fig.to_html(include_plotlyjs="cdn", full_html=False,
                        div_id="radar", default_width="100%",
-                       default_height="460px")
+                       default_height="500px")
 
 
 # ---------------------------------------------------------------- bubble (d3 pack)
 _PACK_TEMPLATE = """
-<div style="text-align:center;color:#e5e5e5;font-size:14px;padding:6px 0 2px;">Implementation Strength by System</div>
-<svg id="pack-svg" style="display:block;width:100%;height:440px" viewBox="0 0 460 440" preserveAspectRatio="xMidYMid meet"></svg>
+<div style="text-align:center;color:#e5e5e5;font-size:14px;padding:14px 0 10px;">Implementation Strength by System</div>
+<svg id="pack-svg" style="display:block;width:100%;height:500px" viewBox="0 0 500 500" preserveAspectRatio="xMidYMid meet"></svg>
 <script src="https://cdn.jsdelivr.net/npm/d3@7/dist/d3.min.js"></script>
 <script>
 (function(){
-  var DATA=__DATA__, W=460, H=440;
+  var DATA=__DATA__, W=500, H=500;
   var svg=d3.select("#pack-svg");
   var root=d3.hierarchy(DATA).sum(function(d){return d.val||0;}).sort(function(a,b){return b.value-a.value;});
-  d3.pack().size([W-6,H-6]).padding(4)(root);
-  var g=svg.append("g").attr("transform","translate(3,3)");
+  d3.pack().size([W-12,H-12]).padding(5)(root);
+  var g=svg.append("g").attr("transform","translate(6,6)");
   function ink(hex){var c=hex.replace('#','');var r=parseInt(c.substr(0,2),16),
     gg=parseInt(c.substr(2,2),16),b=parseInt(c.substr(4,2),16);
     return (0.299*r+0.587*gg+0.114*b)>150?"#111":"#fff";}
@@ -153,10 +153,10 @@ def build_radar_bubble_html(radar, bubble, domain_map):
     left = _radar_fragment(radar)
     right = _bubble_fragment(bubble, domain_map)
     return (
-        '<div style="display:flex;flex-wrap:wrap;gap:8px;background:#111;'
-        'border-radius:8px;padding:8px;">'
-        '<div style="flex:1 1 360px;min-width:320px;">' + left + '</div>'
-        '<div style="flex:1 1 360px;min-width:320px;">' + right + '</div>'
+        '<div style="display:flex;flex-wrap:wrap;gap:18px;background:#111;'
+        'border-radius:8px;padding:16px 18px 18px;">'
+        '<div style="flex:1 1 390px;min-width:330px;">' + left + '</div>'
+        '<div style="flex:1 1 390px;min-width:330px;">' + right + '</div>'
         '</div>'
     )
 
@@ -167,9 +167,9 @@ def build_radar_bubble_html(radar, bubble, domain_map):
 # degree, edge width = weight. Hover a node to highlight its connections.
 _NETWORK_TEMPLATE = """
 <div id="net-wrap" style="position:relative;width:100%;background:#111;border-radius:8px;font-family:-apple-system,Segoe UI,sans-serif;">
-  <div style="color:#e5e5e5;font-size:15px;text-align:center;padding:14px 0 2px;">__TITLE__</div>
-  <div style="color:#8a8a8a;font-size:11px;text-align:center;padding-bottom:6px;">__DESC__</div>
-  <svg id="net-svg" style="display:block;width:100%;height:660px" viewBox="0 0 980 660" preserveAspectRatio="xMidYMid meet"></svg>
+  <div style="color:#e5e5e5;font-size:15px;text-align:center;padding:22px 0 8px;">__TITLE__</div>
+  <div style="color:#8a8a8a;font-size:11px;text-align:center;padding-bottom:18px;">__DESC__</div>
+  <svg id="net-svg" style="display:block;width:100%;height:820px" viewBox="0 0 980 820" preserveAspectRatio="xMidYMid meet"></svg>
   <div id="net-tip" style="position:absolute;pointer-events:none;opacity:0;background:#1c1c1c;border:1px solid #333;border-radius:8px;padding:8px 10px;color:#e5e5e5;font-size:12px;max-width:240px;line-height:1.4;box-shadow:0 4px 16px rgba(0,0,0,.5);z-index:10;"></div>
 </div>
 <script src="https://cdn.jsdelivr.net/npm/d3@7/dist/d3.min.js"></script>
@@ -264,8 +264,8 @@ def build_network_html(network, domain_map):
             return 16.0
         return round(11 + (deg.get(nid, 0) - dmin) / (dmax - dmin) * 15, 1)
 
-    H = 660
-    top, bot = 56, 36
+    H = 820
+    top, bot = 86, 58
     # three columns when systems present: systems | concepts | tools
     if systems:
         SYSTEM_X, CONCEPT_X, TOOL_X = 150, 490, 830
