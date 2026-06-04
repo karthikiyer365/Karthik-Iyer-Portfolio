@@ -11,6 +11,8 @@ node_modules/
 
 # Python
 .venv/
+__pycache__/
+*.pyc
 
 # Env
 .env*
