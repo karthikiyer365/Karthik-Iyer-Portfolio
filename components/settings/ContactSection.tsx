@@ -13,7 +13,7 @@ import {
 
 const TABS: { id: ContactTab; label: string }[] = [
   { id: "all", label: "All" },
-  { id: "primary", label: "Primary" },
+  { id: "work", label: "Work" },
   { id: "social", label: "Social" },
 ];
 

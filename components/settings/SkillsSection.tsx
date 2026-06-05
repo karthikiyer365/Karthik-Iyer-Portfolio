@@ -12,18 +12,20 @@ import {
 } from "./primitives";
 
 const TABS: { id: SkillTab; label: string }[] = [
-  { id: "all", label: "All" },
   { id: "technical", label: "Technical" },
-  { id: "applied", label: "Applied" },
+  { id: "soft", label: "Soft" },
 ];
 
-export default function SkillsSection() {
-  const [tab, setTab] = useState<SkillTab>("all");
-  const [featuredOnly, setFeaturedOnly] = useState(false);
+const CATEGORIES: Record<SkillTab, string[]> = {
+  technical: ["Analytics", "ETL", "UI/UX", "AI", "Development"],
+  soft: ["Leadership", "Management", "Critical Thinking"],
+};
 
-  const skills = SKILLS_DATA.filter(
-    (s) => s.tabs.includes(tab) && (!featuredOnly || s.featured)
-  );
+export default function SkillsSection() {
+  const [tab, setTab] = useState<SkillTab>("technical");
+  const [sortByCategory, setSortByCategory] = useState(false);
+
+  const skills = SKILLS_DATA.filter((s) => s.tabs.includes(tab));
 
   return (
     <div>
@@ -37,30 +39,57 @@ export default function SkillsSection() {
       <SegmentedTabs tabs={TABS} active={tab} onChange={setTab} />
 
       <SettingsToggle
-        title="Show only featured skills"
-        description="Hide skills not pinned to the front page."
-        on={featuredOnly}
-        onToggle={() => setFeaturedOnly((v) => !v)}
+        title="Sort by category"
+        description="Group skills by category."
+        on={sortByCategory}
+        onToggle={() => setSortByCategory((v) => !v)}
       />
 
       <SectionHeader title="Skills" info />
 
-      <SurfaceCard>
-        {skills.length === 0 ? (
-          <SettingRow>
-            <span className="text-desc text-ink-muted">Nothing here yet.</span>
-          </SettingRow>
-        ) : (
-          skills.map((s) => (
-            <SettingRow key={s.name}>
-              <div className="text-body font-medium text-ink">{s.name}</div>
-              <div className="text-desc text-ink-secondary mt-0.5">
-                {s.description}
-              </div>
+      {sortByCategory ? (
+        CATEGORIES[tab].map((category) => {
+          const categorySkills = skills.filter((s) => s.category === category);
+
+          if (categorySkills.length === 0) return null;
+
+          return (
+            <div key={category} className="mb-4">
+              <SectionHeader title={category} />
+
+              <SurfaceCard>
+                {categorySkills.map((s) => (
+                  <SettingRow key={s.name}>
+                    <div className="text-body font-medium text-ink">
+                      {s.name}
+                    </div>
+                    <div className="text-desc text-ink-secondary mt-0.5">
+                      {s.description}
+                    </div>
+                  </SettingRow>
+                ))}
+              </SurfaceCard>
+            </div>
+          );
+        })
+      ) : (
+        <SurfaceCard>
+          {skills.length === 0 ? (
+            <SettingRow>
+              <span className="text-desc text-ink-muted">Nothing here yet.</span>
             </SettingRow>
-          ))
-        )}
-      </SurfaceCard>
+          ) : (
+            skills.map((s) => (
+              <SettingRow key={s.name}>
+                <div className="text-body font-medium text-ink">{s.name}</div>
+                <div className="text-desc text-ink-secondary mt-0.5">
+                  {s.description}
+                </div>
+              </SettingRow>
+            ))
+          )}
+        </SurfaceCard>
+      )}
     </div>
   );
 }

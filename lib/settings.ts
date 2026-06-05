@@ -149,13 +149,23 @@ export const TOOLS_DATA: ToolItem[] = [
 
 /* ---------- Skills & Techniques ---------- */
 
-export type SkillTab = "all" | "technical" | "applied";
+export type SkillTab = "technical" | "soft";
+
+export type SkillCategory =
+  | "Analytics"
+  | "ETL"
+  | "UI/UX"
+  | "AI"
+  | "Development"
+  | "Leadership"
+  | "Management"
+  | "Critical Thinking";
 
 export interface SkillItem {
+  category: SkillCategory;
   name: string;
   description: string;
-  tabs: SkillTab[]; // always includes "all"
-  featured: boolean;
+  tabs: SkillTab[];
 }
 
 export const SKILLS_DATA: SkillItem[] = [
@@ -163,92 +173,110 @@ export const SKILLS_DATA: SkillItem[] = [
     name: "Data pipeline & ETL design",
     description:
       "Build and maintain ingestion/transformation flows feeding analytics and ML workloads.",
-    tabs: ["all", "technical"],
-    featured: true,
+    tabs: ["technical"],
+    category: "ETL",
   },
   {
     name: "Data modeling & schema design",
     description: "Relational and document schemas, governed inputs, and clean data layers.",
-    tabs: ["all", "technical"],
-    featured: false,
+    tabs: ["technical"],
+    category: "Analytics",
   },
   {
     name: "Retrieval-augmented generation (RAG)",
     description: "Pair vector search with LLM reasoning for grounded, cited answers.",
-    tabs: ["all", "technical"],
-    featured: true,
+    tabs: ["technical"],
+    category: "AI",
   },
   {
     name: "Agentic AI & MCP tooling",
     description: "Multi-step agent flows and custom MCP connectors across enterprise systems.",
-    tabs: ["all", "technical"],
-    featured: true,
+    tabs: ["technical"],
+    category: "AI",
   },
   {
     name: "LLM application development",
     description: "Production LLM services — triage agents, knowledge platforms, and chat.",
-    tabs: ["all", "technical"],
-    featured: false,
+    tabs: ["technical"],
+    category: "Development",
   },
   {
     name: "Machine learning modeling",
     description: "Regression and classification with XGBoost, Random Forest, and SVM.",
-    tabs: ["all", "technical"],
-    featured: false,
+    tabs: ["technical"],
+    category: "AI",
   },
   {
     name: "Deep learning & time-series",
     description: "Bi-LSTM and CNN-LSTM sequence models and time-series forecasting.",
-    tabs: ["all", "technical"],
-    featured: false,
+    tabs: ["technical"],
+    category: "AI",
   },
   {
     name: "NLP",
     description: "BERT-based text understanding, auto-grading, and sentiment analysis.",
-    tabs: ["all", "technical"],
-    featured: false,
+    tabs: ["technical"],
+    category: "AI",
   },
   {
     name: "Dimensionality reduction & EDA",
     description: "PCA, t-SNE, and UMAP for feature spaces, plus rigorous exploratory analysis.",
-    tabs: ["all", "technical"],
-    featured: false,
+    tabs: ["technical"],
+    category: "Analytics",
   },
   {
     name: "MLOps & CI/CD",
     description: "Reproducible model delivery, containerization, and automated pipelines.",
-    tabs: ["all", "technical"],
-    featured: false,
+    tabs: ["technical"],
+    category: "Development",
   },
   {
     name: "Web scraping & data collection",
     description: "BeautifulSoup/Requests pipelines for longitudinal, multi-source datasets.",
-    tabs: ["all", "applied"],
-    featured: false,
+    tabs: ["technical"],
+    category: "ETL",
   },
   {
     name: "BI dashboards & reporting",
     description: "Self-service Tableau, Power BI, and Dash views for non-technical teams.",
-    tabs: ["all", "applied"],
-    featured: true,
+    tabs: ["technical"],
+    category: "UI/UX",
   },
   {
     name: "Statistical analysis & forecasting",
     description: "Hypothesis testing, regression, and time-series forecasting on messy data.",
-    tabs: ["all", "applied"],
-    featured: false,
+    tabs: ["technical"],
+    category: "Analytics",
   },
   {
     name: "Data storytelling for stakeholders",
     description: "Translating model and pipeline outputs into decision-ready recommendations.",
-    tabs: ["all", "applied"],
-    featured: true,
+    tabs: ["soft"],
+    category: "Critical Thinking",
+  },
+  {
+    name: "Leadership",
+    description: "Guiding teams, setting direction, and creating accountability without turning meetings into performance art.",
+    tabs: ["soft"],
+    category: "Leadership",
+  },
+  {
+    name: "Management",
+    description: "Planning work, coordinating priorities, and keeping execution moving across teams.",
+    tabs: ["soft"],
+    category: "Management",
+  },
+  {
+    name: "Critical thinking",
+    description: "Breaking down ambiguous problems, testing assumptions, and making decisions from evidence.",
+    tabs: ["soft"],
+    category: "Critical Thinking",
   },
 ];
 
 /* ---------- Contact ---------- */
 
-export type ContactTab = "all" | "primary" | "social";
+export type ContactTab = "all" | "work" | "social";
 
 export interface ContactChannel {
   label: string;
@@ -263,25 +291,30 @@ export interface ContactChannel {
 
 export const CONTACT_DATA: ContactChannel[] = [
   {
-    label: "Email",
-    value: "karthikiyer365@gmail.com",
-    href: "mailto:karthikiyer365@gmail.com",
-    tabs: ["all", "primary"],
-    private: true,
-  },
-  {
     label: "Phone",
     value: "+1 (202) 713-1699",
     href: "tel:+12027131699",
-    tabs: ["all", "primary"],
-    badge: "fastest via SMS",
+    tabs: ["all", "work"],
     private: true,
   },
   {
+    label: "Email",
+    value: "karthikiyer365@gmail.com",
+    href: "mailto:karthikiyer365@gmail.com",
+    tabs: ["all", "work"],
+    private: true,
+  },
+    {
     label: "LinkedIn",
-    value: "linkedin.com/in/kiyer8",
-    href: "https://linkedin.com/in/kiyer8",
-    tabs: ["all", "social"],
+    value: "ksi365",
+    href: "https://linkedin.com/in/ksi365",
+    tabs: ["all", "work"],
+  },
+  {
+    label:"GitHub",
+    value:"karthikiyer365",
+    href:"https://github.com/karthikiyer365",
+    tabs:["all", "work"],
   },
   {
     label: "Location",
@@ -289,4 +322,11 @@ export const CONTACT_DATA: ContactChannel[] = [
     tabs: ["all"],
     subtext: "Open to remote & hybrid",
   },
+  {
+    label:"Instagram",
+    value:"iyer.karthik00",
+    href:"https://www.instagram.com/iyer.karthik00",
+    tabs:["all", "social"]
+  }
+
 ];
