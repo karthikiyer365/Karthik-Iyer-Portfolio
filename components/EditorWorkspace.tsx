@@ -141,12 +141,12 @@ function MarkdownPreview({ content }: { content: string }) {
               </h1>
             ),
             h2: ({ children }) => (
-              <h2 className="text-[17px] font-semibold text-accent-teal mb-2 mt-6">
+              <h2 className="text-[18px] font-semibold text-accent-teal mb-2 mt-6">
                 {children}
               </h2>
             ),
             h3: ({ children }) => (
-              <h3 className="text-[15px] font-semibold text-ink mb-1.5 mt-4">
+              <h3 className="text-[16px] font-semibold text-ink mb-1.5 mt-4">
                 {children}
               </h3>
             ),
@@ -189,7 +189,7 @@ function MarkdownPreview({ content }: { content: string }) {
                 return node;
               };
               return (
-                <h4 className="text-[13px] text-ink-secondary mb-3">
+                <h4 className="text-[14px] text-ink-secondary mb-3">
                   {replaceTokens(children)}
                 </h4>
               );
@@ -266,7 +266,7 @@ function MarkdownPreview({ content }: { content: string }) {
               if (lang) {
                 return (
                   <pre className="bg-surface-raised rounded-lg p-4 overflow-auto my-3 border border-line">
-                    <code className="text-[13px] text-ink-body font-mono">
+                    <code className="text-[14px] text-ink-body font-mono">
                       {codeStr}
                     </code>
                   </pre>
