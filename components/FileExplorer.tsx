@@ -117,7 +117,7 @@ function TreeNode({ node, depth }: { node: FileNode; depth: number }) {
         ))}
 
         {isFolder ? (
-          <span className="text-[#444444]">
+          <span className="text-accent-teal ">
             <ChevronIcon expanded={isExpanded} />
           </span>
         ) : (
@@ -126,7 +126,13 @@ function TreeNode({ node, depth }: { node: FileNode; depth: number }) {
             <FileIcon name={node.name} />
           </>
         )}
-        <span className="truncate">{node.name}</span>
+        <span
+          className={`truncate ${
+            isFolder ? "font-medium text-ink" : ""
+          }`}
+        >
+          {node.name}
+        </span>
       </button>
 
       {isFolder &&
