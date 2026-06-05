@@ -27,8 +27,11 @@ export default function TopBar({ onClose }: TopBarProps) {
           onClick={onClose}
           className="w-3 h-3 rounded-full bg-[#ff5f57] hover:brightness-90 cursor-pointer"
         />
-        <div className="w-3 h-3 rounded-full bg-[#febc2e] hover:brightness-90 cursor-pointer" />
-        <div className="w-3 h-3 rounded-full bg-[#28c840] hover:brightness-90 cursor-pointer" />
+      <div className="w-3 h-3 rounded-full bg-[#febc2e] hover:brightness-90 cursor-pointer" />
+      <div className="w-3 h-3 rounded-full bg-[#28c840] hover:brightness-90 cursor-pointer">
+        <button 
+          type="button" className="w-3 h-3 rounded-full bg-[#28c840] hover:brightness-90 cursor-pointer" />
+        </div>
       </div>
 
       {/* Center - Repository Name */}
