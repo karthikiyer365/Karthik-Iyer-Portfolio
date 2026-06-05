@@ -1,0 +1,80 @@
+{
+  "output": "content/projects/Audio Similarity Recommender.ipynb",
+  "meta": {
+    "company": "Academic Project",
+    "role": "Audio ML · Recommendation",
+    "duration": "2023",
+    "location": "Python · Scikit-learn"
+  },
+  "hero": "# Audio Similarity Recommender\n\n**Audio-feature similarity & genre classification · Python · Scikit-learn · BeautifulSoup**\n\n## Hero Overview\n\nA pipeline transforming semi-structured artist data into clean datasets for 20K+ artists, extracting MFCC audio features and projecting them with PCA, t-SNE and UMAP.\n\nA GTZAN genre classifier (Support Vector Classifier) reached ~74% accuracy with 0.97 AUC, feeding an artist-similarity recommender concept.",
+  "domain_colors": {
+    "AI / ML": "#dd0077",
+    "Integration": "#c98aa0",
+    "Backend Engineering": "#b8b8b8",
+    "Cloud & Infra": "#a8b8b0",
+    "Data Engineering": "#88c0b4",
+    "Workflow / Ops": "#4ec9b0"
+  },
+  "radar": {
+    "Web Scraping": 7,
+    "Audio Feature Extraction": 8,
+    "Dimensionality Reduction": 8,
+    "Classification": 8,
+    "Data Pipelines": 7,
+    "Data Storytelling": 6
+  },
+  "bubble_chart": {
+    "x_axis": "system",
+    "y_axis": "ownership",
+    "size_metric": "implementation_strength",
+    "color_metric": "domain",
+    "points": [
+      { "system": "Ingestion Pipeline", "domain": "Integration", "ownership": 9, "implementation_strength": 8.0, "complexity": 7.5, "impact": 7.0, "maturity": 7.0, "subsystems": ["Weekly scraping (BeautifulSoup, Regex)", "NoSQL → Pandas", "20K+ artists"], "evidence": "Built a weekly ingestion pipeline transforming semi-structured NoSQL artist data into clean Pandas datasets for 20K+ artists." },
+      { "system": "Audio Features", "domain": "Data Engineering", "ownership": 8, "implementation_strength": 8.0, "complexity": 7.5, "impact": 7.0, "maturity": 7.0, "subsystems": ["WAV preprocessing", "20 MFCCs per track", "Standardized inputs"], "evidence": "Automated WAV retrieval/preprocessing, extracting 20 MFCCs per track and standardizing inputs for downstream work." },
+      { "system": "Dimensionality Reduction", "domain": "AI / ML", "ownership": 8, "implementation_strength": 7.5, "complexity": 8.0, "impact": 6.5, "maturity": 6.0, "subsystems": ["PCA", "t-SNE", "UMAP"], "evidence": "Applied PCA, t-SNE and UMAP across MFCC space, preserving audio-pattern structure for clustering and visualization." },
+      { "system": "Genre Classifier", "domain": "AI / ML", "ownership": 8, "implementation_strength": 7.5, "complexity": 7.5, "impact": 7.5, "maturity": 6.0, "subsystems": ["GTZAN dataset", "Support Vector Classifier", "~74% acc / 0.97 AUC"], "evidence": "Trained an SVC genre classifier on GTZAN MFCC features reaching ~74% accuracy and 0.97 AUC, leading benchmarks." }
+    ]
+  },
+  "network_graph": {
+    "title": "Technology Capability Network",
+    "description": "Maps the project's core techniques to the tools used to implement them.",
+    "nodes": [
+      { "id": "Ingestion Pipeline", "type": "system", "domain": "Integration" },
+      { "id": "Audio Features", "type": "system", "domain": "Data Engineering" },
+      { "id": "Dimensionality Reduction", "type": "system", "domain": "AI / ML" },
+      { "id": "Genre Classifier", "type": "system", "domain": "AI / ML" },
+
+      { "id": "Web Scraping", "type": "concept", "domain": "Integration" },
+      { "id": "Feature Extraction", "type": "concept", "domain": "Data Engineering" },
+      { "id": "Manifold Projection", "type": "concept", "domain": "AI / ML" },
+      { "id": "Classification", "type": "concept", "domain": "AI / ML" },
+
+      { "id": "Python / Pandas", "type": "tool", "category": "Language" },
+      { "id": "BeautifulSoup", "type": "tool", "category": "Scraping" },
+      { "id": "NumPy", "type": "tool", "category": "Numerics" },
+      { "id": "Scikit-learn", "type": "tool", "category": "ML Library" }
+    ],
+    "edges": [
+      { "source": "Ingestion Pipeline", "target": "Web Scraping", "weight": 3 },
+      { "source": "Ingestion Pipeline", "target": "Feature Extraction", "weight": 2 },
+      { "source": "Audio Features", "target": "Feature Extraction", "weight": 3 },
+      { "source": "Dimensionality Reduction", "target": "Manifold Projection", "weight": 3 },
+      { "source": "Genre Classifier", "target": "Classification", "weight": 3 },
+      { "source": "Genre Classifier", "target": "Feature Extraction", "weight": 2 },
+
+      { "source": "Web Scraping", "target": "BeautifulSoup", "weight": 3 },
+      { "source": "Web Scraping", "target": "Python / Pandas", "weight": 2 },
+      { "source": "Feature Extraction", "target": "Python / Pandas", "weight": 3 },
+      { "source": "Feature Extraction", "target": "NumPy", "weight": 2 },
+      { "source": "Manifold Projection", "target": "Scikit-learn", "weight": 3 },
+      { "source": "Classification", "target": "Scikit-learn", "weight": 3 }
+    ]
+  },
+  "outcomes": {
+    "Artists Processed": "20K+",
+    "MFCCs per Track": "20",
+    "Classifier Accuracy": "~74%",
+    "AUC": "0.97"
+  },
+  "storyline": "# Storyline\n\n## Context\n\nMusic discovery benefits from similarity grounded in actual audio characteristics, not just metadata tags.\n\n## Workflow\n\nWeekly artist-data ingestion → audio feature extraction → manifold projection → genre classification → recommender concept.\n\n## Technical Implementation\n\n- **Ingestion:** BeautifulSoup/Regex pipeline transforming NoSQL artist data into Pandas frames for 20K+ artists.\n- **Features:** WAV preprocessing extracting 20 MFCCs per track with standardized inputs.\n- **Projection:** PCA, t-SNE and UMAP across MFCC space for structure-preserving clustering.\n- **Classification:** SVC on GTZAN MFCC features, ~74% accuracy and 0.97 AUC.\n\n## Outcomes\n\nBridged audio-feature extraction and similarity output into a recommender concept framing similarity as a music-curation lens."
+}

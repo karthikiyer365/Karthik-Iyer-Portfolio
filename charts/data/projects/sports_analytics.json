@@ -1,0 +1,98 @@
+{
+  "output": "content/projects/Sports Analytics Dashboard.ipynb",
+  "meta": {
+    "company": "Personal & Academic Project",
+    "role": "Sports Analytics · Modeling & Dashboards",
+    "duration": "2021 – 2022",
+    "location": "Python · Dash · GCP"
+  },
+  "hero": "# Sports Analytics Dashboard\n\n**Player performance modeling & valuation · Python · Pandas · Scikit-learn · Dash · GCP**\n\n## Hero Overview\n\nA two-part sports analytics build: a soccer player-performance dashboard scaling a reusable cleaning pipeline to 100K+ datapoints across 22 attributes, and a cross-sport (FIFA × NBA) player-valuation model benchmarking 25K+ records over 5 seasons.\n\nBoth ship as interactive Dash/Plotly apps on GCP, turning raw player data into model-backed comparison views and scouting/pricing inputs for non-technical coaching and club-side stakeholders.",
+  "domain_colors": {
+    "AI / ML": "#dd0077",
+    "Integration": "#c98aa0",
+    "Backend Engineering": "#b8b8b8",
+    "Cloud & Infra": "#a8b8b0",
+    "Data Engineering": "#88c0b4",
+    "Workflow / Ops": "#4ec9b0"
+  },
+  "radar": {
+    "Data Cleaning": 9,
+    "Statistical Testing": 8,
+    "Feature Engineering": 8,
+    "Regression Modeling": 8,
+    "Dimensionality Reduction": 7,
+    "Dashboarding": 8,
+    "Cloud Deploy": 6,
+    "Data Storytelling": 7
+  },
+  "bubble_chart": {
+    "x_axis": "system",
+    "y_axis": "ownership",
+    "size_metric": "implementation_strength",
+    "color_metric": "domain",
+    "points": [
+      { "system": "Data Cleaning Pipeline", "domain": "Data Engineering", "ownership": 9, "implementation_strength": 8.5, "complexity": 7.0, "impact": 7.5, "maturity": 8.0, "subsystems": ["IQR outlier removal", "Z-score normalization", "Kolmogorov-Smirnov testing"], "evidence": "Reusable normalization pipeline scaling to 100K+ player datapoints, enabling re-runs against new seasons without manual rework." },
+      { "system": "Feature Engineering", "domain": "Data Engineering", "ownership": 8, "implementation_strength": 8.0, "complexity": 7.5, "impact": 7.0, "maturity": 7.0, "subsystems": ["22 performance attributes", "20+ FIFA/NBA features", "PCA dimensionality reduction"], "evidence": "Engineered 22 soccer attributes and 20+ cross-sport features with Pandas/Scikit-learn, applying PCA to lift model interpretability." },
+      { "system": "Regression Modeling", "domain": "AI / ML", "ownership": 8, "implementation_strength": 8.5, "complexity": 8.0, "impact": 8.0, "maturity": 7.0, "subsystems": ["Multivariate Linear Regression", "Market-value prediction", "Performance valuation"], "evidence": "Multivariate Linear Regression reaching ~97% accuracy on player projection and ~85% R² on market-value prediction." },
+      { "system": "Cross-Sport Benchmarking", "domain": "AI / ML", "ownership": 8, "implementation_strength": 7.5, "complexity": 8.0, "impact": 7.0, "maturity": 6.0, "subsystems": ["FIFA × NBA dataset", "OBPM/DBPM mapping", "5-season integration"], "evidence": "Integrated 25K+ FIFA records across 5 seasons with NBA OBPM/DBPM metrics into one valuation-benchmarking dataset." },
+      { "system": "Interactive Dashboard", "domain": "Workflow / Ops", "ownership": 9, "implementation_strength": 8.0, "complexity": 6.5, "impact": 8.0, "maturity": 7.0, "subsystems": ["Dash + Plotly app", "GCP deployment", "Side-by-side comparison"], "evidence": "Interactive time-series dashboards on Dash, Plotly and GCP, replacing static spreadsheet workflows for coaching staff." }
+    ]
+  },
+  "network_graph": {
+    "title": "Technology Capability Network",
+    "description": "Maps the project's core techniques to the tools used to implement them.",
+    "nodes": [
+      { "id": "Data Cleaning Pipeline", "type": "system", "domain": "Data Engineering" },
+      { "id": "Regression Modeling", "type": "system", "domain": "AI / ML" },
+      { "id": "Cross-Sport Benchmarking", "type": "system", "domain": "AI / ML" },
+      { "id": "Interactive Dashboard", "type": "system", "domain": "Workflow / Ops" },
+
+      { "id": "Data Cleaning", "type": "concept", "domain": "Data Engineering" },
+      { "id": "Statistical Testing", "type": "concept", "domain": "Data Engineering" },
+      { "id": "Feature Engineering", "type": "concept", "domain": "Data Engineering" },
+      { "id": "Regression", "type": "concept", "domain": "AI / ML" },
+      { "id": "Dimensionality Reduction", "type": "concept", "domain": "AI / ML" },
+      { "id": "Visualization", "type": "concept", "domain": "Workflow / Ops" },
+      { "id": "Cloud Deploy", "type": "concept", "domain": "Cloud & Infra" },
+
+      { "id": "Python / Pandas", "type": "tool", "category": "Language" },
+      { "id": "NumPy", "type": "tool", "category": "Numerics" },
+      { "id": "Scikit-learn", "type": "tool", "category": "ML Library" },
+      { "id": "Dash", "type": "tool", "category": "App Framework" },
+      { "id": "Plotly", "type": "tool", "category": "Visualization" },
+      { "id": "GCP", "type": "tool", "category": "Cloud" }
+    ],
+    "edges": [
+      { "source": "Data Cleaning Pipeline", "target": "Data Cleaning", "weight": 3 },
+      { "source": "Data Cleaning Pipeline", "target": "Statistical Testing", "weight": 3 },
+      { "source": "Data Cleaning Pipeline", "target": "Feature Engineering", "weight": 2 },
+      { "source": "Regression Modeling", "target": "Regression", "weight": 3 },
+      { "source": "Regression Modeling", "target": "Feature Engineering", "weight": 2 },
+      { "source": "Cross-Sport Benchmarking", "target": "Dimensionality Reduction", "weight": 3 },
+      { "source": "Cross-Sport Benchmarking", "target": "Feature Engineering", "weight": 3 },
+      { "source": "Cross-Sport Benchmarking", "target": "Regression", "weight": 2 },
+      { "source": "Interactive Dashboard", "target": "Visualization", "weight": 3 },
+      { "source": "Interactive Dashboard", "target": "Cloud Deploy", "weight": 3 },
+
+      { "source": "Data Cleaning", "target": "Python / Pandas", "weight": 3 },
+      { "source": "Data Cleaning", "target": "NumPy", "weight": 2 },
+      { "source": "Statistical Testing", "target": "Python / Pandas", "weight": 2 },
+      { "source": "Statistical Testing", "target": "Scikit-learn", "weight": 2 },
+      { "source": "Feature Engineering", "target": "Python / Pandas", "weight": 3 },
+      { "source": "Feature Engineering", "target": "Scikit-learn", "weight": 2 },
+      { "source": "Regression", "target": "Scikit-learn", "weight": 3 },
+      { "source": "Dimensionality Reduction", "target": "Scikit-learn", "weight": 3 },
+      { "source": "Visualization", "target": "Dash", "weight": 3 },
+      { "source": "Visualization", "target": "Plotly", "weight": 3 },
+      { "source": "Cloud Deploy", "target": "GCP", "weight": 3 }
+    ]
+  },
+  "outcomes": {
+    "Player Datapoints": "100K+",
+    "Performance Attributes": "22",
+    "Projection Accuracy": "~97%",
+    "Market-Value R²": "~85%",
+    "Cross-Sport Records": "25K+ / 5 seasons"
+  },
+  "storyline": "# Storyline\n\n## Context\n\nCoaching and scouting decisions leaned on static spreadsheets that buried player-performance signal and made cross-season or cross-league comparison slow and manual.\n\n## Workflow\n\nRaw player data → reusable cleaning & integrity testing → feature engineering → regression modeling → interactive dashboards for comparison and valuation. The same pipeline backs both the soccer dashboard and the FIFA × NBA cross-sport valuation model.\n\n## Technical Implementation\n\n- **Cleaning pipeline:** reusable normalization (IQR outlier removal, Z-score, Kolmogorov-Smirnov testing) scaling to 100K+ datapoints across 22 attributes, re-runnable against new seasons.\n- **Feature engineering:** 20+ statistical and contextual features with Pandas and Scikit-learn, PCA applied to reduce dimensionality and lift interpretability.\n- **Modeling:** Multivariate Linear Regression reaching ~97% accuracy on player projection and ~85% R² on market-value prediction (~78% on performance-based valuation).\n- **Cross-sport benchmarking:** integrated 25K+ FIFA records across 5 seasons with NBA OBPM/DBPM metrics into one valuation dataset.\n- **Dashboards:** interactive time-series Dash/Plotly apps on GCP for real-time, side-by-side player comparison.\n\n## Outcomes\n\nReplaced static spreadsheet workflows with model-backed comparison views, translating 22-attribute outputs into priority insights for coaching staff and a scouting/pricing framework for club-side decision-makers."
+}

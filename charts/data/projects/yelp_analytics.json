@@ -1,0 +1,81 @@
+{
+  "output": "content/projects/Yelp Analytics.ipynb",
+  "meta": {
+    "company": "Academic Project",
+    "role": "Big-Data ETL · Sentiment Analytics",
+    "duration": "2023",
+    "location": "Databricks · Spark"
+  },
+  "hero": "# Yelp Analytics\n\n**Large-scale review ETL & sentiment analysis · Databricks · Spark · SQL**\n\n## Hero Overview\n\nA big-data pipeline processing 10M+ Yelp data points through Databricks ETL and applying the AFINN sentiment lexicon across 7M+ reviews to surface star-rating vs. sentiment bias.\n\nFindings were packaged into sector-specific strategy directions, bridging distributed processing output to business decisions.",
+  "domain_colors": {
+    "AI / ML": "#dd0077",
+    "Integration": "#c98aa0",
+    "Backend Engineering": "#b8b8b8",
+    "Cloud & Infra": "#a8b8b0",
+    "Data Engineering": "#88c0b4",
+    "Workflow / Ops": "#4ec9b0"
+  },
+  "radar": {
+    "ETL Pipelines": 9,
+    "Distributed Processing": 8,
+    "Sentiment Analysis": 7,
+    "SQL": 7,
+    "Data Modeling": 7,
+    "Data Storytelling": 7,
+    "Big Data": 8
+  },
+  "bubble_chart": {
+    "x_axis": "system",
+    "y_axis": "ownership",
+    "size_metric": "implementation_strength",
+    "color_metric": "domain",
+    "points": [
+      { "system": "Databricks ETL", "domain": "Data Engineering", "ownership": 9, "implementation_strength": 8.5, "complexity": 8.0, "impact": 8.0, "maturity": 7.0, "subsystems": ["5+ Spark pipelines", "10M+ data points", "SQL transformation"], "evidence": "Built 5+ Databricks ETL pipelines automating ingestion/transformation of 10M+ data points, cutting processing time ~15 hours." },
+      { "system": "Sentiment Analysis", "domain": "AI / ML", "ownership": 8, "implementation_strength": 8.0, "complexity": 7.5, "impact": 7.5, "maturity": 7.0, "subsystems": ["AFINN lexicon", "7M+ reviews", "Star-rating bias detection"], "evidence": "Applied the AFINN sentiment lexicon across 7M+ reviews with Spark, surfacing systematic star-rating vs. sentiment bias." },
+      { "system": "Insights & Reporting", "domain": "Workflow / Ops", "ownership": 8, "implementation_strength": 7.5, "complexity": 6.5, "impact": 8.0, "maturity": 7.0, "subsystems": ["3 sector patterns", "Stakeholder report", "3 strategy directions"], "evidence": "Surfaced 3 sector-specific behavior patterns (restaurants, salons, retail) and packaged 3 actionable strategy directions." }
+    ]
+  },
+  "network_graph": {
+    "title": "Technology Capability Network",
+    "description": "Maps the project's core techniques to the tools used to implement them.",
+    "nodes": [
+      { "id": "Databricks ETL", "type": "system", "domain": "Data Engineering" },
+      { "id": "Sentiment Analysis", "type": "system", "domain": "AI / ML" },
+      { "id": "Insights & Reporting", "type": "system", "domain": "Workflow / Ops" },
+
+      { "id": "ETL Pipelines", "type": "concept", "domain": "Data Engineering" },
+      { "id": "Distributed Processing", "type": "concept", "domain": "Data Engineering" },
+      { "id": "Sentiment Analysis (NLP)", "type": "concept", "domain": "AI / ML" },
+      { "id": "Reporting", "type": "concept", "domain": "Workflow / Ops" },
+
+      { "id": "Spark", "type": "tool", "category": "Big Data" },
+      { "id": "Databricks", "type": "tool", "category": "Platform" },
+      { "id": "SQL", "type": "tool", "category": "Query Language" },
+      { "id": "Python", "type": "tool", "category": "Language" },
+      { "id": "AFINN", "type": "tool", "category": "NLP Lexicon" }
+    ],
+    "edges": [
+      { "source": "Databricks ETL", "target": "ETL Pipelines", "weight": 3 },
+      { "source": "Databricks ETL", "target": "Distributed Processing", "weight": 3 },
+      { "source": "Sentiment Analysis", "target": "Sentiment Analysis (NLP)", "weight": 3 },
+      { "source": "Sentiment Analysis", "target": "Distributed Processing", "weight": 2 },
+      { "source": "Insights & Reporting", "target": "Reporting", "weight": 3 },
+
+      { "source": "ETL Pipelines", "target": "Spark", "weight": 3 },
+      { "source": "ETL Pipelines", "target": "Databricks", "weight": 3 },
+      { "source": "ETL Pipelines", "target": "SQL", "weight": 2 },
+      { "source": "Distributed Processing", "target": "Spark", "weight": 3 },
+      { "source": "Sentiment Analysis (NLP)", "target": "AFINN", "weight": 3 },
+      { "source": "Sentiment Analysis (NLP)", "target": "Python", "weight": 2 },
+      { "source": "Reporting", "target": "Python", "weight": 2 }
+    ]
+  },
+  "outcomes": {
+    "Data Points Processed": "10M+",
+    "Reviews Analyzed": "7M+",
+    "ETL Pipelines": "5+",
+    "Processing Time Saved": "~15 hrs",
+    "Sector Patterns": "3"
+  },
+  "storyline": "# Storyline\n\n## Context\n\nMillions of Yelp reviews held category-level behavioral signal, but raw star ratings alone obscured how sentiment actually diverged across business sectors.\n\n## Workflow\n\nDistributed ingestion & transformation → sentiment scoring at scale → sector pattern detection → stakeholder-facing strategy report.\n\n## Technical Implementation\n\n- **ETL:** 5+ Databricks/Spark pipelines transforming 10M+ data points with SQL, cutting end-to-end processing ~15 hours.\n- **Sentiment:** AFINN lexicon applied to 7M+ reviews with Spark, exposing star-rating vs. sentiment bias by category.\n- **Insight:** 3 sector-specific behavior patterns (restaurants, salons, retail) grounded in review-sentiment evidence.\n\n## Outcomes\n\nBridged Databricks ETL output to business strategy, translating large-scale review data into 3 actionable, category-aligned strategy directions."
+}

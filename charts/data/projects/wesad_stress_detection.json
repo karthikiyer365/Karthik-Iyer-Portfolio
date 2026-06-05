@@ -1,0 +1,86 @@
+{
+  "output": "content/projects/WESAD Stress Detection.ipynb",
+  "meta": {
+    "company": "Academic Project",
+    "role": "Wearable ML · Time-Series Classification",
+    "duration": "2024",
+    "location": "Python · TensorFlow"
+  },
+  "hero": "# WESAD Stress Detection\n\n**Wearable physiological stress/panic detection · Python · TensorFlow · Scikit-learn**\n\n## Hero Overview\n\nA wearable-sensor pipeline detecting panic vs. non-panic states from multi-channel Empatica E4 streams across 15 participants, framed as a daily-wearable monitoring concept.\n\nSequence models (Bi-LSTM, CNN-LSTM) trained with subject-level cross-validation translate raw physiological signal into clinician-readable risk indicators.",
+  "domain_colors": {
+    "AI / ML": "#dd0077",
+    "Integration": "#c98aa0",
+    "Backend Engineering": "#b8b8b8",
+    "Cloud & Infra": "#a8b8b0",
+    "Data Engineering": "#88c0b4",
+    "Workflow / Ops": "#4ec9b0"
+  },
+  "radar": {
+    "Signal Processing": 8,
+    "Feature Engineering": 8,
+    "Dimensionality Reduction": 7,
+    "Deep Learning": 8,
+    "Time-Series Modeling": 8,
+    "Cross-Validation": 7,
+    "Model Evaluation": 7,
+    "Data Storytelling": 6
+  },
+  "bubble_chart": {
+    "x_axis": "system",
+    "y_axis": "ownership",
+    "size_metric": "implementation_strength",
+    "color_metric": "domain",
+    "points": [
+      { "system": "Sensor Ingestion", "domain": "Data Engineering", "ownership": 9, "implementation_strength": 8.0, "complexity": 7.5, "impact": 7.0, "maturity": 7.0, "subsystems": ["Empatica E4 streams (TEMP, EDA, BVP, HR, ACC)", "Frequency resampling", "15-participant alignment"], "evidence": "Ingested multi-channel Empatica E4 sensor streams across 15 participants, resampling signals to aligned frequencies." },
+      { "system": "Feature Engineering", "domain": "Data Engineering", "ownership": 8, "implementation_strength": 8.0, "complexity": 7.5, "impact": 7.0, "maturity": 7.0, "subsystems": ["30+ temporal/statistical features", "PCA ~40% reduction", "Z-score normalization"], "evidence": "Engineered 30+ temporal and statistical features per channel, applying PCA (~40% reduction) and Z-score normalization." },
+      { "system": "Sequence Modeling", "domain": "AI / ML", "ownership": 8, "implementation_strength": 8.0, "complexity": 8.5, "impact": 7.5, "maturity": 6.0, "subsystems": ["Bi-LSTM", "CNN-LSTM", "TensorFlow + Scikit-learn"], "evidence": "Trained Bi-LSTM and CNN-LSTM time-series classifiers reaching ~79% accuracy and 0.81 F1 on panic detection." },
+      { "system": "Validation Framework", "domain": "AI / ML", "ownership": 8, "implementation_strength": 7.5, "complexity": 7.5, "impact": 7.0, "maturity": 6.0, "subsystems": ["Leave-One-Group-Out CV", "Subject-level generalization", "Unseen-user simulation"], "evidence": "Leave-One-Group-Out cross-validation across 15 participants to test subject-level, unseen-user generalization." }
+    ]
+  },
+  "network_graph": {
+    "title": "Technology Capability Network",
+    "description": "Maps the project's core techniques to the tools used to implement them.",
+    "nodes": [
+      { "id": "Sensor Ingestion", "type": "system", "domain": "Data Engineering" },
+      { "id": "Feature Engineering", "type": "system", "domain": "Data Engineering" },
+      { "id": "Sequence Modeling", "type": "system", "domain": "AI / ML" },
+      { "id": "Validation Framework", "type": "system", "domain": "AI / ML" },
+
+      { "id": "Signal Processing", "type": "concept", "domain": "Data Engineering" },
+      { "id": "Feature Extraction", "type": "concept", "domain": "Data Engineering" },
+      { "id": "Dimensionality Reduction", "type": "concept", "domain": "AI / ML" },
+      { "id": "Deep Learning", "type": "concept", "domain": "AI / ML" },
+      { "id": "Cross-Validation", "type": "concept", "domain": "AI / ML" },
+
+      { "id": "Python / Pandas", "type": "tool", "category": "Language" },
+      { "id": "NumPy", "type": "tool", "category": "Numerics" },
+      { "id": "TensorFlow", "type": "tool", "category": "Deep Learning" },
+      { "id": "Scikit-learn", "type": "tool", "category": "ML Library" }
+    ],
+    "edges": [
+      { "source": "Sensor Ingestion", "target": "Signal Processing", "weight": 3 },
+      { "source": "Sensor Ingestion", "target": "Feature Extraction", "weight": 2 },
+      { "source": "Feature Engineering", "target": "Feature Extraction", "weight": 3 },
+      { "source": "Feature Engineering", "target": "Dimensionality Reduction", "weight": 3 },
+      { "source": "Sequence Modeling", "target": "Deep Learning", "weight": 3 },
+      { "source": "Validation Framework", "target": "Cross-Validation", "weight": 3 },
+      { "source": "Validation Framework", "target": "Deep Learning", "weight": 2 },
+
+      { "source": "Signal Processing", "target": "Python / Pandas", "weight": 3 },
+      { "source": "Signal Processing", "target": "NumPy", "weight": 2 },
+      { "source": "Feature Extraction", "target": "Python / Pandas", "weight": 3 },
+      { "source": "Feature Extraction", "target": "Scikit-learn", "weight": 2 },
+      { "source": "Dimensionality Reduction", "target": "Scikit-learn", "weight": 3 },
+      { "source": "Deep Learning", "target": "TensorFlow", "weight": 3 },
+      { "source": "Cross-Validation", "target": "Scikit-learn", "weight": 3 }
+    ]
+  },
+  "outcomes": {
+    "Participants": "15",
+    "Features per Channel": "30+",
+    "Detection Accuracy": "~79%",
+    "F1 Score": "0.81",
+    "PCA Reduction": "~40%"
+  },
+  "storyline": "# Storyline\n\n## Context\n\nPanic and acute-stress episodes are hard to catch in the moment; wearable physiological signal offers a continuous, non-invasive monitoring lens if it can be modeled reliably across people.\n\n## Workflow\n\nMulti-channel sensor ingestion → per-channel feature engineering → dimensionality reduction → sequence modeling → subject-level validation → clinician-readable risk output.\n\n## Technical Implementation\n\n- **Ingestion:** Empatica E4 streams (TEMP, EDA, BVP, HR, ACC) across 15 participants, resampled to aligned frequencies.\n- **Features:** 30+ temporal/statistical features per channel, PCA (~40% reduction) and Z-score normalization for stable inputs.\n- **Modeling:** Bi-LSTM and CNN-LSTM classifiers (TensorFlow + Scikit-learn), ~79% accuracy and 0.81 F1.\n- **Validation:** Leave-One-Group-Out CV across 15 participants simulating unseen-user deployment.\n\n## Outcomes\n\nFramed sensor-driven detection as a daily-wearable monitoring concept, translating model outputs into clinician-readable risk indicators for downstream consultation."
+}
