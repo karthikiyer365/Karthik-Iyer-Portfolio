@@ -109,7 +109,7 @@ export default function EditorWorkspace() {
       {/* Content */}
       {hasPreview && viewMode === "preview" ? (
         isNotebook ? (
-          <NotebookRenderer content={content} />
+          <NotebookRenderer key={activeFile} content={content} />
         ) : (
           <MarkdownPreview content={content} />
         )
