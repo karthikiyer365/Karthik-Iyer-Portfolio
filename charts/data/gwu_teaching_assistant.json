@@ -6,7 +6,7 @@
     "duration": "September 2024 – December 2024",
     "location": "Washington, DC, USA"
   },
-  "hero": "# GWU · Teaching Assistant / Decision Making & Data Analytics\n\n**September 2024 – December 2024 · Washington, DC, USA**\n\n## Hero Overview\n\nSupported a multi-section graduate analytics cohort through weekly student support sessions, applied probability/data-analytics instruction, and AI-assisted assignment evaluation.\n\nThe role combined teaching operations with practical NLP automation: building a Python, NLP, and BERT auto-grading pipeline for 400+ assignments while refining scoring consistency with faculty stakeholders.",
+  "hero": "# GWU · Teaching Assistant / Decision Making & Data Analytics\n\n**September 2024 – December 2024 · Washington, DC, USA**\n\n## Hero Overview\n\nSupported a multi-section graduate analytics cohort through weekly student support sessions, applied probability/data-analytics instruction, and AI-assisted assignment evaluation.\n\nThe role combined teaching operations with practical NLP automation: building a Python, NLP, and BERT grading-automation pipeline supporting 400+ assignments (human-in-the-loop) while refining scoring consistency with faculty stakeholders.",
   "domain_colors": {
     "AI / ML": "#dd0077",
     "Integration": "#c98aa0",
@@ -44,7 +44,7 @@
           "NLP Processing",
           "BERT Evaluation"
         ],
-        "evidence": "Built an auto-grading pipeline for 400+ assignments using Python, NLP, and BERT."
+        "evidence": "Built a grading-automation pipeline supporting evaluation of 400+ assignments using Python, NLP, and BERT (human-in-the-loop)."
       },
       {
         "system": "Student Support Sessions",
@@ -89,7 +89,7 @@
           "Batch Review",
           "Evaluation Outputs"
         ],
-        "evidence": "Organized review workflows around 400+ assignments and reduced evaluation time by roughly 60%."
+        "evidence": "Organized review workflows around 400+ assignments, supporting an estimated ~60% reduction in evaluation time."
       },
       {
         "system": "Plagiarism Detection Support",
@@ -113,29 +113,24 @@
     "description": "Teaching operations connected to NLP grading, faculty review, student support, and assignment-scale workflows.",
     "nodes": [
       {
-        "id": "Auto-Grading Pipeline",
+        "id": "Human-in-Loop Grading",
         "type": "system",
         "domain": "AI / ML"
       },
       {
-        "id": "Student Support Sessions",
+        "id": "Student Support Ops",
         "type": "system",
         "domain": "Workflow / Ops"
       },
       {
-        "id": "Scoring Consistency Loop",
+        "id": "Faculty Calibration",
         "type": "system",
         "domain": "Integration"
       },
       {
-        "id": "Assignment Review Ops",
+        "id": "Assignment Review",
         "type": "system",
         "domain": "Data Engineering"
-      },
-      {
-        "id": "Plagiarism Detection Support",
-        "type": "system",
-        "domain": "AI / ML"
       },
       {
         "id": "NLP Evaluation",
@@ -143,19 +138,14 @@
         "domain": "AI / ML"
       },
       {
-        "id": "Applied Concept Translation",
-        "type": "concept",
-        "domain": "Workflow / Ops"
-      },
-      {
-        "id": "Faculty Calibration",
+        "id": "Rubric Consistency",
         "type": "concept",
         "domain": "Integration"
       },
       {
-        "id": "Batch Review",
+        "id": "Academic Workflow",
         "type": "concept",
-        "domain": "Data Engineering"
+        "domain": "Workflow / Ops"
       },
       {
         "id": "Similarity Review",
@@ -163,19 +153,9 @@
         "domain": "AI / ML"
       },
       {
-        "id": "Python",
+        "id": "Python / BERT",
         "type": "tool",
         "category": "Language"
-      },
-      {
-        "id": "NLP",
-        "type": "tool",
-        "category": "Text Processing"
-      },
-      {
-        "id": "BERT",
-        "type": "tool",
-        "category": "NLP Model"
       },
       {
         "id": "Rubrics",
@@ -186,87 +166,92 @@
         "id": "Faculty Review",
         "type": "tool",
         "category": "Workflow"
+      },
+      {
+        "id": "Assignment Data",
+        "type": "tool",
+        "category": "Operational Data"
       }
     ],
     "edges": [
       {
-        "source": "Auto-Grading Pipeline",
+        "source": "Human-in-Loop Grading",
         "target": "NLP Evaluation",
         "weight": 3
       },
       {
-        "source": "Student Support Sessions",
-        "target": "Applied Concept Translation",
+        "source": "Human-in-Loop Grading",
+        "target": "Rubric Consistency",
+        "weight": 2
+      },
+      {
+        "source": "Student Support Ops",
+        "target": "Academic Workflow",
         "weight": 3
       },
       {
-        "source": "Scoring Consistency Loop",
-        "target": "Faculty Calibration",
+        "source": "Student Support Ops",
+        "target": "Rubric Consistency",
+        "weight": 2
+      },
+      {
+        "source": "Faculty Calibration",
+        "target": "Rubric Consistency",
         "weight": 3
       },
       {
-        "source": "Assignment Review Ops",
-        "target": "Batch Review",
-        "weight": 3
+        "source": "Faculty Calibration",
+        "target": "Academic Workflow",
+        "weight": 2
       },
       {
-        "source": "Plagiarism Detection Support",
+        "source": "Assignment Review",
         "target": "Similarity Review",
         "weight": 3
       },
       {
-        "source": "NLP Evaluation",
-        "target": "Python",
-        "weight": 3
-      },
-      {
-        "source": "NLP Evaluation",
-        "target": "NLP",
-        "weight": 3
-      },
-      {
-        "source": "NLP Evaluation",
-        "target": "BERT",
-        "weight": 3
-      },
-      {
-        "source": "Applied Concept Translation",
-        "target": "Rubrics",
+        "source": "Assignment Review",
+        "target": "Academic Workflow",
         "weight": 2
       },
       {
-        "source": "Faculty Calibration",
+        "source": "NLP Evaluation",
+        "target": "Python / BERT",
+        "weight": 3
+      },
+      {
+        "source": "Rubric Consistency",
+        "target": "Rubrics",
+        "weight": 3
+      },
+      {
+        "source": "Rubric Consistency",
         "target": "Faculty Review",
+        "weight": 2
+      },
+      {
+        "source": "Academic Workflow",
+        "target": "Assignment Data",
         "weight": 3
       },
       {
-        "source": "Faculty Calibration",
-        "target": "Rubrics",
-        "weight": 2
-      },
-      {
-        "source": "Batch Review",
-        "target": "Python",
-        "weight": 2
+        "source": "Similarity Review",
+        "target": "Python / BERT",
+        "weight": 3
       },
       {
         "source": "Similarity Review",
-        "target": "NLP",
-        "weight": 2
-      },
-      {
-        "source": "Similarity Review",
-        "target": "BERT",
+        "target": "Assignment Data",
         "weight": 2
       }
     ]
   },
   "outcomes": {
-    "Assignments Automated": "400+",
-    "Evaluation Time Reduced": "~60%",
-    "Faculty Time Saved": "~10 hrs/week",
+    "Assignments Supported": "400+",
+    "Evaluation Time Reduced": "~60% (est.)",
+    "Faculty Time Saved": "~10 hrs/week (est.)",
     "Faculty Collaborators": "3",
     "Support Cadence": "Weekly 3-hour sessions"
   },
-  "storyline": "# Storyline\n\n## Context\n\nThe Decision Making & Data Analytics course needed scalable student support and consistent assignment evaluation across a multi-section graduate cohort. Manual grading and feedback workflows created pressure on turnaround time and scoring consistency.\n\n## Workflow\n\nThe role moved from weekly student support sessions into assignment review, NLP-assisted grading automation, faculty calibration, and plagiarism-detection support. The goal was to preserve teaching quality while making evaluation more repeatable.\n\n## Technical Implementation\n\n- **Student support:** ran weekly 3-hour sessions translating probability and analytics concepts into applied examples.\n- **Auto-grading pipeline:** built a Python, NLP, and BERT workflow for 400+ assignments.\n- **Scoring consistency:** refined the grading algorithm with 3 faculty members over the term.\n- **Evaluation operations:** reduced manual evaluation time by roughly 60% and saved faculty about 10 hours per week.\n- **Plagiarism detection:** improved review support through scoring and similarity-oriented checks.\n\n## Outcomes\n\nThe work scaled evaluation across 400+ assignments, reduced grading time by roughly 60%, saved faculty about 10 hours per week, and improved the consistency of analytics-course assessment workflows."
+  "storyline": "# Storyline\n\n## Context\n\nThe Decision Making & Data Analytics course needed scalable student support and consistent assignment evaluation across a multi-section graduate cohort. Manual grading and feedback workflows created pressure on turnaround time and scoring consistency.\n\n## Workflow\n\nThe role moved from weekly student support sessions into assignment review, NLP-assisted grading automation, faculty calibration, and plagiarism-detection support. The goal was to preserve teaching quality while making evaluation more repeatable.\n\n## Technical Implementation\n\n- **Student support:** ran weekly 3-hour sessions translating probability and analytics concepts into applied examples.\n- **Grading automation:** built a Python, NLP, and BERT workflow supporting evaluation of 400+ assignments (human-in-the-loop).\n- **Scoring consistency:** refined the grading algorithm with 3 faculty members over the term.\n- **Evaluation operations:** supported an estimated ~60% reduction in manual evaluation time and roughly 10 hours/week of faculty time saved.\n- **Plagiarism detection:** improved review support through scoring and similarity-oriented checks.\n\n## Outcomes\n\nThe work supported evaluation across 400+ assignments, an estimated ~60% reduction in grading time, roughly 10 hours/week of faculty time saved, and improved consistency of analytics-course assessment workflows."
 }

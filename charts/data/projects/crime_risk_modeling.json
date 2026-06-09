@@ -6,7 +6,7 @@
     "duration": "2023",
     "location": "Python · Scikit-learn"
   },
-  "hero": "# Crime Risk Modeling\n\n**Socio-economic crime-rate modeling · Python · Pandas · Scikit-learn**\n\n## Hero Overview\n\nA regression model forecasting regional crime rates from socio-economic indicators, with engineered interaction terms and PCA isolating the 6 variables driving regional fluctuation.\n\nOutputs were distilled into variable-level summaries to anchor socio-economic policy briefs on quantitative evidence.",
+  "hero": "# Crime Risk Modeling\n\n**Socio-economic crime-rate regression analysis · Python · Pandas · Scikit-learn**\n\n## Hero Overview\n\nA multivariate regression analysis explaining regional crime rates from socio-economic indicators, with engineered interaction terms and PCA isolating the 6 variables driving regional variation.\n\nModel fit (R²) and variable-level summaries were distilled into a policy-style interpretation that grounds socio-economic discussion in quantitative evidence.",
   "domain_colors": {
     "AI / ML": "#dd0077",
     "Integration": "#c98aa0",
@@ -29,52 +29,181 @@
     "size_metric": "implementation_strength",
     "color_metric": "domain",
     "points": [
-      { "system": "Data Analysis", "domain": "Data Engineering", "ownership": 9, "implementation_strength": 8.0, "complexity": 7.0, "impact": 7.0, "maturity": 7.0, "subsystems": ["10K+ crime records", "EDA correlations", "Socio-economic indicators"], "evidence": "Cleaned and ran EDA on 10K+ crime records, surfacing correlations across unemployment, education and income." },
-      { "system": "Feature Engineering", "domain": "Data Engineering", "ownership": 8, "implementation_strength": 8.0, "complexity": 7.5, "impact": 7.5, "maturity": 7.0, "subsystems": ["Log transformations", "2 interaction terms", "+10% accuracy lift"], "evidence": "Engineered log transforms and 2 interaction terms capturing financial-instability and education-disparity effects (+10% accuracy)." },
-      { "system": "Regression Modeling", "domain": "AI / ML", "ownership": 8, "implementation_strength": 7.5, "complexity": 7.5, "impact": 7.5, "maturity": 6.0, "subsystems": ["Multivariate Linear Regression", "~78% accuracy", "PCA → 6 key variables"], "evidence": "Multivariate Linear Regression forecasting regional crime at ~78% accuracy; PCA extracted 6 key driving variables." },
-      { "system": "Policy Insights", "domain": "Workflow / Ops", "ownership": 8, "implementation_strength": 7.0, "complexity": 6.0, "impact": 8.0, "maturity": 7.0, "subsystems": ["6-variable summaries", "Policy briefs", "Stakeholder evidence"], "evidence": "Distilled regression outputs into 6-variable summaries anchoring socio-economic policy briefs for state authorities." }
+      {
+        "system": "Data Analysis",
+        "domain": "Data Engineering",
+        "ownership": 9,
+        "implementation_strength": 8.0,
+        "complexity": 7.0,
+        "impact": 7.0,
+        "maturity": 7.0,
+        "subsystems": [
+          "10K+ crime records",
+          "EDA correlations",
+          "Socio-economic indicators"
+        ],
+        "evidence": "Cleaned and ran EDA on 10K+ crime records, surfacing correlations across unemployment, education and income."
+      },
+      {
+        "system": "Feature Engineering",
+        "domain": "Data Engineering",
+        "ownership": 8,
+        "implementation_strength": 8.0,
+        "complexity": 7.5,
+        "impact": 7.5,
+        "maturity": 7.0,
+        "subsystems": [
+          "Log transformations",
+          "2 interaction terms",
+          "+10% model fit"
+        ],
+        "evidence": "Engineered log transforms and 2 interaction terms capturing financial-instability and education-disparity effects (+10% model fit)."
+      },
+      {
+        "system": "Regression Modeling",
+        "domain": "AI / ML",
+        "ownership": 8,
+        "implementation_strength": 7.5,
+        "complexity": 7.5,
+        "impact": 7.5,
+        "maturity": 6.0,
+        "subsystems": [
+          "Multivariate Linear Regression",
+          "R² ≈ 0.78",
+          "PCA → 6 key variables"
+        ],
+        "evidence": "Multivariate Linear Regression explaining regional crime variation with R² ≈ 0.78; PCA extracted 6 key driving variables."
+      },
+      {
+        "system": "Policy Insights",
+        "domain": "Workflow / Ops",
+        "ownership": 8,
+        "implementation_strength": 7.0,
+        "complexity": 6.0,
+        "impact": 7.0,
+        "maturity": 7.0,
+        "subsystems": [
+          "6-variable summaries",
+          "Policy-style interpretation",
+          "Quantitative evidence"
+        ],
+        "evidence": "Distilled regression outputs into 6-variable summaries supporting a policy-style interpretation of socio-economic drivers."
+      }
     ]
   },
   "network_graph": {
     "title": "Technology Capability Network",
     "description": "Maps the project's core techniques to the tools used to implement them.",
     "nodes": [
-      { "id": "Data Analysis", "type": "system", "domain": "Data Engineering" },
-      { "id": "Feature Engineering", "type": "system", "domain": "Data Engineering" },
-      { "id": "Regression Modeling", "type": "system", "domain": "AI / ML" },
-      { "id": "Policy Insights", "type": "system", "domain": "Workflow / Ops" },
-
-      { "id": "Exploratory Analysis", "type": "concept", "domain": "Data Engineering" },
-      { "id": "Statistical Analysis", "type": "concept", "domain": "Data Engineering" },
-      { "id": "Regression", "type": "concept", "domain": "AI / ML" },
-      { "id": "Dimensionality Reduction", "type": "concept", "domain": "AI / ML" },
-      { "id": "Reporting", "type": "concept", "domain": "Workflow / Ops" },
-
-      { "id": "Python / Pandas", "type": "tool", "category": "Language" },
-      { "id": "NumPy", "type": "tool", "category": "Numerics" },
-      { "id": "Scikit-learn", "type": "tool", "category": "ML Library" }
+      {
+        "id": "Socioeconomic EDA",
+        "type": "system",
+        "domain": "Data Engineering"
+      },
+      {
+        "id": "Regression Model",
+        "type": "system",
+        "domain": "AI / ML"
+      },
+      {
+        "id": "Policy-Style Insights",
+        "type": "system",
+        "domain": "Workflow / Ops"
+      },
+      {
+        "id": "Feature Engineering",
+        "type": "concept",
+        "domain": "Data Engineering"
+      },
+      {
+        "id": "Regression Fit",
+        "type": "concept",
+        "domain": "AI / ML"
+      },
+      {
+        "id": "Dimensionality Reduction",
+        "type": "concept",
+        "domain": "AI / ML"
+      },
+      {
+        "id": "Python / Pandas",
+        "type": "tool",
+        "category": "Language"
+      },
+      {
+        "id": "NumPy / Scikit-learn",
+        "type": "tool",
+        "category": "ML Library"
+      },
+      {
+        "id": "PCA / Reporting",
+        "type": "tool",
+        "category": "Analysis"
+      }
     ],
     "edges": [
-      { "source": "Data Analysis", "target": "Exploratory Analysis", "weight": 3 },
-      { "source": "Feature Engineering", "target": "Statistical Analysis", "weight": 3 },
-      { "source": "Feature Engineering", "target": "Exploratory Analysis", "weight": 2 },
-      { "source": "Regression Modeling", "target": "Regression", "weight": 3 },
-      { "source": "Regression Modeling", "target": "Dimensionality Reduction", "weight": 3 },
-      { "source": "Policy Insights", "target": "Reporting", "weight": 3 },
-
-      { "source": "Exploratory Analysis", "target": "Python / Pandas", "weight": 3 },
-      { "source": "Exploratory Analysis", "target": "NumPy", "weight": 2 },
-      { "source": "Statistical Analysis", "target": "Python / Pandas", "weight": 2 },
-      { "source": "Regression", "target": "Scikit-learn", "weight": 3 },
-      { "source": "Dimensionality Reduction", "target": "Scikit-learn", "weight": 3 },
-      { "source": "Reporting", "target": "Python / Pandas", "weight": 2 }
+      {
+        "source": "Socioeconomic EDA",
+        "target": "Feature Engineering",
+        "weight": 3
+      },
+      {
+        "source": "Socioeconomic EDA",
+        "target": "Dimensionality Reduction",
+        "weight": 2
+      },
+      {
+        "source": "Regression Model",
+        "target": "Regression Fit",
+        "weight": 3
+      },
+      {
+        "source": "Regression Model",
+        "target": "Feature Engineering",
+        "weight": 2
+      },
+      {
+        "source": "Policy-Style Insights",
+        "target": "Regression Fit",
+        "weight": 3
+      },
+      {
+        "source": "Policy-Style Insights",
+        "target": "Dimensionality Reduction",
+        "weight": 2
+      },
+      {
+        "source": "Feature Engineering",
+        "target": "Python / Pandas",
+        "weight": 3
+      },
+      {
+        "source": "Feature Engineering",
+        "target": "NumPy / Scikit-learn",
+        "weight": 2
+      },
+      {
+        "source": "Regression Fit",
+        "target": "NumPy / Scikit-learn",
+        "weight": 3
+      },
+      {
+        "source": "Dimensionality Reduction",
+        "target": "PCA / Reporting",
+        "weight": 3
+      },
+      {
+        "source": "Dimensionality Reduction",
+        "target": "NumPy / Scikit-learn",
+        "weight": 2
+      }
     ]
   },
   "outcomes": {
     "Crime Records": "10K+",
-    "Model Accuracy": "~78%",
-    "Accuracy Lift": "+10%",
+    "Regression Fit (R²)": "~0.78",
+    "Fit Improvement": "+10%",
     "Key Variables (PCA)": "6"
   },
-  "storyline": "# Storyline\n\n## Context\n\nRegional crime patterns track socio-economic conditions, but policy conversations needed a defensible, quantitative link rather than anecdote.\n\n## Workflow\n\nEDA on socio-economic indicators → interaction-term feature engineering → regression modeling → PCA variable extraction → policy briefs.\n\n## Technical Implementation\n\n- **Analysis:** 10K+ crime records with Pandas/NumPy, correlating unemployment, education and income.\n- **Features:** log transforms and 2 interaction terms (+10% accuracy) capturing compound effects.\n- **Modeling:** Multivariate Linear Regression at ~78% accuracy; PCA isolated 6 key driving variables.\n\n## Outcomes\n\nDistilled outputs into 6-variable summaries state authorities could act on, anchoring socio-economic policy briefs on evidence."
+  "storyline": "# Storyline\n\n## Context\n\nRegional crime patterns track socio-economic conditions, but policy conversations needed a defensible, quantitative link rather than anecdote.\n\n## Workflow\n\nEDA on socio-economic indicators → interaction-term feature engineering → regression modeling → PCA variable extraction → policy-style interpretation.\n\n## Technical Implementation\n\n- **Analysis:** 10K+ crime records with Pandas/NumPy, correlating unemployment, education and income.\n- **Features:** log transforms and 2 interaction terms (+10% model fit) capturing compound effects.\n- **Modeling:** Multivariate Linear Regression with R² ≈ 0.78; PCA isolated 6 key driving variables.\n\n## Outcomes\n\nDistilled outputs into 6-variable summaries supporting a policy-style interpretation of socio-economic drivers, grounded in quantitative evidence."
 }

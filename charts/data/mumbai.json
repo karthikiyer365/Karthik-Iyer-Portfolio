@@ -42,7 +42,7 @@
         "subsystems": [
           "Scheduling Logic",
           "MongoDB Storage",
-          "AWS S3/IAM Setup"
+          "AWS S3/IAM concepts"
         ],
         "evidence": "Built a train scheduling project using database design and AWS storage/IAM concepts."
       },
@@ -127,42 +127,133 @@
     "title": "Computer Engineering Foundation Network",
     "description": "Maps undergraduate systems to engineering concepts and implementation tools.",
     "nodes": [
-      { "id": "Train Scheduling System", "type": "system", "domain": "Backend Engineering" },
-      { "id": "Social-Distancing Tracker", "type": "system", "domain": "AI / ML" },
-      { "id": "Database Coursework", "type": "system", "domain": "Data Engineering" },
-      { "id": "Web Development Foundation", "type": "system", "domain": "Backend Engineering" },
-      { "id": "NLP Foundations", "type": "system", "domain": "AI / ML" },
-      { "id": "Scheduling Logic", "type": "concept", "domain": "Backend Engineering" },
-      { "id": "Computer Vision", "type": "concept", "domain": "AI / ML" },
-      { "id": "Schema Design", "type": "concept", "domain": "Data Engineering" },
-      { "id": "Application Architecture", "type": "concept", "domain": "Backend Engineering" },
-      { "id": "Text Processing", "type": "concept", "domain": "AI / ML" },
-      { "id": "Cloud Storage", "type": "concept", "domain": "Cloud & Infra" },
-      { "id": "C++", "type": "tool", "category": "Language" },
-      { "id": "OpenCV", "type": "tool", "category": "Computer Vision" },
-      { "id": "MongoDB", "type": "tool", "category": "Database" },
-      { "id": "AWS S3", "type": "tool", "category": "Cloud Storage" },
-      { "id": "AWS IAM", "type": "tool", "category": "Cloud Access" },
-      { "id": "SQL", "type": "tool", "category": "Query Language" },
-      { "id": "Web Stack", "type": "tool", "category": "Application Development" }
+      {
+        "id": "Scheduling System",
+        "type": "system",
+        "domain": "Backend Engineering"
+      },
+      {
+        "id": "OpenCV Tracker",
+        "type": "system",
+        "domain": "AI / ML"
+      },
+      {
+        "id": "Database Coursework",
+        "type": "system",
+        "domain": "Data Engineering"
+      },
+      {
+        "id": "Engineering Foundation",
+        "type": "system",
+        "domain": "Workflow / Ops"
+      },
+      {
+        "id": "Database Design",
+        "type": "concept",
+        "domain": "Data Engineering"
+      },
+      {
+        "id": "Computer Vision",
+        "type": "concept",
+        "domain": "AI / ML"
+      },
+      {
+        "id": "Application Architecture",
+        "type": "concept",
+        "domain": "Backend Engineering"
+      },
+      {
+        "id": "Core CS",
+        "type": "concept",
+        "domain": "Workflow / Ops"
+      },
+      {
+        "id": "C++ / SQL",
+        "type": "tool",
+        "category": "Language"
+      },
+      {
+        "id": "MongoDB / AWS",
+        "type": "tool",
+        "category": "Database"
+      },
+      {
+        "id": "OpenCV",
+        "type": "tool",
+        "category": "Computer Vision"
+      },
+      {
+        "id": "Web Stack",
+        "type": "tool",
+        "category": "Application Development"
+      }
     ],
     "edges": [
-      { "source": "Train Scheduling System", "target": "Scheduling Logic", "weight": 3 },
-      { "source": "Train Scheduling System", "target": "Cloud Storage", "weight": 2 },
-      { "source": "Train Scheduling System", "target": "Schema Design", "weight": 2 },
-      { "source": "Social-Distancing Tracker", "target": "Computer Vision", "weight": 3 },
-      { "source": "Database Coursework", "target": "Schema Design", "weight": 3 },
-      { "source": "Web Development Foundation", "target": "Application Architecture", "weight": 3 },
-      { "source": "NLP Foundations", "target": "Text Processing", "weight": 3 },
-      { "source": "Scheduling Logic", "target": "C++", "weight": 2 },
-      { "source": "Scheduling Logic", "target": "MongoDB", "weight": 2 },
-      { "source": "Computer Vision", "target": "OpenCV", "weight": 3 },
-      { "source": "Schema Design", "target": "MongoDB", "weight": 3 },
-      { "source": "Schema Design", "target": "SQL", "weight": 2 },
-      { "source": "Application Architecture", "target": "Web Stack", "weight": 3 },
-      { "source": "Text Processing", "target": "C++", "weight": 1 },
-      { "source": "Cloud Storage", "target": "AWS S3", "weight": 3 },
-      { "source": "Cloud Storage", "target": "AWS IAM", "weight": 2 }
+      {
+        "source": "Scheduling System",
+        "target": "Database Design",
+        "weight": 3
+      },
+      {
+        "source": "Scheduling System",
+        "target": "Application Architecture",
+        "weight": 2
+      },
+      {
+        "source": "OpenCV Tracker",
+        "target": "Computer Vision",
+        "weight": 3
+      },
+      {
+        "source": "OpenCV Tracker",
+        "target": "Core CS",
+        "weight": 2
+      },
+      {
+        "source": "Database Coursework",
+        "target": "Database Design",
+        "weight": 3
+      },
+      {
+        "source": "Database Coursework",
+        "target": "Core CS",
+        "weight": 2
+      },
+      {
+        "source": "Engineering Foundation",
+        "target": "Application Architecture",
+        "weight": 3
+      },
+      {
+        "source": "Engineering Foundation",
+        "target": "Core CS",
+        "weight": 2
+      },
+      {
+        "source": "Database Design",
+        "target": "MongoDB / AWS",
+        "weight": 3
+      },
+      {
+        "source": "Database Design",
+        "target": "C++ / SQL",
+        "weight": 2
+      },
+      {
+        "source": "Computer Vision",
+        "target": "OpenCV",
+        "weight": 3
+      },
+      {
+        "source": "Application Architecture",
+        "target": "Web Stack",
+        "weight": 3
+      },
+      {
+        "source": "Core CS",
+        "target": "C++ / SQL",
+        "weight": 3
+      }
     ]
   },
   "outcomes": {

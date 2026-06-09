@@ -104,7 +104,11 @@ _PACK_TEMPLATE = """
 <svg id="pack-svg" style="display:block;width:100%;height:500px" viewBox="0 0 500 500" preserveAspectRatio="xMidYMid meet"></svg>
 <script src="https://cdn.jsdelivr.net/npm/d3@7/dist/d3.min.js"></script>
 <script>
-(function(){
+(function start(){
+  // Wait until d3 (loaded from the CDN <script> above) is available.
+  // On remounted srcdoc iframes the external script can resolve after this
+  // inline script first runs, so poll instead of assuming d3 is ready.
+  if (typeof d3 === "undefined") { return setTimeout(start, 30); }
   var DATA=__DATA__, W=500, H=500;
   var svg=d3.select("#pack-svg");
   var root=d3.hierarchy(DATA).sum(function(d){return d.val||0;}).sort(function(a,b){return b.value-a.value;});
@@ -174,7 +178,11 @@ _NETWORK_TEMPLATE = """
 </div>
 <script src="https://cdn.jsdelivr.net/npm/d3@7/dist/d3.min.js"></script>
 <script>
-(function(){
+(function start(){
+  // Wait until d3 (loaded from the CDN <script> above) is available.
+  // On remounted srcdoc iframes the external script can resolve after this
+  // inline script first runs, so poll instead of assuming d3 is ready.
+  if (typeof d3 === "undefined") { return setTimeout(start, 30); }
   var NODES=__NODES__, EDGES=__EDGES__;
   var svg=d3.select("#net-svg"), tip=d3.select("#net-tip"), wrap=document.getElementById("net-wrap");
   var pos={}; NODES.forEach(function(n){ pos[n.id]=n; });

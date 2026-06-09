@@ -127,47 +127,148 @@
     "title": "Financial Analytics Capability Network",
     "description": "Maps financial analytics systems to reporting concepts and analysis tools.",
     "nodes": [
-      { "id": "CRM Reconciliation", "type": "system", "domain": "Workflow / Ops" },
-      { "id": "Client BI Dashboards", "type": "system", "domain": "Data Engineering" },
-      { "id": "Data Consolidation", "type": "system", "domain": "Data Engineering" },
-      { "id": "Inventory Optimization", "type": "system", "domain": "Workflow / Ops" },
-      { "id": "Audit Support Analytics", "type": "system", "domain": "Workflow / Ops" },
-      { "id": "Financial Reporting", "type": "concept", "domain": "Data Engineering" },
-      { "id": "Risk Segmentation", "type": "concept", "domain": "Workflow / Ops" },
-      { "id": "ETL Normalization", "type": "concept", "domain": "Data Engineering" },
-      { "id": "Dashboard Design", "type": "concept", "domain": "Data Engineering" },
-      { "id": "Forecasting", "type": "concept", "domain": "AI / ML" },
-      { "id": "Operational Review", "type": "concept", "domain": "Workflow / Ops" },
-      { "id": "SQL", "type": "tool", "category": "Query Language" },
-      { "id": "Python", "type": "tool", "category": "Language" },
-      { "id": "Tableau", "type": "tool", "category": "BI Platform" },
-      { "id": "Power BI", "type": "tool", "category": "BI Platform" },
-      { "id": "Excel", "type": "tool", "category": "Spreadsheet Modeling" },
-      { "id": "CRM Data", "type": "tool", "category": "Business Data Source" }
+      {
+        "id": "CRM Risk Review",
+        "type": "system",
+        "domain": "Workflow / Ops"
+      },
+      {
+        "id": "Client Dashboarding",
+        "type": "system",
+        "domain": "Data Engineering"
+      },
+      {
+        "id": "Data Consolidation",
+        "type": "system",
+        "domain": "Data Engineering"
+      },
+      {
+        "id": "Financial Ops Support",
+        "type": "system",
+        "domain": "Workflow / Ops"
+      },
+      {
+        "id": "Risk Segmentation",
+        "type": "concept",
+        "domain": "Workflow / Ops"
+      },
+      {
+        "id": "ETL Normalization",
+        "type": "concept",
+        "domain": "Data Engineering"
+      },
+      {
+        "id": "Forecasting",
+        "type": "concept",
+        "domain": "AI / ML"
+      },
+      {
+        "id": "Audit Support",
+        "type": "concept",
+        "domain": "Workflow / Ops"
+      },
+      {
+        "id": "SQL / Python",
+        "type": "tool",
+        "category": "Language"
+      },
+      {
+        "id": "Power BI / Tableau",
+        "type": "tool",
+        "category": "BI Platform"
+      },
+      {
+        "id": "Excel",
+        "type": "tool",
+        "category": "Spreadsheet"
+      },
+      {
+        "id": "CRM Data",
+        "type": "tool",
+        "category": "Business Data Source"
+      }
     ],
     "edges": [
-      { "source": "CRM Reconciliation", "target": "Risk Segmentation", "weight": 3 },
-      { "source": "CRM Reconciliation", "target": "Operational Review", "weight": 2 },
-      { "source": "Client BI Dashboards", "target": "Dashboard Design", "weight": 3 },
-      { "source": "Client BI Dashboards", "target": "Financial Reporting", "weight": 3 },
-      { "source": "Data Consolidation", "target": "ETL Normalization", "weight": 3 },
-      { "source": "Data Consolidation", "target": "Financial Reporting", "weight": 2 },
-      { "source": "Inventory Optimization", "target": "Forecasting", "weight": 2 },
-      { "source": "Inventory Optimization", "target": "Operational Review", "weight": 3 },
-      { "source": "Audit Support Analytics", "target": "Risk Segmentation", "weight": 2 },
-      { "source": "Audit Support Analytics", "target": "Financial Reporting", "weight": 3 },
-      { "source": "Financial Reporting", "target": "Excel", "weight": 3 },
-      { "source": "Financial Reporting", "target": "SQL", "weight": 2 },
-      { "source": "Risk Segmentation", "target": "CRM Data", "weight": 3 },
-      { "source": "Risk Segmentation", "target": "SQL", "weight": 2 },
-      { "source": "ETL Normalization", "target": "Python", "weight": 3 },
-      { "source": "ETL Normalization", "target": "SQL", "weight": 3 },
-      { "source": "Dashboard Design", "target": "Tableau", "weight": 3 },
-      { "source": "Dashboard Design", "target": "Power BI", "weight": 3 },
-      { "source": "Forecasting", "target": "Excel", "weight": 2 },
-      { "source": "Forecasting", "target": "Python", "weight": 2 },
-      { "source": "Operational Review", "target": "Excel", "weight": 2 },
-      { "source": "Operational Review", "target": "CRM Data", "weight": 2 }
+      {
+        "source": "CRM Risk Review",
+        "target": "Risk Segmentation",
+        "weight": 3
+      },
+      {
+        "source": "CRM Risk Review",
+        "target": "Audit Support",
+        "weight": 2
+      },
+      {
+        "source": "Client Dashboarding",
+        "target": "Forecasting",
+        "weight": 3
+      },
+      {
+        "source": "Client Dashboarding",
+        "target": "Audit Support",
+        "weight": 2
+      },
+      {
+        "source": "Data Consolidation",
+        "target": "ETL Normalization",
+        "weight": 3
+      },
+      {
+        "source": "Data Consolidation",
+        "target": "Risk Segmentation",
+        "weight": 2
+      },
+      {
+        "source": "Financial Ops Support",
+        "target": "Forecasting",
+        "weight": 3
+      },
+      {
+        "source": "Financial Ops Support",
+        "target": "Audit Support",
+        "weight": 2
+      },
+      {
+        "source": "Risk Segmentation",
+        "target": "CRM Data",
+        "weight": 3
+      },
+      {
+        "source": "Risk Segmentation",
+        "target": "SQL / Python",
+        "weight": 2
+      },
+      {
+        "source": "ETL Normalization",
+        "target": "SQL / Python",
+        "weight": 3
+      },
+      {
+        "source": "ETL Normalization",
+        "target": "Excel",
+        "weight": 2
+      },
+      {
+        "source": "Forecasting",
+        "target": "Excel",
+        "weight": 3
+      },
+      {
+        "source": "Forecasting",
+        "target": "Power BI / Tableau",
+        "weight": 2
+      },
+      {
+        "source": "Audit Support",
+        "target": "Power BI / Tableau",
+        "weight": 3
+      },
+      {
+        "source": "Audit Support",
+        "target": "CRM Data",
+        "weight": 2
+      }
     ]
   },
   "outcomes": {
@@ -175,7 +276,7 @@
     "BI Dashboards Built": "10+",
     "Client Report Workflows": "3+",
     "Consolidation Pipelines": "5+",
-    "Primary Stack": "SQL · Python · Tableau · Excel"
+    "Primary Stack": "SQL · Python · Power BI · Tableau · Excel"
   },
   "storyline": "# Storyline\n\n## Context\n\nDPSY & Associates required financial reporting workflows that could turn fragmented account, CRM, inventory, and client data into cleaner review outputs.\n\n## Workflow\n\nThe work moved from source review and data consolidation into segmentation, dashboarding, forecasting, and recurring report preparation. CRM reconciliation separated routine records from higher-risk cases, while BI dashboards made client-facing reporting easier to scan.\n\n## Technical Implementation\n\n- **CRM reconciliation:** filtered routine account records and surfaced higher-risk cases through segmentation logic.\n- **Dashboarding:** built Tableau and Power BI reporting surfaces for recurring client metrics.\n- **Data consolidation:** created 5+ ETL-style workflows to normalize source data and reduce drift across reports.\n- **Inventory analysis:** combined market research and stocking-level analysis to support operational recommendations.\n- **Financial modeling:** used SQL, Python, Excel, and forecasting workflows for recurring financial analysis.\n\n## Outcomes\n\nThe work improved reporting consistency, supported 10+ dashboard outputs, reduced routine review load through CRM filtering, and created cleaner data surfaces for client and audit support."
 }

@@ -30,46 +30,174 @@
     "size_metric": "implementation_strength",
     "color_metric": "domain",
     "points": [
-      { "system": "Data Analysis", "domain": "Data Engineering", "ownership": 9, "implementation_strength": 8.0, "complexity": 7.0, "impact": 7.5, "maturity": 7.0, "subsystems": ["2.5M+ app records", "Category-level slices", "Pandas / NumPy / SQL"], "evidence": "Analyzed 2.5M+ Play Store app records with Python and SQL, structuring category-level slices for performance analysis." },
-      { "system": "Feature Engineering", "domain": "Data Engineering", "ownership": 8, "implementation_strength": 8.0, "complexity": 7.5, "impact": 7.5, "maturity": 7.0, "subsystems": ["Chi-square testing", "10+ attributes", "Market-fit KPIs"], "evidence": "Conducted chi-square feature engineering across 10+ attributes (size, gamification, utility) to surface market-fit KPIs." },
-      { "system": "Trend Modeling", "domain": "AI / ML", "ownership": 8, "implementation_strength": 7.5, "complexity": 7.0, "impact": 7.0, "maturity": 6.0, "subsystems": ["Scikit-learn models", "Category growth trends", "Reproducible benchmarks"], "evidence": "Modeled app-performance and category growth with Scikit-learn, generating reproducible benchmarks for strategy." },
-      { "system": "Tableau Dashboards", "domain": "Workflow / Ops", "ownership": 8, "implementation_strength": 7.5, "complexity": 6.0, "impact": 8.0, "maturity": 7.0, "subsystems": ["3 dashboards", "Stakeholder views", "3 strategy recommendations"], "evidence": "Built 3 Tableau dashboards translating engagement signals into stakeholder-ready views and 3 strategy recommendations." }
+      {
+        "system": "Data Analysis",
+        "domain": "Data Engineering",
+        "ownership": 9,
+        "implementation_strength": 8.0,
+        "complexity": 7.0,
+        "impact": 7.5,
+        "maturity": 7.0,
+        "subsystems": [
+          "2.5M+ app records",
+          "Category-level slices",
+          "Pandas / NumPy / SQL"
+        ],
+        "evidence": "Analyzed 2.5M+ Play Store app records with Python and SQL, structuring category-level slices for performance analysis."
+      },
+      {
+        "system": "Feature Engineering",
+        "domain": "Data Engineering",
+        "ownership": 8,
+        "implementation_strength": 8.0,
+        "complexity": 7.5,
+        "impact": 7.5,
+        "maturity": 7.0,
+        "subsystems": [
+          "Chi-square testing",
+          "10+ attributes",
+          "Market-fit KPIs"
+        ],
+        "evidence": "Conducted chi-square feature engineering across 10+ attributes (size, gamification, utility) to surface market-fit KPIs."
+      },
+      {
+        "system": "Trend Modeling",
+        "domain": "AI / ML",
+        "ownership": 8,
+        "implementation_strength": 7.5,
+        "complexity": 7.0,
+        "impact": 7.0,
+        "maturity": 6.0,
+        "subsystems": [
+          "Scikit-learn models",
+          "Category growth trends",
+          "Reproducible benchmarks"
+        ],
+        "evidence": "Modeled app rating/install performance and category growth trends with Scikit-learn regression, generating reproducible benchmarks for strategy."
+      },
+      {
+        "system": "Tableau Dashboards",
+        "domain": "Workflow / Ops",
+        "ownership": 8,
+        "implementation_strength": 7.5,
+        "complexity": 6.0,
+        "impact": 8.0,
+        "maturity": 7.0,
+        "subsystems": [
+          "3 dashboards",
+          "Stakeholder views",
+          "3 strategy recommendations"
+        ],
+        "evidence": "Built 3 Tableau dashboards translating engagement signals into stakeholder-ready views and 3 strategy recommendations."
+      }
     ]
   },
   "network_graph": {
     "title": "Technology Capability Network",
     "description": "Maps the project's core techniques to the tools used to implement them.",
     "nodes": [
-      { "id": "Data Analysis", "type": "system", "domain": "Data Engineering" },
-      { "id": "Feature Engineering", "type": "system", "domain": "Data Engineering" },
-      { "id": "Trend Modeling", "type": "system", "domain": "AI / ML" },
-      { "id": "Tableau Dashboards", "type": "system", "domain": "Workflow / Ops" },
-
-      { "id": "Exploratory Analysis", "type": "concept", "domain": "Data Engineering" },
-      { "id": "Statistical Testing", "type": "concept", "domain": "Data Engineering" },
-      { "id": "Predictive Modeling", "type": "concept", "domain": "AI / ML" },
-      { "id": "Visualization", "type": "concept", "domain": "Workflow / Ops" },
-
-      { "id": "Python / Pandas", "type": "tool", "category": "Language" },
-      { "id": "NumPy", "type": "tool", "category": "Numerics" },
-      { "id": "SQL", "type": "tool", "category": "Query Language" },
-      { "id": "Scikit-learn", "type": "tool", "category": "ML Library" },
-      { "id": "Tableau", "type": "tool", "category": "BI" }
+      {
+        "id": "App Market Dataset",
+        "type": "system",
+        "domain": "Data Engineering"
+      },
+      {
+        "id": "Statistical Modeling",
+        "type": "system",
+        "domain": "AI / ML"
+      },
+      {
+        "id": "Tableau Insights",
+        "type": "system",
+        "domain": "Workflow / Ops"
+      },
+      {
+        "id": "Feature Testing",
+        "type": "concept",
+        "domain": "Data Engineering"
+      },
+      {
+        "id": "Predictive Trends",
+        "type": "concept",
+        "domain": "AI / ML"
+      },
+      {
+        "id": "Product Strategy",
+        "type": "concept",
+        "domain": "Workflow / Ops"
+      },
+      {
+        "id": "Python / SQL",
+        "type": "tool",
+        "category": "Language"
+      },
+      {
+        "id": "Scikit-learn",
+        "type": "tool",
+        "category": "ML Library"
+      },
+      {
+        "id": "Tableau",
+        "type": "tool",
+        "category": "BI"
+      }
     ],
     "edges": [
-      { "source": "Data Analysis", "target": "Exploratory Analysis", "weight": 3 },
-      { "source": "Feature Engineering", "target": "Statistical Testing", "weight": 3 },
-      { "source": "Feature Engineering", "target": "Exploratory Analysis", "weight": 2 },
-      { "source": "Trend Modeling", "target": "Predictive Modeling", "weight": 3 },
-      { "source": "Tableau Dashboards", "target": "Visualization", "weight": 3 },
-
-      { "source": "Exploratory Analysis", "target": "Python / Pandas", "weight": 3 },
-      { "source": "Exploratory Analysis", "target": "SQL", "weight": 2 },
-      { "source": "Exploratory Analysis", "target": "NumPy", "weight": 2 },
-      { "source": "Statistical Testing", "target": "Python / Pandas", "weight": 2 },
-      { "source": "Statistical Testing", "target": "Scikit-learn", "weight": 2 },
-      { "source": "Predictive Modeling", "target": "Scikit-learn", "weight": 3 },
-      { "source": "Visualization", "target": "Tableau", "weight": 3 }
+      {
+        "source": "App Market Dataset",
+        "target": "Feature Testing",
+        "weight": 3
+      },
+      {
+        "source": "App Market Dataset",
+        "target": "Predictive Trends",
+        "weight": 2
+      },
+      {
+        "source": "Statistical Modeling",
+        "target": "Predictive Trends",
+        "weight": 3
+      },
+      {
+        "source": "Statistical Modeling",
+        "target": "Feature Testing",
+        "weight": 2
+      },
+      {
+        "source": "Tableau Insights",
+        "target": "Product Strategy",
+        "weight": 3
+      },
+      {
+        "source": "Tableau Insights",
+        "target": "Predictive Trends",
+        "weight": 2
+      },
+      {
+        "source": "Feature Testing",
+        "target": "Python / SQL",
+        "weight": 3
+      },
+      {
+        "source": "Feature Testing",
+        "target": "Scikit-learn",
+        "weight": 2
+      },
+      {
+        "source": "Predictive Trends",
+        "target": "Scikit-learn",
+        "weight": 3
+      },
+      {
+        "source": "Predictive Trends",
+        "target": "Python / SQL",
+        "weight": 2
+      },
+      {
+        "source": "Product Strategy",
+        "target": "Tableau",
+        "weight": 3
+      }
     ]
   },
   "outcomes": {
@@ -78,5 +206,5 @@
     "Tableau Dashboards": "3",
     "Strategy Recommendations": "3"
   },
-  "storyline": "# Storyline\n\n## Context\n\nProduct and marketing teams needed to know which app attributes actually correlate with market fit across a noisy 2.5M-record store catalog.\n\n## Workflow\n\nCategory-level data slicing → chi-square feature engineering → trend modeling → Tableau dashboards → strategy recommendations.\n\n## Technical Implementation\n\n- **Analysis:** 2.5M+ records with Pandas/NumPy and SQL, structured into category slices.\n- **Features:** chi-square testing across 10+ attributes (size, gamification, utility) to rank market-fit KPIs.\n- **Modeling:** Scikit-learn trend models producing reproducible category-growth benchmarks.\n- **Dashboards:** 3 Tableau views translating signals for non-technical teams.\n\n## Outcomes\n\nTurned statistical signal into 3 development-strategy recommendations aligned to product-team decision questions."
+  "storyline": "# Storyline\n\n## Context\n\nProduct and marketing teams needed to know which app attributes actually correlate with market fit across a noisy 2.5M-record store catalog.\n\n## Workflow\n\nCategory-level data slicing → chi-square feature engineering → trend modeling → Tableau dashboards → strategy recommendations.\n\n## Technical Implementation\n\n- **Analysis:** 2.5M+ records with Pandas/NumPy and SQL, structured into category slices.\n- **Features:** chi-square testing across 10+ attributes (size, gamification, utility) to rank market-fit KPIs.\n- **Modeling:** Scikit-learn regression trend models on rating/install signals, producing reproducible category-growth benchmarks.\n- **Dashboards:** 3 Tableau views translating signals for non-technical teams.\n\n## Outcomes\n\nTurned statistical signal into 3 development-strategy recommendations aligned to product-team decision questions."
 }

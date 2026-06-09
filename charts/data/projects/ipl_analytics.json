@@ -2,11 +2,11 @@
   "output": "content/projects/IPL Analytics.ipynb",
   "meta": {
     "company": "Academic Project",
-    "role": "Sports ML · Match-Outcome Prediction",
+    "role": "Sports ML · Win-Probability Modeling",
     "duration": "2022",
     "location": "Python · Scikit-learn"
   },
-  "hero": "# IPL Analytics\n\n**T20 match-outcome prediction · Python · Pandas · Scikit-learn**\n\n## Hero Overview\n\nA phase-level analysis of T20 IPL matches (Powerplay, Middle, Death overs) feeding a 25+ feature classification model for match-outcome prediction.\n\nRandom Forest reached ~80.55% accuracy, with outputs framed as match-by-match outcome probabilities for cricket-domain audiences.",
+  "hero": "# IPL Analytics\n\n**Ball-by-ball T20 win-probability prediction · Python · Pandas · Scikit-learn**\n\n## Hero Overview\n\nA ball-by-ball win-probability predictor for T20 IPL matches: phase-level analysis (Powerplay, Middle, Death) and 25+ match-state features feed classification models that update win probability as the match unfolds.\n\nAn Elo-style rating layer tracks long-term team strength, giving live win-probability estimates a longer-horizon context.",
   "domain_colors": {
     "AI / ML": "#dd0077",
     "Integration": "#c98aa0",
@@ -29,52 +29,182 @@
     "size_metric": "implementation_strength",
     "color_metric": "domain",
     "points": [
-      { "system": "Phase-Level EDA", "domain": "Data Engineering", "ownership": 9, "implementation_strength": 8.0, "complexity": 7.0, "impact": 7.0, "maturity": 7.0, "subsystems": ["Powerplay / Middle / Death", "Scoring-dynamic patterns", "T20 research alignment"], "evidence": "Ran phase-level EDA on T20 IPL matches with Pandas, surfacing scoring-dynamic patterns aligned with public research." },
-      { "system": "Feature Engineering", "domain": "Data Engineering", "ownership": 8, "implementation_strength": 8.0, "complexity": 7.5, "impact": 7.5, "maturity": 7.0, "subsystems": ["25+ features", "Team / player / venue", "Match conditions"], "evidence": "Engineered 25+ features capturing team composition, player metrics, venue and match conditions." },
-      { "system": "Classification Models", "domain": "AI / ML", "ownership": 8, "implementation_strength": 7.5, "complexity": 7.5, "impact": 7.5, "maturity": 6.0, "subsystems": ["Random Forest", "Logistic Regression", "SVM"], "evidence": "Trained Random Forest, Logistic Regression and SVM; Random Forest reached ~80.55% accuracy on outcome prediction." },
-      { "system": "Outcome Insights", "domain": "Workflow / Ops", "ownership": 8, "implementation_strength": 7.0, "complexity": 6.0, "impact": 7.5, "maturity": 7.0, "subsystems": ["Match-by-match probabilities", "Phase scoring dynamics", "Domain-readable framing"], "evidence": "Translated model outputs into match-by-match outcome probabilities framed for cricket-domain audiences." }
+      {
+        "system": "Phase-Level EDA",
+        "domain": "Data Engineering",
+        "ownership": 9,
+        "implementation_strength": 8.0,
+        "complexity": 7.0,
+        "impact": 7.0,
+        "maturity": 7.0,
+        "subsystems": [
+          "Powerplay / Middle / Death",
+          "Scoring-dynamic patterns",
+          "T20 research alignment"
+        ],
+        "evidence": "Ran phase-level EDA on T20 IPL matches with Pandas, surfacing scoring-dynamic patterns aligned with public research."
+      },
+      {
+        "system": "Ball-by-Ball Features",
+        "domain": "Data Engineering",
+        "ownership": 8,
+        "implementation_strength": 8.0,
+        "complexity": 7.5,
+        "impact": 7.5,
+        "maturity": 7.0,
+        "subsystems": [
+          "25+ match-state features",
+          "Overs / wickets / run-rate",
+          "Team / player / venue"
+        ],
+        "evidence": "Engineered 25+ ball-by-ball match-state features (overs, wickets, run-rate, required-rate) across team, player, venue and conditions."
+      },
+      {
+        "system": "Win Probability Model",
+        "domain": "AI / ML",
+        "ownership": 8,
+        "implementation_strength": 7.5,
+        "complexity": 7.5,
+        "impact": 7.5,
+        "maturity": 6.0,
+        "subsystems": [
+          "Random Forest / LogReg / SVM",
+          "Live win-prob updates",
+          "~80% best model"
+        ],
+        "evidence": "Trained Random Forest, Logistic Regression and SVM to predict ball-by-ball win probability; Random Forest best at ~80%, surfaced as live win-probability updates."
+      },
+      {
+        "system": "Elo-Style Ratings",
+        "domain": "AI / ML",
+        "ownership": 8,
+        "implementation_strength": 7.0,
+        "complexity": 6.5,
+        "impact": 7.0,
+        "maturity": 6.0,
+        "subsystems": [
+          "Elo-style team ratings",
+          "Long-term strength tracking",
+          "Win-prob context"
+        ],
+        "evidence": "Layered an Elo-style rating system tracking long-term team strength to contextualize match-state win-probability estimates."
+      }
     ]
   },
   "network_graph": {
     "title": "Technology Capability Network",
     "description": "Maps the project's core techniques to the tools used to implement them.",
     "nodes": [
-      { "id": "Phase-Level EDA", "type": "system", "domain": "Data Engineering" },
-      { "id": "Feature Engineering", "type": "system", "domain": "Data Engineering" },
-      { "id": "Classification Models", "type": "system", "domain": "AI / ML" },
-      { "id": "Outcome Insights", "type": "system", "domain": "Workflow / Ops" },
-
-      { "id": "Exploratory Analysis", "type": "concept", "domain": "Data Engineering" },
-      { "id": "Statistical Analysis", "type": "concept", "domain": "Data Engineering" },
-      { "id": "Classification", "type": "concept", "domain": "AI / ML" },
-      { "id": "Model Selection", "type": "concept", "domain": "AI / ML" },
-      { "id": "Reporting", "type": "concept", "domain": "Workflow / Ops" },
-
-      { "id": "Python / Pandas", "type": "tool", "category": "Language" },
-      { "id": "NumPy", "type": "tool", "category": "Numerics" },
-      { "id": "Scikit-learn", "type": "tool", "category": "ML Library" }
+      {
+        "id": "Ball-by-Ball Features",
+        "type": "system",
+        "domain": "Data Engineering"
+      },
+      {
+        "id": "Win Probability Model",
+        "type": "system",
+        "domain": "AI / ML"
+      },
+      {
+        "id": "Elo-Style Ratings",
+        "type": "system",
+        "domain": "AI / ML"
+      },
+      {
+        "id": "Match State Modeling",
+        "type": "concept",
+        "domain": "Data Engineering"
+      },
+      {
+        "id": "Model Selection",
+        "type": "concept",
+        "domain": "AI / ML"
+      },
+      {
+        "id": "Team Strength Tracking",
+        "type": "concept",
+        "domain": "AI / ML"
+      },
+      {
+        "id": "Python / Pandas",
+        "type": "tool",
+        "category": "Language"
+      },
+      {
+        "id": "Scikit-learn",
+        "type": "tool",
+        "category": "ML Library"
+      },
+      {
+        "id": "Cricket Data",
+        "type": "tool",
+        "category": "Sports Data"
+      }
     ],
     "edges": [
-      { "source": "Phase-Level EDA", "target": "Exploratory Analysis", "weight": 3 },
-      { "source": "Feature Engineering", "target": "Statistical Analysis", "weight": 3 },
-      { "source": "Feature Engineering", "target": "Exploratory Analysis", "weight": 2 },
-      { "source": "Classification Models", "target": "Classification", "weight": 3 },
-      { "source": "Classification Models", "target": "Model Selection", "weight": 3 },
-      { "source": "Outcome Insights", "target": "Reporting", "weight": 3 },
-
-      { "source": "Exploratory Analysis", "target": "Python / Pandas", "weight": 3 },
-      { "source": "Exploratory Analysis", "target": "NumPy", "weight": 2 },
-      { "source": "Statistical Analysis", "target": "Python / Pandas", "weight": 2 },
-      { "source": "Classification", "target": "Scikit-learn", "weight": 3 },
-      { "source": "Model Selection", "target": "Scikit-learn", "weight": 3 },
-      { "source": "Reporting", "target": "Python / Pandas", "weight": 2 }
+      {
+        "source": "Ball-by-Ball Features",
+        "target": "Match State Modeling",
+        "weight": 3
+      },
+      {
+        "source": "Ball-by-Ball Features",
+        "target": "Model Selection",
+        "weight": 2
+      },
+      {
+        "source": "Win Probability Model",
+        "target": "Match State Modeling",
+        "weight": 3
+      },
+      {
+        "source": "Win Probability Model",
+        "target": "Model Selection",
+        "weight": 2
+      },
+      {
+        "source": "Elo-Style Ratings",
+        "target": "Team Strength Tracking",
+        "weight": 3
+      },
+      {
+        "source": "Elo-Style Ratings",
+        "target": "Match State Modeling",
+        "weight": 2
+      },
+      {
+        "source": "Match State Modeling",
+        "target": "Python / Pandas",
+        "weight": 3
+      },
+      {
+        "source": "Match State Modeling",
+        "target": "Cricket Data",
+        "weight": 2
+      },
+      {
+        "source": "Model Selection",
+        "target": "Scikit-learn",
+        "weight": 3
+      },
+      {
+        "source": "Team Strength Tracking",
+        "target": "Python / Pandas",
+        "weight": 3
+      },
+      {
+        "source": "Team Strength Tracking",
+        "target": "Cricket Data",
+        "weight": 2
+      }
     ]
   },
   "outcomes": {
-    "Engineered Features": "25+",
-    "Best Model Accuracy": "~80.55%",
-    "Match Phases": "3",
-    "Models Compared": "3"
+    "Win Probability Model": "~80% best",
+    "Ball-by-Ball Features": "25+",
+    "Elo-Style Ratings": "Team strength layer",
+    "Models Compared": "3",
+    "Match Phases": "3"
   },
-  "storyline": "# Storyline\n\n## Context\n\nT20 match outcomes hinge on phase-specific dynamics (Powerplay, Middle, Death) that flat match-level stats miss.\n\n## Workflow\n\nPhase-level EDA → feature engineering → multi-model classification → match-by-match outcome probabilities.\n\n## Technical Implementation\n\n- **EDA:** phase-level analysis with Pandas, surfacing scoring patterns consistent with public T20 research.\n- **Features:** 25+ features across team composition, player metrics, venue and conditions.\n- **Modeling:** Random Forest, Logistic Regression and SVM; Random Forest best at ~80.55% accuracy.\n\n## Outcomes\n\nTranslated outputs into match-by-match outcome probabilities framed for cricket-domain audiences against tactical decisions."
+  "storyline": "# Storyline\n\n## Context\n\nT20 match outcomes shift ball by ball with match state (overs, wickets, run-rate); flat match-level stats miss this in-game movement.\n\n## Workflow\n\nPhase-level EDA → ball-by-ball match-state feature engineering → win-probability classification → Elo-style team-rating layer.\n\n## Technical Implementation\n\n- **EDA:** phase-level analysis (Powerplay/Middle/Death) with Pandas, surfacing scoring patterns consistent with public T20 research.\n- **Features:** 25+ ball-by-ball match-state features across team composition, player metrics, venue and conditions.\n- **Win-probability modeling:** Random Forest, Logistic Regression and SVM predicting win probability; Random Forest best at ~80%.\n- **Elo-style ratings:** a long-term team-strength layer contextualizing live win-probability estimates.\n\n## Outcomes\n\nProduced ball-by-ball win-probability estimates with an Elo-style long-term rating layer, framed for cricket-domain audiences."
 }
