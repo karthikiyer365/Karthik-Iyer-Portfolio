@@ -86,14 +86,15 @@ export default function SettingsSidebar() {
         ))}
       </div>
 
-      {/* résumé download (decorative, pink) */}
-      <button
-        type="button"
-        className="mt-2 flex items-center gap-2 px-3 py-2 rounded border border-accent-pink bg-transparent hover:bg-accent-pink/30 active:bg-accent-pink/40 text-body text-ink text-left transition-colors"
+      {/* résumé download (pink) */}
+      <a
+        href="/Karthik-Iyer-Resume.pdf"
+        download="Karthik Iyer - Resume.pdf"
+        className="group mt-2 flex items-center gap-2 px-3 py-2 rounded border border-accent-pink bg-transparent hover:bg-accent-pink/30 hover:text-accent-pink active:bg-accent-pink/40 text-body text-ink text-left transition-colors"
       >
         <Download className="w-4 h-4 text-accent-pink" />
         Download résumé (PDF)
-      </button>
+      </a>
     </div>
   );
 }
