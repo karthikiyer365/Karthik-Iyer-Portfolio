@@ -40,6 +40,29 @@ function ActionButton({ icon, label, disabled, onClick }: ActionButtonProps) {
   );
 }
 
+const RECENT_EXPERIENCE: { title: string; path: string; file: string }[] = [
+  {
+    title: "Data Systems Engineer",
+    path: "~/restorefast/ai-dev",
+    file: "portfolio/experiences/AI & Data Engineer - RestoreFast.ipynb",
+  },
+  {
+    title: "Technical Systems Assistant",
+    path: "~/gwu/it",
+    file: "portfolio/experiences/Technical Systems Admin - GWU.ipynb",
+  },
+  {
+    title: "M.Sc Data Analytics",
+    path: "~/gwu/seas/data-analytics",
+    file: "portfolio/education/MSc Data Analytics - GWU.ipynb",
+  },
+  {
+    title: "Data Analyst",
+    path: "~/dpsy/financial-data-analysis",
+    file: "portfolio/experiences/Financial Analyst - DPSY & Associates.ipynb",
+  },
+];
+
 function collectFiles(nodes: FileNode[]): string[] {
   const files: string[] = [];
   for (const node of nodes) {
@@ -113,38 +136,20 @@ export default function LandingPage({ onNavigate }: LandingPageProps) {
               RECENT EXPERIENCE
             </div>
             <ul className="mt-3 space-y-1 text-[13px] text-[#a3a3a3]">
-              <li className="flex gap-2 justify-between">
-                <span className="text-white font-mono font-semibold text-left">
-                  Data Systems Engineer
-                </span>
-                <span className="text-[#444444] font-mono text-right">
-                  ~/restorefast/ai-dev
-                </span>
-              </li>
-              <li className="flex gap-2 justify-between">
-                <span className="text-white font-mono font-semibold text-left">
-                  Technical Systems Assistant
-                </span>
-                <span className="text-[#444444] font-mono text-right">
-                  ~/gwu/it
-                </span>
-              </li>
-              <li className="flex gap-2 justify-between">
-                <span className="text-white font-mono font-semibold text-left">
-                  M.Sc Data Analytics
-                </span>
-                <span className="text-[#444444] font-mono text-right">
-                  ~/gwu/seas/data-analytics
-                </span>
-              </li>
-              <li className="flex gap-2 justify-between">
-              <span className="text-white font-mono font-semibold text-left">
-                  Data Analyst
-                </span>
-                <span className="text-[#444444] font-mono text-right">
-                  ~/dpsy/financial-data-analysis
-                </span>
-              </li>
+              {RECENT_EXPERIENCE.map((exp) => (
+                <li key={exp.file} className="flex gap-2 justify-between">
+                  <button
+                    type="button"
+                    onClick={() => onNavigate?.(exp.file)}
+                    className="text-white font-mono font-semibold text-left hover:text-accent-teal transition-colors cursor-pointer"
+                  >
+                    {exp.title}
+                  </button>
+                  <span className="text-[#444444] font-mono text-right">
+                    {exp.path}
+                  </span>
+                </li>
+              ))}
             </ul>
           </div>
         </div>

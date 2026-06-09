@@ -16,8 +16,17 @@ export default function TopBar({ onClose }: TopBarProps) {
     openFile(SETTINGS_PATH, SETTINGS_LABEL);
   };
 
+  const toggleFullscreen = () => {
+    if (typeof document === "undefined") return;
+    if (!document.fullscreenElement) {
+      document.documentElement.requestFullscreen?.();
+    } else {
+      document.exitFullscreen?.();
+    }
+  };
+
   return (
-    <div className="flex items-center justify-between h-9 px-3 bg-titlebar border-b border-line-subtle select-none shrink-0">
+    <div className="flex items-center justify-between h-10 px-3 bg-titlebar border-b border-line-subtle select-none shrink-0">
       {/* Left - Window Controls */}
       <div className="flex items-center gap-2">
         <button
@@ -27,11 +36,14 @@ export default function TopBar({ onClose }: TopBarProps) {
           onClick={onClose}
           className="w-3 h-3 rounded-full bg-[#ff5f57] hover:brightness-90 cursor-pointer"
         />
-      <div className="w-3 h-3 rounded-full bg-[#febc2e] hover:brightness-90 cursor-pointer" />
-      <div className="w-3 h-3 rounded-full bg-[#28c840] hover:brightness-90 cursor-pointer">
-        <button 
-          type="button" className="w-3 h-3 rounded-full bg-[#28c840] hover:brightness-90 cursor-pointer" />
-        </div>
+        <div className="w-3 h-3 rounded-full bg-[#febc2e] hover:brightness-90 cursor-pointer" />
+        <button
+          type="button"
+          aria-label="Toggle fullscreen"
+          title="Toggle fullscreen"
+          onClick={toggleFullscreen}
+          className="w-3 h-3 rounded-full bg-[#28c840] hover:brightness-90 cursor-pointer"
+        />
       </div>
 
       {/* Center - Repository Name */}
@@ -47,7 +59,7 @@ export default function TopBar({ onClose }: TopBarProps) {
           title="Search"
         >
           <svg
-            className="w-4 h-4"
+            className="w-[18px] h-[18px]"
             fill="none"
             stroke="currentColor"
             viewBox="0 0 24 24"
@@ -67,7 +79,7 @@ export default function TopBar({ onClose }: TopBarProps) {
           title="Split View"
         >
           <svg
-            className="w-4 h-4"
+            className="w-[18px] h-[18px]"
             fill="none"
             stroke="currentColor"
             viewBox="0 0 24 24"
@@ -85,11 +97,11 @@ export default function TopBar({ onClose }: TopBarProps) {
         <button
           type="button"
           onClick={openSettings}
-          className="p-1 text-ink-muted hover:text-ink-secondary transition-colors cursor-pointer"
+          className="p-1 text-accent-pink hover:brightness-110 transition-all cursor-pointer"
           title="Settings"
         >
           <svg
-            className="w-4 h-4"
+            className="w-[18px] h-[18px]"
             fill="none"
             stroke="currentColor"
             viewBox="0 0 24 24"
