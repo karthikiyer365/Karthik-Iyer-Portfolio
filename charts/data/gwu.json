@@ -1,0 +1,267 @@
+{
+  "output": "content/education/MSc Data Analytics - GWU.ipynb",
+  "meta": {
+    "company": "George Washington University",
+    "role": "MSc Data Analytics / Technical Assistant",
+    "duration": "2023 – 2025",
+    "location": "Washington, DC"
+  },
+  "hero": "# GWU · MSc Data Analytics / Technical Assistant\n\n**2023 – 2025 · Washington, DC**\n\n## Hero Overview\n\nA graduate analytics program spanning machine learning, data engineering, and sports analytics, delivered through end-to-end projects alongside teaching and technical-systems assistantship roles.\n\nThe work emphasized applied modeling, large-scale data processing, and multi-project delivery — pairing analytical depth with the project-management and operational exposure of concurrent assistantship work.",
+  "domain_colors": {
+    "AI / ML": "#dd0077",
+    "Integration": "#c98aa0",
+    "Backend Engineering": "#b8b8b8",
+    "Cloud & Infra": "#a8b8b0",
+    "Data Engineering": "#88c0b4",
+    "Workflow / Ops": "#4ec9b0"
+  },
+  "radar": {
+    "AI / ML": 8,
+    "Data Engineering": 8,
+    "Backend Engineering": 5,
+    "Systems Integration": 5,
+    "Workflow / Product": 5,
+    "Cloud & Infra": 4,
+    "Operations / Automation": 6,
+    "Analytics / Insights": 9
+  },
+  "bubble_chart": {
+    "x_axis": "system",
+    "y_axis": "ownership",
+    "size_metric": "implementation_strength",
+    "color_metric": "domain",
+    "points": [
+      {
+        "system": "Graduate Analytics",
+        "domain": "AI / ML",
+        "ownership": 8,
+        "implementation_strength": 8.2,
+        "complexity": 8.0,
+        "impact": 7.5,
+        "maturity": 7.0,
+        "subsystems": [
+          "ML & deep learning",
+          "Statistical modeling",
+          "Model validation"
+        ],
+        "evidence": "Coursework and projects across machine learning, deep learning, and statistical modeling, applied through end-to-end validation-driven pipelines."
+      },
+      {
+        "system": "Sports Analytics",
+        "domain": "AI / ML",
+        "ownership": 8,
+        "implementation_strength": 8.0,
+        "complexity": 7.6,
+        "impact": 7.4,
+        "maturity": 7.0,
+        "subsystems": [
+          "Player valuation",
+          "Cross-sport comparison",
+          "Dash/Plotly dashboards"
+        ],
+        "evidence": "Player-performance and valuation analytics over FIFA/NBA-style data with feature reduction and interactive dashboards."
+      },
+      {
+        "system": "Data Engineering",
+        "domain": "Data Engineering",
+        "ownership": 8,
+        "implementation_strength": 8.2,
+        "complexity": 8.0,
+        "impact": 7.5,
+        "maturity": 7.0,
+        "subsystems": [
+          "Distributed processing",
+          "ETL pipelines",
+          "Large-scale text data"
+        ],
+        "evidence": "Distributed data engineering over large-scale review datasets using Spark and Databricks workflows."
+      },
+      {
+        "system": "Project Management",
+        "domain": "Workflow / Ops",
+        "ownership": 8,
+        "implementation_strength": 7.4,
+        "complexity": 6.5,
+        "impact": 7.5,
+        "maturity": 7.0,
+        "subsystems": [
+          "Multi-project delivery",
+          "Scope & timelines",
+          "Stakeholder coordination"
+        ],
+        "evidence": "Coordinated delivery across multiple concurrent graduate analytics projects, balancing scope, timelines, and deliverables."
+      },
+      {
+        "system": "Assistantship Systems",
+        "domain": "Workflow / Ops",
+        "ownership": 7,
+        "implementation_strength": 7.2,
+        "complexity": 6.5,
+        "impact": 7.0,
+        "maturity": 7.0,
+        "subsystems": [
+          "Teaching assistance",
+          "LLM-assisted grading",
+          "Technical systems support"
+        ],
+        "evidence": "Teaching and technical-systems assistantship work, including LLM-assisted grading support and operational systems analysis."
+      }
+    ]
+  },
+  "network_graph": {
+    "title": "Academic Analytics Capability Network",
+    "description": "Maps graduate skill domains to modeling concepts and implementation tools.",
+    "nodes": [
+      {
+        "id": "Graduate Analytics Portfolio",
+        "type": "system",
+        "domain": "AI / ML"
+      },
+      {
+        "id": "Sports Analytics Work",
+        "type": "system",
+        "domain": "AI / ML"
+      },
+      {
+        "id": "Assistantship Systems",
+        "type": "system",
+        "domain": "Workflow / Ops"
+      },
+      {
+        "id": "Teaching Support",
+        "type": "system",
+        "domain": "Workflow / Ops"
+      },
+      {
+        "id": "ML Modeling",
+        "type": "concept",
+        "domain": "AI / ML"
+      },
+      {
+        "id": "Data Engineering",
+        "type": "concept",
+        "domain": "Data Engineering"
+      },
+      {
+        "id": "Project Management",
+        "type": "concept",
+        "domain": "Workflow / Ops"
+      },
+      {
+        "id": "Academic Operations",
+        "type": "concept",
+        "domain": "Workflow / Ops"
+      },
+      {
+        "id": "Python / SQL",
+        "type": "tool",
+        "category": "Language"
+      },
+      {
+        "id": "Spark / Databricks",
+        "type": "tool",
+        "category": "Big Data"
+      },
+      {
+        "id": "Scikit-learn / TensorFlow",
+        "type": "tool",
+        "category": "ML Library"
+      },
+      {
+        "id": "Dash / Plotly",
+        "type": "tool",
+        "category": "Visualization"
+      },
+      {
+        "id": "BMC Helix",
+        "type": "tool",
+        "category": "ITSM"
+      }
+    ],
+    "edges": [
+      {
+        "source": "Graduate Analytics Portfolio",
+        "target": "ML Modeling",
+        "weight": 3
+      },
+      {
+        "source": "Graduate Analytics Portfolio",
+        "target": "Data Engineering",
+        "weight": 2
+      },
+      {
+        "source": "Sports Analytics Work",
+        "target": "ML Modeling",
+        "weight": 3
+      },
+      {
+        "source": "Sports Analytics Work",
+        "target": "Project Management",
+        "weight": 2
+      },
+      {
+        "source": "Assistantship Systems",
+        "target": "Academic Operations",
+        "weight": 3
+      },
+      {
+        "source": "Assistantship Systems",
+        "target": "Data Engineering",
+        "weight": 2
+      },
+      {
+        "source": "Teaching Support",
+        "target": "Academic Operations",
+        "weight": 3
+      },
+      {
+        "source": "Teaching Support",
+        "target": "Project Management",
+        "weight": 2
+      },
+      {
+        "source": "ML Modeling",
+        "target": "Scikit-learn / TensorFlow",
+        "weight": 3
+      },
+      {
+        "source": "ML Modeling",
+        "target": "Dash / Plotly",
+        "weight": 2
+      },
+      {
+        "source": "Data Engineering",
+        "target": "Spark / Databricks",
+        "weight": 3
+      },
+      {
+        "source": "Data Engineering",
+        "target": "Python / SQL",
+        "weight": 2
+      },
+      {
+        "source": "Project Management",
+        "target": "BMC Helix",
+        "weight": 3
+      },
+      {
+        "source": "Academic Operations",
+        "target": "BMC Helix",
+        "weight": 3
+      },
+      {
+        "source": "Academic Operations",
+        "target": "Python / SQL",
+        "weight": 2
+      }
+    ]
+  },
+  "outcomes": {
+    "Graduate GPA": "3.68",
+    "Projects Delivered": "6+",
+    "Reviews Processed": "10M+",
+    "Assignments Supported": "400+",
+    "Player Records Modeled": "25K+"
+  },
+  "storyline": "# Storyline\n\n## Context\n\nGraduate study at GWU combined analytics coursework with applied project delivery and concurrent assistantship roles, spanning machine learning, data engineering, and sports analytics.\n\n## Workflow\n\nProjects moved from data collection and cleaning through feature engineering, modeling, validation, and visualization, while assistantship work added teaching support and technical-systems operations alongside the degree.\n\n## Technical Implementation\n\n- **Machine learning:** applied ML, deep learning, and statistical modeling across graduate projects with validation-driven workflows.\n- **Data engineering:** large-scale distributed processing with Spark and Databricks over multi-million-record datasets.\n- **Sports analytics:** player-valuation and comparison modeling with feature reduction and interactive Dash/Plotly dashboards.\n- **Project management:** coordinated scope, timelines, and deliverables across multiple concurrent projects.\n- **Assistantship exposure:** teaching assistance with LLM-assisted grading support and technical-systems/operational analysis.\n\n## Outcomes\n\nProduced a broad applied-analytics portfolio across ML, data engineering, and visualization, backed by graduate-scale delivery and hands-on assistantship experience during the degree."
+}

@@ -1,0 +1,252 @@
+{
+  "output": "content/experiences/Technical Systems Admin - GWU.ipynb",
+  "meta": {
+    "company": "George Washington University",
+    "role": "Technical Systems Admin / Software Support",
+    "duration": "August 2024 – May 2025",
+    "location": "Washington, DC, USA"
+  },
+  "hero": "# GWU · Technical Systems Admin / Software Support\n\n**August 2024 – May 2025 · Washington, DC, USA**\n\n## Hero Overview\n\nSupported GWU software and technical systems operations through inventory audits, demand forecasting, support-ticket analysis, and feedback dashboards across academic tools.\n\nThe role connected day-to-day software support with operational analytics: using BMC Helix, usage/sentiment signals, and ticket trends to improve resource allocation, procurement planning, and team response workflows.",
+  "domain_colors": {
+    "AI / ML": "#dd0077",
+    "Integration": "#c98aa0",
+    "Backend Engineering": "#b8b8b8",
+    "Cloud & Infra": "#a8b8b0",
+    "Data Engineering": "#88c0b4",
+    "Workflow / Ops": "#4ec9b0"
+  },
+  "radar": {
+    "Systems Support": 9,
+    "Inventory Analytics": 8,
+    "Demand Forecasting": 7,
+    "Dashboarding": 8,
+    "Ticket Analytics": 8,
+    "Workflow / Ops": 8,
+    "User Analytics": 8,
+    "Cross-Platform Support": 7
+  },
+  "bubble_chart": {
+    "x_axis": "system",
+    "y_axis": "ownership",
+    "size_metric": "implementation_strength",
+    "color_metric": "domain",
+    "points": [
+      {
+        "system": "Inventory Audit Workflow",
+        "domain": "Data Engineering",
+        "ownership": 8,
+        "implementation_strength": 8.0,
+        "complexity": 7.0,
+        "impact": 7.8,
+        "maturity": 7.5,
+        "subsystems": [
+          "BMC Helix Records",
+          "Resource Allocation",
+          "Procurement Signals"
+        ],
+        "evidence": "Conducted inventory audits and supported demand forecasting using BMC Helix for resource allocation and procurement."
+      },
+      {
+        "system": "Academic Tool Dashboards",
+        "domain": "Workflow / Ops",
+        "ownership": 8,
+        "implementation_strength": 8.2,
+        "complexity": 7.5,
+        "impact": 8.3,
+        "maturity": 7.5,
+        "subsystems": [
+          "Usage Tracking",
+          "Sentiment Signals",
+          "Feedback Reporting"
+        ],
+        "evidence": "Built feedback dashboards tracking usage and sentiment across 10+ academic tools."
+      },
+      {
+        "system": "Support Ticket Analytics",
+        "domain": "Data Engineering",
+        "ownership": 8,
+        "implementation_strength": 7.8,
+        "complexity": 7.4,
+        "impact": 8.2,
+        "maturity": 7.4,
+        "subsystems": [
+          "Ticket Trend Review",
+          "Bottleneck Detection",
+          "Resolution Signals"
+        ],
+        "evidence": "Analyzed support ticket trends and operational data to identify system bottlenecks and improve response workflows."
+      },
+      {
+        "system": "Cross-Platform Support Layer",
+        "domain": "Integration",
+        "ownership": 7,
+        "implementation_strength": 7.3,
+        "complexity": 7.0,
+        "impact": 7.5,
+        "maturity": 7.2,
+        "subsystems": [
+          "Mac Support",
+          "Linux Support",
+          "Windows Support"
+        ],
+        "evidence": "Supported academic tooling across Mac, Linux, and Windows environments."
+      },
+      {
+        "system": "Response Workflow Improvement",
+        "domain": "Workflow / Ops",
+        "ownership": 7,
+        "implementation_strength": 7.5,
+        "complexity": 6.8,
+        "impact": 8.0,
+        "maturity": 7.5,
+        "subsystems": [
+          "Issue Routing",
+          "Team Response",
+          "Operational Follow-Up"
+        ],
+        "evidence": "Support analytics improved team response and supported high-resolution issue workflows."
+      }
+    ]
+  },
+  "network_graph": {
+    "title": "GWU Technical Systems Support Network",
+    "description": "Operational analytics layer connecting inventory, academic tools, support tickets, and response workflows.",
+    "nodes": [
+      {
+        "id": "Inventory Analytics",
+        "type": "system",
+        "domain": "Data Engineering"
+      },
+      {
+        "id": "Academic Tool Dashboards",
+        "type": "system",
+        "domain": "Workflow / Ops"
+      },
+      {
+        "id": "Ticket Support Ops",
+        "type": "system",
+        "domain": "Data Engineering"
+      },
+      {
+        "id": "Cross-Platform Support",
+        "type": "system",
+        "domain": "Integration"
+      },
+      {
+        "id": "Demand Forecasting",
+        "type": "concept",
+        "domain": "Data Engineering"
+      },
+      {
+        "id": "Usage Feedback",
+        "type": "concept",
+        "domain": "Workflow / Ops"
+      },
+      {
+        "id": "Resolution Workflow",
+        "type": "concept",
+        "domain": "Workflow / Ops"
+      },
+      {
+        "id": "Platform Operations",
+        "type": "concept",
+        "domain": "Integration"
+      },
+      {
+        "id": "BMC Helix",
+        "type": "tool",
+        "category": "ITSM"
+      },
+      {
+        "id": "Dashboarding",
+        "type": "tool",
+        "category": "Reporting"
+      },
+      {
+        "id": "Ticket Data",
+        "type": "tool",
+        "category": "Operational Data"
+      },
+      {
+        "id": "Mac / Linux / Windows",
+        "type": "tool",
+        "category": "OS"
+      }
+    ],
+    "edges": [
+      {
+        "source": "Inventory Analytics",
+        "target": "Demand Forecasting",
+        "weight": 3
+      },
+      {
+        "source": "Inventory Analytics",
+        "target": "Platform Operations",
+        "weight": 2
+      },
+      {
+        "source": "Academic Tool Dashboards",
+        "target": "Usage Feedback",
+        "weight": 3
+      },
+      {
+        "source": "Academic Tool Dashboards",
+        "target": "Demand Forecasting",
+        "weight": 2
+      },
+      {
+        "source": "Ticket Support Ops",
+        "target": "Resolution Workflow",
+        "weight": 3
+      },
+      {
+        "source": "Ticket Support Ops",
+        "target": "Usage Feedback",
+        "weight": 2
+      },
+      {
+        "source": "Cross-Platform Support",
+        "target": "Platform Operations",
+        "weight": 3
+      },
+      {
+        "source": "Cross-Platform Support",
+        "target": "Resolution Workflow",
+        "weight": 2
+      },
+      {
+        "source": "Demand Forecasting",
+        "target": "BMC Helix",
+        "weight": 3
+      },
+      {
+        "source": "Usage Feedback",
+        "target": "Dashboarding",
+        "weight": 3
+      },
+      {
+        "source": "Resolution Workflow",
+        "target": "Ticket Data",
+        "weight": 3
+      },
+      {
+        "source": "Resolution Workflow",
+        "target": "BMC Helix",
+        "weight": 2
+      },
+      {
+        "source": "Platform Operations",
+        "target": "Mac / Linux / Windows",
+        "weight": 3
+      }
+    ]
+  },
+  "outcomes": {
+    "Academic Tools Tracked": "10+",
+    "Support Feedback": "Positive (survey-based)",
+    "Resolution Workflows": "High-resolution support",
+    "Core Platform": "BMC Helix",
+    "Supported OS Surface": "Mac / Linux / Windows"
+  },
+  "storyline": "# Storyline\n\n## Context\n\nGWU software support required visibility across inventory, academic tools, user feedback, and support-ticket operations. The team needed clearer signals for resource allocation, procurement, bottleneck detection, and response workflow improvement.\n\n## Workflow\n\nThe work moved from inventory audits and BMC Helix records into demand forecasting, dashboarding, support-ticket trend analysis, and team response improvement across Mac, Linux, and Windows environments.\n\n## Technical Implementation\n\n- **Inventory audits:** conducted resource audits and supported demand forecasting through BMC Helix.\n- **Feedback dashboards:** built dashboards tracking usage and sentiment across 10+ academic tools.\n- **Ticket analytics:** analyzed support-ticket trends and operational data to identify system bottlenecks.\n- **Cross-platform support:** supported software workflows across Mac, Linux, and Windows systems.\n- **Response workflow improvement:** connected operational analysis to team response workflows and resolution tracking.\n\n## Outcomes\n\nThe work improved the operational analytics layer for GWU software support, contributing to positive user feedback, high-resolution support workflows, and clearer resource-allocation and procurement signals."
+}

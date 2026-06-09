@@ -1,0 +1,267 @@
+{
+  "output": "content/experiences/SMO Lead - TechAnalogy.ipynb",
+  "meta": {
+    "company": "TechAnalogy",
+    "role": "Sales & Marketing Operations Lead",
+    "duration": "August 2021 – December 2021",
+    "location": "Mumbai, India"
+  },
+  "hero": "# TechAnalogy · Sales & Marketing Operations Lead\n\n**August 2021 – December 2021 · Mumbai, India**\n\n## Hero Overview\n\nLed sales and marketing operations across campaign analytics, cross-channel B2C/B2B strategy, account coordination, and market research for education-focused offerings.\n\nThe role combined SMO execution with data-informed campaign operations: tracking engagement, supporting B2B acquisition, testing marketing offers, and converting audience research into a pilot Robotics course launch.",
+  "domain_colors": {
+    "AI / ML": "#dd0077",
+    "Integration": "#c98aa0",
+    "Backend Engineering": "#b8b8b8",
+    "Cloud & Infra": "#a8b8b0",
+    "Data Engineering": "#88c0b4",
+    "Workflow / Ops": "#4ec9b0"
+  },
+  "radar": {
+    "Campaign Analytics": 8,
+    "SMO Strategy": 8,
+    "Sales Ops": 8,
+    "A/B Testing": 7,
+    "Market Research": 8,
+    "Stakeholder Reporting": 7,
+    "Account Coordination": 7,
+    "Workflow / Ops": 7
+  },
+  "bubble_chart": {
+    "x_axis": "system",
+    "y_axis": "ownership",
+    "size_metric": "implementation_strength",
+    "color_metric": "domain",
+    "points": [
+      {
+        "system": "Campaign Performance Analytics",
+        "domain": "Data Engineering",
+        "ownership": 8,
+        "implementation_strength": 8.0,
+        "complexity": 7.2,
+        "impact": 8.0,
+        "maturity": 7.0,
+        "subsystems": [
+          "Engagement Metrics",
+          "Campaign Review",
+          "B2B Acquisition Support"
+        ],
+        "evidence": "Analyzed campaign performance and engagement metrics to support 10+ new B2B acquisitions."
+      },
+      {
+        "system": "B2C + B2B Campaign Strategy",
+        "domain": "Workflow / Ops",
+        "ownership": 8,
+        "implementation_strength": 8.2,
+        "complexity": 7.5,
+        "impact": 8.5,
+        "maturity": 7.0,
+        "subsystems": [
+          "Cross-Channel Planning",
+          "Coordinated Execution",
+          "Registration Growth"
+        ],
+        "evidence": "Supported cross-channel campaign strategy that contributed to a roughly 20% increase in student registrations across the quarter (team-supported)."
+      },
+      {
+        "system": "Account Data Liaison",
+        "domain": "Integration",
+        "ownership": 8,
+        "implementation_strength": 7.5,
+        "complexity": 6.8,
+        "impact": 7.8,
+        "maturity": 7.0,
+        "subsystems": [
+          "4 Key Accounts",
+          "Sales-Marketing Coordination",
+          "Performance Updates"
+        ],
+        "evidence": "Served as primary data liaison across 4 key accounts for campaign and acquisition reporting."
+      },
+      {
+        "system": "Robotics Course Market Research",
+        "domain": "Workflow / Ops",
+        "ownership": 8,
+        "implementation_strength": 7.8,
+        "complexity": 7.0,
+        "impact": 8.0,
+        "maturity": 7.0,
+        "subsystems": [
+          "Social Engagement Research",
+          "Participant Demographics",
+          "Course Launch Signals"
+        ],
+        "evidence": "Ran market research supporting the pilot launch of a 3-domain Robotics course with a team-supported 100+ enrollments."
+      },
+      {
+        "system": "Offer A/B Testing Loop",
+        "domain": "Workflow / Ops",
+        "ownership": 7,
+        "implementation_strength": 7.2,
+        "complexity": 6.8,
+        "impact": 7.5,
+        "maturity": 6.8,
+        "subsystems": [
+          "Variant Testing",
+          "Lead Funnel Review",
+          "Conversion Lift"
+        ],
+        "evidence": "Ran A/B tests on marketing offers, contributing to a roughly 5% lift in recurring lead-funnel conversion (team-supported)."
+      }
+    ]
+  },
+  "network_graph": {
+    "title": "TechAnalogy Sales & Marketing Operations Network",
+    "description": "Campaign systems connected to SMO execution, account reporting, market research, and conversion testing.",
+    "nodes": [
+      {
+        "id": "Campaign Analytics",
+        "type": "system",
+        "domain": "Data Engineering"
+      },
+      {
+        "id": "Growth Ops",
+        "type": "system",
+        "domain": "Workflow / Ops"
+      },
+      {
+        "id": "Account Reporting",
+        "type": "system",
+        "domain": "Integration"
+      },
+      {
+        "id": "Course Research",
+        "type": "system",
+        "domain": "Workflow / Ops"
+      },
+      {
+        "id": "Cross-Channel SMO",
+        "type": "concept",
+        "domain": "Workflow / Ops"
+      },
+      {
+        "id": "Market Segmentation",
+        "type": "concept",
+        "domain": "Workflow / Ops"
+      },
+      {
+        "id": "Experimentation",
+        "type": "concept",
+        "domain": "Workflow / Ops"
+      },
+      {
+        "id": "Sales Ops",
+        "type": "concept",
+        "domain": "Integration"
+      },
+      {
+        "id": "Engagement Metrics",
+        "type": "tool",
+        "category": "Marketing Data"
+      },
+      {
+        "id": "Spreadsheets",
+        "type": "tool",
+        "category": "Analysis"
+      },
+      {
+        "id": "Social Media",
+        "type": "tool",
+        "category": "Channel"
+      },
+      {
+        "id": "A/B Tests",
+        "type": "tool",
+        "category": "Experimentation"
+      }
+    ],
+    "edges": [
+      {
+        "source": "Campaign Analytics",
+        "target": "Cross-Channel SMO",
+        "weight": 3
+      },
+      {
+        "source": "Campaign Analytics",
+        "target": "Experimentation",
+        "weight": 2
+      },
+      {
+        "source": "Growth Ops",
+        "target": "Sales Ops",
+        "weight": 3
+      },
+      {
+        "source": "Growth Ops",
+        "target": "Market Segmentation",
+        "weight": 2
+      },
+      {
+        "source": "Account Reporting",
+        "target": "Sales Ops",
+        "weight": 3
+      },
+      {
+        "source": "Account Reporting",
+        "target": "Cross-Channel SMO",
+        "weight": 2
+      },
+      {
+        "source": "Course Research",
+        "target": "Market Segmentation",
+        "weight": 3
+      },
+      {
+        "source": "Course Research",
+        "target": "Cross-Channel SMO",
+        "weight": 2
+      },
+      {
+        "source": "Cross-Channel SMO",
+        "target": "Social Media",
+        "weight": 3
+      },
+      {
+        "source": "Cross-Channel SMO",
+        "target": "Engagement Metrics",
+        "weight": 2
+      },
+      {
+        "source": "Market Segmentation",
+        "target": "Social Media",
+        "weight": 3
+      },
+      {
+        "source": "Market Segmentation",
+        "target": "Spreadsheets",
+        "weight": 2
+      },
+      {
+        "source": "Experimentation",
+        "target": "A/B Tests",
+        "weight": 3
+      },
+      {
+        "source": "Experimentation",
+        "target": "Engagement Metrics",
+        "weight": 2
+      },
+      {
+        "source": "Sales Ops",
+        "target": "Spreadsheets",
+        "weight": 3
+      },
+      {
+        "source": "Sales Ops",
+        "target": "Engagement Metrics",
+        "weight": 2
+      }
+    ]
+  },
+  "outcomes": {
+    "B2B Acquisition Support": "10+",
+    "Campaign Reporting": "4 key accounts",
+    "Team Registration Lift": "~20%",
+    "Robotics Enrollments": "100+ (team)",
+    "Offer Testing Lift": "~5%"
+  },
+  "storyline": "# Storyline\n\n## Context\n\nTechAnalogy needed stronger sales and marketing operations across social engagement, B2B acquisition, campaign execution, and education-program growth. The role required connecting marketing activity to measurable acquisition and registration outcomes.\n\n## Workflow\n\nThe work moved from campaign tracking and engagement review into cross-channel B2C/B2B strategy, account reporting, market research, and A/B testing on marketing offers.\n\n## Technical Implementation\n\n- **Campaign analytics:** analyzed engagement and campaign performance metrics to support 10+ new B2B acquisitions.\n- **Account liaison work:** served as the primary data liaison across 4 key accounts.\n- **Cross-channel campaign strategy:** coordinated B2C+B2B execution that contributed to a roughly 20% increase in student registrations.\n- **Market research:** analyzed social-media engagement and participant demographics to support a 3-domain Robotics course pilot with a team-supported 100+ enrollments.\n- **A/B testing:** tested marketing offers, contributing to a roughly 5% lift in recurring lead-funnel conversion.\n\n## Outcomes\n\nThe role connected SMO execution with sales operations, contributing to 10+ B2B acquisitions, a roughly 20% quarterly lift in student registrations, 100+ Robotics course enrollments, and a roughly 5% improvement in recurring campaign conversions — outcomes delivered as part of the marketing team."
+}

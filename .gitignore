@@ -1,0 +1,39 @@
+# Next.js
+.next/
+out/
+next-env.d.ts
+
+# TypeScript build cache
+*.tsbuildinfo
+
+# Node
+node_modules/
+
+# Python
+.venv/
+__pycache__/
+*.pyc
+
+# Env
+.env*
+.env.local
+
+# OS
+.DS_Store
+
+# Brainstorm visual companion
+.superpowers/
+
+# Playwright MCP artifacts (screenshots, console logs, snapshots)
+.playwright-mcp/
+*.playwright-mcp.png
+
+# Local-only content reference (not part of the site)
+content/content-audit.md
+
+# Logs
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+/generated/prisma

@@ -1,0 +1,190 @@
+{
+  "output": "content/projects/Train Scheduling Analysis.ipynb",
+  "meta": {
+    "company": "Academic Project",
+    "role": "Data Modeling · Hybrid Databases",
+    "duration": "2022",
+    "location": "MySQL · MongoDB · Tableau"
+  },
+  "hero": "# Train Scheduling Analysis\n\n**Hybrid relational/NoSQL scheduling analysis · MySQL · MongoDB · Tableau**\n\n## Hero Overview\n\nA hybrid query layer over relational and NoSQL train-scheduling data, analyzing cross-system query response and exposing a ~20% peak-hour shortfall through train-to-ticket ratio metrics.\n\nDatabase-level findings were translated into Tableau dashboards surfacing congestion and capacity gaps for operational decisions.",
+  "domain_colors": {
+    "AI / ML": "#dd0077",
+    "Integration": "#c98aa0",
+    "Backend Engineering": "#b8b8b8",
+    "Cloud & Infra": "#a8b8b0",
+    "Data Engineering": "#88c0b4",
+    "Workflow / Ops": "#4ec9b0"
+  },
+  "radar": {
+    "Data Modeling": 8,
+    "SQL": 8,
+    "NoSQL": 7,
+    "API Integration": 7,
+    "Query Optimization": 7,
+    "Dashboarding": 7,
+    "Data Storytelling": 7
+  },
+  "bubble_chart": {
+    "x_axis": "system",
+    "y_axis": "ownership",
+    "size_metric": "implementation_strength",
+    "color_metric": "domain",
+    "points": [
+      {
+        "system": "Hybrid Query Layer",
+        "domain": "Data Engineering",
+        "ownership": 9,
+        "implementation_strength": 8.0,
+        "complexity": 8.0,
+        "impact": 7.5,
+        "maturity": 7.0,
+        "subsystems": [
+          "MySQL relational model",
+          "MongoDB document store",
+          "Cross-system queries"
+        ],
+        "evidence": "Modeled relational and NoSQL scheduling data with MySQL and MongoDB into a hybrid cross-system query layer."
+      },
+      {
+        "system": "API Connectivity",
+        "domain": "Integration",
+        "ownership": 8,
+        "implementation_strength": 7.5,
+        "complexity": 7.5,
+        "impact": 7.0,
+        "maturity": 6.0,
+        "subsystems": [
+          "API-driven DB connectivity",
+          "Distributed systems",
+          "~30% query-response gain"
+        ],
+        "evidence": "Integrated API-driven database connectivity across distributed systems; query-response analysis showed ~30% improvement at peak load."
+      },
+      {
+        "system": "Tableau Dashboards",
+        "domain": "Workflow / Ops",
+        "ownership": 8,
+        "implementation_strength": 7.5,
+        "complexity": 6.0,
+        "impact": 8.0,
+        "maturity": 7.0,
+        "subsystems": [
+          "2+ dashboards",
+          "Peak-hour congestion",
+          "Capacity-gap views"
+        ],
+        "evidence": "Built 2+ Tableau dashboards visualizing peak-hour congestion and scheduling overloads for operational decisions."
+      }
+    ]
+  },
+  "network_graph": {
+    "title": "Technology Capability Network",
+    "description": "Maps the project's core techniques to the tools used to implement them.",
+    "nodes": [
+      {
+        "id": "Hybrid Scheduling Model",
+        "type": "system",
+        "domain": "Data Engineering"
+      },
+      {
+        "id": "Query Layer",
+        "type": "system",
+        "domain": "Integration"
+      },
+      {
+        "id": "Operational Dashboards",
+        "type": "system",
+        "domain": "Workflow / Ops"
+      },
+      {
+        "id": "SQL / NoSQL Design",
+        "type": "concept",
+        "domain": "Data Engineering"
+      },
+      {
+        "id": "API Connectivity",
+        "type": "concept",
+        "domain": "Integration"
+      },
+      {
+        "id": "Capacity Analysis",
+        "type": "concept",
+        "domain": "Workflow / Ops"
+      },
+      {
+        "id": "MySQL / MongoDB",
+        "type": "tool",
+        "category": "Database"
+      },
+      {
+        "id": "REST APIs",
+        "type": "tool",
+        "category": "Integration"
+      },
+      {
+        "id": "Tableau",
+        "type": "tool",
+        "category": "BI"
+      }
+    ],
+    "edges": [
+      {
+        "source": "Hybrid Scheduling Model",
+        "target": "SQL / NoSQL Design",
+        "weight": 3
+      },
+      {
+        "source": "Hybrid Scheduling Model",
+        "target": "Capacity Analysis",
+        "weight": 2
+      },
+      {
+        "source": "Query Layer",
+        "target": "SQL / NoSQL Design",
+        "weight": 3
+      },
+      {
+        "source": "Query Layer",
+        "target": "API Connectivity",
+        "weight": 2
+      },
+      {
+        "source": "Operational Dashboards",
+        "target": "Capacity Analysis",
+        "weight": 3
+      },
+      {
+        "source": "Operational Dashboards",
+        "target": "API Connectivity",
+        "weight": 2
+      },
+      {
+        "source": "SQL / NoSQL Design",
+        "target": "MySQL / MongoDB",
+        "weight": 3
+      },
+      {
+        "source": "API Connectivity",
+        "target": "REST APIs",
+        "weight": 3
+      },
+      {
+        "source": "Capacity Analysis",
+        "target": "Tableau",
+        "weight": 3
+      },
+      {
+        "source": "Capacity Analysis",
+        "target": "MySQL / MongoDB",
+        "weight": 2
+      }
+    ]
+  },
+  "outcomes": {
+    "Hybrid Data Model": "MySQL + MongoDB",
+    "Query Response Analysis": "~30% at peak load",
+    "Operational Dashboards": "2+",
+    "Capacity Gap Analysis": "~20% shortfall"
+  },
+  "storyline": "# Storyline\n\n## Context\n\nSchedule and ticket-volume data lived in separate relational and NoSQL stores, making peak-load bottlenecks invisible in standalone reporting.\n\n## Workflow\n\nHybrid data modeling → API-driven cross-system connectivity → ratio-metric analysis → Tableau operational dashboards.\n\n## Technical Implementation\n\n- **Modeling:** relational + NoSQL scheduling data with MySQL and MongoDB into a hybrid query layer.\n- **Connectivity:** API-driven DB connectivity across distributed systems; query-response analysis showed ~30% improvement at peak load.\n- **Analysis:** train-to-ticket ratio metrics exposed a ~20% peak-hour shortfall.\n- **Dashboards:** 2+ Tableau views of congestion and capacity gaps.\n\n## Outcomes\n\nTranslated query-layer output into peak-load schedule recommendations, giving stakeholders a visual lens on operational bottlenecks."
+}

@@ -1,0 +1,141 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* =========================================================================
+   Design tokens — single source of truth.
+   Wired into tailwind.config.ts (theme.extend.colors / fontFamily / fontSize).
+   Prefer the Tailwind token classes (bg-surface-1, text-ink-secondary,
+   border-line, text-accent-teal, …) over raw hex in components.
+   ========================================================================= */
+:root {
+  /* Surfaces */
+  --bg: #0a0a0a;            /* app / editor surface            -> bg-bg            */
+  --surface-1: #171717;     /* content panels, empty states    -> bg-surface-1    */
+  --surface-2: #1e1e1e;     /* left sidebar, chat panel         -> bg-surface-2    */
+  --surface-3: #141414;     /* tab strip                        -> bg-surface-3    */
+  --surface-raised: #1a1a1a;/* cards, code blocks               -> bg-surface-raised */
+  --titlebar: #202020;      /* top bar (darker, Cursor-like)    -> bg-titlebar     */
+
+  /* Borders (hairlines) */
+  --border-subtle: #1f1f1f; /* default dividers                 -> border-line-subtle */
+  --border: #2a2a2a;        /* inputs, cards                    -> border-line        */
+  --border-strong: #333333; /* ghost buttons                    -> border-line-strong */
+
+  /* Text */
+  --text: #e5e5e5;          /* primary      -> text-ink           */
+  --text-body: #d4d4d4;     /* document body-> text-ink-body      */
+  --text-secondary: #a3a3a3;/* descriptions -> text-ink-secondary */
+  --text-muted: #707070;    /* meta         -> text-ink-muted     */
+  --text-faint: #444444;    /* line numbers, disabled -> text-ink-faint */
+
+  /* State */
+  --selection: #04395e;     /* file-tree active row / text selection -> selection */
+
+  /* Accents — the ONLY colored tokens, used sparingly */
+  --accent-pink: #dd0077;   /* brand: CTAs, timeline markers, active nav */
+  --accent-teal: #4ec9b0;   /* links, toggle "on", h2, highlights        */
+  --accent-blue: #569cd6;   /* code-view links, pairs with selection     */
+
+  /* Fonts (next/font injects --font-sans / --font-mono in layout.tsx) */
+  --dot-red: #ff5f57;
+  --dot-yellow: #febc2e;
+  --dot-green: #28c840;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html,
+body {
+  height: 100%;
+  overflow: hidden;
+}
+
+body {
+  font-family: var(--font-sans), system-ui, -apple-system, sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  font-size: 13px;
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--border);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--text-muted);
+}
+
+::-webkit-scrollbar-corner {
+  background: transparent;
+}
+
+/* Selection */
+::selection {
+  background: var(--selection);
+  color: #fff;
+}
+
+/* Focus styles */
+:focus-visible {
+  outline: 1px solid var(--accent-blue);
+  outline-offset: -1px;
+}
+
+/* Blinking caret animation */
+@keyframes blink {
+  0%, 50% { opacity: 1; }
+  51%, 100% { opacity: 0; }
+}
+
+.caret-blink {
+  animation: blink 1s step-end infinite;
+}
+
+/* Notebook HTML output (pandas DataFrames, etc.) */
+.notebook-html-output table {
+  border-collapse: collapse;
+  font-size: 12px;
+  font-family: var(--font-mono), ui-monospace, monospace;
+  margin: 4px 0;
+}
+
+.notebook-html-output th,
+.notebook-html-output td {
+  border: 1px solid var(--border-strong);
+  padding: 3px 8px;
+  text-align: left;
+  color: var(--text-body);
+}
+
+.notebook-html-output th {
+  background: var(--surface-raised);
+  color: var(--text);
+  font-weight: 600;
+}
+
+.notebook-html-output tr:nth-child(even) {
+  background: var(--surface-3);
+}
+
+.notebook-html-output img {
+  max-width: 100%;
+}
