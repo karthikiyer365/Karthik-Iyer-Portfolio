@@ -99,8 +99,12 @@ def _radar_fragment(radar):
 
 
 # ---------------------------------------------------------------- bubble (d3 pack)
+# Site uses Geist (var(--font-sans)); inside the srcdoc iframe that webfont/var
+# isn't available, so match the site's own fallback stack for visual parity.
+_FONT_STACK = "-apple-system,system-ui,'Segoe UI',Roboto,sans-serif"
+
 _PACK_TEMPLATE = """
-<div style="text-align:center;color:#e5e5e5;font-size:14px;padding:14px 0 10px;">Implementation Strength by System</div>
+<div style="text-align:center;color:#e5e5e5;font-size:14px;padding:14px 0 10px;font-family:__FONT__;">Implementation Strength by System</div>
 <svg id="pack-svg" style="display:block;width:100%;height:500px" viewBox="0 0 500 500" preserveAspectRatio="xMidYMid meet"></svg>
 <script src="https://cdn.jsdelivr.net/npm/d3@7/dist/d3.min.js"></script>
 <script>
@@ -109,26 +113,25 @@ _PACK_TEMPLATE = """
   // On remounted srcdoc iframes the external script can resolve after this
   // inline script first runs, so poll instead of assuming d3 is ready.
   if (typeof d3 === "undefined") { return setTimeout(start, 30); }
-  var DATA=__DATA__, W=500, H=500;
+  var DATA=__DATA__, W=500, H=500, FONT="__FONT__";
   var svg=d3.select("#pack-svg");
   var root=d3.hierarchy(DATA).sum(function(d){return d.val||0;}).sort(function(a,b){return b.value-a.value;});
-  d3.pack().size([W-12,H-12]).padding(5)(root);
+  d3.pack().size([W-12,H-12]).padding(6)(root);
   var g=svg.append("g").attr("transform","translate(6,6)");
-  function ink(hex){var c=hex.replace('#','');var r=parseInt(c.substr(0,2),16),
-    gg=parseInt(c.substr(2,2),16),b=parseInt(c.substr(4,2),16);
-    return (0.299*r+0.587*gg+0.114*b)>150?"#111":"#fff";}
   var leaf=g.selectAll("g.leaf").data(root.leaves()).enter().append("g")
     .attr("transform",function(d){return "translate("+d.x+","+d.y+")";});
   leaf.append("title").text(function(d){return d.data.label+" — strength "+d.data.strength;});
+  // transparent bubble: translucent colored fill + matching colored rim
   leaf.append("circle").attr("r",function(d){return d.r;})
-    .attr("fill",function(d){return d.data.color;}).attr("fill-opacity",0.92)
-    .attr("stroke","#111").attr("stroke-width",2);
+    .attr("fill",function(d){return d.data.color;}).attr("fill-opacity",0.18)
+    .attr("stroke",function(d){return d.data.color;})
+    .attr("stroke-width",1.6).attr("stroke-opacity",0.9);
   leaf.each(function(d){
-    if(d.r<22) return;
+    if(d.r<20) return;
     var words=d.data.label.split(/\\s+/);
-    var fs=Math.max(9,Math.min(14,d.r/3.4));
+    var fs=Math.max(7,Math.min(10.5,d.r/4.4));
     var t=d3.select(this).append("text").attr("text-anchor","middle")
-      .attr("fill",ink(d.data.color)).attr("font-size",fs+"px")
+      .attr("fill","#ededed").attr("font-family",FONT).attr("font-size",fs+"px")
       .attr("font-weight","600").style("pointer-events","none");
     var n=words.length, lh=1.05, start=-(n-1)/2*lh;
     words.forEach(function(w,i){t.append("tspan").attr("x",0).attr("dy",(i===0?start:lh)+"em").text(w);});
@@ -149,7 +152,9 @@ def _bubble_fragment(bubble, domain_map):
             "color": domain_map.get(p["domain"], "#888"),
         })
     data = {"name": "root", "children": leaves}
-    return _PACK_TEMPLATE.replace("__DATA__", json.dumps(data))
+    return (_PACK_TEMPLATE
+            .replace("__DATA__", json.dumps(data))
+            .replace("__FONT__", _FONT_STACK))
 
 
 def build_radar_bubble_html(radar, bubble, domain_map):

@@ -152,7 +152,7 @@ export const TOOLS_DATA: ToolItem[] = [
 export type SkillTab = "technical" | "soft";
 
 export type SkillCategory =
-  | "Analytics"
+  | "ML & Analytics"
   | "ETL"
   | "UI/UX"
   | "AI"
@@ -170,9 +170,15 @@ export interface SkillItem {
 
 export const SKILLS_DATA: SkillItem[] = [
   {
+    name: "Integrations",
+    description:"Integrating 3rd party systems according to internal team needs",
+    tabs:["technical"],
+    category:"ETL"
+  },
+  {
     name: "Data pipeline & ETL design",
     description:
-      "Build and maintain ingestion/transformation flows feeding analytics and ML workloads.",
+      "Build and maintain ingestion/transformation flows feeding Data Processing Pipelines & Analytics.",
     tabs: ["technical"],
     category: "ETL",
   },
@@ -180,7 +186,7 @@ export const SKILLS_DATA: SkillItem[] = [
     name: "Data modeling & schema design",
     description: "Relational and document schemas, governed inputs, and clean data layers.",
     tabs: ["technical"],
-    category: "Analytics",
+    category: "ML & Analytics",
   },
   {
     name: "Retrieval-augmented generation (RAG)",
@@ -204,13 +210,13 @@ export const SKILLS_DATA: SkillItem[] = [
     name: "Machine learning modeling",
     description: "Regression and classification with XGBoost, Random Forest, and SVM.",
     tabs: ["technical"],
-    category: "AI",
+    category: "ML & Analytics",
   },
   {
     name: "Deep learning & time-series",
     description: "Bi-LSTM and CNN-LSTM sequence models and time-series forecasting.",
     tabs: ["technical"],
-    category: "AI",
+    category: "ML & Analytics",
   },
   {
     name: "NLP",
@@ -222,17 +228,17 @@ export const SKILLS_DATA: SkillItem[] = [
     name: "Dimensionality reduction & EDA",
     description: "PCA, t-SNE, and UMAP for feature spaces, plus rigorous exploratory analysis.",
     tabs: ["technical"],
-    category: "Analytics",
+    category: "ML & Analytics",
   },
   {
-    name: "MLOps & CI/CD",
+    name: "CI/CD",
     description: "Reproducible model delivery, containerization, and automated pipelines.",
     tabs: ["technical"],
     category: "Development",
   },
   {
     name: "Web scraping & data collection",
-    description: "BeautifulSoup/Requests pipelines for longitudinal, multi-source datasets.",
+    description: "BeautifulSoup/Selenium pipelines for longitudinal, multi-source datasets.",
     tabs: ["technical"],
     category: "ETL",
   },
@@ -240,13 +246,13 @@ export const SKILLS_DATA: SkillItem[] = [
     name: "BI dashboards & reporting",
     description: "Self-service Tableau, Power BI, and Dash views for non-technical teams.",
     tabs: ["technical"],
-    category: "UI/UX",
+    category: "ML & Analytics",
   },
   {
     name: "Statistical analysis & forecasting",
     description: "Hypothesis testing, regression, and time-series forecasting on messy data.",
     tabs: ["technical"],
-    category: "Analytics",
+    category: "ML & Analytics",
   },
   {
     name: "Data storytelling for stakeholders",
@@ -255,19 +261,19 @@ export const SKILLS_DATA: SkillItem[] = [
     category: "Critical Thinking",
   },
   {
-    name: "Leadership",
+    name: "Operations Management",
     description: "Guiding teams, setting direction, and creating accountability without turning meetings into performance art.",
     tabs: ["soft"],
     category: "Leadership",
   },
   {
-    name: "Management",
+    name: "Task Distribution",
     description: "Planning work, coordinating priorities, and keeping execution moving across teams.",
     tabs: ["soft"],
-    category: "Management",
+    category: "Leadership",
   },
   {
-    name: "Critical thinking",
+    name: "Problem Decomposition",
     description: "Breaking down ambiguous problems, testing assumptions, and making decisions from evidence.",
     tabs: ["soft"],
     category: "Critical Thinking",

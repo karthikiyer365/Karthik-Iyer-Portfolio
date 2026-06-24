@@ -17,7 +17,7 @@ const TABS: { id: SkillTab; label: string }[] = [
 ];
 
 const CATEGORIES: Record<SkillTab, string[]> = {
-  technical: ["Analytics", "ETL", "UI/UX", "AI", "Development"],
+  technical: ["ML & Analytics", "ETL", "UI/UX", "AI", "Development"],
   soft: ["Leadership", "Management", "Critical Thinking"],
 };
 
