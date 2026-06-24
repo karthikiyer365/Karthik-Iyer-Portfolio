@@ -128,7 +128,7 @@
         "domain": "Integration"
       },
       {
-        "id": "Course Research",
+        "id": "Market Research",
         "type": "system",
         "domain": "Workflow / Ops"
       },
@@ -138,12 +138,12 @@
         "domain": "Workflow / Ops"
       },
       {
-        "id": "Market Segmentation",
+        "id": "Segmentation",
         "type": "concept",
         "domain": "Workflow / Ops"
       },
       {
-        "id": "Experimentation",
+        "id": "A/B Testing",
         "type": "concept",
         "domain": "Workflow / Ops"
       },
@@ -153,7 +153,17 @@
         "domain": "Integration"
       },
       {
-        "id": "Engagement Metrics",
+        "id": "Engagement Analytics",
+        "type": "concept",
+        "domain": "Data Engineering"
+      },
+      {
+        "id": "Data Storytelling",
+        "type": "concept",
+        "domain": "Data Engineering"
+      },
+      {
+        "id": "Analytics Data",
         "type": "tool",
         "category": "Marketing Data"
       },
@@ -168,7 +178,7 @@
         "category": "Channel"
       },
       {
-        "id": "A/B Tests",
+        "id": "Campaign Tests",
         "type": "tool",
         "category": "Experimentation"
       }
@@ -181,7 +191,17 @@
       },
       {
         "source": "Campaign Analytics",
-        "target": "Experimentation",
+        "target": "Engagement Analytics",
+        "weight": 3
+      },
+      {
+        "source": "Campaign Analytics",
+        "target": "A/B Testing",
+        "weight": 2
+      },
+      {
+        "source": "Campaign Analytics",
+        "target": "Data Storytelling",
         "weight": 2
       },
       {
@@ -191,7 +211,12 @@
       },
       {
         "source": "Growth Ops",
-        "target": "Market Segmentation",
+        "target": "Cross-Channel SMO",
+        "weight": 2
+      },
+      {
+        "source": "Growth Ops",
+        "target": "Segmentation",
         "weight": 2
       },
       {
@@ -201,17 +226,27 @@
       },
       {
         "source": "Account Reporting",
+        "target": "Data Storytelling",
+        "weight": 2
+      },
+      {
+        "source": "Account Reporting",
         "target": "Cross-Channel SMO",
         "weight": 2
       },
       {
-        "source": "Course Research",
-        "target": "Market Segmentation",
+        "source": "Market Research",
+        "target": "Segmentation",
         "weight": 3
       },
       {
-        "source": "Course Research",
-        "target": "Cross-Channel SMO",
+        "source": "Market Research",
+        "target": "Engagement Analytics",
+        "weight": 2
+      },
+      {
+        "source": "Market Research",
+        "target": "Data Storytelling",
         "weight": 2
       },
       {
@@ -221,27 +256,27 @@
       },
       {
         "source": "Cross-Channel SMO",
-        "target": "Engagement Metrics",
+        "target": "Analytics Data",
         "weight": 2
       },
       {
-        "source": "Market Segmentation",
+        "source": "Segmentation",
+        "target": "Spreadsheets",
+        "weight": 3
+      },
+      {
+        "source": "Segmentation",
         "target": "Social Media",
-        "weight": 3
-      },
-      {
-        "source": "Market Segmentation",
-        "target": "Spreadsheets",
         "weight": 2
       },
       {
-        "source": "Experimentation",
-        "target": "A/B Tests",
+        "source": "A/B Testing",
+        "target": "Campaign Tests",
         "weight": 3
       },
       {
-        "source": "Experimentation",
-        "target": "Engagement Metrics",
+        "source": "A/B Testing",
+        "target": "Analytics Data",
         "weight": 2
       },
       {
@@ -251,7 +286,27 @@
       },
       {
         "source": "Sales Ops",
-        "target": "Engagement Metrics",
+        "target": "Analytics Data",
+        "weight": 2
+      },
+      {
+        "source": "Engagement Analytics",
+        "target": "Analytics Data",
+        "weight": 3
+      },
+      {
+        "source": "Engagement Analytics",
+        "target": "Spreadsheets",
+        "weight": 2
+      },
+      {
+        "source": "Data Storytelling",
+        "target": "Spreadsheets",
+        "weight": 3
+      },
+      {
+        "source": "Engagement Analytics",
+        "target": "Social Media",
         "weight": 2
       }
     ]

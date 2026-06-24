@@ -134,7 +134,7 @@
     "description": "Maps core technical concepts to the tools and platforms used to implement them.",
     "nodes": [
       {
-        "id": "Worker Matching Platform",
+        "id": "Worker Matching",
         "type": "system",
         "domain": "AI / ML"
       },
@@ -144,7 +144,7 @@
         "domain": "Data Engineering"
       },
       {
-        "id": "Comms & Hotline Infra",
+        "id": "Comms Infra",
         "type": "system",
         "domain": "Integration"
       },
@@ -159,12 +159,12 @@
         "domain": "AI / ML"
       },
       {
-        "id": "RAG / Vector Search",
+        "id": "RAG",
         "type": "concept",
         "domain": "AI / ML"
       },
       {
-        "id": "API / MCP Integration",
+        "id": "MCP Tools",
         "type": "concept",
         "domain": "Integration"
       },
@@ -172,6 +172,16 @@
         "id": "Workflow Automation",
         "type": "concept",
         "domain": "Workflow / Ops"
+      },
+      {
+        "id": "LLM Apps",
+        "type": "concept",
+        "domain": "AI / ML"
+      },
+      {
+        "id": "Integrations",
+        "type": "concept",
+        "domain": "Integration"
       },
       {
         "id": "Python / SQL",
@@ -184,7 +194,7 @@
         "category": "Database"
       },
       {
-        "id": "Pinecone / LangChain",
+        "id": "Pinecone",
         "type": "tool",
         "category": "AI Framework"
       },
@@ -194,7 +204,7 @@
         "category": "Communications"
       },
       {
-        "id": "Gmail / Drive APIs",
+        "id": "Gmail / Drive",
         "type": "tool",
         "category": "Workspace APIs"
       },
@@ -206,33 +216,63 @@
     ],
     "edges": [
       {
-        "source": "Worker Matching Platform",
+        "source": "Worker Matching",
         "target": "Agentic AI",
         "weight": 3
       },
       {
-        "source": "Worker Matching Platform",
-        "target": "API / MCP Integration",
+        "source": "Worker Matching",
+        "target": "MCP Tools",
+        "weight": 2
+      },
+      {
+        "source": "Worker Matching",
+        "target": "LLM Apps",
+        "weight": 2
+      },
+      {
+        "source": "Worker Matching",
+        "target": "Integrations",
         "weight": 2
       },
       {
         "source": "Knowledge Layer",
-        "target": "RAG / Vector Search",
+        "target": "RAG",
         "weight": 3
       },
       {
         "source": "Knowledge Layer",
-        "target": "API / MCP Integration",
+        "target": "MCP Tools",
         "weight": 2
       },
       {
-        "source": "Comms & Hotline Infra",
+        "source": "Knowledge Layer",
+        "target": "Integrations",
+        "weight": 2
+      },
+      {
+        "source": "Knowledge Layer",
+        "target": "Workflow Automation",
+        "weight": 1
+      },
+      {
+        "source": "Comms Infra",
         "target": "Workflow Automation",
         "weight": 3
       },
       {
-        "source": "Comms & Hotline Infra",
-        "target": "API / MCP Integration",
+        "source": "Comms Infra",
+        "target": "Integrations",
+        "weight": 3
+      },
+      {
+        "source": "Comms Infra",
+        "target": "LLM Apps",
+        "weight": 2
+      },
+      {
+        "source": "Comms Infra",
+        "target": "MCP Tools",
         "weight": 2
       },
       {
@@ -242,7 +282,12 @@
       },
       {
         "source": "Compliance Ops",
-        "target": "RAG / Vector Search",
+        "target": "RAG",
+        "weight": 2
+      },
+      {
+        "source": "Compliance Ops",
+        "target": "Integrations",
         "weight": 2
       },
       {
@@ -252,27 +297,42 @@
       },
       {
         "source": "Agentic AI",
-        "target": "Pinecone / LangChain",
+        "target": "Pinecone",
         "weight": 2
       },
       {
-        "source": "RAG / Vector Search",
-        "target": "Pinecone / LangChain",
-        "weight": 3
-      },
-      {
-        "source": "RAG / Vector Search",
+        "source": "Agentic AI",
         "target": "Supabase",
         "weight": 2
       },
       {
-        "source": "API / MCP Integration",
-        "target": "Gmail / Drive APIs",
+        "source": "RAG",
+        "target": "Pinecone",
         "weight": 3
       },
       {
-        "source": "API / MCP Integration",
+        "source": "RAG",
+        "target": "Supabase",
+        "weight": 2
+      },
+      {
+        "source": "RAG",
+        "target": "Python / SQL",
+        "weight": 2
+      },
+      {
+        "source": "MCP Tools",
+        "target": "Gmail / Drive",
+        "weight": 3
+      },
+      {
+        "source": "MCP Tools",
         "target": "Twilio",
+        "weight": 2
+      },
+      {
+        "source": "MCP Tools",
+        "target": "Python / SQL",
         "weight": 2
       },
       {
@@ -283,6 +343,36 @@
       {
         "source": "Workflow Automation",
         "target": "Twilio",
+        "weight": 2
+      },
+      {
+        "source": "LLM Apps",
+        "target": "Python / SQL",
+        "weight": 3
+      },
+      {
+        "source": "LLM Apps",
+        "target": "Pinecone",
+        "weight": 2
+      },
+      {
+        "source": "Integrations",
+        "target": "Gmail / Drive",
+        "weight": 3
+      },
+      {
+        "source": "Integrations",
+        "target": "Supabase",
+        "weight": 2
+      },
+      {
+        "source": "RAG",
+        "target": "Gmail / Drive",
+        "weight": 2
+      },
+      {
+        "source": "MCP Tools",
+        "target": "Supabase",
         "weight": 2
       }
     ]

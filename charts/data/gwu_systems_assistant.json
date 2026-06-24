@@ -113,44 +113,54 @@
     "description": "Operational analytics layer connecting inventory, academic tools, support tickets, and response workflows.",
     "nodes": [
       {
-        "id": "Inventory Analytics",
+        "id": "Inventory Audit",
         "type": "system",
         "domain": "Data Engineering"
       },
       {
-        "id": "Academic Tool Dashboards",
+        "id": "Tool Dashboards",
         "type": "system",
         "domain": "Workflow / Ops"
       },
       {
-        "id": "Ticket Support Ops",
+        "id": "Ticket Analytics",
         "type": "system",
         "domain": "Data Engineering"
       },
       {
-        "id": "Cross-Platform Support",
+        "id": "Platform Support",
         "type": "system",
         "domain": "Integration"
       },
       {
-        "id": "Demand Forecasting",
+        "id": "Forecasting",
         "type": "concept",
         "domain": "Data Engineering"
       },
       {
-        "id": "Usage Feedback",
+        "id": "User Feedback",
         "type": "concept",
         "domain": "Workflow / Ops"
       },
       {
-        "id": "Resolution Workflow",
+        "id": "Ticket Resolution",
         "type": "concept",
         "domain": "Workflow / Ops"
       },
       {
-        "id": "Platform Operations",
+        "id": "Platform Ops",
         "type": "concept",
         "domain": "Integration"
+      },
+      {
+        "id": "BI Dashboards",
+        "type": "concept",
+        "domain": "Data Engineering"
+      },
+      {
+        "id": "Statistical Analysis",
+        "type": "concept",
+        "domain": "AI / ML"
       },
       {
         "id": "BMC Helix",
@@ -158,86 +168,136 @@
         "category": "ITSM"
       },
       {
-        "id": "Dashboarding",
+        "id": "Excel / Sheets",
         "type": "tool",
         "category": "Reporting"
       },
       {
-        "id": "Ticket Data",
+        "id": "Operational Data",
         "type": "tool",
         "category": "Operational Data"
       },
       {
-        "id": "Mac / Linux / Windows",
+        "id": "Multi-OS Support",
         "type": "tool",
         "category": "OS"
       }
     ],
     "edges": [
       {
-        "source": "Inventory Analytics",
-        "target": "Demand Forecasting",
+        "source": "Inventory Audit",
+        "target": "Forecasting",
         "weight": 3
       },
       {
-        "source": "Inventory Analytics",
-        "target": "Platform Operations",
+        "source": "Inventory Audit",
+        "target": "Platform Ops",
         "weight": 2
       },
       {
-        "source": "Academic Tool Dashboards",
-        "target": "Usage Feedback",
+        "source": "Inventory Audit",
+        "target": "Statistical Analysis",
+        "weight": 2
+      },
+      {
+        "source": "Inventory Audit",
+        "target": "BI Dashboards",
+        "weight": 2
+      },
+      {
+        "source": "Tool Dashboards",
+        "target": "User Feedback",
         "weight": 3
       },
       {
-        "source": "Academic Tool Dashboards",
-        "target": "Demand Forecasting",
-        "weight": 2
-      },
-      {
-        "source": "Ticket Support Ops",
-        "target": "Resolution Workflow",
+        "source": "Tool Dashboards",
+        "target": "BI Dashboards",
         "weight": 3
       },
       {
-        "source": "Ticket Support Ops",
-        "target": "Usage Feedback",
+        "source": "Tool Dashboards",
+        "target": "Statistical Analysis",
         "weight": 2
       },
       {
-        "source": "Cross-Platform Support",
-        "target": "Platform Operations",
+        "source": "Ticket Analytics",
+        "target": "Ticket Resolution",
         "weight": 3
       },
       {
-        "source": "Cross-Platform Support",
-        "target": "Resolution Workflow",
+        "source": "Ticket Analytics",
+        "target": "Statistical Analysis",
+        "weight": 3
+      },
+      {
+        "source": "Ticket Analytics",
+        "target": "User Feedback",
         "weight": 2
       },
       {
-        "source": "Demand Forecasting",
+        "source": "Platform Support",
+        "target": "Platform Ops",
+        "weight": 3
+      },
+      {
+        "source": "Platform Support",
+        "target": "Ticket Resolution",
+        "weight": 2
+      },
+      {
+        "source": "Forecasting",
         "target": "BMC Helix",
         "weight": 3
       },
       {
-        "source": "Usage Feedback",
-        "target": "Dashboarding",
+        "source": "Forecasting",
+        "target": "Excel / Sheets",
+        "weight": 2
+      },
+      {
+        "source": "User Feedback",
+        "target": "Excel / Sheets",
         "weight": 3
       },
       {
-        "source": "Resolution Workflow",
-        "target": "Ticket Data",
+        "source": "User Feedback",
+        "target": "Operational Data",
+        "weight": 2
+      },
+      {
+        "source": "Ticket Resolution",
+        "target": "Operational Data",
         "weight": 3
       },
       {
-        "source": "Resolution Workflow",
+        "source": "Ticket Resolution",
         "target": "BMC Helix",
         "weight": 2
       },
       {
-        "source": "Platform Operations",
-        "target": "Mac / Linux / Windows",
+        "source": "Platform Ops",
+        "target": "Multi-OS Support",
         "weight": 3
+      },
+      {
+        "source": "BI Dashboards",
+        "target": "Excel / Sheets",
+        "weight": 3
+      },
+      {
+        "source": "BI Dashboards",
+        "target": "BMC Helix",
+        "weight": 2
+      },
+      {
+        "source": "Statistical Analysis",
+        "target": "Operational Data",
+        "weight": 3
+      },
+      {
+        "source": "Statistical Analysis",
+        "target": "Excel / Sheets",
+        "weight": 2
       }
     ]
   },

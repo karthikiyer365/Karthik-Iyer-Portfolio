@@ -113,22 +113,22 @@
     "description": "Maps graduate skill domains to modeling concepts and implementation tools.",
     "nodes": [
       {
-        "id": "Graduate Analytics Portfolio",
+        "id": "ML Projects",
         "type": "system",
         "domain": "AI / ML"
       },
       {
-        "id": "Sports Analytics Work",
+        "id": "Sports Analytics",
         "type": "system",
         "domain": "AI / ML"
       },
       {
-        "id": "Assistantship Systems",
+        "id": "Assistantship",
         "type": "system",
         "domain": "Workflow / Ops"
       },
       {
-        "id": "Teaching Support",
+        "id": "Teaching Ops",
         "type": "system",
         "domain": "Workflow / Ops"
       },
@@ -138,17 +138,27 @@
         "domain": "AI / ML"
       },
       {
-        "id": "Data Engineering",
+        "id": "ETL Pipelines",
         "type": "concept",
         "domain": "Data Engineering"
       },
       {
-        "id": "Project Management",
+        "id": "Feature Engineering",
+        "type": "concept",
+        "domain": "AI / ML"
+      },
+      {
+        "id": "BI Dashboards",
+        "type": "concept",
+        "domain": "Data Engineering"
+      },
+      {
+        "id": "Academic Ops",
         "type": "concept",
         "domain": "Workflow / Ops"
       },
       {
-        "id": "Academic Operations",
+        "id": "Project Mgmt",
         "type": "concept",
         "domain": "Workflow / Ops"
       },
@@ -163,7 +173,7 @@
         "category": "Big Data"
       },
       {
-        "id": "Scikit-learn / TensorFlow",
+        "id": "Scikit-learn / TF",
         "type": "tool",
         "category": "ML Library"
       },
@@ -180,78 +190,123 @@
     ],
     "edges": [
       {
-        "source": "Graduate Analytics Portfolio",
+        "source": "ML Projects",
         "target": "ML Modeling",
         "weight": 3
       },
       {
-        "source": "Graduate Analytics Portfolio",
-        "target": "Data Engineering",
+        "source": "ML Projects",
+        "target": "Feature Engineering",
+        "weight": 3
+      },
+      {
+        "source": "ML Projects",
+        "target": "ETL Pipelines",
         "weight": 2
       },
       {
-        "source": "Sports Analytics Work",
+        "source": "Sports Analytics",
         "target": "ML Modeling",
         "weight": 3
       },
       {
-        "source": "Sports Analytics Work",
-        "target": "Project Management",
-        "weight": 2
-      },
-      {
-        "source": "Assistantship Systems",
-        "target": "Academic Operations",
+        "source": "Sports Analytics",
+        "target": "BI Dashboards",
         "weight": 3
       },
       {
-        "source": "Assistantship Systems",
-        "target": "Data Engineering",
+        "source": "Sports Analytics",
+        "target": "Feature Engineering",
         "weight": 2
       },
       {
-        "source": "Teaching Support",
-        "target": "Academic Operations",
+        "source": "Sports Analytics",
+        "target": "Project Mgmt",
+        "weight": 2
+      },
+      {
+        "source": "Assistantship",
+        "target": "Academic Ops",
         "weight": 3
       },
       {
-        "source": "Teaching Support",
-        "target": "Project Management",
+        "source": "Assistantship",
+        "target": "ETL Pipelines",
         "weight": 2
+      },
+      {
+        "source": "Assistantship",
+        "target": "Project Mgmt",
+        "weight": 2
+      },
+      {
+        "source": "Teaching Ops",
+        "target": "Academic Ops",
+        "weight": 3
+      },
+      {
+        "source": "Teaching Ops",
+        "target": "Project Mgmt",
+        "weight": 2
+      },
+      {
+        "source": "Teaching Ops",
+        "target": "ML Modeling",
+        "weight": 1
       },
       {
         "source": "ML Modeling",
-        "target": "Scikit-learn / TensorFlow",
+        "target": "Scikit-learn / TF",
         "weight": 3
       },
       {
         "source": "ML Modeling",
-        "target": "Dash / Plotly",
+        "target": "Python / SQL",
         "weight": 2
       },
       {
-        "source": "Data Engineering",
+        "source": "Feature Engineering",
+        "target": "Python / SQL",
+        "weight": 3
+      },
+      {
+        "source": "Feature Engineering",
+        "target": "Scikit-learn / TF",
+        "weight": 2
+      },
+      {
+        "source": "ETL Pipelines",
         "target": "Spark / Databricks",
         "weight": 3
       },
       {
-        "source": "Data Engineering",
+        "source": "ETL Pipelines",
         "target": "Python / SQL",
         "weight": 2
       },
       {
-        "source": "Project Management",
-        "target": "BMC Helix",
+        "source": "BI Dashboards",
+        "target": "Dash / Plotly",
         "weight": 3
       },
       {
-        "source": "Academic Operations",
-        "target": "BMC Helix",
-        "weight": 3
-      },
-      {
-        "source": "Academic Operations",
+        "source": "BI Dashboards",
         "target": "Python / SQL",
+        "weight": 2
+      },
+      {
+        "source": "Academic Ops",
+        "target": "BMC Helix",
+        "weight": 3
+      },
+      {
+        "source": "Academic Ops",
+        "target": "Python / SQL",
+        "weight": 2
+      },
+      {
+        "source": "Project Mgmt",
+        "target": "BMC Helix",
         "weight": 2
       }
     ]

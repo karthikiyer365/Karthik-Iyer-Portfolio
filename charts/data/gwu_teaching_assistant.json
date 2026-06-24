@@ -113,44 +113,54 @@
     "description": "Teaching operations connected to NLP grading, faculty review, student support, and assignment-scale workflows.",
     "nodes": [
       {
-        "id": "Human-in-Loop Grading",
+        "id": "Auto-Grading",
         "type": "system",
         "domain": "AI / ML"
       },
       {
-        "id": "Student Support Ops",
+        "id": "Student Support",
         "type": "system",
         "domain": "Workflow / Ops"
       },
       {
-        "id": "Faculty Calibration",
+        "id": "Faculty Review",
         "type": "system",
         "domain": "Integration"
       },
       {
-        "id": "Assignment Review",
+        "id": "Assignment Ops",
         "type": "system",
         "domain": "Data Engineering"
       },
       {
-        "id": "NLP Evaluation",
+        "id": "NLP",
         "type": "concept",
         "domain": "AI / ML"
       },
       {
-        "id": "Rubric Consistency",
+        "id": "Rubric Design",
         "type": "concept",
         "domain": "Integration"
       },
       {
-        "id": "Academic Workflow",
+        "id": "Concept Teaching",
         "type": "concept",
         "domain": "Workflow / Ops"
       },
       {
-        "id": "Similarity Review",
+        "id": "Plagiarism Detection",
         "type": "concept",
         "domain": "AI / ML"
+      },
+      {
+        "id": "Data Analytics",
+        "type": "concept",
+        "domain": "AI / ML"
+      },
+      {
+        "id": "Workflow Automation",
+        "type": "concept",
+        "domain": "Workflow / Ops"
       },
       {
         "id": "Python / BERT",
@@ -163,7 +173,7 @@
         "category": "Evaluation"
       },
       {
-        "id": "Faculty Review",
+        "id": "Review Data",
         "type": "tool",
         "category": "Workflow"
       },
@@ -171,78 +181,173 @@
         "id": "Assignment Data",
         "type": "tool",
         "category": "Operational Data"
+      },
+      {
+        "id": "Communication",
+        "type": "concept",
+        "domain": "Workflow / Ops"
+      },
+      {
+        "id": "Tech Mentoring",
+        "type": "concept",
+        "domain": "Workflow / Ops"
       }
     ],
     "edges": [
       {
-        "source": "Human-in-Loop Grading",
-        "target": "NLP Evaluation",
+        "source": "Auto-Grading",
+        "target": "NLP",
         "weight": 3
       },
       {
-        "source": "Human-in-Loop Grading",
-        "target": "Rubric Consistency",
+        "source": "Auto-Grading",
+        "target": "Rubric Design",
         "weight": 2
       },
       {
-        "source": "Student Support Ops",
-        "target": "Academic Workflow",
+        "source": "Auto-Grading",
+        "target": "Workflow Automation",
         "weight": 3
       },
       {
-        "source": "Student Support Ops",
-        "target": "Rubric Consistency",
+        "source": "Auto-Grading",
+        "target": "Plagiarism Detection",
         "weight": 2
       },
       {
-        "source": "Faculty Calibration",
-        "target": "Rubric Consistency",
+        "source": "Student Support",
+        "target": "Concept Teaching",
         "weight": 3
       },
       {
-        "source": "Faculty Calibration",
-        "target": "Academic Workflow",
+        "source": "Student Support",
+        "target": "Rubric Design",
         "weight": 2
       },
       {
-        "source": "Assignment Review",
-        "target": "Similarity Review",
+        "source": "Student Support",
+        "target": "Data Analytics",
+        "weight": 2
+      },
+      {
+        "source": "Faculty Review",
+        "target": "Rubric Design",
         "weight": 3
       },
       {
-        "source": "Assignment Review",
-        "target": "Academic Workflow",
+        "source": "Faculty Review",
+        "target": "Concept Teaching",
         "weight": 2
       },
       {
-        "source": "NLP Evaluation",
+        "source": "Faculty Review",
+        "target": "Plagiarism Detection",
+        "weight": 2
+      },
+      {
+        "source": "Assignment Ops",
+        "target": "Plagiarism Detection",
+        "weight": 3
+      },
+      {
+        "source": "Assignment Ops",
+        "target": "Concept Teaching",
+        "weight": 2
+      },
+      {
+        "source": "Assignment Ops",
+        "target": "Workflow Automation",
+        "weight": 2
+      },
+      {
+        "source": "NLP",
         "target": "Python / BERT",
         "weight": 3
       },
       {
-        "source": "Rubric Consistency",
+        "source": "NLP",
+        "target": "Assignment Data",
+        "weight": 2
+      },
+      {
+        "source": "Rubric Design",
         "target": "Rubrics",
         "weight": 3
       },
       {
-        "source": "Rubric Consistency",
-        "target": "Faculty Review",
+        "source": "Rubric Design",
+        "target": "Review Data",
         "weight": 2
       },
       {
-        "source": "Academic Workflow",
+        "source": "Concept Teaching",
         "target": "Assignment Data",
         "weight": 3
       },
       {
-        "source": "Similarity Review",
+        "source": "Concept Teaching",
+        "target": "Review Data",
+        "weight": 2
+      },
+      {
+        "source": "Plagiarism Detection",
         "target": "Python / BERT",
         "weight": 3
       },
       {
-        "source": "Similarity Review",
+        "source": "Plagiarism Detection",
         "target": "Assignment Data",
         "weight": 2
+      },
+      {
+        "source": "Data Analytics",
+        "target": "Assignment Data",
+        "weight": 3
+      },
+      {
+        "source": "Workflow Automation",
+        "target": "Python / BERT",
+        "weight": 3
+      },
+      {
+        "source": "Student Support",
+        "target": "Communication",
+        "weight": 3
+      },
+      {
+        "source": "Student Support",
+        "target": "Tech Mentoring",
+        "weight": 3
+      },
+      {
+        "source": "Concept Teaching",
+        "target": "Communication",
+        "weight": 2
+      },
+      {
+        "source": "Concept Teaching",
+        "target": "Tech Mentoring",
+        "weight": 3
+      },
+      {
+        "source": "Faculty Review",
+        "target": "Communication",
+        "weight": 2
+      },
+      {
+        "source": "Communication",
+        "target": "Review Data",
+        "weight": 2
+      },
+      {
+        "source": "Tech Mentoring",
+        "target": "Assignment Data",
+        "weight": 2
+      },
+      {
+        "source": "Tech Mentoring",
+        "target": "Python / BERT",
+        "weight": 1
       }
     ]
   },
