@@ -4,6 +4,7 @@ import { useRef, useEffect, useState } from "react";
 import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
 import MermaidDiagram from "./MermaidDiagram";
+import { useEditor } from "@/app/providers";
 
 /* ===================== ipynb types ===================== */
 
@@ -101,12 +102,33 @@ function CellBlock({ cell }: { cell: NotebookCell }) {
 /* ===================== Markdown Cell ===================== */
 
 function MarkdownCell({ source }: { source: string }) {
+  const { openFile } = useEditor();
+  const components = {
+    ...markdownComponents,
+    a: ({ children, href }: { children?: React.ReactNode; href?: string }) => {
+      if (href?.startsWith("portfolio/")) {
+        const filePath = decodeURIComponent(href);
+        const displayName = filePath.split("/").pop()?.replace(/\.ipynb$/, "") ?? filePath;
+        return (
+          <button
+            type="button"
+            onClick={() => openFile(filePath, displayName)}
+            className="text-white font-semibold hover:text-accent-teal transition-colors cursor-pointer"
+          >
+            {children}
+          </button>
+        );
+      }
+      return (
+        <a href={href} className="text-accent-teal hover:underline" target="_blank" rel="noreferrer">
+          {children}
+        </a>
+      );
+    },
+  };
   return (
     <div className="px-4 py-3">
-      <ReactMarkdown
-        remarkPlugins={[remarkGfm]}
-        components={markdownComponents}
-      >
+      <ReactMarkdown remarkPlugins={[remarkGfm]} components={components}>
         {source}
       </ReactMarkdown>
     </div>

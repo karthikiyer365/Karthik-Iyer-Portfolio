@@ -331,17 +331,17 @@ def build_notebook(spec):
     cells = [
         md_cell(spec["hero"]),
         code_cell(
+            "outcomes = " + json.dumps(spec["outcomes"], indent=4) + "\n\n"
+            "pd.DataFrame(outcomes.items(), columns=[\"Metric\", \"Value\"])",
+            [_execresult_html(build_outcomes_html(spec["outcomes"]), 1)], 1),
+        code_cell(
             "# Radar (skill intensity) + Bubble cluster (implementation strength).\nfig",
             [_display_html(build_radar_bubble_html(
-                spec["radar"], spec["bubble_chart"], domain_map))], 1),
+                spec["radar"], spec["bubble_chart"], domain_map))], 2),
         code_cell(
             "# Technology Capability Network — concepts ↔ tools (bipartite, D3).",
             [_display_html(build_network_html(
-                spec["network_graph"], domain_map))], 2),
-        code_cell(
-            "outcomes = " + json.dumps(spec["outcomes"], indent=4) + "\n\n"
-            "pd.DataFrame(outcomes.items(), columns=[\"Metric\", \"Value\"])",
-            [_execresult_html(build_outcomes_html(spec["outcomes"]), 3)], 3),
+                spec["network_graph"], domain_map))], 3),
         md_cell(spec["storyline"]),
     ]
     return {
