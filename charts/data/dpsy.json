@@ -16,14 +16,14 @@
     "Workflow / Ops": "#4ec9b0"
   },
   "radar": {
-    "Financial Analytics": 9,
-    "Data Engineering": 7,
-    "Dashboarding": 8,
-    "Workflow / Ops": 7,
+    "Financial Analytics": 7,
+    "Data Engineering": 9,
+    "Dashboarding": 7,
+    "Workflow / Ops": 4,
     "Forecasting": 6,
-    "SQL / Python": 7,
+    "SQL / Python": 5,
     "Client Reporting": 8,
-    "Automation": 5
+    "Automation": 7
   },
   "bubble_chart": {
     "x_axis": "system",
@@ -75,36 +75,6 @@
           "Report Source Normalization"
         ],
         "evidence": "Built 5+ ETL-style consolidation workflows to reduce reporting inconsistency and mitigate data drift."
-      },
-      {
-        "system": "Inventory Optimization",
-        "domain": "Workflow / Ops",
-        "ownership": 7,
-        "implementation_strength": 7.0,
-        "complexity": 6.8,
-        "impact": 7.0,
-        "maturity": 6.5,
-        "subsystems": [
-          "Market Research",
-          "Stocking-Level Analysis",
-          "Operational Recommendations"
-        ],
-        "evidence": "Analyzed market and inventory signals to support stocking-level recommendations."
-      },
-      {
-        "system": "Forecasting Workbook",
-        "domain": "Data Engineering",
-        "ownership": 7,
-        "implementation_strength": 6.8,
-        "complexity": 6.5,
-        "impact": 6.8,
-        "maturity": 6.5,
-        "subsystems": [
-          "Excel Modeling",
-          "Python Analysis",
-          "Scenario Review"
-        ],
-        "evidence": "Used Python, SQL, Excel, and forecasting workflows to support recurring financial analysis."
       },
       {
         "system": "Audit Support Analytics",

@@ -31,6 +31,9 @@ __pycache__/
 # Local-only content reference (not part of the site)
 content/content-audit.md
 
+# Chart build outputs (local artifacts)
+outputs/
+
 # Logs
 npm-debug.log*
 yarn-debug.log*
