@@ -215,16 +215,31 @@ function MarkdownPreview({ content }: { content: string }) {
                 {children}
               </blockquote>
             ),
-            a: ({ children, href }) => (
-              <a
-                href={href}
-                className="text-accent-teal hover:underline"
-                target="_blank"
-                rel="noreferrer"
-              >
-                {children}
-              </a>
-            ),
+            a: ({ children, href }) => {
+              if (href?.startsWith("portfolio/")) {
+                const filePath = decodeURIComponent(href);
+                const displayName = filePath.split("/").pop()?.replace(/\.ipynb$/, "") ?? filePath;
+                return (
+                  <button
+                    type="button"
+                    onClick={(e) => { e.preventDefault(); e.stopPropagation(); openFile(filePath, displayName); }}
+                    className="text-accent-teal cursor-pointer"
+                  >
+                    {children}
+                  </button>
+                );
+              }
+              return (
+                <a
+                  href={href}
+                  className="text-accent-teal hover:underline"
+                  target="_blank"
+                  rel="noreferrer"
+                >
+                  {children}
+                </a>
+              );
+            },
             table: ({ children }) => (
               <div className="overflow-auto my-3">
                 <table className="border-collapse text-body w-full">

@@ -4,13 +4,40 @@ import type { FileNode } from "@/types/editor";
 
 const CONTENT_DIR = path.join(process.cwd(), "content");
 
+const SORT_ORDER: Record<string, string[]> = {
+  portfolio: [
+    "resume.md",
+    "education",
+    "experiences",
+    "projects",
+  ],
+  "portfolio/experiences": [
+    "Summary.ipynb",
+    "AI & Data Engineer - RestoreFast.ipynb",
+    "Teaching Assistant - GWU.ipynb",
+    "Technical Systems Admin - GWU.ipynb",
+    "Financial Analyst - DPSY & Associates.ipynb",
+    "SMO Lead - TechAnalogy.ipynb",
+  ],
+};
+
 function buildFileTree(dir: string, prefix: string): FileNode[] {
   if (!fs.existsSync(dir)) return [];
 
+  const order = SORT_ORDER[prefix];
   const entries = fs
     .readdirSync(dir, { withFileTypes: true })
     .filter((e) => !e.name.startsWith(".") && !e.name.endsWith(".ts"))
     .sort((a, b) => {
+      if (order) {
+        const ai = order.indexOf(a.name);
+        const bi = order.indexOf(b.name);
+        if (ai !== -1 || bi !== -1) {
+          if (ai === -1) return 1;
+          if (bi === -1) return -1;
+          return ai - bi;
+        }
+      }
       if (a.isDirectory() && !b.isDirectory()) return -1;
       if (!a.isDirectory() && b.isDirectory()) return 1;
       return a.name.localeCompare(b.name);

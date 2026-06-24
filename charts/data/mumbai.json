@@ -128,27 +128,27 @@
     "description": "Maps undergraduate systems to engineering concepts and implementation tools.",
     "nodes": [
       {
-        "id": "Scheduling System",
+        "id": "Train Scheduler",
         "type": "system",
         "domain": "Backend Engineering"
       },
       {
-        "id": "OpenCV Tracker",
+        "id": "CV Tracker",
         "type": "system",
         "domain": "AI / ML"
       },
       {
-        "id": "Database Coursework",
+        "id": "DB Systems",
         "type": "system",
         "domain": "Data Engineering"
       },
       {
-        "id": "Engineering Foundation",
+        "id": "CS Foundation",
         "type": "system",
         "domain": "Workflow / Ops"
       },
       {
-        "id": "Database Design",
+        "id": "DB Design",
         "type": "concept",
         "domain": "Data Engineering"
       },
@@ -158,14 +158,24 @@
         "domain": "AI / ML"
       },
       {
-        "id": "Application Architecture",
+        "id": "Web Dev",
         "type": "concept",
         "domain": "Backend Engineering"
       },
       {
-        "id": "Core CS",
+        "id": "Data Structures",
         "type": "concept",
         "domain": "Workflow / Ops"
+      },
+      {
+        "id": "NLP",
+        "type": "concept",
+        "domain": "AI / ML"
+      },
+      {
+        "id": "Cloud Infra",
+        "type": "concept",
+        "domain": "Backend Engineering"
       },
       {
         "id": "C++ / SQL",
@@ -183,59 +193,84 @@
         "category": "Computer Vision"
       },
       {
-        "id": "Web Stack",
+        "id": "Node.js",
         "type": "tool",
         "category": "Application Development"
       }
     ],
     "edges": [
       {
-        "source": "Scheduling System",
-        "target": "Database Design",
+        "source": "Train Scheduler",
+        "target": "DB Design",
         "weight": 3
       },
       {
-        "source": "Scheduling System",
-        "target": "Application Architecture",
+        "source": "Train Scheduler",
+        "target": "Cloud Infra",
         "weight": 2
       },
       {
-        "source": "OpenCV Tracker",
+        "source": "Train Scheduler",
+        "target": "Data Structures",
+        "weight": 2
+      },
+      {
+        "source": "Train Scheduler",
+        "target": "Web Dev",
+        "weight": 1
+      },
+      {
+        "source": "CV Tracker",
         "target": "Computer Vision",
         "weight": 3
       },
       {
-        "source": "OpenCV Tracker",
-        "target": "Core CS",
+        "source": "CV Tracker",
+        "target": "Data Structures",
         "weight": 2
       },
       {
-        "source": "Database Coursework",
-        "target": "Database Design",
+        "source": "CV Tracker",
+        "target": "NLP",
+        "weight": 1
+      },
+      {
+        "source": "DB Systems",
+        "target": "DB Design",
         "weight": 3
       },
       {
-        "source": "Database Coursework",
-        "target": "Core CS",
+        "source": "DB Systems",
+        "target": "Data Structures",
         "weight": 2
       },
       {
-        "source": "Engineering Foundation",
-        "target": "Application Architecture",
+        "source": "DB Systems",
+        "target": "Cloud Infra",
+        "weight": 2
+      },
+      {
+        "source": "CS Foundation",
+        "target": "Data Structures",
         "weight": 3
       },
       {
-        "source": "Engineering Foundation",
-        "target": "Core CS",
+        "source": "CS Foundation",
+        "target": "Web Dev",
         "weight": 2
       },
       {
-        "source": "Database Design",
+        "source": "CS Foundation",
+        "target": "NLP",
+        "weight": 2
+      },
+      {
+        "source": "DB Design",
         "target": "MongoDB / AWS",
         "weight": 3
       },
       {
-        "source": "Database Design",
+        "source": "DB Design",
         "target": "C++ / SQL",
         "weight": 2
       },
@@ -245,13 +280,33 @@
         "weight": 3
       },
       {
-        "source": "Application Architecture",
-        "target": "Web Stack",
+        "source": "Computer Vision",
+        "target": "C++ / SQL",
+        "weight": 2
+      },
+      {
+        "source": "Web Dev",
+        "target": "Node.js",
         "weight": 3
       },
       {
-        "source": "Core CS",
+        "source": "Web Dev",
+        "target": "MongoDB / AWS",
+        "weight": 2
+      },
+      {
+        "source": "Data Structures",
         "target": "C++ / SQL",
+        "weight": 3
+      },
+      {
+        "source": "NLP",
+        "target": "C++ / SQL",
+        "weight": 2
+      },
+      {
+        "source": "Cloud Infra",
+        "target": "MongoDB / AWS",
         "weight": 3
       }
     ]

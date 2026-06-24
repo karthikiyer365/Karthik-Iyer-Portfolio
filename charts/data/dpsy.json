@@ -98,12 +98,12 @@
     "description": "Maps financial analytics systems to reporting concepts and analysis tools.",
     "nodes": [
       {
-        "id": "CRM Risk Review",
+        "id": "CRM Review",
         "type": "system",
         "domain": "Workflow / Ops"
       },
       {
-        "id": "Client Dashboarding",
+        "id": "BI Dashboards",
         "type": "system",
         "domain": "Data Engineering"
       },
@@ -113,7 +113,7 @@
         "domain": "Data Engineering"
       },
       {
-        "id": "Financial Ops Support",
+        "id": "Financial Ops",
         "type": "system",
         "domain": "Workflow / Ops"
       },
@@ -123,7 +123,7 @@
         "domain": "Workflow / Ops"
       },
       {
-        "id": "ETL Normalization",
+        "id": "ETL Pipelines",
         "type": "concept",
         "domain": "Data Engineering"
       },
@@ -138,7 +138,17 @@
         "domain": "Workflow / Ops"
       },
       {
-        "id": "SQL / Python",
+        "id": "Data Modeling",
+        "type": "concept",
+        "domain": "Data Engineering"
+      },
+      {
+        "id": "Statistical Analysis",
+        "type": "concept",
+        "domain": "AI / ML"
+      },
+      {
+        "id": "Python / SQL",
         "type": "tool",
         "category": "Language"
       },
@@ -160,28 +170,43 @@
     ],
     "edges": [
       {
-        "source": "CRM Risk Review",
+        "source": "CRM Review",
         "target": "Risk Segmentation",
         "weight": 3
       },
       {
-        "source": "CRM Risk Review",
+        "source": "CRM Review",
         "target": "Audit Support",
         "weight": 2
       },
       {
-        "source": "Client Dashboarding",
+        "source": "CRM Review",
+        "target": "Statistical Analysis",
+        "weight": 2
+      },
+      {
+        "source": "CRM Review",
+        "target": "Data Modeling",
+        "weight": 1
+      },
+      {
+        "source": "BI Dashboards",
         "target": "Forecasting",
         "weight": 3
       },
       {
-        "source": "Client Dashboarding",
+        "source": "BI Dashboards",
         "target": "Audit Support",
         "weight": 2
       },
       {
+        "source": "BI Dashboards",
+        "target": "Statistical Analysis",
+        "weight": 2
+      },
+      {
         "source": "Data Consolidation",
-        "target": "ETL Normalization",
+        "target": "ETL Pipelines",
         "weight": 3
       },
       {
@@ -190,13 +215,28 @@
         "weight": 2
       },
       {
-        "source": "Financial Ops Support",
+        "source": "Data Consolidation",
+        "target": "Data Modeling",
+        "weight": 2
+      },
+      {
+        "source": "Data Consolidation",
+        "target": "Statistical Analysis",
+        "weight": 1
+      },
+      {
+        "source": "Financial Ops",
         "target": "Forecasting",
         "weight": 3
       },
       {
-        "source": "Financial Ops Support",
+        "source": "Financial Ops",
         "target": "Audit Support",
+        "weight": 2
+      },
+      {
+        "source": "Financial Ops",
+        "target": "Risk Segmentation",
         "weight": 2
       },
       {
@@ -206,16 +246,16 @@
       },
       {
         "source": "Risk Segmentation",
-        "target": "SQL / Python",
+        "target": "Python / SQL",
         "weight": 2
       },
       {
-        "source": "ETL Normalization",
-        "target": "SQL / Python",
+        "source": "ETL Pipelines",
+        "target": "Python / SQL",
         "weight": 3
       },
       {
-        "source": "ETL Normalization",
+        "source": "ETL Pipelines",
         "target": "Excel",
         "weight": 2
       },
@@ -237,6 +277,26 @@
       {
         "source": "Audit Support",
         "target": "CRM Data",
+        "weight": 2
+      },
+      {
+        "source": "Data Modeling",
+        "target": "Python / SQL",
+        "weight": 3
+      },
+      {
+        "source": "Data Modeling",
+        "target": "Excel",
+        "weight": 2
+      },
+      {
+        "source": "Statistical Analysis",
+        "target": "Excel",
+        "weight": 3
+      },
+      {
+        "source": "Statistical Analysis",
+        "target": "Power BI / Tableau",
         "weight": 2
       }
     ]

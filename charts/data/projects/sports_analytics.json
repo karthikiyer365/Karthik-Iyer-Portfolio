@@ -109,11 +109,11 @@
     ]
   },
   "network_graph": {
-    "title": "Technology Capability Network",
-    "description": "Maps the project's core techniques to the tools used to implement them.",
+    "title": "Sports Analytics Network",
+    "description": "Player data pipeline, valuation modeling, and interactive dashboards.",
     "nodes": [
       {
-        "id": "Player Data Pipeline",
+        "id": "Data Pipeline",
         "type": "system",
         "domain": "Data Engineering"
       },
@@ -123,27 +123,37 @@
         "domain": "AI / ML"
       },
       {
-        "id": "Prototype Dashboard",
+        "id": "Interactive Dashboard",
         "type": "system",
-        "domain": "Workflow / Ops"
+        "domain": "Data Engineering"
       },
       {
-        "id": "Performance Modeling",
+        "id": "ML Modeling",
         "type": "concept",
         "domain": "AI / ML"
       },
       {
-        "id": "Cross-Sport Benchmarking",
+        "id": "Cross-Sport Analysis",
         "type": "concept",
         "domain": "AI / ML"
       },
       {
-        "id": "Visualization",
+        "id": "BI Dashboards",
         "type": "concept",
-        "domain": "Workflow / Ops"
+        "domain": "Data Engineering"
       },
       {
-        "id": "R² Evaluation",
+        "id": "Model Evaluation",
+        "type": "concept",
+        "domain": "AI / ML"
+      },
+      {
+        "id": "PCA",
+        "type": "concept",
+        "domain": "AI / ML"
+      },
+      {
+        "id": "Feature Engineering",
         "type": "concept",
         "domain": "AI / ML"
       },
@@ -170,68 +180,98 @@
     ],
     "edges": [
       {
-        "source": "Player Data Pipeline",
-        "target": "Performance Modeling",
+        "source": "Data Pipeline",
+        "target": "Feature Engineering",
         "weight": 3
       },
       {
-        "source": "Player Data Pipeline",
-        "target": "Cross-Sport Benchmarking",
+        "source": "Data Pipeline",
+        "target": "PCA",
+        "weight": 2
+      },
+      {
+        "source": "Data Pipeline",
+        "target": "ML Modeling",
         "weight": 2
       },
       {
         "source": "Valuation Model",
-        "target": "Performance Modeling",
+        "target": "ML Modeling",
         "weight": 3
       },
       {
         "source": "Valuation Model",
-        "target": "R² Evaluation",
-        "weight": 2
-      },
-      {
-        "source": "Prototype Dashboard",
-        "target": "Visualization",
+        "target": "Model Evaluation",
         "weight": 3
       },
       {
-        "source": "Prototype Dashboard",
-        "target": "R² Evaluation",
+        "source": "Valuation Model",
+        "target": "Cross-Sport Analysis",
         "weight": 2
       },
       {
-        "source": "Performance Modeling",
+        "source": "Valuation Model",
+        "target": "Feature Engineering",
+        "weight": 2
+      },
+      {
+        "source": "Interactive Dashboard",
+        "target": "BI Dashboards",
+        "weight": 3
+      },
+      {
+        "source": "Interactive Dashboard",
+        "target": "Cross-Sport Analysis",
+        "weight": 2
+      },
+      {
+        "source": "ML Modeling",
         "target": "Scikit-learn",
         "weight": 3
       },
       {
-        "source": "Performance Modeling",
+        "source": "ML Modeling",
         "target": "Python / Pandas",
         "weight": 2
       },
       {
-        "source": "Cross-Sport Benchmarking",
+        "source": "Feature Engineering",
         "target": "Python / Pandas",
         "weight": 3
       },
       {
-        "source": "Cross-Sport Benchmarking",
+        "source": "Feature Engineering",
         "target": "Scikit-learn",
         "weight": 2
       },
       {
-        "source": "Visualization",
+        "source": "PCA",
+        "target": "Scikit-learn",
+        "weight": 3
+      },
+      {
+        "source": "PCA",
+        "target": "Python / Pandas",
+        "weight": 2
+      },
+      {
+        "source": "Model Evaluation",
+        "target": "Scikit-learn",
+        "weight": 3
+      },
+      {
+        "source": "BI Dashboards",
         "target": "Dash / Plotly",
         "weight": 3
       },
       {
-        "source": "Visualization",
+        "source": "BI Dashboards",
         "target": "GCP",
         "weight": 2
       },
       {
-        "source": "R² Evaluation",
-        "target": "Scikit-learn",
+        "source": "Cross-Sport Analysis",
+        "target": "Python / Pandas",
         "weight": 3
       }
     ]
