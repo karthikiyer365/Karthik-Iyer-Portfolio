@@ -3,9 +3,10 @@
 import { useState, useRef, useEffect } from "react";
 import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
-import { usePersona } from "@/app/providers";
+import { usePersona, useEditor, useGeneratedResume } from "@/app/providers";
 import { personas } from "@/lib/personas";
 import { ChatMessage, Persona } from "@/types/editor";
+import { GENERATED_RESUME_PATH, GENERATED_RESUME_LABEL } from "@/lib/resume";
 
 const TYPING_SPEED = 20;
 const THINKING_WORD_SPEED = 80;
@@ -23,8 +24,17 @@ function generateId() {
   return Date.now().toString() + Math.random().toString(36).slice(2, 9);
 }
 
+// ponytail: length heuristic — pasted JDs run long, chat questions are short.
+// Tune the threshold or add a keyword sniff if real misroutes show up.
+function isJobDescription(text: string) {
+  return text.trim().length > 300;
+}
+
 export default function ChatPanel() {
   const { persona, setPersona } = usePersona();
+  const { openFile } = useEditor();
+  const { setMd } = useGeneratedResume();
+  const [isTailoring, setIsTailoring] = useState(false);
   const [messages, setMessages] = useState<ChatMessage[]>(initialMessages);
   const [input, setInput] = useState("");
   const messagesEndRef = useRef<HTMLDivElement>(null);
@@ -218,7 +228,7 @@ export default function ChatPanel() {
   const handleKeyDown = (e: React.KeyboardEvent) => {
     if (e.key === "Enter" && !e.shiftKey) {
       e.preventDefault();
-      handleSend();
+      handleSubmit();
     }
   };
 
@@ -231,6 +241,40 @@ export default function ChatPanel() {
     sessionIdRef.current = generateId();
     setMessages(initialMessages);
     setCurrentState([]);
+  };
+
+  // Single submit: a long paste routes to resume tailoring, a short question to chat.
+  const handleSubmit = () => {
+    if (!input.trim() || isTailoring) return;
+    if (isJobDescription(input)) handleTailor();
+    else handleSend();
+  };
+
+  // Paste a JD into the input, submit -> generate a tailored resume that
+  // opens in the center editor (not the chat).
+  const handleTailor = async () => {
+    const jdText = input.trim();
+    if (!jdText || isTailoring) return;
+    setIsTailoring(true);
+    setMd(null);
+    openFile(GENERATED_RESUME_PATH, GENERATED_RESUME_LABEL);
+    try {
+      const res = await fetch("/api/resume/generate", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ jdText, persona }),
+      });
+      const data = (await res.json()) as { md?: string; error?: string };
+      setMd(
+        data.md && data.md.trim()
+          ? data.md
+          : `Could not generate resume${data.error ? `: ${data.error}` : "."}`
+      );
+    } catch {
+      setMd("Could not generate resume. Please try again.");
+    } finally {
+      setIsTailoring(false);
+    }
   };
 
   return (
@@ -359,7 +403,7 @@ export default function ChatPanel() {
               value={input}
               onChange={(e) => setInput(e.target.value)}
               onKeyDown={handleKeyDown}
-              placeholder="questions "
+              placeholder="ask a question, or paste a job description"
               rows={2}
               className="w-full bg-transparent text-body text-ink placeholder-ink-faint resize-none focus:outline-none"
             />
@@ -383,20 +427,28 @@ export default function ChatPanel() {
               ))}
             </select>
             <button
-              onClick={handleSend}
-              disabled={!input.trim()}
+              onClick={handleSubmit}
+              disabled={!input.trim() || isTailoring}
               className="w-8 h-8 rounded-full bg-[#4a4a4a] flex items-center justify-center disabled:opacity-30 disabled:cursor-not-allowed hover:bg-[#5a5a5a] transition-colors"
-              title="Send"
+              title={
+                isJobDescription(input)
+                  ? "Tailor a resume to this job description"
+                  : "Send"
+              }
             >
-              <svg className="w-4 h-4" viewBox="0 0 24 24" fill="none">
-                <path
-                  d="M12 19V5M12 5l-6 6M12 5l6 6"
-                  stroke="#1e1e1e"
-                  strokeWidth={2.5}
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                />
-              </svg>
+              {isTailoring ? (
+                <span className="w-3.5 h-3.5 border-2 border-[#1e1e1e] border-t-transparent rounded-full animate-spin" />
+              ) : (
+                <svg className="w-4 h-4" viewBox="0 0 24 24" fill="none">
+                  <path
+                    d="M12 19V5M12 5l-6 6M12 5l6 6"
+                    stroke="#1e1e1e"
+                    strokeWidth={2.5}
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                  />
+                </svg>
+              )}
             </button>
           </div>
         </div>

@@ -1,8 +1,9 @@
 "use client";
 
 import { useState } from "react";
-import { useEditor, useContent, useSettings } from "@/app/providers";
+import { useEditor, useContent, useSettings, useGeneratedResume } from "@/app/providers";
 import { SETTINGS_PATH, SETTINGS_LABEL } from "@/lib/settings";
+import { GENERATED_RESUME_PATH, GENERATED_RESUME_LABEL } from "@/lib/resume";
 import EditorTabs from "./EditorTabs";
 import SettingsView from "./settings/SettingsView";
 import CursorCaret from "./CursorCaret";
@@ -11,7 +12,7 @@ import remarkGfm from "remark-gfm";
 import MermaidDiagram from "./MermaidDiagram";
 import CareerTimeline from "./CareerTimeline";
 import NotebookRenderer from "./NotebookRenderer";
-import { Mail, Phone, Link } from "lucide-react";
+import { Mail, Phone, Link, Download } from "lucide-react";
 
 type ViewMode = "code" | "preview";
 
@@ -50,6 +51,15 @@ export default function EditorWorkspace() {
       <div className="flex-1 flex flex-col bg-bg overflow-hidden">
         <EditorTabs />
         <SettingsView />
+      </div>
+    );
+  }
+
+  if (activeFile === GENERATED_RESUME_PATH) {
+    return (
+      <div className="flex-1 flex flex-col bg-bg overflow-hidden">
+        <EditorTabs />
+        <GeneratedResumeView />
       </div>
     );
   }
@@ -300,6 +310,46 @@ function MarkdownPreview({ content }: { content: string }) {
           {content}
         </ReactMarkdown>
       </div>
+    </div>
+  );
+}
+
+/* ===================== Generated Resume ===================== */
+
+function GeneratedResumeView() {
+  const { md } = useGeneratedResume();
+  const content = md ?? "";
+
+  const download = () => {
+    const blob = new Blob([content], { type: "text/markdown" });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement("a");
+    a.href = url;
+    a.download = GENERATED_RESUME_LABEL;
+    a.click();
+    URL.revokeObjectURL(url);
+  };
+
+  if (!content.trim()) {
+    return (
+      <div className="flex-1 flex items-center justify-center text-ink-muted text-body">
+        Generating…
+      </div>
+    );
+  }
+
+  return (
+    <div className="flex-1 flex flex-col overflow-hidden">
+      <div className="flex items-center justify-end h-9 px-4 shrink-0 border-b border-line-subtle">
+        <button
+          onClick={download}
+          className="flex items-center gap-1.5 px-3 py-1 rounded bg-line text-ink-secondary hover:text-ink text-meta transition-colors"
+        >
+          <Download className="w-3.5 h-3.5" />
+          Download .md
+        </button>
+      </div>
+      <MarkdownPreview content={content} />
     </div>
   );
 }

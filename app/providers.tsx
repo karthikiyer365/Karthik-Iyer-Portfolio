@@ -95,6 +95,37 @@ export function usePersona() {
 }
 
 /* =========================
+   Generated Resume Context
+========================= */
+
+interface GeneratedResumeContextType {
+  md: string | null;
+  setMd: (md: string | null) => void;
+}
+
+const GeneratedResumeContext = createContext<GeneratedResumeContextType | null>(
+  null
+);
+
+function GeneratedResumeProvider({ children }: { children: ReactNode }) {
+  const [md, setMd] = useState<string | null>(null);
+  return (
+    <GeneratedResumeContext.Provider value={{ md, setMd }}>
+      {children}
+    </GeneratedResumeContext.Provider>
+  );
+}
+
+export function useGeneratedResume() {
+  const context = useContext(GeneratedResumeContext);
+  if (!context)
+    throw new Error(
+      "useGeneratedResume must be used within GeneratedResumeProvider"
+    );
+  return context;
+}
+
+/* =========================
    Content Context
 ========================= */
 
@@ -168,7 +199,9 @@ export function AppProviders({ children }: { children: ReactNode }) {
   return (
     <EditorProvider>
       <PersonaProvider>
-        <SettingsProvider>{children}</SettingsProvider>
+        <GeneratedResumeProvider>
+          <SettingsProvider>{children}</SettingsProvider>
+        </GeneratedResumeProvider>
       </PersonaProvider>
     </EditorProvider>
   );
