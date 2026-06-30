@@ -6,7 +6,7 @@ import remarkGfm from "remark-gfm";
 import { usePersona, useEditor, useGeneratedResume } from "@/app/providers";
 import { personas } from "@/lib/personas";
 import { ChatMessage, Persona } from "@/types/editor";
-import { GENERATED_RESUME_PATH, GENERATED_RESUME_LABEL } from "@/lib/resume";
+import { GENERATED_RESUME_PATH, GENERATED_RESUME_LABEL, type ResumeData } from "@/lib/resume";
 
 const TYPING_SPEED = 20;
 const THINKING_WORD_SPEED = 80;
@@ -33,8 +33,11 @@ function isJobDescription(text: string) {
 export default function ChatPanel() {
   const { persona, setPersona } = usePersona();
   const { openFile } = useEditor();
-  const { setMd } = useGeneratedResume();
+  const { setResume } = useGeneratedResume();
   const [isTailoring, setIsTailoring] = useState(false);
+  const [canGenerate, setCanGenerate] = useState(false);
+  const pendingJdRef = useRef<{ jdText: string; persona: Persona } | null>(null);
+  const answerStartRef = useRef(0);
   const [messages, setMessages] = useState<ChatMessage[]>(initialMessages);
   const [input, setInput] = useState("");
   const messagesEndRef = useRef<HTMLDivElement>(null);
@@ -243,35 +246,79 @@ export default function ChatPanel() {
     setCurrentState([]);
   };
 
-  // Single submit: a long paste routes to resume tailoring, a short question to chat.
+  // Single submit: a long paste routes to the resume Q&A flow, a short question to chat.
   const handleSubmit = () => {
     if (!input.trim() || isTailoring) return;
-    if (isJobDescription(input)) handleTailor();
+    if (isJobDescription(input)) handleAskQuestions();
     else handleSend();
   };
 
-  // Paste a JD into the input, submit -> generate a tailored resume that
-  // opens in the center editor (not the chat).
-  const handleTailor = async () => {
+  // Step 1: a pasted JD triggers RAG-grounded, leading-but-open follow-up questions
+  // in the chat. The candidate answers freely, then hits "Generate résumé".
+  const handleAskQuestions = async () => {
     const jdText = input.trim();
     if (!jdText || isTailoring) return;
+    setMessages((prev) => [
+      ...prev,
+      { id: generateId(), role: "user", content: "📋 Pasted a job description" },
+    ]);
+    setInput("");
     setIsTailoring(true);
-    setMd(null);
+    pendingJdRef.current = { jdText, persona };
+    setCanGenerate(false);
+    try {
+      const res = await fetch("/api/resume/questions", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ jdText, persona }),
+      });
+      const json = (await res.json()) as { questions?: string[]; error?: string };
+      const qs = json.questions ?? [];
+      const body = qs.length
+        ? "A few quick questions about the role — your answers help me position Karthik's resume for it. Answer any that apply, then hit **Generate résumé**:\n\n" +
+          qs.map((q, i) => `${i + 1}. ${q}`).join("\n")
+        : "I couldn't draft questions, but I can still tailor the resume — hit **Generate résumé**.";
+      setMessages((prev) => {
+        const next = [...prev, { id: generateId(), role: "assistant" as const, content: body }];
+        answerStartRef.current = next.length;
+        return next;
+      });
+      setCanGenerate(true);
+    } catch {
+      setMessages((prev) => [
+        ...prev,
+        { id: generateId(), role: "assistant", content: "Something went wrong drafting questions. Hit **Generate résumé** to proceed anyway." },
+      ]);
+      setCanGenerate(true);
+    } finally {
+      setIsTailoring(false);
+    }
+  };
+
+  // Step 2: generate the tailored resume in the center editor, folding in any answers
+  // the candidate typed after the questions.
+  const handleGenerate = async () => {
+    const ctx = pendingJdRef.current;
+    if (!ctx || isTailoring) return;
+    const answers = messages
+      .slice(answerStartRef.current)
+      .filter((m) => m.role === "user")
+      .map((m) => m.content)
+      .join("\n");
+    setIsTailoring(true);
+    setResume({ status: "loading" });
     openFile(GENERATED_RESUME_PATH, GENERATED_RESUME_LABEL);
     try {
       const res = await fetch("/api/resume/generate", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ jdText, persona }),
+        body: JSON.stringify({ jdText: ctx.jdText, persona: ctx.persona, answers }),
       });
-      const data = (await res.json()) as { md?: string; error?: string };
-      setMd(
-        data.md && data.md.trim()
-          ? data.md
-          : `Could not generate resume${data.error ? `: ${data.error}` : "."}`
-      );
+      const json = (await res.json()) as { data?: ResumeData; error?: string };
+      if (json.data) setResume({ status: "ready", data: json.data });
+      else setResume({ status: "error", message: json.error ?? "generation failed" });
     } catch {
-      setMd("Could not generate resume. Please try again.");
+      setResume({ status: "error", message: "Please try again." });
     } finally {
       setIsTailoring(false);
     }
@@ -397,6 +444,15 @@ export default function ChatPanel() {
       </div>
 
       <div className="p-3 shrink-0">
+        {canGenerate && (
+          <button
+            onClick={handleGenerate}
+            disabled={isTailoring}
+            className="w-full mb-2 py-2 rounded-xl bg-accent-pink/20 text-accent-pink text-meta font-medium border border-accent-pink/40 hover:bg-accent-pink/30 disabled:opacity-40 transition-colors"
+          >
+            Generate résumé →
+          </button>
+        )}
         <div className="bg-[#3C3C3C] rounded-xl border border-[#3a3a3a]">
           <div className="px-2 pt-3">
             <textarea
@@ -432,7 +488,7 @@ export default function ChatPanel() {
               className="w-8 h-8 rounded-full bg-[#4a4a4a] flex items-center justify-center disabled:opacity-30 disabled:cursor-not-allowed hover:bg-[#5a5a5a] transition-colors"
               title={
                 isJobDescription(input)
-                  ? "Tailor a resume to this job description"
+                  ? "Ask tailoring questions for this job description"
                   : "Send"
               }
             >

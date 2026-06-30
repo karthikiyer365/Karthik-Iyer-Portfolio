@@ -3,7 +3,8 @@
 import { useState } from "react";
 import { useEditor, useContent, useSettings, useGeneratedResume } from "@/app/providers";
 import { SETTINGS_PATH, SETTINGS_LABEL } from "@/lib/settings";
-import { GENERATED_RESUME_PATH, GENERATED_RESUME_LABEL } from "@/lib/resume";
+import { GENERATED_RESUME_PATH } from "@/lib/resume";
+import ResumeDocument from "./ResumeDocument";
 import EditorTabs from "./EditorTabs";
 import SettingsView from "./settings/SettingsView";
 import CursorCaret from "./CursorCaret";
@@ -317,23 +318,20 @@ function MarkdownPreview({ content }: { content: string }) {
 /* ===================== Generated Resume ===================== */
 
 function GeneratedResumeView() {
-  const { md } = useGeneratedResume();
-  const content = md ?? "";
+  const { resume } = useGeneratedResume();
 
-  const download = () => {
-    const blob = new Blob([content], { type: "text/markdown" });
-    const url = URL.createObjectURL(blob);
-    const a = document.createElement("a");
-    a.href = url;
-    a.download = GENERATED_RESUME_LABEL;
-    a.click();
-    URL.revokeObjectURL(url);
-  };
-
-  if (!content.trim()) {
+  if (!resume || resume.status === "loading") {
     return (
       <div className="flex-1 flex items-center justify-center text-ink-muted text-body">
-        Generating…
+        Generating tailored resume…
+      </div>
+    );
+  }
+
+  if (resume.status === "error") {
+    return (
+      <div className="flex-1 flex items-center justify-center text-ink-muted text-body">
+        Could not generate resume. {resume.message}
       </div>
     );
   }
@@ -342,14 +340,16 @@ function GeneratedResumeView() {
     <div className="flex-1 flex flex-col overflow-hidden">
       <div className="flex items-center justify-end h-9 px-4 shrink-0 border-b border-line-subtle">
         <button
-          onClick={download}
+          onClick={() => window.print()}
           className="flex items-center gap-1.5 px-3 py-1 rounded bg-line text-ink-secondary hover:text-ink text-meta transition-colors"
         >
           <Download className="w-3.5 h-3.5" />
-          Download .md
+          Download PDF
         </button>
       </div>
-      <MarkdownPreview content={content} />
+      <div className="flex-1 overflow-auto bg-surface-1 py-6">
+        <ResumeDocument data={resume.data} />
+      </div>
     </div>
   );
 }

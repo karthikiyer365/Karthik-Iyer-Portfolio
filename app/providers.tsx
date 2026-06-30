@@ -10,6 +10,7 @@ import React, {
 import { EditorState, EditorAction, FileNode, Persona } from "@/types/editor";
 import { editorReducer, initialEditorState } from "@/lib/editorState";
 import type { Subsection } from "@/lib/settings";
+import type { ResumeState } from "@/lib/resume";
 
 /* =========================
    Editor Context
@@ -99,8 +100,8 @@ export function usePersona() {
 ========================= */
 
 interface GeneratedResumeContextType {
-  md: string | null;
-  setMd: (md: string | null) => void;
+  resume: ResumeState | null;
+  setResume: (r: ResumeState | null) => void;
 }
 
 const GeneratedResumeContext = createContext<GeneratedResumeContextType | null>(
@@ -108,9 +109,9 @@ const GeneratedResumeContext = createContext<GeneratedResumeContextType | null>(
 );
 
 function GeneratedResumeProvider({ children }: { children: ReactNode }) {
-  const [md, setMd] = useState<string | null>(null);
+  const [resume, setResume] = useState<ResumeState | null>(null);
   return (
-    <GeneratedResumeContext.Provider value={{ md, setMd }}>
+    <GeneratedResumeContext.Provider value={{ resume, setResume }}>
       {children}
     </GeneratedResumeContext.Provider>
   );

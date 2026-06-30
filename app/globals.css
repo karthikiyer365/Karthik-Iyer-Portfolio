@@ -139,3 +139,38 @@ body {
 .notebook-html-output img {
   max-width: 100%;
 }
+
+/* ===== Generated resume (light surface, print target) ===== */
+.resume-page {
+  background: #fff;
+  color: #1a1a1a;
+  font-family: "Times New Roman", Times, Garamond, serif;
+  box-shadow: 0 1px 16px rgba(0, 0, 0, 0.45);
+}
+
+/* Print only the resume node, at exact page size, no app chrome. */
+@media print {
+  @page {
+    size: letter;
+    margin: 0;
+  }
+  html,
+  body {
+    overflow: visible !important;
+    height: auto !important;
+  }
+  body * {
+    visibility: hidden !important;
+  }
+  #print-resume,
+  #print-resume * {
+    visibility: visible !important;
+  }
+  #print-resume {
+    position: absolute;
+    left: 0;
+    top: 0;
+    margin: 0 !important;
+    box-shadow: none !important;
+  }
+}
