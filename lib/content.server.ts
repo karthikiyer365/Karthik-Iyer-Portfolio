@@ -6,13 +6,13 @@ const CONTENT_DIR = path.join(process.cwd(), "content");
 
 const SORT_ORDER: Record<string, string[]> = {
   portfolio: [
-    "resume.md",
+    "Summary.ipynb",
+    "Resume.md",
     "education",
     "experiences",
     "projects",
   ],
   "portfolio/experiences": [
-    "Summary.ipynb",
     "AI & Data Engineer - RestoreFast.ipynb",
     "Teaching Assistant - GWU.ipynb",
     "Technical Systems Admin - GWU.ipynb",

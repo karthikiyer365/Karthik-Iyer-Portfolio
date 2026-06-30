@@ -105,7 +105,7 @@ export default function LandingPage({ onNavigate }: LandingPageProps) {
                 <FolderOpen className="h-4 w-4 ml-1" aria-hidden="true" />
               }
               label="Open Portfolio"
-              onClick={() => onNavigate?.("portfolio/resume.md")}
+              onClick={() => onNavigate?.("portfolio/Summary.ipynb")}
             />
             <ActionButton
               icon={
