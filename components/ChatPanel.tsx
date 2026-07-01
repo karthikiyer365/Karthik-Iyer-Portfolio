@@ -24,10 +24,18 @@ function generateId() {
   return Date.now().toString() + Math.random().toString(36).slice(2, 9);
 }
 
-// ponytail: length heuristic — pasted JDs run long, chat questions are short.
-// Tune the threshold or add a keyword sniff if real misroutes show up.
+// Detect a pasted job description vs a normal chat message. Length alone misfires,
+// so: very long => JD; short => chat; medium => needs JD-structural signals (keywords
+// or a multi-line/bulleted shape). ponytail: heuristic, not an LLM call.
 function isJobDescription(text: string) {
-  return text.trim().length > 300;
+  const t = text.trim();
+  if (t.length < 150) return false;
+  if (t.length > 700) return true;
+  const signals = t.match(
+    /responsibilit|requirement|qualification|years?\s+of\b|experience (?:with|in)|proficient|we(?:'re| are)\s+looking|you(?:'ll| will)\b|the role|about the (?:role|team|company)|bachelor|master's|degree|skills?:|nice to have|preferred|hiring|full[- ]?time|salary|benefits/gi
+  );
+  const lines = t.split(/\n/).filter((l) => l.trim()).length;
+  return (signals?.length ?? 0) >= 2 || lines >= 6;
 }
 
 export default function ChatPanel() {
@@ -35,9 +43,10 @@ export default function ChatPanel() {
   const { openFile } = useEditor();
   const { setResume } = useGeneratedResume();
   const [isTailoring, setIsTailoring] = useState(false);
-  const [canGenerate, setCanGenerate] = useState(false);
+  // Resume flow phase: after a JD is pasted we ask questions and wait for the
+  // recruiter's answers; their next submit generates the resume.
+  const [awaitingAnswers, setAwaitingAnswers] = useState(false);
   const pendingJdRef = useRef<{ jdText: string; persona: Persona } | null>(null);
-  const answerStartRef = useRef(0);
   const [messages, setMessages] = useState<ChatMessage[]>(initialMessages);
   const [input, setInput] = useState("");
   const messagesEndRef = useRef<HTMLDivElement>(null);
@@ -246,11 +255,22 @@ export default function ChatPanel() {
     setCurrentState([]);
   };
 
-  // Single submit: a long paste routes to the resume Q&A flow, a short question to chat.
+  // One submit button, three behaviors by phase:
+  //  - awaiting answers -> this input is the recruiter's answers -> generate.
+  //  - looks like a JD  -> start the flow (ask tailoring questions).
+  //  - otherwise        -> normal chat.
   const handleSubmit = () => {
     if (!input.trim() || isTailoring) return;
-    if (isJobDescription(input)) handleAskQuestions();
-    else handleSend();
+    if (awaitingAnswers && pendingJdRef.current) {
+      const answers = input.trim();
+      setMessages((prev) => [...prev, { id: generateId(), role: "user", content: answers }]);
+      setInput("");
+      handleGenerate(answers);
+    } else if (isJobDescription(input)) {
+      handleAskQuestions();
+    } else {
+      handleSend();
+    }
   };
 
   // Step 1: a pasted JD triggers RAG-grounded, leading-but-open follow-up questions
@@ -265,7 +285,7 @@ export default function ChatPanel() {
     setInput("");
     setIsTailoring(true);
     pendingJdRef.current = { jdText, persona };
-    setCanGenerate(false);
+    setAwaitingAnswers(false);
     try {
       const res = await fetch("/api/resume/questions", {
         method: "POST",
@@ -275,36 +295,28 @@ export default function ChatPanel() {
       const json = (await res.json()) as { questions?: string[]; error?: string };
       const qs = json.questions ?? [];
       const body = qs.length
-        ? "A few quick questions about the role — your answers help me position Karthik's resume for it. Answer any that apply, then hit **Generate résumé**:\n\n" +
+        ? "A few quick questions about the role — your answers help me position Karthik's resume for it. Reply with anything that applies (or just send to skip) and I'll generate the resume:\n\n" +
           qs.map((q, i) => `${i + 1}. ${q}`).join("\n")
-        : "I couldn't draft questions, but I can still tailor the resume — hit **Generate résumé**.";
-      setMessages((prev) => {
-        const next = [...prev, { id: generateId(), role: "assistant" as const, content: body }];
-        answerStartRef.current = next.length;
-        return next;
-      });
-      setCanGenerate(true);
+        : "Send any notes about the role (or just send to skip) and I'll generate the resume.";
+      setMessages((prev) => [...prev, { id: generateId(), role: "assistant" as const, content: body }]);
+      setAwaitingAnswers(true);
     } catch {
       setMessages((prev) => [
         ...prev,
-        { id: generateId(), role: "assistant", content: "Something went wrong drafting questions. Hit **Generate résumé** to proceed anyway." },
+        { id: generateId(), role: "assistant", content: "Something went wrong drafting questions — send anything and I'll generate the resume anyway." },
       ]);
-      setCanGenerate(true);
+      setAwaitingAnswers(true);
     } finally {
       setIsTailoring(false);
     }
   };
 
-  // Step 2: generate the tailored resume in the center editor, folding in any answers
-  // the candidate typed after the questions.
-  const handleGenerate = async () => {
+  // Second submit after the questions: generate the tailored resume in the center
+  // editor, folding in the recruiter's answers.
+  const handleGenerate = async (answers: string) => {
     const ctx = pendingJdRef.current;
-    if (!ctx || isTailoring) return;
-    const answers = messages
-      .slice(answerStartRef.current)
-      .filter((m) => m.role === "user")
-      .map((m) => m.content)
-      .join("\n");
+    if (!ctx) return;
+    setAwaitingAnswers(false);
     setIsTailoring(true);
     setResume({ status: "loading" });
     openFile(GENERATED_RESUME_PATH, GENERATED_RESUME_LABEL);
@@ -444,22 +456,17 @@ export default function ChatPanel() {
       </div>
 
       <div className="p-3 shrink-0">
-        {canGenerate && (
-          <button
-            onClick={handleGenerate}
-            disabled={isTailoring}
-            className="w-full mb-2 py-2 rounded-xl bg-accent-pink/20 text-accent-pink text-meta font-medium border border-accent-pink/40 hover:bg-accent-pink/30 disabled:opacity-40 transition-colors"
-          >
-            Generate résumé →
-          </button>
-        )}
         <div className="bg-[#3C3C3C] rounded-xl border border-[#3a3a3a]">
           <div className="px-2 pt-3">
             <textarea
               value={input}
               onChange={(e) => setInput(e.target.value)}
               onKeyDown={handleKeyDown}
-              placeholder="ask a question, or paste a job description"
+              placeholder={
+                awaitingAnswers
+                  ? "answer above, then send to generate the resume"
+                  : "ask a question, or paste a job description"
+              }
               rows={2}
               className="w-full bg-transparent text-body text-ink placeholder-ink-faint resize-none focus:outline-none"
             />
@@ -487,7 +494,9 @@ export default function ChatPanel() {
               disabled={!input.trim() || isTailoring}
               className="w-8 h-8 rounded-full bg-[#4a4a4a] flex items-center justify-center disabled:opacity-30 disabled:cursor-not-allowed hover:bg-[#5a5a5a] transition-colors"
               title={
-                isJobDescription(input)
+                awaitingAnswers
+                  ? "Generate résumé from your answers"
+                  : isJobDescription(input)
                   ? "Ask tailoring questions for this job description"
                   : "Send"
               }
