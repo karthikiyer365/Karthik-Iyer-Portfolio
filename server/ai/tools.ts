@@ -1,17 +1,15 @@
-import { getRelevantHistory, getHistory } from "./memory";
+import { getRelevantHistory } from "./memory";
 import {
   isPineconeConfigured,
   queryPineconeByText,
   type PineconeSearchHit,
 } from "./pinecone";
-import { callOpenRouterChat } from "./llm";
 
 export type ToolDef = { type: "function"; function: { name: string; description: string; parameters: { type: "object"; properties: Record<string, { type: string; description?: string; items?: { type: string } }>; required: string[] } } };
 
 export const TOOL_DEFS: ToolDef[] = [
   { type: "function", function: { name: "fetch_relevant_chat_history", description: "Retrieve relevant factoids from session chat history by keywords.", parameters: { type: "object", properties: { query: { type: "string", description: "Keywords to search" } }, required: ["query"] } } },
   { type: "function", function: { name: "get_relevant_info", description: "Semantic search over knowledge base (resume, portfolio).", parameters: { type: "object", properties: { query: { type: "string", description: "Search query" } }, required: ["query"] } } },
-  { type: "function", function: { name: "generate_document", description: "Compile fit-match document from job description and highlights.", parameters: { type: "object", properties: { jobDescription: { type: "string", description: "Job description" }, highlights: { type: "array", items: { type: "string" }, description: "Bullet highlights" } }, required: ["jobDescription", "highlights"] } } },
 ];
 
 /**
@@ -52,35 +50,6 @@ export async function executeTool(
         console.error("[get_relevant_info] Pinecone error", { query: typeof args.query === "string" ? args.query : "", error: msg });
         return `Pinecone search failed: ${msg}. Ensure the index has integrated embedding (text search) and PINECONE_HOST is set for serverless.`;
       }
-    }
-    case "generate_document": {
-      const jobDescription = typeof args.jobDescription === "string" ? args.jobDescription : "";
-      const rawHighlights = args.highlights;
-      const highlights = Array.isArray(rawHighlights)
-        ? rawHighlights.map((h) => String(h))
-        : [String(rawHighlights ?? "")];
-      const history = getHistory(sessionId);
-      const contextSnippet =
-        history.length > 0
-          ? history
-              .slice(-10)
-              .map((e) => `${e.role}: ${e.content}`)
-              .join("\n")
-          : "No prior chat context.";
-      const result = await callOpenRouterChat({
-        messages: [
-          {
-            role: "system",
-            content:
-              "You are a resume writer. Given a job description and bullet-point highlights from a conversation, produce a short fit-match document in markdown: a brief intro paragraph, then a bullet list aligning the candidate's highlights with the role. Use the chat context below only for tone and extra detail. Output valid markdown only.",
-          },
-          {
-            role: "user",
-            content: `Job description:\n${jobDescription}\n\nHighlights:\n${highlights.join("\n")}\n\nRecent chat context:\n${contextSnippet}`,
-          },
-        ],
-      });
-      return result.content ?? "";
     }
     default:
       return `Unknown tool: ${toolName}`;

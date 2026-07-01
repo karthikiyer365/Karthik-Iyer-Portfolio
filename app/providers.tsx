@@ -10,6 +10,7 @@ import React, {
 import { EditorState, EditorAction, FileNode, Persona } from "@/types/editor";
 import { editorReducer, initialEditorState } from "@/lib/editorState";
 import type { Subsection } from "@/lib/settings";
+import type { ResumeState } from "@/lib/resume";
 
 /* =========================
    Editor Context
@@ -95,6 +96,37 @@ export function usePersona() {
 }
 
 /* =========================
+   Generated Resume Context
+========================= */
+
+interface GeneratedResumeContextType {
+  resume: ResumeState | null;
+  setResume: (r: ResumeState | null) => void;
+}
+
+const GeneratedResumeContext = createContext<GeneratedResumeContextType | null>(
+  null
+);
+
+function GeneratedResumeProvider({ children }: { children: ReactNode }) {
+  const [resume, setResume] = useState<ResumeState | null>(null);
+  return (
+    <GeneratedResumeContext.Provider value={{ resume, setResume }}>
+      {children}
+    </GeneratedResumeContext.Provider>
+  );
+}
+
+export function useGeneratedResume() {
+  const context = useContext(GeneratedResumeContext);
+  if (!context)
+    throw new Error(
+      "useGeneratedResume must be used within GeneratedResumeProvider"
+    );
+  return context;
+}
+
+/* =========================
    Content Context
 ========================= */
 
@@ -168,7 +200,9 @@ export function AppProviders({ children }: { children: ReactNode }) {
   return (
     <EditorProvider>
       <PersonaProvider>
-        <SettingsProvider>{children}</SettingsProvider>
+        <GeneratedResumeProvider>
+          <SettingsProvider>{children}</SettingsProvider>
+        </GeneratedResumeProvider>
       </PersonaProvider>
     </EditorProvider>
   );
