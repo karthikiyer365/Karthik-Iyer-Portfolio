@@ -1,16 +1,15 @@
 "use client";
 
-import { Menu, MessageSquare } from "lucide-react";
+import { Menu } from "lucide-react";
 import { useEditor, useSettings } from "@/app/providers";
 import { SETTINGS_PATH, SETTINGS_LABEL } from "@/lib/settings";
 
 type TopBarProps = {
   onClose?: () => void;
   onOpenFiles?: () => void;
-  onOpenChat?: () => void;
 };
 
-export default function TopBar({ onClose, onOpenFiles, onOpenChat }: TopBarProps) {
+export default function TopBar({ onClose, onOpenFiles }: TopBarProps) {
   const { openFile } = useEditor();
   const { setActiveSubsection } = useSettings();
 
@@ -53,7 +52,7 @@ export default function TopBar({ onClose, onOpenFiles, onOpenChat }: TopBarProps
           aria-label="Open files"
           title="Files"
           onClick={onOpenFiles}
-          className="md:hidden ml-1 p-1 text-ink-muted hover:text-ink-secondary transition-colors"
+          className="md:hidden ml-1 p-1 text-accent-pink hover:brightness-110 transition-all"
         >
           <Menu className="w-[18px] h-[18px]" />
         </button>
@@ -66,16 +65,6 @@ export default function TopBar({ onClose, onOpenFiles, onOpenChat }: TopBarProps
 
       {/* Right - Utility Icons */}
       <div className="flex items-center gap-3">
-        {/* Mobile-only: open chat drawer */}
-        <button
-          type="button"
-          aria-label="Open chat"
-          title="Chat"
-          onClick={onOpenChat}
-          className="md:hidden p-1 text-ink-muted hover:text-ink-secondary transition-colors"
-        >
-          <MessageSquare className="w-[18px] h-[18px]" />
-        </button>
         {/* Search */}
         <button
           className="p-1 text-ink-muted hover:text-ink-secondary transition-colors"

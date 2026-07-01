@@ -1,6 +1,7 @@
 "use client";
 
 import { useCallback, useEffect, useState } from "react";
+import { MessageSquare } from "lucide-react";
 import LandingPage from "@/components/LandingPage";
 import TopBar from "@/components/TopBar";
 import FileExplorer from "@/components/FileExplorer";
@@ -52,7 +53,6 @@ export default function HomePage({ fileTree, fileContents }: HomePageProps) {
               setView("landing");
             }}
             onOpenFiles={() => setDrawer("files")}
-            onOpenChat={() => setDrawer("chat")}
           />
           <div className="flex flex-1 overflow-hidden">
             {/* File explorer: inline on desktop, off-canvas drawer on mobile */}
@@ -78,6 +78,18 @@ export default function HomePage({ fileTree, fileContents }: HomePageProps) {
                 className="fixed inset-0 z-20 bg-black/50 md:hidden"
                 onClick={() => setDrawer(null)}
               />
+            )}
+            {/* Mobile-only floating chat button; hidden while chat is open */}
+            {drawer !== "chat" && (
+              <button
+                type="button"
+                aria-label="Open chat"
+                onClick={() => setDrawer("chat")}
+                className="md:hidden fixed bottom-5 right-5 z-30 flex items-center gap-1.5 rounded-full border border-accent-pink bg-accent-pink/20 px-3.5 py-2.5 text-accent-pink text-[13px] font-mono font-semibold shadow-lg hover:bg-accent-pink/30 active:bg-accent-pink/40 transition-colors"
+              >
+                <MessageSquare className="w-4 h-4" />
+                kAI
+              </button>
             )}
           </div>
         </div>
