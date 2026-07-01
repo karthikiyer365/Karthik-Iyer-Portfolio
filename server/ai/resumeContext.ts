@@ -1,6 +1,9 @@
 import fs from "fs";
 import path from "path";
 import { queryPineconeByText, isPineconeConfigured } from "./pinecone";
+// Baked from content/resume.md at build (scripts/bake-master.mjs) so the serverless
+// function bundles it — no runtime fs read (which ENOENTs on Netlify).
+import resumeMaster from "./resumeMaster.json";
 
 export const PERSONA_VOICE: Record<string, string> = {
   recruiter: "Lead with impact and measurable outcomes; frame the background as a fit for the role.",
@@ -14,7 +17,7 @@ export const CONTACT =
   "Washington, DC · karthikiyer365@gmail.com · +1 (202) 713-1699 · linkedin.com/in/karthikiyer365 · github.com/karthikiyer365";
 
 export function readMaster(): string {
-  return fs.readFileSync(path.join(process.cwd(), "content/resume.md"), "utf8");
+  return resumeMaster.text;
 }
 
 // Mine only the narrative text from the chart JSONs (hero/storyline/outcomes) — the
