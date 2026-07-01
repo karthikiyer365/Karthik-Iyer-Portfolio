@@ -75,8 +75,8 @@ export default function EditorWorkspace() {
       <EditorTabs />
 
       {/* Breadcrumb + view toggle */}
-      <div className="flex items-center justify-between h-7 px-4 bg-bg shrink-0">
-        <div className="flex items-center font-mono text-desc text-ink-muted">
+      <div className="flex items-center justify-between min-h-7 px-4 bg-bg shrink-0">
+        <div className="flex flex-wrap items-center font-mono text-desc text-ink-muted">
           {activeFile
             .split("/")
             .map((part: string, idx: number, arr: string[]) => (
