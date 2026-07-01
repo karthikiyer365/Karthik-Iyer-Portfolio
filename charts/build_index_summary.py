@@ -699,7 +699,7 @@ def build_chart() -> go.Figure:
             yref="y",
             text=signal.replace(" / ", " /<br>"),
             showarrow=False,
-            font=dict(size=13, color=color),
+            font=dict(size=10, color=color),
         )
 
     for year in [2022, 2023, 2025]:
@@ -765,7 +765,7 @@ def build_chart() -> go.Figure:
             linecolor="rgba(255,255,255,0.10)",
         ),
         angularaxis=dict(
-            tickfont=dict(size=13, color="#cfcfcf"),
+            tickfont=dict(size=11, color="#cfcfcf"),
             linecolor="rgba(255,255,255,0.10)",
             gridcolor="rgba(255,255,255,0.08)",
             direction="clockwise",
@@ -826,7 +826,7 @@ def build_chart() -> go.Figure:
             font=dict(size=18, color="#f0f0f0"),
         ),
         font=dict(family="Helvetica, Arial, sans-serif", color="#e5e5e5", size=14),
-        margin=dict(l=10, r=10, t=48, b=10, autoexpand=True),
+        margin=dict(l=50, r=50, t=48, b=10, autoexpand=True),
         showlegend=False,
         hoverlabel=dict(
             bgcolor="#1b1b1b",
