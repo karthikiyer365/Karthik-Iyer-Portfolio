@@ -178,7 +178,9 @@ _NETWORK_TEMPLATE = """
 <div id="net-wrap" style="position:relative;width:100%;background:#111;border-radius:8px;font-family:-apple-system,Segoe UI,sans-serif;">
   <div style="color:#e5e5e5;font-size:15px;text-align:center;padding:22px 0 8px;">__TITLE__</div>
   <div style="color:#8a8a8a;font-size:11px;text-align:center;padding-bottom:18px;">__DESC__</div>
-  <svg id="net-svg" style="display:block;width:100%;height:820px" viewBox="0 0 980 820" preserveAspectRatio="xMidYMid meet"></svg>
+  <div style="overflow-x:auto;">
+    <svg id="net-svg" style="display:block;width:100%;min-width:760px;height:auto;aspect-ratio:980 / 820" viewBox="0 0 980 820" preserveAspectRatio="xMidYMid meet"></svg>
+  </div>
   <div id="net-tip" style="position:absolute;pointer-events:none;opacity:0;background:#1c1c1c;border:1px solid #333;border-radius:8px;padding:8px 10px;color:#e5e5e5;font-size:12px;max-width:240px;line-height:1.4;box-shadow:0 4px 16px rgba(0,0,0,.5);z-index:10;"></div>
 </div>
 <script src="https://cdn.jsdelivr.net/npm/d3@7/dist/d3.min.js"></script>
