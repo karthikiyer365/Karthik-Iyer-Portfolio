@@ -4,6 +4,8 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
+    "bake": "node scripts/bake-master.mjs",
+    "prebuild": "node scripts/bake-master.mjs",
     "build": "next build",
     "start": "next start",
     "lint": "next lint"
