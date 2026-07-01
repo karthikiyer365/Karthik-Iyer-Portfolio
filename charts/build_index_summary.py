@@ -17,7 +17,7 @@ from wordcloud import WordCloud
 
 
 REPO_ROOT = Path(__file__).resolve().parents[1]
-NOTEBOOK_PATH = REPO_ROOT / "content/experiences/Summary.ipynb"
+NOTEBOOK_PATH = REPO_ROOT / "content/Summary.ipynb"
 
 DOMAIN_COLORS = {
     "AI / ML": "#dd0077",
@@ -640,17 +640,18 @@ def build_chart() -> go.Figure:
             density += weight * np.exp(-0.5 * ((x_grid - event["center"]) / sigma) ** 2)
         density_by_signal[signal] = density
 
+    # Stacked single column so panels read top-to-bottom on narrow screens
+    # instead of squishing side by side.
     fig = make_subplots(
-        rows=2,
-        cols=2,
+        rows=3,
+        cols=1,
         specs=[
-            [{"type": "xy", "colspan": 2}, None],
-            [{"type": "polar"}, {"type": "xy"}],
+            [{"type": "xy"}],
+            [{"type": "polar"}],
+            [{"type": "xy"}],
         ],
-        row_heights=[0.44, 0.56],
-        column_widths=[0.42, 0.58],
-        vertical_spacing=0.10,
-        horizontal_spacing=0.15,
+        row_heights=[0.30, 0.36, 0.34],
+        vertical_spacing=0.05,
     )
 
     # ── KDE career-signal traces (row 1, full width) ──────────────────────────
@@ -749,7 +750,7 @@ def build_chart() -> go.Figure:
             showscale=False,
             hovertemplate="%{y} × %{x}: %{z}/10<extra></extra>",
         ),
-        row=2, col=2,
+        row=3, col=1,
     )
 
     # ── Axis styling ──────────────────────────────────────────────────────────
@@ -800,7 +801,7 @@ def build_chart() -> go.Figure:
     )
 
     fig.update_xaxes(
-        row=2, col=2,
+        row=3, col=1,
         tickfont=dict(size=12, color="#cfcfcf"),
         tickangle=-35,
         showgrid=False,
@@ -808,7 +809,7 @@ def build_chart() -> go.Figure:
         zeroline=False,
     )
     fig.update_yaxes(
-        row=2, col=2,
+        row=3, col=1,
         tickfont=dict(size=12, color="#cfcfcf"),
         showgrid=False,
         linecolor="rgba(255,255,255,0.10)",
@@ -816,7 +817,7 @@ def build_chart() -> go.Figure:
     )
 
     fig.update_layout(
-        height=960,
+        height=1050,
         paper_bgcolor="#111111",
         plot_bgcolor="#111111",
         title=dict(
@@ -842,7 +843,7 @@ def _html_output(fig: go.Figure) -> dict[str, Any]:
         full_html=False,
         div_id="experience-signal-map",
         default_width="100%",
-        default_height="960px",
+        default_height="1050px",
         config={"responsive": True, "displayModeBar": False},
     )
     html = f'<div style="width:100%;padding:0 10px;box-sizing:border-box">{inner}</div>'
