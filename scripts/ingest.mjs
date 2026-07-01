@@ -7,7 +7,7 @@ import { Pinecone } from "@pinecone-database/pinecone";
 import fs from "fs";
 import path from "path";
 
-const NAME = process.env.PINECONE_INDEX;        // pfaaa
+const NAME = process.env.PINECONE_INDEX;
 const HOST = process.env.PINECONE_HOST;
 const NS = process.env.PINECONE_NAMESPACE || "__default__";
 if (!NAME) throw new Error("PINECONE_INDEX not set");
