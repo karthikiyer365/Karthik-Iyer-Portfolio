@@ -1,13 +1,16 @@
 "use client";
 
+import { Menu, MessageSquare } from "lucide-react";
 import { useEditor, useSettings } from "@/app/providers";
 import { SETTINGS_PATH, SETTINGS_LABEL } from "@/lib/settings";
 
 type TopBarProps = {
   onClose?: () => void;
+  onOpenFiles?: () => void;
+  onOpenChat?: () => void;
 };
 
-export default function TopBar({ onClose }: TopBarProps) {
+export default function TopBar({ onClose, onOpenFiles, onOpenChat }: TopBarProps) {
   const { openFile } = useEditor();
   const { setActiveSubsection } = useSettings();
 
@@ -44,15 +47,35 @@ export default function TopBar({ onClose }: TopBarProps) {
           onClick={toggleFullscreen}
           className="w-3 h-3 rounded-full bg-[#28c840] hover:brightness-90 cursor-pointer"
         />
+        {/* Mobile-only: open file explorer drawer */}
+        <button
+          type="button"
+          aria-label="Open files"
+          title="Files"
+          onClick={onOpenFiles}
+          className="md:hidden ml-1 p-1 text-ink-muted hover:text-ink-secondary transition-colors"
+        >
+          <Menu className="w-[18px] h-[18px]" />
+        </button>
       </div>
 
       {/* Center - Repository Name */}
-      <div className="absolute left-1/2 transform -translate-x-1/2 text-ink-muted text-desc">
+      <div className="hidden md:block absolute left-1/2 transform -translate-x-1/2 text-ink-muted text-desc">
         Karthik Iyer's Portfolio
       </div>
 
       {/* Right - Utility Icons */}
       <div className="flex items-center gap-3">
+        {/* Mobile-only: open chat drawer */}
+        <button
+          type="button"
+          aria-label="Open chat"
+          title="Chat"
+          onClick={onOpenChat}
+          className="md:hidden p-1 text-ink-muted hover:text-ink-secondary transition-colors"
+        >
+          <MessageSquare className="w-[18px] h-[18px]" />
+        </button>
         {/* Search */}
         <button
           className="p-1 text-ink-muted hover:text-ink-secondary transition-colors"
