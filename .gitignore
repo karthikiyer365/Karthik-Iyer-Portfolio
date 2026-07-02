@@ -24,6 +24,9 @@ __pycache__/
 # Brainstorm visual companion
 .superpowers/
 
+# Local agent tooling context
+.claude/
+
 # Playwright MCP artifacts (screenshots, console logs, snapshots)
 .playwright-mcp/
 *.playwright-mcp.png

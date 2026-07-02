@@ -18,7 +18,7 @@ export default function SettingsSidebar() {
   const { activeSubsection, setActiveSubsection } = useSettings();
 
   return (
-    <div className="w-60 shrink-0 bg-surface-1 border-r border-line-subtle overflow-y-auto px-2.5 py-3 flex flex-col gap-1.5">
+    <div className="hidden md:flex w-60 shrink-0 bg-surface-1 border-r border-line-subtle overflow-y-auto px-2.5 py-3 flex-col gap-1.5">
       {/* profile */}
       <div className="flex items-center gap-2 px-1">
         <img
