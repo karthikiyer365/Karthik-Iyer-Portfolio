@@ -846,7 +846,14 @@ def _html_output(fig: go.Figure) -> dict[str, Any]:
         default_height="1050px",
         config={"responsive": True, "displayModeBar": False},
     )
-    html = f'<div style="width:100%;padding:0 10px;box-sizing:border-box">{inner}</div>'
+    # min-width + overflow-x lets the figure render at a readable width and
+    # scroll sideways on narrow screens instead of squishing the time axis;
+    # desktop (container wider than min-width) is unaffected.
+    html = (
+        '<div style="overflow-x:auto">'
+        '<div style="min-width:560px;padding:0 10px;box-sizing:border-box">'
+        f"{inner}</div></div>"
+    )
     return {
         "output_type": "display_data",
         "metadata": {},
