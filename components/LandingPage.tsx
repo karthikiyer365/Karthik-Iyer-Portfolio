@@ -108,7 +108,7 @@ export default function LandingPage({ onNavigate }: LandingPageProps) {
               onClick={() => {
                 const mobile =
                   typeof window !== "undefined" &&
-                  window.matchMedia("(max-width: 767px)").matches;
+                  window.matchMedia("(max-width: 899px)").matches;
                 onNavigate?.(
                   mobile ? "portfolio/Resume.md" : "portfolio/Summary.ipynb"
                 );
