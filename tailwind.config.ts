@@ -13,6 +13,10 @@ const config: Config = {
   content: ["./app/**/*.{ts,tsx}", "./components/**/*.{ts,tsx}"],
   theme: {
     extend: {
+      // Mobile shell (drawers) reverts to desktop 3-panel layout at this width.
+      screens: {
+        md: "900px",
+      },
       colors: {
         bg: "var(--bg)",
         surface: {
