@@ -122,7 +122,7 @@ export default function CareerTimeline({ data }: { data: string }) {
                   {entry.stack && (
                     <div>
                       <span
-                        className="inline-flex items-center rounded-md px-2.5 py-1 text-[12px] font-medium text-ink"
+                        className="inline-flex items-center rounded-md px-2.5 py-1 text-[12px] font-medium text-ink max-w-full"
                         style={{ backgroundColor: "rgba(221,0,119,0.30)" }}
                       >
                         {entry.stack}

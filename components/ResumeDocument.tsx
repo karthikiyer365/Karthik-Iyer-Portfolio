@@ -43,6 +43,10 @@ export default function ResumeDocument({ data }: { data: ResumeData }) {
   }, [data]);
 
   return (
+    // Fixed 816px page → wrap so it scrolls sideways within its pane on narrow
+    // screens instead of dragging the whole editor. Print uses position:absolute
+    // (globals.css), so this static wrapper never clips the PDF.
+    <div className="overflow-x-auto">
     <div
       id="print-resume"
       className="resume-page"
@@ -128,6 +132,7 @@ export default function ResumeDocument({ data }: { data: ResumeData }) {
           </Section>
         )}
       </div>
+    </div>
     </div>
   );
 }
