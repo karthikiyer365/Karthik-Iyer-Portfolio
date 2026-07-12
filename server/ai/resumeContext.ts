@@ -14,7 +14,7 @@ export const PERSONA_VOICE: Record<string, string> = {
 // Real contact lives in lib/settings.ts, not resume.md — pass it verbatim so the
 // model stops emitting [Email]/[Phone] placeholders.
 export const CONTACT =
-  "Washington, DC · karthikiyer365@gmail.com · +1 (202) 713-1699 · linkedin.com/in/karthikiyer365 · github.com/karthikiyer365";
+  "Washington, DC · karthikiyer365@gmail.com · +1 (202) 713-1699 · linkedin.com/in/karthikiyer365 · karthikiyer.info";
 
 export function readMaster(): string {
   return resumeMaster.text;

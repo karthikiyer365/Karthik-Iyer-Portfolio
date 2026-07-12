@@ -176,6 +176,14 @@ export default function ResumeDocument({ data }: { data: ResumeData }) {
   );
 }
 
+// Bullets carry **keyword** markers from the LLM (tools/concepts). Render them
+// as <strong> — a two-line split beats pulling in a markdown renderer per <li>.
+function renderBold(text: string) {
+  return text
+    .split(/\*\*(.+?)\*\*/g)
+    .map((seg, i) => (i % 2 ? <strong key={i}>{seg}</strong> : seg));
+}
+
 // Jake \section: small-caps title over a full-width black titlerule.
 function Section({
   title,
@@ -252,7 +260,7 @@ function Entry({
         <ul style={{ listStyle: "disc", paddingLeft: 18, marginTop: 2 }}>
           {bullets.map((b, i) => (
             <li key={i} style={{ fontSize: 12, lineHeight: 1.35, marginBottom: 2 }}>
-              {b}
+              {renderBold(b)}
             </li>
           ))}
         </ul>

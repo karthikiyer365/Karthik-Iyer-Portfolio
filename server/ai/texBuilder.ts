@@ -11,6 +11,10 @@ const esc = (s: string) =>
     .replace(/~/g, "\\textasciitilde{}")
     .replace(/\^/g, "\\textasciicircum{}");
 
+// Bullets carry **keyword** bold markers from the LLM → \textbf{}. Escape first
+// so the marker conversion runs on already-safe text (* is not a LaTeX special).
+const escBold = (s: string) => esc(s).replace(/\*\*(.+?)\*\*/g, "\\textbf{$1}");
+
 const PREAMBLE = String.raw`%-------------------------
 % Jake's Resume Template
 %-------------------------
@@ -135,7 +139,7 @@ ${lines}
   if (d.experience?.length) {
     const entries = d.experience
       .map((e) => {
-        const bullets = e.bullets.map((b) => `        \\resumeItem{${esc(b)}}`).join("\n");
+        const bullets = e.bullets.map((b) => `        \\resumeItem{${escBold(b)}}`).join("\n");
         return `    \\resumeSubheading
       {${esc(e.org)}}{${esc(e.location ?? "")}}
       {${esc(e.role)}}{${esc(e.dates)}}
@@ -160,7 +164,7 @@ ${entries}
         const heading = p.stack
           ? `{\\textbf{${esc(p.name)}} $|$ \\emph{${esc(p.stack)}}}{}`
           : `{\\textbf{${esc(p.name)}}}{}`;
-        const bullets = p.bullets.map((b) => `            \\resumeItem{${esc(b)}}`).join("\n");
+        const bullets = p.bullets.map((b) => `            \\resumeItem{${escBold(b)}}`).join("\n");
         return `      \\resumeProjectHeading
           ${heading}
           \\resumeItemListStart
