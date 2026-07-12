@@ -10,11 +10,13 @@ export interface ResumeData {
   name: string;
   contact: string; // single line: location · email · phone · links
   summary: string;
-  experience: { role: string; org: string; dates: string; bullets: string[] }[];
-  projects: { name: string; bullets: string[] }[];
-  education: { degree: string; org: string; dates: string }[];
+  experience: { role: string; org: string; location?: string; dates: string; bullets: string[] }[];
+  projects: { name: string; stack?: string; bullets: string[] }[];
+  education: { degree: string; org: string; location?: string; dates: string }[];
   skills: { group: string; items: string[] }[];
+  // Format A includes both; format B omits both (LLM's layout call).
   leadership?: string[];
+  certifications?: string[];
 }
 
 export type ResumeState =
