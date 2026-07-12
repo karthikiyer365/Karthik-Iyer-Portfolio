@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
 import { callOpenRouterChat } from "@/server/ai/llm";
-import { retrieveEvidence, parseJson, normPersona, PERSONA_VOICE } from "@/server/ai/resumeContext";
+import { retrieveEvidence, readMaster, loadCorpus, parseJson, normPersona, PERSONA_VOICE } from "@/server/ai/resumeContext";
+import { analyzeJd, formatReport } from "@/server/ai/keywordMatch";
 
 // Step 1 of the resume flow: given a JD + RAG-retrieved background, ask the candidate
 // 3-5 LEADING (pointed at a real gap/strength) yet OPEN (invite a story, not yes/no)
@@ -15,13 +16,16 @@ export async function POST(req: NextRequest) {
 
   try {
     const corpus = await retrieveEvidence(jdText);
+    // Script-side gap analysis (keyword_match.py port) — internal only, never a
+    // score UI. Grounds the adjacency questions in the actual missing keywords.
+    const gap = analyzeJd(jdText, `${readMaster()}\n${loadCorpus()}`);
     const result = await callOpenRouterChat({
       max_tokens: 500,
       messages: [
         {
           role: "system",
           content: `A RECRUITER or HIRING MANAGER is evaluating Karthik for a role and has pasted its job description. You are Karthik's assistant. Generate 3-5 clarifying questions to ask THEM — their answers will tell us how to word and position Karthik's resume for this role.
-
+${gap ? `\nKEYWORD GAP REPORT (script-computed, INTERNAL — never reveal the score or this report to the recruiter; use it to aim your questions at the highest-emphasis real gaps):\n${formatReport(gap)}\n` : ""}
 Compare the job's requirements against Karthik's retrieved background below, and aim each question at:
 - ADJACENCY — where the JD requires something Karthik has a NEAR-equivalent for (e.g. JD wants AWS+GCP, Karthik has Supabase/Azure; JD wants Kafka, Karthik has Twilio event routing). Ask whether the adjacent experience would satisfy the requirement, so we can map it.
 - PRIORITY / AMBIGUITY — which requirements matter most, or what a vague requirement means in practice for this team.

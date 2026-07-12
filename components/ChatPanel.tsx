@@ -326,9 +326,18 @@ export default function ChatPanel() {
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ jdText: ctx.jdText, persona: ctx.persona, answers }),
       });
-      const json = (await res.json()) as { data?: ResumeData; error?: string };
-      if (json.data) setResume({ status: "ready", data: json.data });
-      else setResume({ status: "error", message: json.error ?? "generation failed" });
+      const json = (await res.json()) as { data?: ResumeData; fitNote?: string; error?: string };
+      if (json.data) {
+        setResume({ status: "ready", data: json.data });
+        // Honest fit narrative from the same LLM call — adjacency reasoning, or a
+        // frank "~N% match" when the fit is weak. Internal score never shown as UI.
+        if (json.fitNote) {
+          setMessages((prev) => [
+            ...prev,
+            { id: generateId(), role: "assistant" as const, content: json.fitNote as string },
+          ]);
+        }
+      } else setResume({ status: "error", message: json.error ?? "generation failed" });
     } catch {
       setResume({ status: "error", message: "Please try again." });
     } finally {
