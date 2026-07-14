@@ -17,17 +17,20 @@ function ChevronIcon({ expanded }: { expanded: boolean }) {
   );
 }
 
-function FileIcon({ name }: { name: string }) {
+function FileIcon({ name, path }: { name: string; path: string }) {
   const ext = name.split(".").pop() ?? "";
+  const { githubUrls } = useContent();
 
   if (ext === "ipynb") {
-    // Jupyter notebook — bracket/cell icon
+    // Jupyter notebook — bracket/cell icon. Color signals whether a GitHub
+    // repo link is attached (metadata.github_url): pink if linked, green if not.
+    const color = githubUrls[path] ? "#dd0077" : "#3fb950";
     return (
       <svg className="w-[14px] h-[14px] shrink-0" viewBox="0 0 16 16" fill="none">
-        <rect x="3" y="1" width="10" height="14" rx="1.5" stroke="#e5a00d" strokeWidth="1.2" />
-        <line x1="5.5" y1="4.5" x2="10.5" y2="4.5" stroke="#e5a00d" strokeWidth="1" />
-        <line x1="5.5" y1="7" x2="10.5" y2="7" stroke="#e5a00d" strokeWidth="1" />
-        <line x1="5.5" y1="9.5" x2="8.5" y2="9.5" stroke="#e5a00d" strokeWidth="1" />
+        <rect x="3" y="1" width="10" height="14" rx="1.5" stroke={color} strokeWidth="1.2" />
+        <line x1="5.5" y1="4.5" x2="10.5" y2="4.5" stroke={color} strokeWidth="1" />
+        <line x1="5.5" y1="7" x2="10.5" y2="7" stroke={color} strokeWidth="1" />
+        <line x1="5.5" y1="9.5" x2="8.5" y2="9.5" stroke={color} strokeWidth="1" />
       </svg>
     );
   }
@@ -123,7 +126,7 @@ function TreeNode({ node, depth }: { node: FileNode; depth: number }) {
         ) : (
           <>
             <span className="absolute w-py bg-[#444444]" />
-            <FileIcon name={node.name} />
+            <FileIcon name={node.name} path={node.path} />
           </>
         )}
         <span

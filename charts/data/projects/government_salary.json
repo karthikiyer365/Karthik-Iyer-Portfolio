@@ -1,0 +1,122 @@
+{
+  "output": "content/projects/Government Employee Salary Analysis.ipynb",
+  "meta": {
+    "company": "Academic Project",
+    "role": "Public-Sector Analytics · Dashboarding",
+    "duration": "2023",
+    "location": "Python · Plotly Dash"
+  },
+  "hero": "# Government Employee Salary Analysis\n\n**Public-sector compensation EDA & interactive dashboard · Python · Pandas · Plotly Dash**\n\n## Hero Overview\n\nAn analysis of Louisville Metro government employee compensation across 2015–2023, pulling live salary records straight from the city's open ArcGIS REST API and profiling pay structure by department, job title, and year.\n\nFindings are packaged into an interactive Plotly Dash dashboard where users filter by department and compose custom salary visualizations on the fly.",
+  "domain_colors": {
+    "AI / ML": "#dd0077",
+    "Integration": "#c98aa0",
+    "Backend Engineering": "#b8b8b8",
+    "Cloud & Infra": "#a8b8b0",
+    "Data Engineering": "#88c0b4",
+    "Workflow / Ops": "#4ec9b0"
+  },
+  "radar": {
+    "API Data Scraping": 9,
+    "Data Cleaning": 8,
+    "Exploratory Analysis": 9,
+    "Feature Engineering": 7,
+    "Data Visualization": 8,
+    "Interactive Dashboarding": 9,
+    "Statistical Analysis": 7
+  },
+  "bubble_chart": {
+    "x_axis": "system",
+    "y_axis": "ownership",
+    "size_metric": "implementation_strength",
+    "color_metric": "domain",
+    "points": [
+      {
+        "system": "API Data Pipeline",
+        "domain": "Data Engineering",
+        "ownership": 9,
+        "implementation_strength": 8.5,
+        "complexity": 7.5,
+        "impact": 8.0,
+        "maturity": 7.0,
+        "subsystems": [
+          "ArcGIS REST API",
+          "Offset pagination",
+          "2015–2023 multi-year"
+        ],
+        "evidence": "Pulled Louisville Metro salary records (2015–2023) directly from the city's open ArcGIS REST API, handling year filters and offset pagination with requests and pandas.json_normalize."
+      },
+      {
+        "system": "Exploratory Analysis",
+        "domain": "AI / ML",
+        "ownership": 8,
+        "implementation_strength": 8.0,
+        "complexity": 7.0,
+        "impact": 7.5,
+        "maturity": 7.0,
+        "subsystems": [
+          "Per-employee trends",
+          "Correlation heatmaps",
+          "Department distributions"
+        ],
+        "evidence": "Profiled compensation across departments, job titles, and years with per-employee trend lines, correlation heatmaps, distribution pies, and rate-vs-total scatter plots (Matplotlib, Seaborn, Plotly)."
+      },
+      {
+        "system": "Dash Dashboard",
+        "domain": "Workflow / Ops",
+        "ownership": 8,
+        "implementation_strength": 7.5,
+        "complexity": 6.5,
+        "impact": 8.0,
+        "maturity": 6.5,
+        "subsystems": [
+          "Department selector",
+          "Custom chart builder",
+          "Label-encoded inputs"
+        ],
+        "evidence": "Built a Plotly Dash app with a department selector and a build-your-own-chart panel (choose X/Y axes, histogram vs. scatter) over label-encoded categorical fields."
+      }
+    ]
+  },
+  "network_graph": {
+    "title": "Government Salary Analysis Network",
+    "description": "API-driven ingestion, salary EDA, and an interactive department dashboard.",
+    "nodes": [
+      { "id": "Data Pipeline", "type": "system", "domain": "Data Engineering" },
+      { "id": "Salary Analytics", "type": "system", "domain": "AI / ML" },
+      { "id": "Dashboard", "type": "system", "domain": "Workflow / Ops" },
+      { "id": "API Ingestion", "type": "concept", "domain": "Data Engineering" },
+      { "id": "Data Cleaning", "type": "concept", "domain": "Data Engineering" },
+      { "id": "Salary EDA", "type": "concept", "domain": "AI / ML" },
+      { "id": "Dept Comparison", "type": "concept", "domain": "AI / ML" },
+      { "id": "Interactive Filtering", "type": "concept", "domain": "Workflow / Ops" },
+      { "id": "Pandas / Requests", "type": "tool", "category": "Language" },
+      { "id": "Plotly / Seaborn", "type": "tool", "category": "Visualization" },
+      { "id": "Dash", "type": "tool", "category": "Framework" }
+    ],
+    "edges": [
+      { "source": "Data Pipeline", "target": "API Ingestion", "weight": 3 },
+      { "source": "Data Pipeline", "target": "Data Cleaning", "weight": 3 },
+      { "source": "Salary Analytics", "target": "Salary EDA", "weight": 3 },
+      { "source": "Salary Analytics", "target": "Dept Comparison", "weight": 3 },
+      { "source": "Salary Analytics", "target": "Data Cleaning", "weight": 2 },
+      { "source": "Dashboard", "target": "Interactive Filtering", "weight": 3 },
+      { "source": "Dashboard", "target": "Dept Comparison", "weight": 2 },
+      { "source": "Dashboard", "target": "Salary EDA", "weight": 2 },
+      { "source": "API Ingestion", "target": "Pandas / Requests", "weight": 3 },
+      { "source": "Data Cleaning", "target": "Pandas / Requests", "weight": 3 },
+      { "source": "Salary EDA", "target": "Plotly / Seaborn", "weight": 3 },
+      { "source": "Salary EDA", "target": "Pandas / Requests", "weight": 2 },
+      { "source": "Dept Comparison", "target": "Plotly / Seaborn", "weight": 3 },
+      { "source": "Interactive Filtering", "target": "Dash", "weight": 3 },
+      { "source": "Interactive Filtering", "target": "Plotly / Seaborn", "weight": 2 }
+    ]
+  },
+  "outcomes": {
+    "Time Span": "2015–2023",
+    "Data Source": "Louisville Open API",
+    "Ingestion": "Paginated, multi-year",
+    "Interactive Dashboard": "Plotly Dash",
+    "Visualization Types": "6+"
+  },
+  "storyline": "# Storyline\n\n## Context\n\nGovernment pay data is public but scattered behind APIs and rarely examined as a time series; raw salary tables obscure how compensation actually shifts across departments, roles, and years.\n\n## Workflow\n\nLive API ingestion & pagination → cleaning and feature engineering → multi-year exploratory analysis → an interactive department dashboard.\n\n## Technical Implementation\n\n- **Ingestion:** pulled Louisville Metro salary records (2015–2023) directly from the city's open ArcGIS REST API, handling year filters and offset pagination with `requests` + `pandas.json_normalize`.\n- **Cleaning & features:** column normalization, null handling, per-employee IDs via `groupby`, and a derived `Calculated_Total` (regular + incentive + overtime).\n- **EDA:** per-employee salary trends, year-over-year mean shifts, department distribution pies, correlation heatmaps, and rate-vs-total scatter plots with Matplotlib, Seaborn, and Plotly.\n- **Dashboard:** a Plotly Dash app with a department selector plus a build-your-own-chart panel (choose X/Y axes and histogram vs. scatter) over label-encoded categorical fields.\n\n## Outcomes\n\nTurned a raw public-sector salary API into a reproducible pipeline and an interactive dashboard, surfacing department-level pay structure and multi-year compensation trends for Louisville Metro."
+}

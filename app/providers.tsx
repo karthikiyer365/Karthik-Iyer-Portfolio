@@ -133,6 +133,7 @@ export function useGeneratedResume() {
 interface ContentContextType {
   fileTree: FileNode[];
   fileContents: Record<string, string>;
+  githubUrls: Record<string, string>;
   getContent: (path: string) => string;
 }
 
@@ -141,17 +142,21 @@ const ContentContext = createContext<ContentContextType | null>(null);
 export function ContentProvider({
   fileTree,
   fileContents,
+  githubUrls,
   children,
 }: {
   fileTree: FileNode[];
   fileContents: Record<string, string>;
+  githubUrls: Record<string, string>;
   children: ReactNode;
 }) {
   const getContent = (path: string) =>
     fileContents[path] ?? `// File not found: ${path}`;
 
   return (
-    <ContentContext.Provider value={{ fileTree, fileContents, getContent }}>
+    <ContentContext.Provider
+      value={{ fileTree, fileContents, githubUrls, getContent }}
+    >
       {children}
     </ContentContext.Provider>
   );

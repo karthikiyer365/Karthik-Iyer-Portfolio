@@ -19,7 +19,7 @@ type ViewMode = "code" | "preview";
 
 export default function EditorWorkspace() {
   const { state } = useEditor();
-  const { getContent } = useContent();
+  const { getContent, githubUrls } = useContent();
   const { activeFile, openFiles } = state;
   const [viewMode, setViewMode] = useState<ViewMode>("preview");
 
@@ -69,6 +69,7 @@ export default function EditorWorkspace() {
   const isMd = activeFile.endsWith(".md");
   const isNotebook = activeFile.endsWith(".ipynb");
   const hasPreview = isMd || isNotebook;
+  const githubUrl = githubUrls[activeFile];
 
   return (
     <div className="flex-1 flex flex-col bg-bg overflow-hidden">
@@ -120,7 +121,7 @@ export default function EditorWorkspace() {
       {/* Content */}
       {hasPreview && viewMode === "preview" ? (
         isNotebook ? (
-          <NotebookRenderer key={activeFile} content={content} />
+          <NotebookRenderer key={activeFile} content={content} githubUrl={githubUrl} />
         ) : (
           <MarkdownPreview content={content} />
         )

@@ -36,6 +36,7 @@
   --accent-pink: #dd0077;   /* brand: CTAs, timeline markers, active nav */
   --accent-teal: #4ec9b0;   /* links, toggle "on", h2, highlights        */
   --accent-blue: #569cd6;   /* code-view links, pairs with selection     */
+  --accent-green: #3fb950;  /* file icons: no GitHub link attached       */
 
   /* Fonts (next/font injects --font-sans / --font-mono in layout.tsx) */
   --dot-red: #ff5f57;
