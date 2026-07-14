@@ -14,9 +14,9 @@ Every resume is built only from Karthik's real, verified accomplishments. The sy
 ## How it works, step by step
 
 1. **Paste detection** — the chat notices when a message looks like a job description instead of a normal question, and switches into resume mode automatically.
-2. **Gap check (instant, automatic)** — the system compares the job's keywords against Karthik's background and scores the overlap: what matches, what's missing, and what kind of role this is (streaming data, analytics, ML, cloud infra, …). This score stays internal — it guides the next steps, it is never shown as a number badge.
+2. **Gap check (instant, automatic)** — the system compares the job's keywords against Karthik's background and scores the overlap: what matches, what's missing, what kind of role this is (ETL-heavy, BI-focused, AI/ML, cloud infra, project-management, …), and what industry the hiring org is in (tech, finance, logistics, sports, edutech, insurance/proptech, retail, consulting, …). This stays internal — it guides the next steps, it is never shown as a number badge.
 3. **A few smart questions** — the chat asks 3–5 pointed questions about the role, aimed at the real gaps. Example: *"The role lists Kafka — would Karthik's Twilio event-routing experience count for that requirement?"* The recruiter can answer or simply skip.
-4. **Layout decision** — before writing anything, the system decides which resume shape shows the strongest evidence for this particular job:
+4. **Layout decision** — before writing anything, the system decides which resume shape shows the strongest evidence for this particular job (the role-type from the gap check is a secondary tiebreaker — e.g. a project-management-flavored role leans toward D):
    - **A** — 2 jobs + 4 projects (for hands-on, project-heavy roles)
    - **B** — 2 jobs + 3 projects with deeper detail (when a few items carry the most weight)
    - **C** — 3 jobs + 2 projects (balanced)
@@ -41,7 +41,7 @@ Is it a job description?
         ▼
    STEP 1 — GAP CHECK (instant, internal)
         compare job keywords vs Karthik's background
-        → match score · missing skills · role type
+        → match score · missing skills · role type · industry
         │
         ▼
    STEP 2 — SMART QUESTIONS
@@ -51,15 +51,21 @@ Is it a job description?
         │
         ▼
    STEP 3 — BUILD THE RESUME
-        ├── pick the best layout for THIS job:
+        ├── pick the best layout for THIS job (role-type is a
+        │   secondary tiebreaker, e.g. PM-flavored JDs lean D):
         │      A: 2 jobs + 4 projects   (project-heavy role)
         │      B: 2 jobs + 3 projects   (depth over count)
         │      C: 3 jobs + 2 projects   (balanced)
         │      D: 4 jobs + 1 project    (tenure matters most)
         │
-        └── write every bullet from verified facts only,
-            using strict phrasing rules (results first,
-            real numbers, real tool names, no clichés)
+        ├── order the skills groups so the one matching this
+        │   JD's role-type leads (e.g. BI-focused JD → "BI &
+        │   Visualization" first)
+        │
+        └── write every bullet from verified facts only, using
+            strict phrasing rules (results first, real numbers,
+            real tool names, no clichés) — role-type and industry
+            bias which tools/phrases get emphasized
         │
         ▼
    STEP 4 — QUALITY CONTROL (automatic)
