@@ -1,3 +1,5 @@
+import { callOpenRouterChat } from "./llm";
+
 // TS port of resume-autopilot/scripts/keyword_match.py — JD-to-resume keyword gap
 // analysis. Script-only, zero LLM tokens. Output feeds the questions + generate
 // prompts (internal only, never shown to the recruiter as a score UI).
@@ -106,20 +108,56 @@ const SKILLS_CLUSTERS: Record<string, string[]> = {
   ],
 };
 
-const ARCHETYPES: Record<string, string[]> = {
-  "streaming-DE": ["kafka", "kinesis", "flink", "real-time", "streaming", "cdc",
-    "change data capture", "pubsub", "pub/sub", "beam", "schema registry"],
-  "batch-DE": ["spark", "pyspark", "glue", "airflow", "etl", "elt", "dbt",
+// Role-type taxonomy: what flavor of technical work the JD is asking for.
+// Keyword-scored, sync, zero LLM cost — same mechanism as before, relabeled
+// and reshaped around Karthik's actual work (streaming+batch merged into one
+// etl-de bucket; project-management added since nothing detected it before).
+const ROLE_TYPES: Record<string, string[]> = {
+  "etl-de": ["kafka", "kinesis", "flink", "real-time", "streaming", "cdc",
+    "change data capture", "pubsub", "pub/sub", "beam", "schema registry",
+    "spark", "pyspark", "glue", "airflow", "etl", "elt", "dbt",
     "batch processing", "hive", "hadoop", "emr", "dagster", "prefect"],
-  "ml-adjacent": ["sagemaker", "mlflow", "feature store", "machine learning", "pytorch",
-    "tensorflow", "llm", "rag", "vertex ai", "xgboost", "scikit-learn",
-    "embeddings", "fine-tuning"],
-  "cloud-infra-DE": ["eks", "k8s", "kubernetes", "terraform", "cdk", "cloudformation",
-    "docker", "helm", "ecs", "ansible", "ci/cd", "github actions",
-    "cloudwatch", "observability"],
-  "analytics-DE": ["dbt", "snowflake", "tableau", "power bi", "looker", "bigquery",
+  "bi-analytics": ["dbt", "snowflake", "tableau", "power bi", "looker", "bigquery",
     "duckdb", "quicksight", "superset", "grafana", "data warehouse",
     "data lakehouse", "redshift"],
+  "ai-ml": ["sagemaker", "mlflow", "feature store", "machine learning", "pytorch",
+    "tensorflow", "llm", "rag", "vertex ai", "xgboost", "scikit-learn",
+    "embeddings", "fine-tuning"],
+  "cloud-infra": ["eks", "k8s", "kubernetes", "terraform", "cdk", "cloudformation",
+    "docker", "helm", "ecs", "ansible", "ci/cd", "github actions",
+    "cloudwatch", "observability"],
+  "project-management": ["stakeholder management", "roadmap", "cross-functional",
+    "scrum master", "program management", "sprint planning", "backlog",
+    "agile ceremonies", "okr", "prioritization", "delivery management",
+    "product owner"],
+};
+
+// Industry taxonomy: what domain the hiring org operates in. Signals are
+// DOMAIN-OBJECT vocabulary (what the company does), never role vocabulary
+// ("engineer"/"developer"/"analyst") — every JD Karthik pastes is already a
+// technical role, so role words would false-match every bucket equally and
+// tell us nothing about industry. "other/unclassified" is a fallback, not a
+// scored bucket, and is intentionally absent from this map.
+const INDUSTRIES: Record<string, string[]> = {
+  tech: ["saas platform", "developer platform", "api-first", "product analytics",
+    "internal tooling"],
+  finance: ["trading systems", "portfolio data", "fintech", "lending platform",
+    "underwriting models", "risk data", "hedge fund", "brokerage systems"],
+  "logistics/supply-chain": ["fleet telemetry", "freight brokerage", "tms", "wms",
+    "route optimization", "supply chain visibility", "last-mile",
+    "distribution network", "inventory forecasting"],
+  sports: ["sports analytics", "player tracking data", "league operations data",
+    "team performance metrics", "sports betting data"],
+  edutech: ["lms platform", "curriculum data", "student outcomes",
+    "online learning platform", "ed-tech"],
+  "insurance/proptech": ["claims data", "underwriting models", "property data",
+    "restoration operations data", "construction data", "real estate platform",
+    "procore", "policy data"],
+  "retail/e-commerce": ["e-commerce platform", "checkout systems",
+    "merchandising data", "storefront analytics", "marketplace data",
+    "sku-level data"],
+  consulting: ["client engagement data", "professional services delivery",
+    "advisory analytics"],
 };
 
 const escRe = (s: string) => s.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
@@ -127,12 +165,39 @@ const hasWord = (text: string, kw: string) => new RegExp(`\\b${escRe(kw)}\\b`).t
 const countWord = (text: string, kw: string) =>
   (text.match(new RegExp(`\\b${escRe(kw)}\\b`, "g")) ?? []).length;
 
+// Score every group's signal words against `text`, return the group with the
+// highest hit count. Shared by role-type and industry scoring — both are the
+// same "which labeled bucket does this JD's language match best" operation.
+function pickBestMatch(
+  text: string,
+  groups: Record<string, string[]>
+): { key: string; signals: string[]; score: number } {
+  let bestKey = "";
+  let best = -1;
+  let bestSignals: string[] = [];
+  for (const [key, sigs] of Object.entries(groups)) {
+    let score = 0;
+    const hit: string[] = [];
+    for (const sig of sigs) {
+      const c = countWord(text, sig);
+      score += c;
+      if (c > 0) hit.push(`${sig}×${c}`);
+    }
+    if (score > best) {
+      best = score;
+      bestKey = key;
+      bestSignals = hit.slice(0, 5);
+    }
+  }
+  return { key: bestKey, signals: bestSignals, score: best };
+}
+
 export interface JdAnalysis {
   score: number; // % of JD keywords present in resume material
   present: string[];
   missing: { kw: string; freq: number; cluster: string }[]; // ranked by JD emphasis
-  archetype: string;
-  archetypeSignals: string[];
+  roleType: string;
+  roleTypeSignals: string[];
   quickWins: string[];
 }
 
@@ -152,23 +217,7 @@ export function analyzeJd(jdText: string, resumeText: string): JdAnalysis | null
 
   const freq = new Map(found.map((kw) => [kw, countWord(jd, kw)] as [string, number]));
 
-  let archetype = "";
-  let best = -1;
-  let archetypeSignals: string[] = [];
-  for (const [name, sigs] of Object.entries(ARCHETYPES)) {
-    let score = 0;
-    const hit: string[] = [];
-    for (const sig of sigs) {
-      const c = countWord(jd, sig);
-      score += c;
-      if (c > 0) hit.push(`${sig}×${c}`);
-    }
-    if (score > best) {
-      best = score;
-      archetype = name;
-      archetypeSignals = hit.slice(0, 5);
-    }
-  }
+  const { key: roleType, signals: roleTypeSignals } = pickBestMatch(jd, ROLE_TYPES);
 
   const clusterOf = (kw: string) =>
     Object.entries(SKILLS_CLUSTERS).find(([, m]) => m.includes(kw))?.[0] ?? "Skills";
@@ -183,22 +232,73 @@ export function analyzeJd(jdText: string, resumeText: string): JdAnalysis | null
     score: Math.round((present.length / found.length) * 100),
     present,
     missing: missingRanked,
-    archetype,
-    archetypeSignals,
+    roleType,
+    roleTypeSignals,
     quickWins,
   };
 }
 
+export interface IndustryResult {
+  industry: string;
+  method: "keyword" | "llm";
+  signals?: string[];
+}
+
 // Compact text block for prompt injection.
-export function formatReport(a: JdAnalysis): string {
+export function formatReport(a: JdAnalysis, industry?: IndustryResult): string {
   const missing = a.missing
     .map((m) => `${m.kw}${m.freq > 1 ? ` ×${m.freq}` : ""} → Skills > ${m.cluster}`)
     .join("; ");
   return [
     `Match score: ${a.score}% (${a.present.length}/${a.present.length + a.missing.length} known JD keywords covered)`,
-    `Archetype: ${a.archetype} [${a.archetypeSignals.join(", ") || "—"}]`,
+    `Role-type: ${a.roleType} [${a.roleTypeSignals.join(", ") || "—"}]`,
+    industry
+      ? `Industry: ${industry.industry} (${industry.method}${industry.signals?.length ? `, ${industry.signals.join(", ")}` : ""})`
+      : "",
     a.missing.length ? `Missing keywords (by JD emphasis): ${missing}` : "No missing known keywords — full coverage.",
     a.quickWins.length ? `Quick wins: ${a.quickWins.join(" | ")}` : "",
     `Present: ${a.present.join(", ")}`,
   ].filter(Boolean).join("\n");
+}
+
+function classifyIndustryKeyword(jdText: string): { industry: string; signals: string[] } {
+  const { key, signals, score } = pickBestMatch(jdText.toLowerCase(), INDUSTRIES);
+  return score > 0 ? { industry: key, signals } : { industry: "other/unclassified", signals: [] };
+}
+
+const INDUSTRY_LABELS = [...Object.keys(INDUSTRIES), "other/unclassified"];
+
+async function classifyIndustryLlm(jdText: string): Promise<{ industry: string }> {
+  const result = await callOpenRouterChat({
+    temperature: 0,
+    max_tokens: 30,
+    messages: [
+      {
+        role: "system",
+        content: `Classify the INDUSTRY of the company hiring for this job description. Every JD you see is for a technical (developer/data/analytics) role — classify the COMPANY's industry from what it does, never from the role's title. Reply with EXACTLY ONE label from this list, nothing else: ${INDUSTRY_LABELS.join(", ")}.`,
+      },
+      { role: "user", content: jdText.slice(0, 4000) },
+    ],
+  });
+  const raw = (result.content ?? "").trim().toLowerCase();
+  const match = INDUSTRY_LABELS.find((label) => raw.includes(label));
+  return { industry: match ?? "other/unclassified" };
+}
+
+// Env-toggled A/B comparison point: keyword scoring (default, zero LLM cost)
+// vs a dedicated LLM classification call. Never throws — falls back to the
+// keyword path so a flaky/misconfigured LLM call never breaks resume
+// generation. Set RESUME_INDUSTRY_CLASSIFIER=llm to flip the toggle.
+export async function classifyIndustry(jdText: string): Promise<IndustryResult> {
+  const method = process.env.RESUME_INDUSTRY_CLASSIFIER === "llm" ? "llm" : "keyword";
+  if (method === "keyword") {
+    return { method: "keyword", ...classifyIndustryKeyword(jdText) };
+  }
+  try {
+    const { industry } = await classifyIndustryLlm(jdText);
+    return { method: "llm", industry };
+  } catch (e) {
+    console.warn("[classifyIndustry] LLM path failed, falling back to keyword", e);
+    return { method: "keyword", ...classifyIndustryKeyword(jdText) };
+  }
 }

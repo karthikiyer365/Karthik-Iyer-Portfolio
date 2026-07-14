@@ -10,7 +10,7 @@ import {
   parseJson,
   normPersona,
 } from "@/server/ai/resumeContext";
-import { analyzeJd, formatReport } from "@/server/ai/keywordMatch";
+import { analyzeJd, classifyIndustry, formatReport } from "@/server/ai/keywordMatch";
 import { checkResume } from "@/server/ai/resumeQuality";
 import { BULLET_RULES } from "@/server/ai/bulletRules";
 import { buildTex } from "@/server/ai/texBuilder";
@@ -32,6 +32,29 @@ export async function POST(req: NextRequest) {
     // Script-side gap analysis (keyword_match.py port). INTERNAL: drives emphasis
     // and the fit_note honesty, never surfaces as a score UI.
     const gap = analyzeJd(jdText, `${master}\n${loadCorpus()}`);
+    const industry = await classifyIndustry(jdText);
+    if (gap) {
+      console.log("[resume/generate] classification", {
+        roleType: gap.roleType,
+        industry: industry.industry,
+        method: industry.method,
+      });
+    }
+
+    // Skills groups always ship all 5, but the one matching this JD's
+    // role-type leads — computed here (not left to the model) so the
+    // ordering is deterministic.
+    const SKILLS_GROUPS = ["Languages & Data", "Data Engineering", "AI / ML", "Cloud & DevOps", "BI & Visualization"] as const;
+    const ROLE_TYPE_TO_SKILLS_GROUP: Record<string, string> = {
+      "etl-de": "Data Engineering",
+      "bi-analytics": "BI & Visualization",
+      "ai-ml": "AI / ML",
+      "cloud-infra": "Cloud & DevOps",
+    };
+    const leadGroup = gap ? ROLE_TYPE_TO_SKILLS_GROUP[gap.roleType] : undefined;
+    const skillsOrder = leadGroup
+      ? [leadGroup, ...SKILLS_GROUPS.filter((g) => g !== leadGroup)]
+      : [...SKILLS_GROUPS];
 
     const systemPrompt = `You build Karthik Iyer's resume, tailored to a specific job, as JSON.
 
@@ -43,7 +66,7 @@ ${master}
 
 RETRIEVED EVIDENCE — the JD-relevant accomplishments, ranked most-relevant first. ALL experience and project bullets come from HERE:
 ${corpus}
-${gap ? `\nKEYWORD GAP REPORT (script-computed, INTERNAL — never print the score or this report in the resume): missing keywords the JD emphasizes. Weave a missing keyword into skills/bullets ONLY where a real fact from the material supports it (aliases count: Spark covers PySpark need, etc.). Use the archetype to decide what to emphasize.\n${formatReport(gap)}\n` : ""}${answers ? `\nRECRUITER'S ANSWERS to clarifying questions about this role — weight these HEAVILY to decide what to emphasize and how to WORD bullets. In particular, when they confirm an adjacent skill counts (e.g. Supabase satisfies the cloud-data need), position Karthik's real adjacent experience toward that requirement using the role's language. Reposition and reword existing facts — never invent new ones:\n${answers}\n` : ""}
+${gap ? `\nKEYWORD GAP REPORT (script-computed, INTERNAL — never print the score or this report in the resume): missing keywords the JD emphasizes. Weave a missing keyword into skills/bullets ONLY where a real fact from the material supports it (aliases count: Spark covers PySpark need, etc.). Use the role-type and industry to decide what to emphasize.\n${formatReport(gap, industry)}\n` : ""}${answers ? `\nRECRUITER'S ANSWERS to clarifying questions about this role — weight these HEAVILY to decide what to emphasize and how to WORD bullets. In particular, when they confirm an adjacent skill counts (e.g. Supabase satisfies the cloud-data need), position Karthik's real adjacent experience toward that requirement using the role's language. Reposition and reword existing facts — never invent new ones:\n${answers}\n` : ""}
 ${BULLET_RULES}
 
 Return ONLY a JSON object of this exact shape (no prose, no markdown fences):
@@ -72,9 +95,9 @@ Rules:
    B) 2 experiences (4-5 bullets each) + 3 projects (2-3 bullets each) — depth over count: a few items carry outsized weight for this JD, so give them more bullets each.
    C) 3 experiences (3-5 bullets each) + 2 projects (2 bullets each) — balanced: professional track record leads, projects round out stack coverage.
    D) 4 experiences (3-4 bullets each) + 1 project (2 bullets) — experience-heavy: the JD prizes professional/industry tenure and progression over side work.
-  Choose by where the BEST evidence is, not by symmetry. Every bullet must still earn its place — never pad a slot with weak material to hit the count; drop to the neighboring layout instead. Order experiences most-recent / most-relevant first; always keep the most recent role, the summary, and education. The document may flow past one page.
+  Choose by where the BEST evidence is, not by symmetry — the role-type signal above is a secondary tiebreaker only (e.g. a project-management-flavored JD leans toward D, tenure/experience-heavy, when evidence strength is otherwise close). Every bullet must still earn its place — never pad a slot with weak material to hit the count; drop to the neighboring layout instead. Order experiences most-recent / most-relevant first; always keep the most recent role, the summary, and education. The document may flow past one page.
 - Pick ONE of two formats: (A) include "leadership" (2-3 one-line items) AND "certifications" (2-4 short items) when the material has them and the role would value them; (B) return BOTH as empty arrays when the page is better spent elsewhere or the material is thin.
-- "skills" MUST use EXACTLY these 5 groups, in this order, each on one line with the relevant items from the master resume: "Languages & Data", "Data Engineering", "AI / ML", "Cloud & DevOps", "BI & Visualization". Never return an empty skills list.
+- "skills" MUST include EXACTLY these 5 groups, each on one line with the relevant items from the master resume: "Languages & Data", "Data Engineering", "AI / ML", "Cloud & DevOps", "BI & Visualization". Order them ${skillsOrder.map((g) => `"${g}"`).join(", ")} — the group most relevant to this JD's role-type leads. Never return an empty skills list.
 - "fit_note": 2-4 sentences addressed to the recruiter about how well Karthik fits THIS role — honest, not salesy. Where a requirement isn't explicitly on the resume but adjacent experience covers it, say so and explain why it transfers (name the real experience). If the fit is genuinely weak, be honest and direct — e.g. "candidly this is roughly a ${gap ? gap.score : 70}% match: the role leans further into <X> than Karthik's background does" — and say what DOES align. Never inflate. Mention the % only when the fit is weak.
 - Tailor wording to the job's language only where a real fact already supports it.`;
 
@@ -145,6 +168,16 @@ Rules:
       } catch (e) {
         console.warn("[resume/generate] quality retry failed, serving first attempt", e);
       }
+    }
+
+    // Enforce the computed skills-group order server-side — the model mostly
+    // follows the prompt's order, but not reliably.
+    if (Array.isArray((d as { skills?: unknown }).skills)) {
+      const idx = (g: unknown) => {
+        const i = skillsOrder.indexOf(String(g));
+        return i === -1 ? skillsOrder.length : i;
+      };
+      (d as { skills: { group?: unknown }[] }).skills.sort((a, b) => idx(a.group) - idx(b.group));
     }
 
     const { fit_note, layout, ...resume } = d as { fit_note?: unknown; layout?: unknown } & Record<string, unknown>;
