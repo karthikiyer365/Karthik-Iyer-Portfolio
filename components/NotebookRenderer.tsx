@@ -51,7 +51,13 @@ function joinSource(source: string | string[]): string {
 
 /* ===================== component ===================== */
 
-export default function NotebookRenderer({ content }: { content: string }) {
+export default function NotebookRenderer({
+  content,
+  githubUrl,
+}: {
+  content: string;
+  githubUrl?: string;
+}) {
   let notebook: Notebook;
   try {
     notebook = JSON.parse(content) as Notebook;
@@ -71,10 +77,17 @@ export default function NotebookRenderer({ content }: { content: string }) {
     );
   }
 
+  // Repo link renders next to the title, which lives in the first markdown cell.
+  const titleCellIdx = notebook.cells.findIndex((c) => c.cell_type === "markdown");
+
   return (
     <div className="flex-1 overflow-auto px-6 py-4 space-y-1">
       {notebook.cells.map((cell, idx) => (
-        <CellBlock key={idx} cell={cell} />
+        <CellBlock
+          key={idx}
+          cell={cell}
+          githubUrl={idx === titleCellIdx ? githubUrl : undefined}
+        />
       ))}
     </div>
   );
@@ -82,9 +95,15 @@ export default function NotebookRenderer({ content }: { content: string }) {
 
 /* ===================== Cell Block ===================== */
 
-function CellBlock({ cell }: { cell: NotebookCell }) {
+function CellBlock({
+  cell,
+  githubUrl,
+}: {
+  cell: NotebookCell;
+  githubUrl?: string;
+}) {
   if (cell.cell_type === "markdown") {
-    return <MarkdownCell source={joinSource(cell.source)} />;
+    return <MarkdownCell source={joinSource(cell.source)} githubUrl={githubUrl} />;
   }
 
   if (cell.cell_type === "code") {
@@ -101,10 +120,31 @@ function CellBlock({ cell }: { cell: NotebookCell }) {
 
 /* ===================== Markdown Cell ===================== */
 
-function MarkdownCell({ source }: { source: string }) {
+function MarkdownCell({
+  source,
+  githubUrl,
+}: {
+  source: string;
+  githubUrl?: string;
+}) {
   const { openFile } = useEditor();
   const components = {
     ...markdownComponents,
+    h1: ({ children }: { children?: React.ReactNode }) => (
+      <h1 className="flex items-center gap-3 text-[19px] font-semibold text-ink mb-3 mt-1 border-b border-line-subtle pb-2">
+        <span>{children}</span>
+        {githubUrl && (
+          <a
+            href={githubUrl}
+            target="_blank"
+            rel="noreferrer"
+            className="font-mono text-[10px] font-normal px-2 py-0.5 rounded bg-accent-pink/10 text-accent-pink hover:bg-accent-pink/20 transition-colors shrink-0"
+          >
+            View on GitHub
+          </a>
+        )}
+      </h1>
+    ),
     a: ({ children, href }: { children?: React.ReactNode; href?: string }) => {
       if (href?.startsWith("portfolio/")) {
         const filePath = decodeURIComponent(href);

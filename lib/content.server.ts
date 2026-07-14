@@ -85,6 +85,27 @@ function readAllFiles(
   return result;
 }
 
+// Notebooks carry their repo link in metadata.github_url (nbformat ignores
+// unknown metadata keys, so this is safe alongside kernelspec/language_info).
+function extractGithubUrls(
+  fileContents: Record<string, string>
+): Record<string, string> {
+  const result: Record<string, string> = {};
+  for (const [filePath, raw] of Object.entries(fileContents)) {
+    if (!filePath.endsWith(".ipynb")) continue;
+    try {
+      const notebook = JSON.parse(raw);
+      const url = notebook?.metadata?.github_url;
+      if (typeof url === "string" && url.trim()) {
+        result[filePath] = url;
+      }
+    } catch {
+      // malformed notebook JSON — skip, renderer will surface the error
+    }
+  }
+  return result;
+}
+
 export function loadContent() {
   const children = buildFileTree(CONTENT_DIR, "portfolio");
 
@@ -101,6 +122,7 @@ export function loadContent() {
       : [];
 
   const fileContents = readAllFiles(CONTENT_DIR, "portfolio");
+  const githubUrls = extractGithubUrls(fileContents);
 
-  return { fileTree, fileContents };
+  return { fileTree, fileContents, githubUrls };
 }

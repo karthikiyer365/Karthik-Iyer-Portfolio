@@ -16,9 +16,14 @@ type ViewMode = "landing" | "ide";
 interface HomePageProps {
   fileTree: FileNode[];
   fileContents: Record<string, string>;
+  githubUrls: Record<string, string>;
 }
 
-export default function HomePage({ fileTree, fileContents }: HomePageProps) {
+export default function HomePage({
+  fileTree,
+  fileContents,
+  githubUrls,
+}: HomePageProps) {
   const { openFile, resetEditor, state } = useEditor();
   const [view, setView] = useState<ViewMode>("landing");
   // Mobile only: which off-canvas panel is open (desktop shows both inline).
@@ -42,7 +47,11 @@ export default function HomePage({ fileTree, fileContents }: HomePageProps) {
   );
 
   return (
-    <ContentProvider fileTree={fileTree} fileContents={fileContents}>
+    <ContentProvider
+      fileTree={fileTree}
+      fileContents={fileContents}
+      githubUrls={githubUrls}
+    >
       {view === "landing" ? (
         <LandingPage onNavigate={handleNavigate} />
       ) : (

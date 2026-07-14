@@ -43,6 +43,7 @@ const config: Config = {
           pink: "var(--accent-pink)",
           teal: "var(--accent-teal)",
           blue: "var(--accent-blue)",
+          green: "var(--accent-green)",
         },
       },
       fontFamily: {
