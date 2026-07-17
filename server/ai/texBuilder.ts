@@ -21,7 +21,7 @@ const PREAMBLE = String.raw`%-------------------------
 % Resume for Karthik Iyer. Do NOT change the preamble, packages, spacing, or commands.
 % Only edit content between \begin{document} and \end{document}.
 
-\documentclass[letterpaper,11pt]{article}
+\documentclass[a4paper,11pt]{article}
 % Force 10.5pt font size for tighter layout
 
 \usepackage{latexsym}
@@ -49,8 +49,8 @@ const PREAMBLE = String.raw`%-------------------------
 \addtolength{\oddsidemargin}{-0.5in}
 \addtolength{\evensidemargin}{-0.5in}
 \addtolength{\textwidth}{1in}
-\addtolength{\topmargin}{-.5in}
-\addtolength{\textheight}{1.0in}
+\addtolength{\topmargin}{-.65in}
+\addtolength{\textheight}{1.3in}
 
 \urlstyle{same}
 
