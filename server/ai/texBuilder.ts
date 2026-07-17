@@ -97,7 +97,7 @@ const PREAMBLE = String.raw`%-------------------------
 %-------------------------------------------
 %%%%%%  RESUME STARTS HERE  %%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\AtBeginDocument{\fontsize{10.5}{15.3}\selectfont}
+\AtBeginDocument{\fontsize{10.5}{12.6}\selectfont}
 
 \begin{document}`;
 
