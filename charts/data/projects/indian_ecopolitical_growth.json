@@ -1,0 +1,175 @@
+{
+  "output": "content/passion-projects/Indian EcoPolitical Growth.ipynb",
+  "github_url": "https://karthikiyer365.github.io/ReLearning-Python/",
+  "meta": {
+    "company": "Personal Project",
+    "role": "Data Engineering · Interactive Dashboards",
+    "duration": "2026",
+    "location": "R · Shiny · WebAssembly"
+  },
+  "hero": "# Understanding Indian EcoPolitical Growth\n\n**Config-driven ETL over 3 public data sources · R · Shiny · plotly · shinylive (WebAssembly)**\n\n## Hero Overview\n\nA config-driven analytics pipeline and dashboard tracing India's economic and governance trajectory from 1789 to 2031. One CSV declares 64 indicators across 11 categories; four batch R scripts pull them from the World Bank, IMF WEO and V-Dem, unify three incompatible response shapes into a single long-format parquet table, and validate the result before it ever reaches the app.\n\nThe front end is a Shiny dashboard of 14 charts across 5 domain tabs, compiled to WebAssembly with shinylive so it runs entirely in the browser on a static host — no R server, no runtime cost. Every headline finding under a chart is computed from the data currently in view rather than written into the page.",
+  "domain_colors": {
+    "AI / ML": "#dd0077",
+    "Integration": "#c98aa0",
+    "Backend Engineering": "#b8b8b8",
+    "Cloud & Infra": "#a8b8b0",
+    "Data Engineering": "#88c0b4",
+    "Workflow / Ops": "#4ec9b0"
+  },
+  "radar": {
+    "Data Engineering": 9,
+    "API Integration": 9,
+    "Data Visualization": 9,
+    "Statistical Reasoning": 7,
+    "Application Development": 8,
+    "Deployment & CI": 7
+  },
+  "bubble_chart": {
+    "x_axis": "system",
+    "y_axis": "ownership",
+    "size_metric": "implementation_strength",
+    "color_metric": "domain",
+    "points": [
+      {
+        "system": "Config-Driven ETL",
+        "domain": "Data Engineering",
+        "ownership": 10,
+        "implementation_strength": 9.0,
+        "complexity": 7.0,
+        "impact": 9.0,
+        "maturity": 8.0,
+        "subsystems": [
+          "indicators.csv contract",
+          "single config loader",
+          "long-format merge",
+          "derived forecast flag",
+          "derived metadata table"
+        ],
+        "evidence": "A single 64-row CSV (category, indicator, code, source_system, source_param, unit) drives fetch, join and every dashboard control — read through one loader so the three consumers cannot drift apart. The merge stage unifies all three sources into one long parquet table of 4,355 observations spanning 1789–2031, deriving both the is_forecast flag (anything past the last real World Bank year) and the indicator metadata table rather than hand-maintaining either."
+      },
+      {
+        "system": "Multi-Source API Integration",
+        "domain": "Integration",
+        "ownership": 10,
+        "implementation_strength": 9.0,
+        "complexity": 8.5,
+        "impact": 8.0,
+        "maturity": 8.0,
+        "subsystems": [
+          "World Bank batch endpoint",
+          "IMF SDMX XML parsing",
+          "V-Dem bulk extract",
+          "silent-empty guard"
+        ],
+        "evidence": "Three sources with three failure modes, all of which return HTTP 200 while giving back nothing. The World Bank pull batches 49 series into 2 semicolon-delimited requests (0.72s, 36KB gzipped) and branches on a source_param column because governance indicators live in a separate database that answers 200-with-empty-body without it. IMF WEO requires the SDMX key in COUNTRY.INDICATOR.FREQUENCY order and ships XML regardless of the Accept header, so it parses with xml2. V-Dem is a 34MB archive that expands to ~1GB across 3,868 variables, so it is pulled once offline and reduced to 8 indices before saving. A shared assert_series_complete turns every short response into a hard stop."
+      },
+      {
+        "system": "Validation Harness",
+        "domain": "Workflow / Ops",
+        "ownership": 10,
+        "implementation_strength": 8.0,
+        "complexity": 6.5,
+        "impact": 8.0,
+        "maturity": 7.5,
+        "subsystems": [
+          "6 data-quality checks",
+          "fail vs warn split",
+          "HTML report render"
+        ],
+        "evidence": "Six checks run over the processed dataset — duplicates, year range, numeric sanity, dead indicator codes, coverage regression and interior gaps — and render to an HTML report. The design rule is that sparsity is not breakage: Gini has 8 observations across 45 years and literacy 14, so a naive no-missing-years rule would fail 4 of 64 indicators on a perfectly healthy run. Gap checks therefore warn and never fail the build, while structural faults still hard-fail."
+      },
+      {
+        "system": "Analytical Dashboard",
+        "domain": "Backend Engineering",
+        "ownership": 10,
+        "implementation_strength": 9.0,
+        "complexity": 8.0,
+        "impact": 9.0,
+        "maturity": 8.0,
+        "subsystems": [
+          "14 charts across 5 tabs",
+          "computed finding lines",
+          "chart-form rationale",
+          "CVD-validated dark theme"
+        ],
+        "evidence": "Fourteen charts grouped into Economy, State, Society, Politics and Limits, each paired with a stated method note and a caveat naming what the chart cannot show. Findings underneath every chart are recomputed from the filtered range rather than hardcoded, so moving the year slider cannot leave a stale sentence behind. Chart forms are chosen against specific traps: indexed single-axis instead of dual-axis where series differ by three orders of magnitude, three separate lines instead of a stacked area because World Bank value-added shares sum to ~91% not 100%, and shock deviation measured against a trailing 10-year mean rather than an arbitrary zero. The dark palette was validated for colour-vision deficiency separation and 3:1 contrast."
+      },
+      {
+        "system": "WebAssembly Deployment",
+        "domain": "Cloud & Infra",
+        "ownership": 10,
+        "implementation_strength": 8.0,
+        "complexity": 8.5,
+        "impact": 8.0,
+        "maturity": 7.0,
+        "subsystems": [
+          "shinylive WASM export",
+          "nanoparquet swap",
+          "plotly load-race shim",
+          "GitHub Actions to Pages"
+        ],
+        "evidence": "Shiny normally needs a live R process, so the app is compiled to WebAssembly with shinylive and served as static files at zero hosting cost — a 119MB, 228-file bundle with no single file over GitHub's 100MB limit. Two porting problems were solved: arrow is unavailable in webR, so the whole pipeline moved to nanoparquet with byte-identical output; and plotly's JavaScript dependencies arrive after the first chart payload, leaving widgets permanently blank because htmlwidgets never retries. Neither a render gate nor a fixed timeout can win that race, so a self-terminating DOM watcher re-renders only while a visible chart is still blank — 14 of 14 charts confirmed painting in a real browser. A GitHub Actions workflow publishes to Pages as an artifact so the generated webR runtime never enters git history."
+      }
+    ]
+  },
+  "network_graph": {
+    "title": "Technology Capability Network",
+    "description": "Systems delivered, the ideas behind them, and the tools they run on.",
+    "nodes": [
+      { "id": "Config-Driven ETL", "type": "system", "domain": "Data Engineering" },
+      { "id": "Source Adapters", "type": "system", "domain": "Integration" },
+      { "id": "Validation Harness", "type": "system", "domain": "Workflow / Ops" },
+      { "id": "Analytical Dashboard", "type": "system", "domain": "Backend Engineering" },
+      { "id": "WASM Deployment", "type": "system", "domain": "Cloud & Infra" },
+
+      { "id": "Config-Driven Ingestion", "type": "concept", "domain": "Data Engineering" },
+      { "id": "Batched API Fetch", "type": "concept", "domain": "Integration" },
+      { "id": "Long-Format Modeling", "type": "concept", "domain": "Data Engineering" },
+      { "id": "Sparse-Aware Validation", "type": "concept", "domain": "Workflow / Ops" },
+      { "id": "Computed Findings", "type": "concept", "domain": "Backend Engineering" },
+      { "id": "Static WASM Hosting", "type": "concept", "domain": "Cloud & Infra" },
+
+      { "id": "R / Shiny", "type": "tool", "category": "Language" },
+      { "id": "plotly", "type": "tool", "category": "Visualization" },
+      { "id": "nanoparquet", "type": "tool", "category": "Storage" },
+      { "id": "httr2 / xml2", "type": "tool", "category": "HTTP Client" },
+      { "id": "World Bank API", "type": "tool", "category": "Data Source" },
+      { "id": "IMF WEO SDMX", "type": "tool", "category": "Data Source" },
+      { "id": "V-Dem", "type": "tool", "category": "Data Source" },
+      { "id": "shinylive", "type": "tool", "category": "Deployment" },
+      { "id": "GitHub Actions", "type": "tool", "category": "Deployment" }
+    ],
+    "edges": [
+      { "source": "Config-Driven ETL", "target": "Config-Driven Ingestion", "weight": 3 },
+      { "source": "Config-Driven ETL", "target": "Long-Format Modeling", "weight": 3 },
+      { "source": "Source Adapters", "target": "Batched API Fetch", "weight": 3 },
+      { "source": "Source Adapters", "target": "Config-Driven Ingestion", "weight": 2 },
+      { "source": "Validation Harness", "target": "Sparse-Aware Validation", "weight": 3 },
+      { "source": "Validation Harness", "target": "Long-Format Modeling", "weight": 2 },
+      { "source": "Analytical Dashboard", "target": "Computed Findings", "weight": 3 },
+      { "source": "Analytical Dashboard", "target": "Long-Format Modeling", "weight": 2 },
+      { "source": "WASM Deployment", "target": "Static WASM Hosting", "weight": 3 },
+
+      { "source": "Config-Driven Ingestion", "target": "R / Shiny", "weight": 2 },
+      { "source": "Long-Format Modeling", "target": "nanoparquet", "weight": 3 },
+      { "source": "Batched API Fetch", "target": "httr2 / xml2", "weight": 3 },
+      { "source": "Batched API Fetch", "target": "World Bank API", "weight": 3 },
+      { "source": "Batched API Fetch", "target": "IMF WEO SDMX", "weight": 2 },
+      { "source": "Batched API Fetch", "target": "V-Dem", "weight": 2 },
+      { "source": "Sparse-Aware Validation", "target": "R / Shiny", "weight": 2 },
+      { "source": "Computed Findings", "target": "plotly", "weight": 3 },
+      { "source": "Computed Findings", "target": "R / Shiny", "weight": 3 },
+      { "source": "Static WASM Hosting", "target": "shinylive", "weight": 3 },
+      { "source": "Static WASM Hosting", "target": "GitHub Actions", "weight": 2 }
+    ]
+  },
+  "outcomes": {
+    "Indicators Unified": "64 across 3 sources",
+    "Observations": "4,355 rows · 1789–2031",
+    "World Bank Pull": "49 series in 2 requests (0.72s)",
+    "Charts Shipped": "14 across 5 tabs",
+    "Data Quality Checks": "6, sparse-aware",
+    "Hosting Cost": "$0 — static WASM"
+  },
+  "storyline": "## Context\n\nMost India dashboards stop at GDP, which answers the easy question and hides the interesting one: whether prosperity and governance moved together. Pairing them means reconciling three data providers that agree on nothing — the World Bank's REST API, IMF WEO over SDMX, and V-Dem as a bulk academic archive — each with different codes, shapes, year ranges and failure behaviour. The harder constraint was honesty: sparse public data invites charts that imply more than the numbers support.\n\n## Workflow\n\nOne CSV declares the indicators → four batch R scripts fetch and reduce each source → a merge step unifies them into a single long-format parquet table → six checks validate it and render a report → the Shiny app reads only the finished parquet and never touches an API at runtime. The whole pipeline runs end-to-end in about six seconds from a clean tree.\n\n## Technical Implementation\n\n- Config contract: 64 indicators over 11 categories in one CSV, read through a single loader so the fetch loop, the join and the dashboard controls cannot drift apart.\n- World Bank: 49 series batched into 2 semicolon-delimited requests against the sources endpoint, gzipped, with retry; a source_param column routes governance indicators to the separate database that otherwise returns 200 with an empty body.\n- IMF WEO: SDMX key built as COUNTRY.INDICATOR.FREQUENCY — any other order returns 200 with zero series — and parsed as XML, which the API sends regardless of the Accept header.\n- V-Dem: a 34MB archive expanding to ~1GB across 3,868 variables, pulled once offline and cut to 8 indices before persisting, so the app never carries the cost.\n- Silent-failure guard: every adapter runs the same completeness assertion, because all three sources answer a subtly wrong request with 200 and missing series rather than an error.\n- Storage: long format, not wide — 64 indicators with different year ranges would otherwise be 64 sparse columns and a per-chart drop_na. The forecast flag and the indicator metadata table are both derived, never hand-written.\n- Validation: six checks with a deliberate fail/warn split, because sparsity in survey-cadence series is the data, not a defect.\n- Dashboard: 14 plotly charts over 5 domain tabs, each with a method note, a caveat, and a finding line recomputed from the visible range.\n- Deployment: compiled to WebAssembly via shinylive onto GitHub Pages, which required replacing arrow with nanoparquet and defeating a plotly dependency-load race with a self-terminating DOM watcher.\n\n## Outcomes\n\nA reproducible pipeline turning three mismatched public sources into one validated 4,355-row analytical dataset, and an interactive 14-chart dashboard that runs entirely in the browser at zero hosting cost. Each chart form was chosen against a specific way it could mislead — no dual axes across incomparable scales, no stacked area over shares that do not sum to 100%, no hardcoded findings that go stale when the range changes."
+}
