@@ -346,11 +346,12 @@ def build_notebook(spec):
                 spec["network_graph"], domain_map))], 3),
         md_cell(spec["storyline"]),
     ]
-    return {
-        "cells": cells,
-        "metadata": {
-            "kernelspec": {"display_name": "Python 3", "language": "python", "name": "python3"},
-            "language_info": {"name": "python", "version": "3.11"},
-        },
-        "nbformat": 4, "nbformat_minor": 5,
+    # lib/content.server.ts reads the repo link off metadata.github_url. Without
+    # this passthrough, re-baking a spec silently strips the link off its notebook.
+    metadata = {
+        "kernelspec": {"display_name": "Python 3", "language": "python", "name": "python3"},
+        "language_info": {"name": "python", "version": "3.11"},
     }
+    if spec.get("github_url"):
+        metadata = {"github_url": spec["github_url"], **metadata}
+    return {"cells": cells, "metadata": metadata, "nbformat": 4, "nbformat_minor": 5}
