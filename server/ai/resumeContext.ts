@@ -58,7 +58,7 @@ export async function retrieveEvidence(jdText: string): Promise<string> {
   if (!isPineconeConfigured()) return loadCorpus();
   let hits;
   try {
-    hits = await queryPineconeByText(jdText, 40);
+    hits = await queryPineconeByText(jdText, 60);
   } catch (e) {
     console.warn("[resume] retrieval failed, falling back to stuffing", e);
     return loadCorpus();

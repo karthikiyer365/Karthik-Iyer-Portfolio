@@ -3,17 +3,22 @@
 // ponytail: no new index, no chunking algorithm (JSON structure = chunks), no embedding
 // code (the index's integrated sparse model embeds `text`). Stays sparse on purpose.
 // Run: node --env-file=.env scripts/ingest.mjs
+//      node scripts/ingest.mjs --dry     (build + print chunks, touch nothing, no env needed)
 import { Pinecone } from "@pinecone-database/pinecone";
 import fs from "fs";
 import path from "path";
 
+const DRY = process.argv.includes("--dry");
 const NAME = process.env.PINECONE_INDEX;
 const HOST = process.env.PINECONE_HOST;
 const NS = process.env.PINECONE_NAMESPACE || "__default__";
-if (!NAME) throw new Error("PINECONE_INDEX not set");
+if (!NAME && !DRY) throw new Error("PINECONE_INDEX not set");
 
-const pc = new Pinecone({ apiKey: process.env.PINECONE_API_KEY });
-const index = HOST ? pc.index(NAME, HOST) : pc.index(NAME);
+const index = DRY
+  ? null
+  : (HOST
+      ? new Pinecone({ apiKey: process.env.PINECONE_API_KEY }).index(NAME, HOST)
+      : new Pinecone({ apiKey: process.env.PINECONE_API_KEY }).index(NAME));
 
 // 1. Build records straight from the JSON structure.
 const stripMd = (s) =>
@@ -30,14 +35,11 @@ function recordsFromFile(file, type) {
     location: m.location ?? "",
   };
   const id = path.basename(file, ".json");
-  const outcomes = j.outcomes
-    ? Object.entries(j.outcomes).map(([k, v]) => `${k}: ${v}`).join(" · ")
-    : "";
   const recs = [];
   if (j.hero) {
     recs.push({
       _id: `${id}#overview`,
-      text: `${base.role} at ${base.company}. ${stripMd(j.hero)}${outcomes ? ` Metrics: ${outcomes}` : ""}`,
+      text: `${base.role} at ${base.company}. ${stripMd(j.hero)}`,
       ...base,
       system: "Overview",
     });
@@ -51,6 +53,44 @@ function recordsFromFile(file, type) {
       system: p.system ?? "",
     });
   }
+  // Outcomes get their own chunk so measurable results stay retrievable on their
+  // own instead of riding a hero blob that stripMd truncates at 600 chars.
+  const outcomes = Object.entries(j.outcomes ?? {}).map(([k, v]) => `${k}: ${v}`);
+  if (outcomes.length) {
+    recs.push({
+      _id: `${id}#outcomes`,
+      text: `${base.role} at ${base.company} — Measurable outcomes: ${outcomes.join(" · ")}`,
+      ...base,
+      system: "Outcomes",
+    });
+  }
+  // Storyline splits on its `## ` headers (Context / Workflow / Technical
+  // Implementation / Outcomes) — the only narrative prose in the spec.
+  for (const block of String(j.storyline ?? "").split(/\n(?=##\s)/)) {
+    const section = block.match(/^##\s*(.+)/)?.[1]?.trim();
+    const body = stripMd(block.replace(/^##\s*.+/, ""));
+    if (!section || !body) continue;
+    recs.push({
+      _id: `${id}#story-${section.toLowerCase().replace(/\W+/g, "-")}`,
+      text: `${base.role} at ${base.company} — ${section}: ${body}`,
+      ...base,
+      system: section,
+    });
+  }
+  // One stack chunk per file: tool + concept node labels, so a JD naming a
+  // concrete technology matches even when no prose sentence mentions it.
+  const nodes = j.network_graph?.nodes ?? [];
+  const label = (t) => nodes.filter((n) => n?.type === t).map((n) => n.id).filter(Boolean);
+  const tools = label("tool");
+  const concepts = label("concept");
+  if (tools.length || concepts.length) {
+    recs.push({
+      _id: `${id}#stack`,
+      text: `${base.role} at ${base.company} — Tools and technologies: ${tools.join(", ")}. Concepts: ${concepts.join(", ")}`,
+      ...base,
+      system: "Stack",
+    });
+  }
   return recs;
 }
 
@@ -60,6 +100,19 @@ const files = [
 ];
 const records = files.flatMap(([f, t]) => recordsFromFile(f, t));
 console.log(`built ${records.length} chunks from ${files.length} files`);
+
+// ponytail self-check: --dry proves the chunkers fire on every spec without
+// touching the live index. Fails loudly if a spec stops producing its sections.
+if (DRY) {
+  const missing = files
+    .map(([f]) => path.basename(f, ".json"))
+    .filter((id) => !["#overview", "#outcomes", "#stack", "#story-"].every((suffix) =>
+      records.some((r) => r._id.startsWith(`${id}${suffix}`))));
+  for (const r of records) console.log(`  ${r._id}\n    ${r.text.slice(0, 140)}`);
+  if (missing.length) throw new Error(`specs missing chunk kinds: ${missing.join(", ")}`);
+  console.log(`\n✅ dry run: ${records.length} chunks, all ${files.length} specs produced every chunk kind.`);
+  process.exit(0);
+}
 
 // 2. Clear the old messy records, then upsert the clean ones (integrated embedding
 // vectorizes `text`; metadata fields ride along, enabling filters later).
