@@ -1,5 +1,6 @@
 {
   "output": "content/projects/Yelp Analytics.ipynb",
+  "github_url": "https://github.com/karthikiyer365/DB-SQL-Yelp",
   "meta": {
     "company": "Academic Project",
     "role": "Big-Data ETL · Sentiment Analytics",

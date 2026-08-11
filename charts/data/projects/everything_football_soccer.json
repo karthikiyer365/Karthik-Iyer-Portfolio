@@ -1,0 +1,196 @@
+{
+  "output": "content/passion-projects/Everything Football - Soccer Data Hub.ipynb",
+  "github_url": "https://karthikiyer365.github.io/Everything-Football-Soccer/match.html",
+  "meta": {
+    "company": "Personal Project",
+    "role": "Data Platform Engineering · Sports Analytics",
+    "duration": "2024 – 2026",
+    "location": "Python · Supabase · GitHub Actions"
+  },
+  "hero": "# Everything Football — Soccer Data Hub\n\n**Multi-source football data platform with entity resolution, scheduled refresh, and static dashboards · Python · Supabase · GitHub Actions**\n\n## Hero Overview\n\nA production-shaped data platform for open football data: five independent sources fetched through one cached reader layer, resolved into a single player identity across providers, merged and cleaned into a Supabase Postgres warehouse that a scheduled pipeline keeps current twice a week. Coverage is 18 seasons of the Big-5 European leagues.\n\nThe front end is deliberately the opposite — three static HTML files with inline JavaScript, no build step and no dependencies, reading the warehouse directly over PostgREST with a read-only key. The Match Center reconstructs league position after every round from raw results and charts long-run club Elo against the league median; the Player dashboard renders per-season percentile cards with a bargain-versus-premium valuation verdict. The same fetch layer is also exposed as an MCP server so an agent can query the hub through the identical functions.",
+  "domain_colors": {
+    "AI / ML": "#dd0077",
+    "Integration": "#c98aa0",
+    "Backend Engineering": "#b8b8b8",
+    "Cloud & Infra": "#a8b8b0",
+    "Data Engineering": "#88c0b4",
+    "Workflow / Ops": "#4ec9b0"
+  },
+  "radar": {
+    "Data Engineering": 9,
+    "API Integration": 9,
+    "Entity Resolution": 9,
+    "Database Design": 8,
+    "Data Visualization": 8,
+    "Pipeline Automation": 8,
+    "Testing Discipline": 8
+  },
+  "bubble_chart": {
+    "x_axis": "system",
+    "y_axis": "ownership",
+    "size_metric": "implementation_strength",
+    "color_metric": "domain",
+    "points": [
+      {
+        "system": "Multi-Source Ingestion",
+        "domain": "Data Engineering",
+        "ownership": 10,
+        "implementation_strength": 9.0,
+        "complexity": 8.0,
+        "impact": 9.0,
+        "maturity": 8.0,
+        "subsystems": [
+          "FBref · Transfermarkt · football-data",
+          "ClubElo · Understat",
+          "content-addressed parquet cache",
+          "Manifest return contract"
+        ],
+        "evidence": "Five sources, one reader per file, every one routed through a single cached_fetch(source, dataset, params, produce, force) memoizer that writes a content-addressed parquet cache. Readers return a Manifest describing the cached artifact rather than a DataFrame, so callers decide when to materialise. Each source needed its own workaround: FBref requires patching soccerdata's league config before import and disambiguating a bare season string into a two-year code, football-data.co.uk is read with plain pandas because the library's own reader 503s on this host, and only FBref needs a browser at all — the rest are ordinary HTTP fetches."
+      },
+      {
+        "system": "Entity Resolution",
+        "domain": "Integration",
+        "ownership": 10,
+        "implementation_strength": 9.0,
+        "complexity": 9.0,
+        "impact": 9.0,
+        "maturity": 8.0,
+        "subsystems": [
+          "4-rung match ladder",
+          "birth-year guard",
+          "token blocking",
+          "same-name disambiguation"
+        ],
+        "evidence": "FBref and Transfermarkt name the same footballer differently, so a cross-source identity has to be built rather than looked up. The xref pipeline runs a four-rung ladder — manual overrides, then a stored mapping file, then exact match, then fuzzy — with every rung guarded by birth year so a fuzzy hit on a common name cannot silently bind the wrong player, and token blocking to keep the fuzzy pass tractable. Downstream, players sharing both a name and a team are separated by a birth-year suffix."
+      },
+      {
+        "system": "Warehouse & Schema",
+        "domain": "Cloud & Infra",
+        "ownership": 10,
+        "implementation_strength": 8.5,
+        "complexity": 7.5,
+        "impact": 9.0,
+        "maturity": 7.5,
+        "subsystems": [
+          "11 SQL migrations",
+          "RLS anon read-only",
+          "chunked upserts",
+          "paginated read path"
+        ],
+        "evidence": "Supabase Postgres is the single source of truth behind six table families — player season stats, transfers, the player xref, age curves, match results and club Elo — defined by 11 hand-applied SQL migrations that double as the schema record. Writes use a service-role key with 500-row chunked upserts and a float-to-Int64 repair pass; reads use an anon key under row-level security that permits nothing but SELECT, which is what makes it safe to ship that key to a static page. The read helper paginates at 1,000 rows so a large query cannot silently truncate."
+      },
+      {
+        "system": "Scheduled Refresh",
+        "domain": "Workflow / Ops",
+        "ownership": 10,
+        "implementation_strength": 8.0,
+        "complexity": 7.5,
+        "impact": 8.0,
+        "maturity": 7.0,
+        "subsystems": [
+          "cron Mon + Thu",
+          "5-league matrix",
+          "serialised scrape job",
+          "derived age-curve job"
+        ],
+        "evidence": "A GitHub Actions workflow refreshes the warehouse twice weekly across five jobs. The league matrix that touches FBref runs strictly one at a time to avoid an IP block, while the match-results matrix — plain CSV, no scrape risk — runs fully parallel. The age-curve job depends on the season job and derives its output from the hub itself, because PostgREST aggregates are disabled. A separate workflow publishes the site to Pages only when site files change."
+      },
+      {
+        "system": "Match Center & Player Dashboards",
+        "domain": "Backend Engineering",
+        "ownership": 10,
+        "implementation_strength": 8.5,
+        "complexity": 8.0,
+        "impact": 8.5,
+        "maturity": 7.5,
+        "subsystems": [
+          "round-by-round position bump chart",
+          "Elo vs league median",
+          "percentile valuation verdict",
+          "zero-dependency inline JS"
+        ],
+        "evidence": "Three static HTML files with inline CSS and JavaScript, no framework and no build step, querying PostgREST directly. The Match Center takes a league and season, recomputes league position after every round client-side from raw match results, and plots the race as a bump chart where unselected clubs stay faint and clickable; a second panel charts full club Elo from 2008 against the league's median club. The Player dashboard scores each season as an output percentile against positional peers and issues a Bargain, Fair or Premium verdict from the gap between output and value percentile, degrading to no verdict where the underlying defensive and keeper metrics do not exist rather than inventing one."
+      },
+      {
+        "system": "Agent Interface",
+        "domain": "AI / ML",
+        "ownership": 10,
+        "implementation_strength": 7.5,
+        "complexity": 6.5,
+        "impact": 7.0,
+        "maturity": 6.5,
+        "subsystems": [
+          "FastMCP server",
+          "3 reader tools",
+          "filtered warehouse reads"
+        ],
+        "evidence": "The same fetch layer is wrapped as an MCP server so an agent can call it without a second implementation: three reader tools each returning a manifest dict, plus a hub_table tool for league, season and player-id filtered reads of the warehouse with an explicit row cap. No parallel code path — the agent surface and the Python package call the identical functions."
+      }
+    ]
+  },
+  "network_graph": {
+    "title": "Technology Capability Network",
+    "description": "Ingestion, resolution and warehouse systems, and the tools behind them.",
+    "nodes": [
+      { "id": "Ingestion Layer", "type": "system", "domain": "Data Engineering" },
+      { "id": "Entity Resolution", "type": "system", "domain": "Integration" },
+      { "id": "Warehouse", "type": "system", "domain": "Cloud & Infra" },
+      { "id": "Scheduled Refresh", "type": "system", "domain": "Workflow / Ops" },
+      { "id": "Dashboards", "type": "system", "domain": "Backend Engineering" },
+      { "id": "Agent Interface", "type": "system", "domain": "AI / ML" },
+
+      { "id": "Cached Fetch", "type": "concept", "domain": "Data Engineering" },
+      { "id": "Fuzzy Match Ladder", "type": "concept", "domain": "Integration" },
+      { "id": "Chunked Upsert", "type": "concept", "domain": "Cloud & Infra" },
+      { "id": "Row-Level Security", "type": "concept", "domain": "Cloud & Infra" },
+      { "id": "Cron Orchestration", "type": "concept", "domain": "Workflow / Ops" },
+      { "id": "Percentile Scoring", "type": "concept", "domain": "Backend Engineering" },
+      { "id": "Tool Wrapping", "type": "concept", "domain": "AI / ML" },
+
+      { "id": "Python / pandas", "type": "tool", "category": "Language" },
+      { "id": "Supabase Postgres", "type": "tool", "category": "Database" },
+      { "id": "PostgREST", "type": "tool", "category": "API" },
+      { "id": "GitHub Actions", "type": "tool", "category": "Automation" },
+      { "id": "FBref / Transfermarkt", "type": "tool", "category": "Data Source" },
+      { "id": "ClubElo / Understat", "type": "tool", "category": "Data Source" },
+      { "id": "Parquet Cache", "type": "tool", "category": "Storage" },
+      { "id": "FastMCP", "type": "tool", "category": "Agent Runtime" },
+      { "id": "Vanilla JS / SVG", "type": "tool", "category": "Visualization" }
+    ],
+    "edges": [
+      { "source": "Ingestion Layer", "target": "Cached Fetch", "weight": 3 },
+      { "source": "Entity Resolution", "target": "Fuzzy Match Ladder", "weight": 3 },
+      { "source": "Entity Resolution", "target": "Cached Fetch", "weight": 2 },
+      { "source": "Warehouse", "target": "Chunked Upsert", "weight": 3 },
+      { "source": "Warehouse", "target": "Row-Level Security", "weight": 3 },
+      { "source": "Scheduled Refresh", "target": "Cron Orchestration", "weight": 3 },
+      { "source": "Scheduled Refresh", "target": "Chunked Upsert", "weight": 2 },
+      { "source": "Dashboards", "target": "Percentile Scoring", "weight": 3 },
+      { "source": "Dashboards", "target": "Row-Level Security", "weight": 2 },
+      { "source": "Agent Interface", "target": "Tool Wrapping", "weight": 3 },
+      { "source": "Agent Interface", "target": "Cached Fetch", "weight": 2 },
+
+      { "source": "Cached Fetch", "target": "Python / pandas", "weight": 3 },
+      { "source": "Cached Fetch", "target": "Parquet Cache", "weight": 3 },
+      { "source": "Cached Fetch", "target": "FBref / Transfermarkt", "weight": 3 },
+      { "source": "Cached Fetch", "target": "ClubElo / Understat", "weight": 2 },
+      { "source": "Fuzzy Match Ladder", "target": "Python / pandas", "weight": 3 },
+      { "source": "Chunked Upsert", "target": "Supabase Postgres", "weight": 3 },
+      { "source": "Row-Level Security", "target": "Supabase Postgres", "weight": 3 },
+      { "source": "Row-Level Security", "target": "PostgREST", "weight": 3 },
+      { "source": "Cron Orchestration", "target": "GitHub Actions", "weight": 3 },
+      { "source": "Percentile Scoring", "target": "Vanilla JS / SVG", "weight": 3 },
+      { "source": "Percentile Scoring", "target": "PostgREST", "weight": 2 },
+      { "source": "Tool Wrapping", "target": "FastMCP", "weight": 3 }
+    ]
+  },
+  "outcomes": {
+    "Coverage": "18 seasons · Big-5 leagues",
+    "Sources Unified": "5, one identity layer",
+    "Match Records": "32,545 backfilled",
+    "Club Elo Rows": "191K",
+    "Test Suite": "64 tests, no network",
+    "Refresh": "Automated, twice weekly"
+  },
+  "storyline": "## Context\n\nOpen football data is plentiful and mutually incompatible. FBref has the match statistics, Transfermarkt has the market values, football-data.co.uk has the results, ClubElo has the strength ratings, and none of them agree on what a given player or club is called. Any question that spans two of them — is this player producing more than he costs, has this club actually been getting stronger — is really an entity-resolution problem wearing an analytics costume. The goal was a hub where that resolution happens once, on a schedule, so the dashboards on top can be simple.\n\n## Workflow\n\nReaders fetch each source into a content-addressed parquet cache → the xref pipeline resolves player identity across providers → the player_season pipeline merges statistics with values and cleans the result → chunked upserts land it in Supabase → a twice-weekly cron re-runs the whole path → static dashboards and an MCP server read the warehouse through the same row-level-security policy.\n\n## Technical Implementation\n\n- Reader layer: one file per source, each returning a Manifest rather than a DataFrame, all routed through a single cached_fetch memoizer so caching, forcing and cache-key logic exist in exactly one place.\n- Source-specific workarounds: patching soccerdata's league config before import, mapping a bare season string to a two-year code, and reading football-data.co.uk with plain pandas because the library reader fails on this host. Only FBref needs a browser; everything else is plain HTTP.\n- Entity resolution: a four-rung ladder — overrides, mapping file, exact, fuzzy — every rung guarded by birth year, with token blocking to keep the fuzzy pass fast.\n- Cleaning rules that live in code and tests rather than prose: per-90 rates nulled below 450 minutes, age derived from birth year, a primary position picked per season, and a staleness flag on market values.\n- Warehouse: 11 hand-applied migrations across six table families; service-role writes in 500-row chunks with a float-to-Int64 repair; anon reads under RLS that permits only SELECT, which is what makes shipping the key to a static page safe.\n- Automation: five cron jobs twice weekly, with the FBref-touching matrix serialised to avoid an IP block and the CSV-based matrix left fully parallel.\n- Front end: three static files, no build step, no dependencies. The Match Center recomputes league position round by round from raw results client-side; the Player dashboard scores seasons as percentiles against positional peers and refuses to issue a verdict where the underlying metrics do not exist.\n- Testing: 64 tests across 17 files, entirely monkeypatched, so the suite covers the merge and cleaning rules without ever touching the network.\n\n## Outcomes\n\nA self-refreshing warehouse covering 18 seasons of the Big-5 leagues — 32,545 match records and roughly 191,000 club Elo rows — with one resolved player identity spanning five providers, and dashboards that read it directly with no server of their own. The known seams are recorded rather than hidden: club names still differ across sources behind an interim alias map, and upserts cannot delete, so a changed key leaves orphans that need a manual sweep."
+}
