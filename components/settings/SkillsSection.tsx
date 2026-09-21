@@ -23,7 +23,7 @@ const CATEGORIES: Record<SkillTab, string[]> = {
 
 export default function SkillsSection() {
   const [tab, setTab] = useState<SkillTab>("technical");
-  const [sortByCategory, setSortByCategory] = useState(false);
+  const [sortByCategory, setSortByCategory] = useState(true);
 
   const skills = SKILLS_DATA.filter((s) => s.tabs.includes(tab));
 
