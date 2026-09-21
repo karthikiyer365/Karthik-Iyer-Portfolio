@@ -3,12 +3,8 @@ import { EditorState, EditorAction } from "@/types/editor";
 export const initialEditorState: EditorState = {
   openFiles: [],
   activeFile: null,
-  expandedFolders: [
-    "portfolio",
-    "portfolio/education",
-    "portfolio/experiences",
-    "portfolio/projects",
-  ],
+  // Only the root opens by default; the section folders start collapsed.
+  expandedFolders: ["portfolio"],
 };
 
 export function editorReducer(

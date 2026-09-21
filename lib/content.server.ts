@@ -11,7 +11,6 @@ const SORT_ORDER: Record<string, string[]> = {
     "education",
     "experiences",
     "projects",
-    "passion-projects",
   ],
   "portfolio/experiences": [
     "AI & Data Engineer - RestoreFast.ipynb",
