@@ -140,7 +140,7 @@ function MarkdownCell({
             rel="noreferrer"
             className="font-mono text-[10px] font-normal px-2 py-0.5 rounded bg-accent-pink/10 text-accent-pink hover:bg-accent-pink/20 transition-colors shrink-0"
           >
-            View on GitHub
+            {githubUrl.includes("github.com") ? "View on GitHub" : "Go Live!!"}
           </a>
         )}
       </h1>
