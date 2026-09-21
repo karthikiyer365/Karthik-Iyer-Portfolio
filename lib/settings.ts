@@ -249,6 +249,24 @@ export const SKILLS_DATA: SkillItem[] = [
     category: "ML & Analytics",
   },
   {
+    name: "Interactive dashboard interfaces",
+    description: "Hand-built SVG charts and zero-dependency dashboards that read a warehouse directly.",
+    tabs: ["technical"],
+    category: "UI/UX",
+  },
+  {
+    name: "React & Next.js interfaces",
+    description: "Component-driven app UIs, from data-dense editor views to public portfolio sites.",
+    tabs: ["technical"],
+    category: "UI/UX",
+  },
+  {
+    name: "Information hierarchy & layout",
+    description: "Density, spacing, and print-exact document layout that stays readable under constraint.",
+    tabs: ["technical"],
+    category: "UI/UX",
+  },
+  {
     name: "Statistical analysis & forecasting",
     description: "Hypothesis testing, regression, and time-series forecasting on messy data.",
     tabs: ["technical"],
