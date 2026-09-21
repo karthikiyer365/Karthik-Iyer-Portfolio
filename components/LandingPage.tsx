@@ -1,10 +1,9 @@
 "use client";
 
 import type { ReactNode } from "react";
-import { FolderOpen, GitBranchPlus, MessageSquare } from "lucide-react";
-import { useContent, useSettings } from "@/app/providers";
+import { FolderOpen, PenLine, MessageSquare } from "lucide-react";
+import { useSettings } from "@/app/providers";
 import { SETTINGS_PATH } from "@/lib/settings";
-import type { FileNode } from "@/types/editor";
 
 type LandingPageProps = {
   onNavigate?: (filePath: string) => void;
@@ -15,27 +14,50 @@ type ActionButtonProps = {
   label: string;
   disabled?: boolean;
   onClick?: () => void;
+  /** External destination. Renders an anchor instead of a button. */
+  href?: string;
 };
 
-function ActionButton({ icon, label, disabled, onClick }: ActionButtonProps) {
-  return (
-    <button
-      type="button"
-      disabled={disabled}
-      onClick={disabled ? undefined : onClick}
-      className={[
+function ActionButton({ icon, label, disabled, onClick, href }: ActionButtonProps) {
+  const className = [
         "group inline-flex items-center gap-3.5 rounded-md border border-accent-pink",
         "bg-transparent px-4 py-1.5 text-body font-mono font-medium text-ink",
         "transition-colors duration-150",
         "hover:bg-accent-pink/30 hover:text-accent-pink hover:border-accent-pink",
         "active:bg-accent-pink/40 cursor-pointer",
-        "disabled:cursor-not-allowed disabled:opacity-30 disabled:hover:bg-transparent disabled:hover:text-ink",
-      ].join(" ")}
-    >
+    "disabled:cursor-not-allowed disabled:opacity-30 disabled:hover:bg-transparent disabled:hover:text-ink",
+  ].join(" ");
+
+  const inner = (
+    <>
       <span className="text-ink transition-colors group-hover:text-accent-pink">
         {icon}
       </span>
       <span className="whitespace-nowrap">{label}</span>
+    </>
+  );
+
+  if (href) {
+    return (
+      <a
+        href={href}
+        target="_blank"
+        rel="noreferrer"
+        className={className}
+      >
+        {inner}
+      </a>
+    );
+  }
+
+  return (
+    <button
+      type="button"
+      disabled={disabled}
+      onClick={disabled ? undefined : onClick}
+      className={className}
+    >
+      {inner}
     </button>
   );
 }
@@ -63,20 +85,8 @@ const RECENT_EXPERIENCE: { title: string; path: string; file: string }[] = [
   },
 ];
 
-function collectFiles(nodes: FileNode[]): string[] {
-  const files: string[] = [];
-  for (const node of nodes) {
-    if (node.type === "file") files.push(node.path);
-    if (node.children) files.push(...collectFiles(node.children));
-  }
-  return files;
-}
-
 export default function LandingPage({ onNavigate }: LandingPageProps) {
-  const { fileTree } = useContent();
   const { setActiveSubsection } = useSettings();
-  const allFiles = collectFiles(fileTree);
-  const firstFile = allFiles[0];
 
   return (
     <div className="flex h-screen w-screen items-center justify-center overflow-hidden bg-[#0a0a0a]">
@@ -105,25 +115,12 @@ export default function LandingPage({ onNavigate }: LandingPageProps) {
                 <FolderOpen className="h-4 w-4 ml-1" aria-hidden="true" />
               }
               label="Open Portfolio"
-              onClick={() => {
-                const mobile =
-                  typeof window !== "undefined" &&
-                  window.matchMedia("(max-width: 899px)").matches;
-                onNavigate?.(
-                  mobile ? "portfolio/Resume.md" : "portfolio/Summary.ipynb"
-                );
-              }}
+              onClick={() => onNavigate?.("portfolio/Resume.md")}
             />
             <ActionButton
-              icon={
-                <GitBranchPlus className="h-4 w-4" aria-hidden="true" />
-              }
-              label="Clone Skills"
-              disabled={!firstFile}
-              onClick={() => {
-                setActiveSubsection("skills");
-                onNavigate?.(SETTINGS_PATH);
-              }}
+              icon={<PenLine className="h-4 w-4" aria-hidden="true" />}
+              label="What's my take"
+              href="https://writing.karthikiyer.info"
             />
             <ActionButton
               icon={
