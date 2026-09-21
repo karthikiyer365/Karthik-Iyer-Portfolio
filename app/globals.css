@@ -171,6 +171,8 @@ body {
     position: absolute;
     left: 0;
     top: 0;
+    /* Shrink to content: a fixed height that touches the sheet edge mints a blank page 2. */
+    height: auto !important;
     margin: 0 !important;
     box-shadow: none !important;
   }

@@ -91,15 +91,16 @@ Rules:
 - Bullets MUST be specific and metric-led. Carry over the exact numbers, named tools/platforms (e.g. Procore, Xero, Twilio, Databricks, Spark, Pinecone), and named systems (e.g. DS-CAR, AFINN) from the retrieved evidence. NEVER flatten a concrete evidence point into vague phrasing like "AI-ready data products" — name the system, the tool, and the number.
 - In every bullet, wrap the 1-3 MOST important keywords in **double asterisks** for bold: the feature/concept name and the tool/tech-stack names (e.g. "Built **Databricks** ETL pipelines...", "Productionized a **24/7 LLM-backed hotline agent** on **Twilio**..."). Bold only short keyword phrases — never metrics, never half the sentence.
 - LAYOUT DECISION (do this FIRST, before writing any bullet): decide where Karthik's strongest JD-relevant content lives by weighing the retrieved evidence — the [experience] vs [project] groups are already ranked by relevance. Pick EXACTLY ONE layout and return it as "layout":
-   A) 2 experiences (3-4 bullets each) + 4 projects (2 bullets each) — project-heavy: the JD's core requirements are best evidenced by project work (e.g. hands-on stack breadth, research/analytics builds).
-   B) 2 experiences (4-5 bullets each) + 3 projects (2-3 bullets each) — depth over count: a few items carry outsized weight for this JD, so give them more bullets each.
+   A) 2 experiences (3-4 bullets each) + 3 projects (2 bullets each) — project-heavy: the JD's core requirements are best evidenced by project work (e.g. hands-on stack breadth, research/analytics builds).
+   B) 2 experiences (4-5 bullets each) + 2 projects (2 bullets each) — depth over count: a few items carry outsized weight for this JD, so give them more bullets each.
    C) 3 experiences (3-5 bullets each) + 2 projects (2 bullets each) — balanced: professional track record leads, projects round out stack coverage.
    D) 4 experiences (3-4 bullets each) + 1 project (2 bullets) — experience-heavy: the JD prizes professional/industry tenure and progression over side work.
   Choose by where the BEST evidence is, not by symmetry — the role-type signal above is a secondary tiebreaker only (e.g. a project-management-flavored JD leans toward D, tenure/experience-heavy, when evidence strength is otherwise close). Every bullet must still earn its place — never pad a slot with weak material to hit the count; drop to the neighboring layout instead. Order experiences most-recent / most-relevant first; always keep the most recent role, the summary, and education. The document may flow past one page.
 - Pick ONE of two formats: (A) include "leadership" (2-3 one-line items) AND "certifications" (2-4 short items) when the material has them and the role would value them; (B) return BOTH as empty arrays when the page is better spent elsewhere or the material is thin.
 - "skills" MUST include EXACTLY these 5 groups, each on one line with the relevant items from the master resume: "Languages & Data", "Data Engineering", "AI / ML", "Cloud & DevOps", "BI & Visualization". Order them ${skillsOrder.map((g) => `"${g}"`).join(", ")} — the group most relevant to this JD's role-type leads. Never return an empty skills list.
 - "fit_note": 2-4 sentences addressed to the recruiter about how well Karthik fits THIS role — honest, not salesy. Where a requirement isn't explicitly on the resume but adjacent experience covers it, say so and explain why it transfers (name the real experience). If the fit is genuinely weak, be honest and direct — e.g. "candidly this is roughly a ${gap ? gap.score : 70}% match: the role leans further into <X> than Karthik's background does" — and say what DOES align. Never inflate. Mention the % only when the fit is weak.
-- Tailor wording to the job's language only where a real fact already supports it.`;
+- Tailor wording to the job's language only where a real fact already supports it.
+- "summary": EXACTLY 2 sentences, max ~230 characters total — it must render in 2 lines on the page. Dense and specific, no filler openers.`;
 
     const messages: OpenRouterMessage[] = [
       { role: "system", content: systemPrompt },
@@ -116,8 +117,8 @@ Rules:
     // Per-layout hard caps: [experiences, exp bullets, projects, proj bullets].
     // Enforce whichever layout the model declared; default to balanced C.
     const LAYOUT_CAPS: Record<string, [number, number, number, number]> = {
-      A: [2, 4, 4, 2],
-      B: [2, 5, 3, 3],
+      A: [2, 4, 3, 2],
+      B: [2, 5, 2, 2],
       C: [3, 5, 2, 2],
       D: [4, 4, 1, 2],
     };
@@ -132,6 +133,7 @@ Rules:
       };
       d.experience = Array.isArray(d.experience) ? d.experience.slice(0, maxExp).map(capEntry(maxExpBullets)) : [];
       d.projects = Array.isArray(d.projects) ? d.projects.slice(0, maxProj).map(capEntry(maxProjBullets)) : [];
+      if (typeof d.summary === "string") d.summary = d.summary.split(/(?<=\.)\s+/).slice(0, 2).join(" ");
       if (Array.isArray(d.leadership)) d.leadership = d.leadership.slice(0, 3);
       if (Array.isArray(d.certifications)) d.certifications = d.certifications.slice(0, 4);
       return d;
