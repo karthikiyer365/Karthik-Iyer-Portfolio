@@ -3,8 +3,8 @@ import { EditorState, EditorAction } from "@/types/editor";
 export const initialEditorState: EditorState = {
   openFiles: [],
   activeFile: null,
-  // Only the root opens by default; the section folders start collapsed.
-  expandedFolders: ["portfolio"],
+  // Tracks collapsed folders so the whole tree starts expanded.
+  collapsedFolders: [],
 };
 
 export function editorReducer(
@@ -58,13 +58,13 @@ export function editorReducer(
     
     case "TOGGLE_FOLDER": {
       const folder = action.payload;
-      const isExpanded = state.expandedFolders.includes(folder);
+      const isCollapsed = state.collapsedFolders.includes(folder);
       
       return {
         ...state,
-        expandedFolders: isExpanded
-          ? state.expandedFolders.filter((f) => f !== folder)
-          : [...state.expandedFolders, folder],
+        collapsedFolders: isCollapsed
+          ? state.collapsedFolders.filter((f) => f !== folder)
+          : [...state.collapsedFolders, folder],
       };
     }
     

@@ -13,7 +13,7 @@ export interface EditorTab {
 export interface EditorState {
   openFiles: EditorTab[];
   activeFile: string | null;
-  expandedFolders: string[];
+  collapsedFolders: string[];
 }
 
 export type EditorAction =
