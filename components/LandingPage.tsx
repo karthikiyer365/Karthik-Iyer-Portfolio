@@ -1,9 +1,7 @@
 "use client";
 
 import type { ReactNode } from "react";
-import { FolderOpen, PenLine, MessageSquare } from "lucide-react";
-import { useSettings } from "@/app/providers";
-import { SETTINGS_PATH } from "@/lib/settings";
+import { FolderOpen, PenLine, LayoutDashboard } from "lucide-react";
 
 type LandingPageProps = {
   onNavigate?: (filePath: string) => void;
@@ -86,8 +84,6 @@ const RECENT_EXPERIENCE: { title: string; path: string; file: string }[] = [
 ];
 
 export default function LandingPage({ onNavigate }: LandingPageProps) {
-  const { setActiveSubsection } = useSettings();
-
   return (
     <div className="flex h-screen w-screen items-center justify-center overflow-hidden bg-[#0a0a0a]">
       <div className="w-full max-w-[820px] px-6">
@@ -118,19 +114,16 @@ export default function LandingPage({ onNavigate }: LandingPageProps) {
               onClick={() => onNavigate?.("portfolio/Resume.md")}
             />
             <ActionButton
-              icon={<PenLine className="h-4 w-4" aria-hidden="true" />}
-              label="What's my take"
-              href="https://writing.karthikiyer.info"
+              icon={
+                <LayoutDashboard className="h-4 w-4" aria-hidden="true" />
+              }
+              label="Open Live Dashboards"
+              href="https://karthikiyer365.github.io/Live/#tickets"
             />
             <ActionButton
-              icon={
-                <MessageSquare className="h-4 w-4" aria-hidden="true" />
-              }
-              label="Connect"
-              onClick={() => {
-                setActiveSubsection("contact");
-                onNavigate?.(SETTINGS_PATH);
-              }}
+              icon={<PenLine className="h-4 w-4" aria-hidden="true" />}
+              label="Open Tech Blog"
+              href="https://writing.karthikiyer.info"
             />
           </div>
 
