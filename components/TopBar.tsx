@@ -1,8 +1,11 @@
 "use client";
 
-import { Menu } from "lucide-react";
+import { Menu, LayoutDashboard, PenLine, Settings } from "lucide-react";
 import { useEditor, useSettings } from "@/app/providers";
 import { SETTINGS_PATH, SETTINGS_LABEL } from "@/lib/settings";
+
+const LINK_CLASS =
+  "inline-flex items-center gap-1.5 text-accent-pink hover:brightness-125 transition-all cursor-pointer";
 
 type TopBarProps = {
   onClose?: () => void;
@@ -64,29 +67,32 @@ export default function TopBar({ onClose, onOpenFiles }: TopBarProps) {
       </div>
 
       {/* Right - Links (first word dropped on mobile so all three fit) */}
-      <div className="flex items-center gap-3 md:gap-4 text-xs md:text-desc whitespace-nowrap">
+      <div className="flex items-center gap-3 md:gap-6 text-xs md:text-desc whitespace-nowrap">
         <a
           href="https://projects.karthikiyer.info/#tickets"
           target="_blank"
           rel="noreferrer"
-          className="text-ink-muted hover:text-accent-pink transition-colors"
+          className={LINK_CLASS}
         >
-          <span className="hidden md:inline">Live </span>Dashboards
+          <LayoutDashboard className="w-3.5 h-3.5 shrink-0" aria-hidden="true" />
+          <span><span className="hidden md:inline">Live </span>Dashboards</span>
         </a>
         <a
           href="https://writing.karthikiyer.info"
           target="_blank"
           rel="noreferrer"
-          className="text-ink-muted hover:text-accent-pink transition-colors"
+          className={LINK_CLASS}
         >
-          <span className="hidden md:inline">Tech </span>Blog
+          <PenLine className="w-3.5 h-3.5 shrink-0" aria-hidden="true" />
+          <span><span className="hidden md:inline">Tech </span>Blog</span>
         </a>
         <button
           type="button"
           onClick={openSettings}
-          className="text-accent-pink hover:brightness-110 transition-all cursor-pointer"
+          className={LINK_CLASS}
         >
-          <span className="hidden md:inline">Tech </span>Stack &amp; Contact
+          <Settings className="w-3.5 h-3.5 shrink-0" aria-hidden="true" />
+          <span><span className="hidden md:inline">Tech </span>Stack &amp; Contact</span>
         </button>
       </div>
     </div>
