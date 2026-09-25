@@ -118,7 +118,7 @@ export default function LandingPage({ onNavigate }: LandingPageProps) {
                 <LayoutDashboard className="h-4 w-4" aria-hidden="true" />
               }
               label="Open Live Dashboards"
-              href="https://karthikiyer365.github.io/Live/#tickets"
+              href="https://projects.karthikiyer.info/#tickets"
             />
             <ActionButton
               icon={<PenLine className="h-4 w-4" aria-hidden="true" />}
