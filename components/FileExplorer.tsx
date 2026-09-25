@@ -105,8 +105,8 @@ function TreeNode({ node, depth }: { node: FileNode; depth: number }) {
         className={[
           "group relative flex items-center gap-1.5 w-full h-[24px] pr-3 text-body cursor-pointer",
           isActive
-            ? "bg-selection bg-[#444444]"
-            : "text-ink-secondary hover:bg-[#ffffff08]",
+            ? "bg-tree-active"
+            : "text-ink-secondary hover:bg-hover",
         ].join(" ")}
         style={{ paddingLeft }}
       >
@@ -114,7 +114,7 @@ function TreeNode({ node, depth }: { node: FileNode; depth: number }) {
         {Array.from({ length: depth }).map((_, i) => (
           <span
             key={i}
-            className="absolute top-0 bottom-0 w-px bg-[#444444]"
+            className="absolute top-0 bottom-0 w-px bg-tree-active"
             style={{ left: i * 12 + 18 }}
           />
         ))}
@@ -125,7 +125,7 @@ function TreeNode({ node, depth }: { node: FileNode; depth: number }) {
           </span>
         ) : (
           <>
-            <span className="absolute w-py bg-[#444444]" />
+            <span className="absolute w-py bg-tree-active" />
             <FileIcon name={node.name} path={node.path} />
           </>
         )}

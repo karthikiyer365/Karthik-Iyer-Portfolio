@@ -301,7 +301,7 @@ function MarkdownPreview({ content }: { content: string }) {
               }
 
               return (
-                <code className="bg-surface-raised text-[#ce9178] px-1.5 py-0.5 rounded text-[12px] font-mono">
+                <code className="bg-surface-raised text-syn-string px-1.5 py-0.5 rounded text-[12px] font-mono">
                   {children}
                 </code>
               );
@@ -400,18 +400,18 @@ function renderLine(line: string, filePath: string) {
   if (isMd) {
     if (line.startsWith("# "))
       return (
-        <span className="text-[#569cd6] font-semibold text-lg">{line}</span>
+        <span className="text-syn-keyword font-semibold text-lg">{line}</span>
       );
     if (line.startsWith("## "))
-      return <span className="text-[#4ec9b0] font-medium">{line}</span>;
+      return <span className="text-syn-type font-medium">{line}</span>;
     if (line.startsWith("### "))
-      return <span className="text-[#dcdcaa]">{line}</span>;
+      return <span className="text-syn-fn">{line}</span>;
     if (line.startsWith("- ") || line.startsWith("* "))
-      return <span className="text-[#ce9178]">{line}</span>;
+      return <span className="text-syn-string">{line}</span>;
     if (line.includes("**"))
-      return <span className="text-[#c586c0]">{line}</span>;
+      return <span className="text-syn-control">{line}</span>;
     if (line.includes("`"))
-      return <span className="text-[#d7ba7d]">{line}</span>;
+      return <span className="text-syn-regex">{line}</span>;
   }
 
   if (isCss) {
@@ -420,9 +420,9 @@ function renderLine(line: string, filePath: string) {
       const value = rest.join(":");
       return (
         <span>
-          <span className="text-[#9cdcfe]">{prop}</span>
+          <span className="text-syn-var">{prop}</span>
           <span className="text-ink-muted">:</span>
-          <span className="text-[#ce9178]">{value}</span>
+          <span className="text-syn-string">{value}</span>
         </span>
       );
     }
@@ -431,13 +431,13 @@ function renderLine(line: string, filePath: string) {
       line.trim().startsWith("*") ||
       line.trim().startsWith("*/")
     )
-      return <span className="text-[#6a9955]">{line}</span>;
+      return <span className="text-syn-comment">{line}</span>;
     if (
       line.trim().startsWith(".") ||
       line.trim().endsWith("{") ||
       line.trim() === "}"
     )
-      return <span className="text-[#d7ba7d]">{line}</span>;
+      return <span className="text-syn-regex">{line}</span>;
   }
 
   return <span className="text-ink-body">{line}</span>;

@@ -90,7 +90,7 @@ export function SettingsToggle({
         aria-checked={on}
         onClick={onToggle}
         className={`w-9 h-5 rounded-full relative transition-colors shrink-0 ${
-          on ? "bg-accent-teal" : "bg-line-strong"
+          on ? "bg-fill-teal" : "bg-line-strong"
         }`}
       >
         <span
