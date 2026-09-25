@@ -10,38 +10,114 @@
    ========================================================================= */
 :root {
   /* Surfaces */
-  --bg: #0a0a0a;            /* app / editor surface            -> bg-bg            */
-  --surface-1: #171717;     /* content panels, empty states    -> bg-surface-1    */
-  --surface-2: #1e1e1e;     /* left sidebar, chat panel         -> bg-surface-2    */
-  --surface-3: #141414;     /* tab strip                        -> bg-surface-3    */
-  --surface-raised: #1a1a1a;/* cards, code blocks               -> bg-surface-raised */
-  --titlebar: #202020;      /* top bar (darker, Cursor-like)    -> bg-titlebar     */
+  --bg: #ffffff;            /* app / editor surface            -> bg-bg            */
+  --surface-1: #fafafa;     /* content panels, empty states    -> bg-surface-1    */
+  --surface-2: #f4f4f4;     /* left sidebar, chat panel         -> bg-surface-2    */
+  --surface-3: #fcfcfc;     /* tab strip                        -> bg-surface-3    */
+  --surface-raised: #f7f7f7;/* cards, code blocks               -> bg-surface-raised */
+  --titlebar: #f0f0f0;      /* top bar (Cursor-like)            -> bg-titlebar     */
 
   /* Borders (hairlines) */
-  --border-subtle: #1f1f1f; /* default dividers                 -> border-line-subtle */
-  --border: #2a2a2a;        /* inputs, cards                    -> border-line        */
-  --border-strong: #333333; /* ghost buttons                    -> border-line-strong */
+  --border-subtle: #ebebeb; /* default dividers                 -> border-line-subtle */
+  --border: #e0e0e0;        /* inputs, cards                    -> border-line        */
+  --border-strong: #d0d0d0; /* ghost buttons                    -> border-line-strong */
 
   /* Text */
-  --text: #e5e5e5;          /* primary      -> text-ink           */
-  --text-body: #d4d4d4;     /* document body-> text-ink-body      */
-  --text-secondary: #a3a3a3;/* descriptions -> text-ink-secondary */
-  --text-muted: #707070;    /* meta         -> text-ink-muted     */
-  --text-faint: #444444;    /* line numbers, disabled -> text-ink-faint */
+  --text: #1a1a1a;          /* primary      -> text-ink           */
+  --text-body: #2e2e2e;     /* document body-> text-ink-body      */
+  --text-secondary: #5c5c5c;/* descriptions -> text-ink-secondary */
+  --text-muted: #6b6b6b;    /* meta         -> text-ink-muted     */
+  --text-faint: #9b9b9b;    /* line numbers, disabled -> text-ink-faint */
 
   /* State */
-  --selection: #04395e;     /* file-tree active row / text selection -> selection */
+  --selection: #add6ff;     /* file-tree active row / text selection -> selection */
 
   /* Accents — the ONLY colored tokens, used sparingly */
   --accent-pink: #dd0077;   /* brand: CTAs, timeline markers, active nav */
-  --accent-teal: #4ec9b0;   /* links, toggle "on", h2, highlights        */
-  --accent-blue: #569cd6;   /* code-view links, pairs with selection     */
-  --accent-green: #3fb950;  /* file icons: no GitHub link attached       */
+  --accent-teal: #0b7c66;   /* text + lines: links, h2, highlights       */
+  --accent-blue: #2f6fa8;   /* code-view links, pairs with selection     */
+  --accent-green: #217a30;  /* file icons: no GitHub link attached       */
 
-  /* Fonts (next/font injects --font-sans / --font-mono in layout.tsx) */
+  /* Fills — bright accents for backgrounds / chart fills (same names as the
+     Writing site). accent-* above is text + borders only. */
+  --fill-teal: #4ec9b0;     /* toggle "on", teal fills -> bg-fill-teal  */
+  --fill-blue: #569cd6;     /*                        -> bg-fill-blue  */
+  --fill-green: #3fb950;    /*                        -> bg-fill-green */
+
+  /* Component states */
+  --hover: #00000008;           /* file-tree row hover        -> hover:bg-hover        */
+  --tree-active: #dcdcdc;       /* active row, tree guides    -> bg-tree-active        */
+  --chat-input: #e4e4e4;        /* chat bubble + input        -> bg-chat-input         */
+  --chat-send: #d4d4d4;         /* send button                -> bg-chat-send          */
+  --chat-send-hover: #c8c8c8;   /*                            -> hover:bg-chat-send-hover */
+  --pink-glow: #fdf4f9;         /* timeline dot halo          -> shadow-[..var(--pink-glow)] */
+  --danger: #dc2626;            /* error text                 -> text-danger           */
+  --backdrop: rgb(0 0 0 / 0.3); /* mobile drawer overlay      -> bg-backdrop           */
+
+  /* Syntax (VS Code Light+)                                  -> text-syn-*            */
+  --syn-var: #001080;
+  --syn-string: #a31515;
+  --syn-fn: #795e26;
+  --syn-control: #af00db;
+  --syn-comment: #008000;
+  --syn-keyword: #0000ff;
+  --syn-type: #267f99;
+  --syn-regex: #800000;
+
+  /* Window dots (same in both themes) */
   --dot-red: #ff5f57;
   --dot-yellow: #febc2e;
   --dot-green: #28c840;
+
+  color-scheme: light;
+}
+
+/* Dark theme — opt-in via Settings → Appearance (sets <html data-theme="dark">).
+   Values are the original dark palette. */
+:root[data-theme="dark"] {
+  --bg: #0a0a0a;
+  --surface-1: #171717;
+  --surface-2: #1e1e1e;
+  --surface-3: #141414;
+  --surface-raised: #1a1a1a;
+  --titlebar: #202020;
+
+  --border-subtle: #1f1f1f;
+  --border: #2a2a2a;
+  --border-strong: #333333;
+
+  --text: #e5e5e5;
+  --text-body: #d4d4d4;
+  --text-secondary: #a3a3a3;
+  --text-muted: #707070;
+  --text-faint: #444444;
+
+  --selection: #04395e;
+
+  --accent-teal: #4ec9b0;
+  --accent-blue: #569cd6;
+  --accent-green: #3fb950;
+
+  --hover: #ffffff08;
+  --tree-active: #444444;
+  --chat-input: #3c3c3c;
+  --chat-send: #4a4a4a;
+  --chat-send-hover: #5a5a5a;
+  --pink-glow: #15060d;
+  --danger: #f87171;
+  --backdrop: rgb(0 0 0 / 0.5);
+
+  /* Syntax (VS Code Dark+) */
+  --syn-var: #9cdcfe;
+  --syn-string: #ce9178;
+  --syn-fn: #dcdcaa;
+  --syn-control: #c586c0;
+  --syn-comment: #6a9955;
+  --syn-keyword: #569cd6;
+  --syn-type: #4ec9b0;
+  --syn-regex: #d7ba7d;
+
+  color-scheme: dark;
 }
 
 * {
@@ -92,8 +168,14 @@ body {
 /* Selection */
 ::selection {
   background: var(--selection);
-  color: #fff;
+  color: var(--text);
 }
+
+/* Logo: dark mark on light theme, original light mark on dark theme */
+.logo-dark { display: inline-block; }
+.logo-light { display: none; }
+:root[data-theme="dark"] .logo-dark { display: none; }
+:root[data-theme="dark"] .logo-light { display: inline-block; }
 
 /* Focus styles */
 :focus-visible {

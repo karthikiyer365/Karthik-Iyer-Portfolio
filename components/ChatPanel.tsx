@@ -376,7 +376,7 @@ export default function ChatPanel() {
         {messages.map((msg, idx) => (
           <div key={msg.id}>
             {msg.role === "user" ? (
-              <div className="w-full max-h-20 text-white text-sm leading-relaxed px-4 py-2 bg-[#3C3C3C] rounded-xl border border-[#3a3a3a]">
+              <div className="w-full max-h-20 text-ink text-sm leading-relaxed px-4 py-2 bg-chat-input rounded-xl border border-line-strong">
                 {msg.content.slice(0, 80)}
               </div>
             ) : (
@@ -445,7 +445,7 @@ export default function ChatPanel() {
                     a: ({ children, href }) => (
                       <a
                         href={href}
-                        className="text-blue-300 underline"
+                        className="text-accent-blue underline"
                         target="_blank"
                         rel="noreferrer"
                       >
@@ -465,7 +465,7 @@ export default function ChatPanel() {
       </div>
 
       <div className="p-3 shrink-0">
-        <div className="bg-[#3C3C3C] rounded-xl border border-[#3a3a3a]">
+        <div className="bg-chat-input rounded-xl border border-line-strong">
           <div className="px-2 pt-3">
             <textarea
               value={input}
@@ -501,7 +501,7 @@ export default function ChatPanel() {
             <button
               onClick={handleSubmit}
               disabled={!input.trim() || isTailoring}
-              className="w-8 h-8 rounded-full bg-[#4a4a4a] flex items-center justify-center disabled:opacity-30 disabled:cursor-not-allowed hover:bg-[#5a5a5a] transition-colors"
+              className="w-8 h-8 rounded-full bg-chat-send flex items-center justify-center disabled:opacity-30 disabled:cursor-not-allowed hover:bg-chat-send-hover transition-colors"
               title={
                 awaitingAnswers
                   ? "Generate résumé from your answers"
