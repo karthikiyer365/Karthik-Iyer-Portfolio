@@ -110,19 +110,19 @@ export default function LandingPage({ onNavigate }: LandingPageProps) {
               icon={
                 <FolderOpen className="h-4 w-4 ml-1" aria-hidden="true" />
               }
-              label="Open Portfolio"
+              label="Portfolio"
               onClick={() => onNavigate?.("portfolio/Resume.md")}
             />
             <ActionButton
               icon={
                 <LayoutDashboard className="h-4 w-4" aria-hidden="true" />
               }
-              label="Open Live Dashboards"
+              label="Live Dashboards"
               href="https://projects.karthikiyer.info/#tickets"
             />
             <ActionButton
               icon={<PenLine className="h-4 w-4" aria-hidden="true" />}
-              label="Open Tech Blog"
+              label="Tech Blog"
               href="https://writing.karthikiyer.info"
             />
           </div>
