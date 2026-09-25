@@ -90,7 +90,7 @@ export default function FileExplorer() {
 function TreeNode({ node, depth }: { node: FileNode; depth: number }) {
   const { state, openFile, toggleFolder } = useEditor();
   const isFolder = node.type === "folder";
-  const isExpanded = state.expandedFolders.includes(node.path);
+  const isExpanded = !state.collapsedFolders.includes(node.path);
   const isActive = state.activeFile === node.path;
 
   const paddingLeft = depth * 12 + 12;
