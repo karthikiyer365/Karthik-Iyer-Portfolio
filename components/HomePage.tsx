@@ -55,7 +55,7 @@ export default function HomePage({
       {view === "landing" ? (
         <LandingPage onNavigate={handleNavigate} />
       ) : (
-        <div className="flex flex-col h-screen w-screen overflow-hidden bg-[#0a0a0a]">
+        <div className="flex flex-col h-screen w-screen overflow-hidden bg-bg">
           <TopBar
             onClose={() => {
               resetEditor();
@@ -84,7 +84,7 @@ export default function HomePage({
             {/* Mobile backdrop */}
             {drawer && (
               <div
-                className="fixed inset-0 z-20 bg-black/50 md:hidden"
+                className="fixed inset-0 z-20 bg-backdrop md:hidden"
                 onClick={() => setDrawer(null)}
               />
             )}

@@ -7,7 +7,7 @@
 export const SETTINGS_PATH = "settings";
 export const SETTINGS_LABEL = "Portfolio Settings";
 
-export type Subsection = "tools" | "skills" | "contact";
+export type Subsection = "tools" | "skills" | "contact" | "appearance";
 
 /* ---------- Tools & TechStack ---------- */
 

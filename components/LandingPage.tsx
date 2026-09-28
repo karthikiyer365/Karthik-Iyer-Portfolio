@@ -2,6 +2,7 @@
 
 import type { ReactNode } from "react";
 import { FolderOpen, PenLine, LayoutDashboard } from "lucide-react";
+import Logo from "@/components/Logo";
 
 type LandingPageProps = {
   onNavigate?: (filePath: string) => void;
@@ -85,22 +86,18 @@ const RECENT_EXPERIENCE: { title: string; path: string; file: string }[] = [
 
 export default function LandingPage({ onNavigate }: LandingPageProps) {
   return (
-    <div className="flex h-screen w-screen items-center justify-center overflow-hidden bg-[#0a0a0a]">
+    <div className="flex h-screen w-screen items-center justify-center overflow-hidden bg-bg">
       <div className="w-full max-w-[820px] px-6">
         <div className="flex flex-col items-center text-center">
           {/* Logo + Title */}
           <div className="flex items-center gap-3 w-full max-w-[500px]">
-            <img
-              src="/img.png"
-              alt="Karthik Iyer"
-              className="w-12 h-17 object-cover"
-            />
+            <Logo className="w-12 h-17 object-cover" />
             <div className="text-[28px] font-semibold tracking-[.13em] text-ink">
               KARTHIK IYER
             </div>
           </div>
 
-          <div className="text-sm text-[#4ec9b0] pl-12 font-mono text-left w-full max-w-[475px]">
+          <div className="text-sm text-accent-teal pl-12 font-mono text-left w-full max-w-[475px]">
             Developer &bull; Engineer &bull; Data
           </div>
 
@@ -129,20 +126,20 @@ export default function LandingPage({ onNavigate }: LandingPageProps) {
 
           {/* Recent experience */}
           <div className="mt-10 w-full max-w-[500px] text-left">
-            <div className="text-xs font-mono tracking-widest text-[#444444]">
+            <div className="text-xs font-mono tracking-widest text-ink-faint">
               RECENT EXPERIENCE
             </div>
-            <ul className="mt-3 space-y-1 text-[13px] text-[#a3a3a3]">
+            <ul className="mt-3 space-y-1 text-[13px] text-ink-secondary">
               {RECENT_EXPERIENCE.map((exp) => (
                 <li key={exp.file} className="flex gap-2 justify-between">
                   <button
                     type="button"
                     onClick={() => onNavigate?.(exp.file)}
-                    className="text-white font-mono font-semibold text-left hover:text-accent-teal transition-colors cursor-pointer"
+                    className="text-ink font-mono font-semibold text-left hover:text-accent-teal transition-colors cursor-pointer"
                   >
                     {exp.title}
                   </button>
-                  <span className="text-[#444444] font-mono text-right">
+                  <span className="text-ink-faint font-mono text-right">
                     {exp.path}
                   </span>
                 </li>

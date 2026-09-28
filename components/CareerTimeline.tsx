@@ -63,7 +63,7 @@ export default function CareerTimeline({ data }: { data: string }) {
     // Fallback: never crash the résumé on a malformed block — show the raw source.
     return (
       <pre className="bg-surface-raised rounded-lg p-4 my-3 border border-line overflow-auto">
-        <code className="text-xs text-[#ce9178] font-mono">{data}</code>
+        <code className="text-xs text-syn-string font-mono">{data}</code>
       </pre>
     );
   }
@@ -97,7 +97,7 @@ export default function CareerTimeline({ data }: { data: string }) {
             {/* Primary rail: dot at top, line stretches to the bottom of content */}
             <div className="flex flex-col items-center self-stretch">
               <span
-                className="mt-0.5 h-2.5 w-2.5 shrink-0 rounded-full shadow-[0_0_0_3px_#15060d]"
+                className="mt-0.5 h-2.5 w-2.5 shrink-0 rounded-full shadow-[0_0_0_3px_var(--pink-glow)]"
                 style={{ backgroundColor: PINK }}
               />
               <span className="my-1 w-px flex-1" style={{ backgroundColor: PINK }} />

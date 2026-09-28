@@ -4,7 +4,7 @@ import { useRef, useEffect, useState } from "react";
 import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
 import MermaidDiagram from "./MermaidDiagram";
-import { useEditor } from "@/app/providers";
+import { useEditor, useTheme } from "@/app/providers";
 
 /* ===================== ipynb types ===================== */
 
@@ -63,7 +63,7 @@ export default function NotebookRenderer({
     notebook = JSON.parse(content) as Notebook;
   } catch {
     return (
-      <div className="flex-1 overflow-auto px-8 py-6 text-red-400 text-sm font-mono">
+      <div className="flex-1 overflow-auto px-8 py-6 text-danger text-sm font-mono">
         Failed to parse notebook JSON.
       </div>
     );
@@ -153,7 +153,7 @@ function MarkdownCell({
           <button
             type="button"
             onClick={() => openFile(filePath, displayName)}
-            className="text-white font-semibold hover:text-accent-teal transition-colors cursor-pointer"
+            className="text-ink font-semibold hover:text-accent-teal transition-colors cursor-pointer"
           >
             {children}
           </button>
@@ -266,9 +266,71 @@ function OutputBlock({ output }: { output: CellOutput }) {
 
 /* ===================== HTML Iframe (for plotly etc.) ===================== */
 
+/*
+ * Notebook outputs have a dark theme baked in (plotly_dark template, D3 inline
+ * styles). In the light theme we restyle them at runtime instead of editing the
+ * .ipynb files. Dark theme renders the outputs untouched.
+ */
+const LIGHT_CHART_CSS = `
+  body { background: #fff !important; }
+  [style*="background:#111"] { background: #fff !important; }
+  [style*="color:#e5e5e5"] { color: #1a1a1a !important; }
+  [style*="color:#8a8a8a"], [style*="color:#9a9a9a"] { color: #6b6b6b !important; }
+  #net-tip { background: #fff !important; border-color: #e0e0e0 !important; color: #1a1a1a !important; box-shadow: 0 4px 16px rgba(0,0,0,.12) !important; }
+  #net-svg text[fill="#cfcfcf"] { fill: #2e2e2e; }
+  text[fill="#ededed"] { fill: #1a1a1a; }
+  #net-svg text[fill="#777"] { fill: #6b6b6b; }
+  #net-svg circle[stroke="#111"] { stroke: #fff; }
+`;
+
+const LIGHT_CHART_SCRIPT = `
+(function () {
+  var TEXT = { "#4ec9b0": "#0b7c66", "#88c0b4": "#3d8f7f", "#bfbfbf": "#5c5c5c", "#b8b8b8": "#5c5c5c", "#cfcfcf": "#5c5c5c", "#e5e5e5": "#1a1a1a" };
+  var TEAL_SCALE = [[0, "#f4f4f4"], [0.3, "#bfe9df"], [0.65, "#4ec9b0"], [1, "#0b7c66"]];
+  var AXIS = { gridcolor: "rgba(0,0,0,0.08)", linecolor: "rgba(0,0,0,0.12)", zerolinecolor: "rgba(0,0,0,0.12)", "tickfont.color": "#6b6b6b" };
+  function mapText(c) { return (c && TEXT[String(c).toLowerCase()]) || c; }
+  function isTealScale(cs) { return Array.isArray(cs) && cs.length && String(cs[cs.length - 1][1]).toLowerCase() === "#4ec9b0"; }
+  function setAxis(u, prefix) { for (var k in AXIS) u[prefix + "." + k] = AXIS[k]; }
+
+  function lighten(gd) {
+    if (gd.dataset.light) return;
+    gd.dataset.light = "1";
+    var L = gd.layout || {};
+    var u = {
+      paper_bgcolor: "#fff", plot_bgcolor: "#fff",
+      "font.color": "#5c5c5c", "title.font.color": "#1a1a1a", "legend.font.color": "#5c5c5c",
+      "hoverlabel.bgcolor": "#fff", "hoverlabel.font.color": "#1a1a1a"
+    };
+    Object.keys(L).forEach(function (k) {
+      if (/^[xy]axis\\d*$/.test(k)) { setAxis(u, k); u[k + ".title.font.color"] = "#5c5c5c"; }
+      if (/^polar\\d*$/.test(k)) { u[k + ".bgcolor"] = "#fff"; setAxis(u, k + ".radialaxis"); setAxis(u, k + ".angularaxis"); }
+    });
+    (L.annotations || []).forEach(function (a, i) {
+      if (a.font && a.font.color) u["annotations[" + i + "].font.color"] = mapText(a.font.color);
+    });
+    Plotly.relayout(gd, u);
+    (gd.data || []).forEach(function (t, i) {
+      var r = {};
+      if (t.type === "heatmap" && isTealScale(t.colorscale)) r.colorscale = [TEAL_SCALE];
+      if (t.textfont && t.textfont.color) r["textfont.color"] = [mapText(t.textfont.color)];
+      if (Object.keys(r).length) Plotly.restyle(gd, r, [i]);
+    });
+  }
+
+  function scan() {
+    if (!window.Plotly) return;
+    document.querySelectorAll(".js-plotly-plot").forEach(function (gd) { if (gd._fullLayout) lighten(gd); });
+  }
+  new MutationObserver(scan).observe(document.body, { childList: true, subtree: true });
+  window.addEventListener("load", function () { scan(); setTimeout(scan, 300); setTimeout(scan, 1000); });
+})();
+`;
+
 function HtmlIframe({ html }: { html: string }) {
   const iframeRef = useRef<HTMLIFrameElement>(null);
   const [height, setHeight] = useState(400);
+  const { theme } = useTheme();
+  const light = theme === "light";
 
   const srcdoc = `<!DOCTYPE html>
 <html><head>
@@ -276,8 +338,10 @@ function HtmlIframe({ html }: { html: string }) {
 <style>
   body { margin: 0; padding: 0; background: #111; overflow: hidden; }
   .plotly-graph-div { width: 100% !important; }
+  ${light ? LIGHT_CHART_CSS : ""}
 </style>
 </head><body>${html}
+${light ? `<script>${LIGHT_CHART_SCRIPT}</script>` : ""}
 <script>
   var heightTimer;
   function notifyHeight() {
@@ -423,7 +487,7 @@ const markdownComponents = {
     }
 
     return (
-      <code className="bg-surface-raised text-[#ce9178] px-1.5 py-0.5 rounded text-[11px] font-mono">
+      <code className="bg-surface-raised text-syn-string px-1.5 py-0.5 rounded text-[11px] font-mono">
         {children}
       </code>
     );

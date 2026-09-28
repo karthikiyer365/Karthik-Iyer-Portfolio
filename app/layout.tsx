@@ -20,13 +20,29 @@ export const metadata = {
   description: "Developer Portfolio",
 };
 
+export const viewport = {
+  colorScheme: "light dark",
+  themeColor: "#ffffff",
+};
+
+// Applies a saved dark-theme choice before first paint (no light flash).
+// Key must match THEME_STORAGE_KEY in app/providers.tsx.
+const THEME_INIT_SCRIPT = `try{if(localStorage.getItem("theme")==="dark")document.documentElement.dataset.theme="dark"}catch(e){}`;
+
 export default function RootLayout({
   children,
 }: {
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en" className={`${geistSans.variable} ${geistMono.variable}`}>
+    <html
+      lang="en"
+      className={`${geistSans.variable} ${geistMono.variable}`}
+      suppressHydrationWarning
+    >
+      <head>
+        <script dangerouslySetInnerHTML={{ __html: THEME_INIT_SCRIPT }} />
+      </head>
       <body>
         <Script
           src="https://www.googletagmanager.com/gtag/js?id=G-WMVWTJ7M4X"

@@ -6,6 +6,7 @@ import React, {
   useReducer,
   ReactNode,
   useState,
+  useEffect,
 } from "react";
 import { EditorState, EditorAction, FileNode, Persona } from "@/types/editor";
 import { editorReducer, initialEditorState } from "@/lib/editorState";
@@ -198,17 +199,76 @@ export function useSettings() {
 }
 
 /* =========================
+   Theme Context
+   Light is the default. Dark is opt-in (Settings → Appearance), stored in
+   localStorage and applied as <html data-theme="dark">. THEME_INIT_SCRIPT in
+   layout.tsx applies the stored choice before first paint.
+========================= */
+
+export type Theme = "light" | "dark";
+export const THEME_STORAGE_KEY = "theme";
+const THEME_COLOR: Record<Theme, string> = { light: "#ffffff", dark: "#0a0a0a" };
+
+interface ThemeContextType {
+  theme: Theme;
+  setTheme: (t: Theme) => void;
+}
+
+const ThemeContext = createContext<ThemeContextType | null>(null);
+
+function ThemeProvider({ children }: { children: ReactNode }) {
+  const [theme, setThemeState] = useState<Theme>("light");
+
+  // Pick up whatever the init script applied.
+  useEffect(() => {
+    if (document.documentElement.dataset.theme === "dark") setThemeState("dark");
+  }, []);
+
+  useEffect(() => {
+    const root = document.documentElement;
+    if (theme === "dark") root.dataset.theme = "dark";
+    else delete root.dataset.theme;
+    document
+      .querySelector('meta[name="theme-color"]')
+      ?.setAttribute("content", THEME_COLOR[theme]);
+  }, [theme]);
+
+  const setTheme = (t: Theme) => {
+    setThemeState(t);
+    try {
+      localStorage.setItem(THEME_STORAGE_KEY, t);
+    } catch {
+      // storage blocked: theme still applies for this visit
+    }
+  };
+
+  return (
+    <ThemeContext.Provider value={{ theme, setTheme }}>
+      {children}
+    </ThemeContext.Provider>
+  );
+}
+
+export function useTheme() {
+  const context = useContext(ThemeContext);
+  if (!context) throw new Error("useTheme must be used within ThemeProvider");
+  return context;
+}
+
+/* =========================
    ROOT PROVIDER
 ========================= */
 
 export function AppProviders({ children }: { children: ReactNode }) {
   return (
-    <EditorProvider>
-      <PersonaProvider>
-        <GeneratedResumeProvider>
-          <SettingsProvider>{children}</SettingsProvider>
-        </GeneratedResumeProvider>
-      </PersonaProvider>
-    </EditorProvider>
+    <ThemeProvider>
+      <EditorProvider>
+        <PersonaProvider>
+          <GeneratedResumeProvider>
+            <SettingsProvider>{children}</SettingsProvider>
+          </GeneratedResumeProvider>
+        </PersonaProvider>
+      </EditorProvider>
+    </ThemeProvider>
   );
 }

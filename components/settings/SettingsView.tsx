@@ -6,11 +6,13 @@ import SettingsSidebar from "./SettingsSidebar";
 import SettingsContent from "./SettingsContent";
 import { useSettings } from "@/app/providers";
 import type { Subsection } from "@/lib/settings";
+import Logo from "@/components/Logo";
 
 const MOBILE_NAV: { id: Subsection; label: string }[] = [
   { id: "tools", label: "Tools & TechStack" },
   { id: "skills", label: "Skills" },
   { id: "contact", label: "Contact" },
+  { id: "appearance", label: "Appearance" },
 ];
 
 export default function SettingsView() {
@@ -26,11 +28,7 @@ export default function SettingsView() {
         <div className="md:hidden shrink-0 border-b border-line-subtle">
           <div className="flex items-center justify-between px-3 py-2">
             <div className="flex items-center gap-2 min-w-0">
-              <img
-                src="/img.png"
-                alt="Karthik Iyer"
-                className="w-7 h-7 rounded bg-ink object-cover shrink-0"
-              />
+              <Logo className="w-7 h-7 rounded bg-ink object-cover shrink-0" />
               <div className="leading-tight min-w-0">
                 <div className="text-desc text-ink truncate">
                   karthikiyer365@gmail.com

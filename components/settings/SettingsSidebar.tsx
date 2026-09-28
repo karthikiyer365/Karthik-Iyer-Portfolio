@@ -4,6 +4,7 @@
 import { Search, Download } from "lucide-react";
 import { useSettings } from "@/app/providers";
 import type { Subsection } from "@/lib/settings";
+import Logo from "@/components/Logo";
 
 const NAV: { id: Subsection; label: string }[] = [
   { id: "tools", label: "Tools & TechStack" },
@@ -11,7 +12,7 @@ const NAV: { id: Subsection; label: string }[] = [
   { id: "contact", label: "Contact info" },
 ];
 
-const DISABLED_TOP = ["General", "Appearance"];
+const DISABLED_TOP = ["General"];
 const DISABLED_MORE = ["Experience", "Education", "Projects", "Docs"];
 
 export default function SettingsSidebar() {
@@ -21,11 +22,7 @@ export default function SettingsSidebar() {
     <div className="hidden md:flex w-60 shrink-0 bg-surface-1 border-r border-line-subtle overflow-y-auto px-2.5 py-3 flex-col gap-1.5">
       {/* profile */}
       <div className="flex items-center gap-2 px-1">
-        <img
-          src="/img.png"
-          alt="Karthik Iyer"
-          className="w-7 h-7 rounded bg-ink object-cover shrink-0"
-        />
+        <Logo className="w-7 h-7 rounded bg-ink object-cover shrink-0" />
         <div className="leading-tight min-w-0">
           <div className="text-desc text-ink truncate">
             karthikiyer365@gmail.com
@@ -40,7 +37,7 @@ export default function SettingsSidebar() {
         Search settings ⌘F
       </div>
 
-      {/* disabled top group */}
+      {/* top group: General (disabled) + Appearance */}
       <div className="mt-1 rounded bg-titlebar opacity-50 select-none">
         {DISABLED_TOP.map((label) => (
           <div key={label} className="px-3 py-1.5 text-desc text-ink-muted">
@@ -48,6 +45,16 @@ export default function SettingsSidebar() {
           </div>
         ))}
       </div>
+      <button
+        onClick={() => setActiveSubsection("appearance")}
+        className={`text-left px-3 py-1.5 rounded text-body text-ink border-l-2 ${
+          activeSubsection === "appearance"
+            ? "bg-line border-l-accent-pink"
+            : "border-l-transparent hover:bg-surface-2"
+        }`}
+      >
+        Appearance
+      </button>
 
       {/* portfolio group */}
       <div className="px-2 pt-2 pb-0.5 text-meta tracking-wide text-ink-muted">

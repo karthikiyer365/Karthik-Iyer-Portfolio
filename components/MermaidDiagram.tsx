@@ -1,28 +1,29 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
+import { useTheme, type Theme } from "@/app/providers";
 
 let mermaidPromise: Promise<typeof import("mermaid")> | null = null;
 function getMermaid() {
-  if (!mermaidPromise) {
-    mermaidPromise = import("mermaid").then((mod) => {
-      mod.default.initialize({
-        startOnLoad: false,
-        theme: "dark",
-        themeVariables: {
-          darkMode: true,
-          background: "#0a0a0a",
-          primaryColor: "#1e3a5f",
-          primaryTextColor: "#e5e5e5",
-          lineColor: "#444",
-          secondaryColor: "#1a1a1a",
-        },
-      });
-      return mod;
-    });
-  }
+  if (!mermaidPromise) mermaidPromise = import("mermaid");
   return mermaidPromise;
 }
+
+const MERMAID_THEME: Record<Theme, Parameters<typeof import("mermaid").default.initialize>[0]> = {
+  light: { startOnLoad: false, theme: "default" },
+  dark: {
+    startOnLoad: false,
+    theme: "dark",
+    themeVariables: {
+      darkMode: true,
+      background: "#0a0a0a",
+      primaryColor: "#1e3a5f",
+      primaryTextColor: "#e5e5e5",
+      lineColor: "#444",
+      secondaryColor: "#1a1a1a",
+    },
+  },
+};
 
 interface MermaidDiagramProps {
   chart: string;
@@ -32,6 +33,7 @@ export default function MermaidDiagram({ chart }: MermaidDiagramProps) {
   const containerRef = useRef<HTMLDivElement>(null);
   const [svg, setSvg] = useState<string>("");
   const [error, setError] = useState<string>("");
+  const { theme } = useTheme();
 
   useEffect(() => {
     let cancelled = false;
@@ -40,6 +42,7 @@ export default function MermaidDiagram({ chart }: MermaidDiagramProps) {
     getMermaid()
       .then(async (mod) => {
         if (cancelled) return;
+        mod.default.initialize(MERMAID_THEME[theme]);
         const { svg: rendered } = await mod.default.render(id, chart);
         if (!cancelled) setSvg(rendered);
       })
@@ -50,11 +53,11 @@ export default function MermaidDiagram({ chart }: MermaidDiagramProps) {
     return () => {
       cancelled = true;
     };
-  }, [chart]);
+  }, [chart, theme]);
 
   if (error) {
     return (
-      <pre className="text-red-400 text-xs bg-[#1a1a1a] p-3 rounded overflow-auto">
+      <pre className="text-danger text-xs bg-surface-raised p-3 rounded overflow-auto">
         {error}
       </pre>
     );
@@ -62,7 +65,7 @@ export default function MermaidDiagram({ chart }: MermaidDiagramProps) {
 
   if (!svg) {
     return (
-      <div className="text-[#666] text-xs p-3">Rendering diagram...</div>
+      <div className="text-ink-muted text-xs p-3">Rendering diagram...</div>
     );
   }
 
