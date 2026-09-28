@@ -69,7 +69,7 @@ export default function TopBar({ onClose, onOpenFiles }: TopBarProps) {
       {/* Right - Links (first word dropped on mobile so all three fit) */}
       <div className="flex items-center gap-3 md:gap-6 text-xs md:text-desc whitespace-nowrap">
         <a
-          href="https://projects.karthikiyer.info/#tickets"
+          href="https://projects.karthikiyer.info/"
           target="_blank"
           rel="noreferrer"
           className={LINK_CLASS}
