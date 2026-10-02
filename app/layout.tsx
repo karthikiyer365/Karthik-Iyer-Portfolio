@@ -15,9 +15,55 @@ const geistMono = Geist_Mono({
   display: "swap",
 });
 
+export const SITE_URL = "https://karthikiyer.info";
+
+const TITLE = "Karthik Iyer – AI Engineer & Data Analyst";
+const DESCRIPTION =
+  "AI engineer & data analyst building data platforms, entity resolution pipelines and analytics dashboards. M.Sc Data Analytics, George Washington University.";
+
 export const metadata = {
-  title: "Karthik Iyer",
-  description: "Developer Portfolio",
+  metadataBase: new URL(SITE_URL),
+  title: TITLE,
+  description: DESCRIPTION,
+  alternates: { canonical: "/" },
+  openGraph: {
+    type: "profile",
+    url: "/",
+    siteName: "Karthik Iyer",
+    title: TITLE,
+    description: DESCRIPTION,
+  },
+  twitter: { card: "summary_large_image", title: TITLE, description: DESCRIPTION },
+};
+
+const PERSON_JSON_LD = {
+  "@context": "https://schema.org",
+  "@type": "Person",
+  "@id": `${SITE_URL}/#person`,
+  name: "Karthik Iyer",
+  url: SITE_URL,
+  image: `${SITE_URL}/img.png`,
+  jobTitle: ["AI Engineer", "Data Analyst"],
+  worksFor: { "@type": "Organization", name: "RestoreFast" },
+  alumniOf: [
+    { "@type": "CollegeOrUniversity", name: "George Washington University" },
+    { "@type": "CollegeOrUniversity", name: "University of Mumbai" },
+  ],
+  homeLocation: {
+    "@type": "Place",
+    address: {
+      "@type": "PostalAddress",
+      addressLocality: "Arlington",
+      addressRegion: "VA",
+      addressCountry: "US",
+    },
+  },
+  sameAs: [
+    "https://linkedin.com/in/ksi365",
+    "https://github.com/karthikiyer365",
+    "https://writing.karthikiyer.info",
+    "https://projects.karthikiyer.info",
+  ],
 };
 
 export const viewport = {
@@ -42,6 +88,10 @@ export default function RootLayout({
     >
       <head>
         <script dangerouslySetInnerHTML={{ __html: THEME_INIT_SCRIPT }} />
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(PERSON_JSON_LD) }}
+        />
       </head>
       <body>
         <Script

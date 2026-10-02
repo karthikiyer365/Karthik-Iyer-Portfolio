@@ -92,13 +92,13 @@ export default function LandingPage({ onNavigate }: LandingPageProps) {
           {/* Logo + Title */}
           <div className="flex items-center gap-3 w-full max-w-[500px]">
             <Logo className="w-12 h-17 object-cover" />
-            <div className="text-[28px] font-semibold tracking-[.13em] text-ink">
+            <h1 className="text-[28px] font-semibold tracking-[.13em] text-ink">
               KARTHIK IYER
-            </div>
+            </h1>
           </div>
 
           <div className="text-sm text-accent-teal pl-12 font-mono text-left w-full max-w-[475px]">
-            Developer &bull; Engineer &bull; Data
+            AI Engineer &bull; Data Analyst
           </div>
 
           {/* Action buttons */}
