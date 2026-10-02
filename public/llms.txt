@@ -1,0 +1,40 @@
+# Karthik Iyer
+
+> AI Engineer & Data Analyst based in Arlington, VA. M.Sc Data Analytics, George Washington University.
+
+Karthik Iyer is an AI & data engineer with 2+ years building ETL pipelines, LLM/agentic AI systems and BI dashboards. His work centers on data architecture and schema design, entity resolution, retrieval-augmented (RAG) and MCP integrations, and analytics for operations, finance and sports.
+
+## Experience
+
+- AI & Data Engineer, RestoreFast (Jun 2025 – present, North Bethesda, MD): agentic worker matching, a RAG knowledge layer, a 24/7 hotline triage agent, cross-tool communications routing (Slack, SMS, email, VoIP) and compliance document management; unified Gmail, Drive, Nutshell, Xero and Twilio into one internal data layer.
+- Technical Systems Admin, George Washington University (Aug 2024 – May 2025, Washington, DC): inventory audits, demand forecasting, support-ticket analysis and feedback dashboards.
+- Teaching Assistant, Decision Making & Data Analytics, George Washington University (Sep 2024 – Dec 2024): built a Python/NLP/BERT grading-automation pipeline supporting 400+ assignments with human-in-the-loop review.
+- Financial Analyst, DPSY & Associates (2022 – 2023, Mumbai, India): CRM reconciliation, 10+ Power BI dashboards, inventory analysis and ETL-based data consolidation.
+- Sales & Marketing Operations Lead, TechAnalogy (Aug 2021 – Dec 2021, Mumbai, India): campaign analytics, B2C/B2B strategy and market research.
+
+## Education
+
+- M.Sc Data Analytics, George Washington University (2023 – 2025, Washington, DC): machine learning, statistical modeling, data engineering, NLP and sports analytics.
+- B.E. Computer Engineering, University of Mumbai (2018 – 2022, Mumbai, India): data structures, database systems, NLP, web development and computer vision.
+
+## Projects
+
+- [SportSignal – Sports Analytics Hub](https://karthikiyer365.github.io/SportSignal/): data platform ingesting five open sports data sources, resolving player identity across providers into a Supabase Postgres warehouse refreshed by scheduled GitHub Actions; 18 seasons of Big-5 European soccer.
+- [Understanding Indian EcoPolitical Growth](https://karthikiyer365.github.io/Live/): config-driven R ETL over World Bank, IMF WEO and V-Dem data (64 indicators) feeding a Shiny dashboard compiled to WebAssembly with shinylive.
+- [Yelp Analytics](https://github.com/karthikiyer365/DB-SQL-Yelp): Databricks/Spark ETL over 10M+ Yelp data points with AFINN sentiment analysis across 7M+ reviews.
+- [WESAD Stress Detection](https://github.com/karthikiyer365/Wrist-Watch-Stress-Detection/blob/main/Wrist%20Watch%20Based%20Stress%20Detection.pdf): Bi-LSTM and CNN-LSTM stress classification from wearable physiological signals with subject-level cross-validation.
+- [Sports Analytics Dashboard](https://github.com/karthikiyer365/Soccer-Player-Valuation-with-NBA/blob/main/Soccer%20Player%20Valuation%20Report.pdf): soccer player-performance dashboard and cross-sport (FIFA × NBA) player-valuation model as Dash/Plotly apps.
+- [IPL Analytics](https://github.com/karthikiyer365/IPL-Match-Win-Probability-Predictions): ball-by-ball T20 win-probability prediction with 25+ match-state features and an Elo-style team rating layer.
+- [Government Employee Salary Analysis](https://github.com/karthikiyer365/Government-Employee-Salary-Analysis): Louisville Metro compensation analysis (2015–2023) from the city's ArcGIS REST API, packaged as a Plotly Dash dashboard.
+- [Google Play Store Analytics](https://github.com/karthikiyer365/storage/blob/main/analysis/Google%20Play%20Store%20analysis.pdf): analysis of 2.5M+ app records with chi-square feature engineering and Tableau dashboards.
+- [Crime Risk Modeling](https://github.com/karthikiyer365/Crime-Rate-Prediction---Socio-Economic-Influence/blob/main/Crime%20Rate%20Prediction.pdf): multivariate regression of regional crime rates on socio-economic indicators, with PCA isolating 6 key variables.
+- [Audio Similarity Recommender](https://s2t2.github.io/ml-music-2023/): MFCC audio features for 20K+ artists projected with PCA, t-SNE and UMAP to surface artist-similarity clusters.
+- Train Scheduling Analysis: hybrid MySQL/MongoDB query layer exposing a ~20% peak-hour capacity shortfall, with Tableau dashboards.
+
+## Links
+
+- [Portfolio](https://karthikiyer.info)
+- [Writing](https://writing.karthikiyer.info)
+- [Projects](https://projects.karthikiyer.info)
+- [LinkedIn](https://linkedin.com/in/ksi365)
+- [GitHub](https://github.com/karthikiyer365)
