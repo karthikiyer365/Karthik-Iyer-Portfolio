@@ -193,6 +193,12 @@ body {
   animation: blink 1s step-end infinite;
 }
 
+/* Calendly badge defaults to bottom-right; keep it off the mobile chat FAB. */
+#calendly-badge-widget {
+  right: auto !important;
+  left: 15px !important;
+}
+
 /* Notebook HTML output (pandas DataFrames, etc.) */
 .notebook-html-output table {
   border-collapse: collapse;

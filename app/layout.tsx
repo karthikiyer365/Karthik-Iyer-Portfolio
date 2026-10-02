@@ -1,6 +1,7 @@
 import "./globals.css";
 import { Geist, Geist_Mono } from "next/font/google";
 import Script from "next/script";
+import CalendlyBadge from "@/components/CalendlyBadge";
 import { AppProviders } from "./providers";
 
 const geistSans = Geist({
@@ -92,6 +93,10 @@ export default function RootLayout({
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(PERSON_JSON_LD) }}
         />
+        <link
+          href="https://assets.calendly.com/assets/external/widget.css"
+          rel="stylesheet"
+        />
       </head>
       <body>
         <Script
@@ -106,6 +111,7 @@ export default function RootLayout({
             gtag('config', 'G-WMVWTJ7M4X');
           `}
         </Script>
+        <CalendlyBadge />
         <AppProviders>{children}</AppProviders>
       </body>
     </html>
