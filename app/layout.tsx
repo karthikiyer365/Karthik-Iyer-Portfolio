@@ -2,6 +2,7 @@ import "./globals.css";
 import { Geist, Geist_Mono } from "next/font/google";
 import Script from "next/script";
 import CalendlyBadge from "@/components/CalendlyBadge";
+import ClickTracker from "@/components/ClickTracker";
 import { AppProviders } from "./providers";
 
 const geistSans = Geist({
@@ -15,6 +16,8 @@ const geistMono = Geist_Mono({
   variable: "--font-mono",
   display: "swap",
 });
+
+const GA_ID = process.env.NEXT_PUBLIC_GA_ID;
 
 export const SITE_URL = "https://karthikiyer.info";
 
@@ -100,7 +103,7 @@ export default function RootLayout({
       </head>
       <body>
         <Script
-          src="https://www.googletagmanager.com/gtag/js?id=G-WMVWTJ7M4X"
+          src={`https://www.googletagmanager.com/gtag/js?id=${GA_ID}`}
           strategy="afterInteractive"
         />
         <Script id="gtag-init" strategy="afterInteractive">
@@ -108,9 +111,10 @@ export default function RootLayout({
             window.dataLayer = window.dataLayer || [];
             function gtag(){dataLayer.push(arguments);}
             gtag('js', new Date());
-            gtag('config', 'G-WMVWTJ7M4X');
+            gtag('config', '${GA_ID}');
           `}
         </Script>
+        <ClickTracker />
         <CalendlyBadge />
         <AppProviders>{children}</AppProviders>
       </body>
