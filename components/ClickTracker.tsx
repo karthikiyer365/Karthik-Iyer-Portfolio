@@ -17,7 +17,13 @@ export default function ClickTracker() {
         "a, button, [role=button], [data-track]"
       );
       if (!el) return;
-      const href = el instanceof HTMLAnchorElement ? el.href : undefined;
+      // gtag appends _gl (client id) to cross-subdomain links on click; drop it so href groups.
+      let href: string | undefined;
+      if (el instanceof HTMLAnchorElement) {
+        const u = new URL(el.href);
+        u.searchParams.delete("_gl");
+        href = u.toString();
+      }
       window.gtag?.("event", "click_through", {
         label:
           el.dataset.track ||
