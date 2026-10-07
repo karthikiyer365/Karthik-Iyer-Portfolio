@@ -1,0 +1,312 @@
+{
+  "output": "content/projects/ML & Statistics/Support Ticket Classifier.ipynb",
+  "github_url": "https://projects.karthikiyer.info/#tickets",
+  "meta": {
+    "company": "Classification Models",
+    "role": "NLP · Ticket Routing · Logistic Regression",
+    "duration": "September 2026",
+    "location": "Python · Scikit-learn"
+  },
+  "hero": "# Support Ticket Classifier\n\n**Ticket-type routing with human handoff · Python · Scikit-learn · Logistic Regression**\n\n## Hero Overview\n\nA text classifier that routes support tickets by type (Incident, Request, Problem, Change) from the customer's subject and body alone, built on 16,338 English tickets drawn from a 28,587-ticket synthetic multilingual set.\n\nFamily-grouped 4-fold validation keeps reworded near-duplicates on one side of every split, and a confidence threshold auto-routes the clear cases while sending the rest to people.",
+  "domain_colors": {
+    "AI / ML": "#dd0077",
+    "Integration": "#c98aa0",
+    "Backend Engineering": "#b8b8b8",
+    "Cloud & Infra": "#a8b8b0",
+    "Data Engineering": "#88c0b4",
+    "Workflow / Ops": "#4ec9b0"
+  },
+  "radar": {
+    "Model Evaluation": 9,
+    "Data Quality": 9,
+    "Feature Engineering": 8,
+    "Cross Validation": 8,
+    "Model Comparison": 8,
+    "Data Interpretation": 7
+  },
+  "bubble_chart": {
+    "x_axis": "system",
+    "y_axis": "ownership",
+    "size_metric": "implementation_strength",
+    "color_metric": "domain",
+    "points": [
+      {
+        "system": "Text Cleaning & Feature Engineering",
+        "domain": "Data Engineering",
+        "ownership": 10,
+        "implementation_strength": 9.0,
+        "complexity": 8.0,
+        "impact": 9.0,
+        "maturity": 8.0,
+        "subsystems": [
+          "Newline / <br> cleanup",
+          "Email, URL, phone, account masking",
+          "Subject + body combined",
+          "Word and word-pair TF-IDF"
+        ],
+        "evidence": "Cleaned and masked 16,338 English tickets and built word and word-pair TF-IDF features (~43K); grouped 7,985 near-duplicate families (similarity ≥0.60)."
+      },
+      {
+        "system": "Family-Grouped K-Fold Validation",
+        "domain": "AI / ML",
+        "ownership": 10,
+        "implementation_strength": 9.0,
+        "complexity": 8.0,
+        "impact": 8.0,
+        "maturity": 8.0,
+        "subsystems": [
+          "Family-grouped 4-fold",
+          "No family crosses a split",
+          "Test set opened once",
+          "Department target exposed at 38.4%"
+        ],
+        "evidence": "Kept every reworded family whole across folds; 77% of tickets had a reworded sibling, so a random split would have inflated scores."
+      },
+      {
+        "system": "Logistic Regression Classifier",
+        "domain": "AI / ML",
+        "ownership": 10,
+        "implementation_strength": 8.0,
+        "complexity": 7.0,
+        "impact": 8.0,
+        "maturity": 7.0,
+        "subsystems": [
+          "4 model families compared",
+          "Balanced class weights",
+          "30 hyperparameter combinations",
+          "Pre-registered selection rules"
+        ],
+        "evidence": "Logistic Regression with balanced class weights reached 79.9% test accuracy and 0.815 macro F1."
+      },
+      {
+        "system": "Auto-Routing with Human Handoff",
+        "domain": "Workflow / Ops",
+        "ownership": 10,
+        "implementation_strength": 8.0,
+        "complexity": 7.0,
+        "impact": 9.0,
+        "maturity": 7.0,
+        "subsystems": [
+          "0.75 confidence threshold",
+          "46% of tickets auto-routed",
+          "96.4% accuracy on auto-routed",
+          "Rest escalated to people"
+        ],
+        "evidence": "Tickets at or above 0.75 confidence are routed automatically (46% of volume at 96.4% accuracy); ambiguous ones go to a person."
+      }
+    ]
+  },
+  "network_graph": {
+    "title": "Support Ticket Classifier Network",
+    "description": "Text feature engineering, family-grouped validation, and confidence-based routing for ticket-type classification.",
+    "nodes": [
+      {
+        "id": "Text Cleaning & Feature Engineering",
+        "type": "system",
+        "domain": "Data Engineering"
+      },
+      {
+        "id": "Family-Grouped K-Fold Validation",
+        "type": "system",
+        "domain": "AI / ML"
+      },
+      {
+        "id": "Logistic Regression Classifier",
+        "type": "system",
+        "domain": "AI / ML"
+      },
+      {
+        "id": "Auto-Routing with Human Handoff",
+        "type": "system",
+        "domain": "Workflow / Ops"
+      },
+      {
+        "id": "Text Features",
+        "type": "concept",
+        "domain": "AI / ML"
+      },
+      {
+        "id": "Near-Duplicate Detection",
+        "type": "concept",
+        "domain": "Data Engineering"
+      },
+      {
+        "id": "Grouped Cross-Validation",
+        "type": "concept",
+        "domain": "AI / ML"
+      },
+      {
+        "id": "Class Imbalance",
+        "type": "concept",
+        "domain": "AI / ML"
+      },
+      {
+        "id": "ITIL Ticket Types",
+        "type": "concept",
+        "domain": "Workflow / Ops"
+      },
+      {
+        "id": "Confidence Thresholding",
+        "type": "concept",
+        "domain": "Workflow / Ops"
+      },
+      {
+        "id": "Python",
+        "type": "tool",
+        "category": "Language"
+      },
+      {
+        "id": "Pandas",
+        "type": "tool",
+        "category": "Data Library"
+      },
+      {
+        "id": "NumPy",
+        "type": "tool",
+        "category": "Data Library"
+      },
+      {
+        "id": "Scikit-learn",
+        "type": "tool",
+        "category": "ML Library"
+      },
+      {
+        "id": "SciPy",
+        "type": "tool",
+        "category": "Scientific Library"
+      },
+      {
+        "id": "Matplotlib",
+        "type": "tool",
+        "category": "Visualization"
+      },
+      {
+        "id": "Seaborn",
+        "type": "tool",
+        "category": "Visualization"
+      }
+    ],
+    "edges": [
+      {
+        "source": "Text Cleaning & Feature Engineering",
+        "target": "Text Features",
+        "weight": 3
+      },
+      {
+        "source": "Text Cleaning & Feature Engineering",
+        "target": "Near-Duplicate Detection",
+        "weight": 2
+      },
+      {
+        "source": "Family-Grouped K-Fold Validation",
+        "target": "Grouped Cross-Validation",
+        "weight": 3
+      },
+      {
+        "source": "Family-Grouped K-Fold Validation",
+        "target": "Near-Duplicate Detection",
+        "weight": 3
+      },
+      {
+        "source": "Family-Grouped K-Fold Validation",
+        "target": "Class Imbalance",
+        "weight": 1
+      },
+      {
+        "source": "Logistic Regression Classifier",
+        "target": "Text Features",
+        "weight": 2
+      },
+      {
+        "source": "Logistic Regression Classifier",
+        "target": "Class Imbalance",
+        "weight": 3
+      },
+      {
+        "source": "Logistic Regression Classifier",
+        "target": "ITIL Ticket Types",
+        "weight": 2
+      },
+      {
+        "source": "Auto-Routing with Human Handoff",
+        "target": "Confidence Thresholding",
+        "weight": 3
+      },
+      {
+        "source": "Auto-Routing with Human Handoff",
+        "target": "ITIL Ticket Types",
+        "weight": 2
+      },
+      {
+        "source": "Text Features",
+        "target": "Scikit-learn",
+        "weight": 3
+      },
+      {
+        "source": "Text Features",
+        "target": "Pandas",
+        "weight": 2
+      },
+      {
+        "source": "Near-Duplicate Detection",
+        "target": "SciPy",
+        "weight": 3
+      },
+      {
+        "source": "Near-Duplicate Detection",
+        "target": "Scikit-learn",
+        "weight": 2
+      },
+      {
+        "source": "Grouped Cross-Validation",
+        "target": "Scikit-learn",
+        "weight": 3
+      },
+      {
+        "source": "Grouped Cross-Validation",
+        "target": "NumPy",
+        "weight": 1
+      },
+      {
+        "source": "Class Imbalance",
+        "target": "Scikit-learn",
+        "weight": 2
+      },
+      {
+        "source": "Class Imbalance",
+        "target": "Seaborn",
+        "weight": 1
+      },
+      {
+        "source": "ITIL Ticket Types",
+        "target": "Matplotlib",
+        "weight": 1
+      },
+      {
+        "source": "ITIL Ticket Types",
+        "target": "Python",
+        "weight": 2
+      },
+      {
+        "source": "Confidence Thresholding",
+        "target": "Scikit-learn",
+        "weight": 2
+      },
+      {
+        "source": "Confidence Thresholding",
+        "target": "NumPy",
+        "weight": 1
+      }
+    ]
+  },
+  "outcomes": {
+    "Test Accuracy": "79.9% (95% CI 75.2–84.5)",
+    "Macro F1": "0.815",
+    "Auto-Routed": "46% at 96.4% accuracy",
+    "Request / Change Recall": "98.5% / 96.7%",
+    "Incident / Problem Recall": "72.9% / 59.7%",
+    "Near-Duplicate Families": "7,985 from 16,338 tickets",
+    "Department Target": "38.4% grouped-CV, dropped"
+  },
+  "storyline": "# Storyline\n\n## Context\n\nSupport tickets arrive as free text and need routing. The first target was department, but department labels proved unreliable: near-identical tickets landed in different departments, and an honest family-grouped evaluation scored 38.4%, only 9 points above the 29.3% floor of always guessing the largest class. The target moved to ITIL ticket type (Incident, Request, Problem, Change), which the text alone can predict. The data is a synthetic multilingual Kaggle set, so results need real-world validation before deployment. See the [write-up](https://writing.karthikiyer.info/the-model-was-fine-the-labels-werent/) and the [live notebook](https://projects.karthikiyer.info/#tickets).\n\n## Workflow\n\nLanguage filter (16,338 English of 28,587) → text cleaning and placeholder masking → subject + body combined → word and word-pair TF-IDF → near-duplicate families → family-grouped 4-fold validation on train → model comparison → one test-set read → confidence threshold for routing.\n\n## Technical Implementation\n\n- **Cleaning:** newlines and `<br>` replaced with spaces; emails, URLs, phone and account numbers masked to placeholders (`<email>`, `<url>`, `<tel_num>`, `<acc_num>`, `<num>`). No stemming or stop-word removal.\n- **Features:** subject and body combined, then word and word-pair TF-IDF (~43K features).\n- **Validation:** tickets with text similarity ≥0.60 grouped into 7,985 families via SciPy connected components; family-grouped 4-fold on train so no family crosses a split. The test set is opened once, at the end.\n- **Model:** four model families compared under pre-registered rules (accuracy decides, ties within one point break on macro F1); Logistic Regression with balanced class weights won, and a 30-combination sweep moved accuracy by only −0.2 points.\n- **Routing:** predictions at or above 0.75 confidence are auto-routed; the rest escalate to a person.\n\n## Outcomes\n\nTest accuracy was 79.9% (95% CI 75.2–84.5) with 0.815 macro F1; 46% of tickets were auto-routed at 96.4% accuracy. Request (98.5%) and Change (96.7%) recall were strong, Incident (72.9%) moderate, and Problem (59.7%) weak. The model is English-only, does not route to departments, and is unreliable on tickets under ten words."
+}
