@@ -143,6 +143,12 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
+/* Accent text reads heavier than body text, in both themes. */
+.text-accent-pink,
+.text-accent-teal {
+  font-weight: 700;
+}
+
 /* Custom scrollbar */
 ::-webkit-scrollbar {
   width: 8px;
