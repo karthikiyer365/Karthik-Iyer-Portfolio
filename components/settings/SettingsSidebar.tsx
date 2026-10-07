@@ -37,7 +37,7 @@ export default function SettingsSidebar() {
         Search settings ⌘F
       </div>
 
-      {/* top group: General (disabled) + Appearance */}
+      {/* top group: General (disabled) */}
       <div className="mt-1 rounded bg-titlebar opacity-50 select-none">
         {DISABLED_TOP.map((label) => (
           <div key={label} className="px-3 py-1.5 text-desc text-ink-muted">
@@ -45,16 +45,6 @@ export default function SettingsSidebar() {
           </div>
         ))}
       </div>
-      <button
-        onClick={() => setActiveSubsection("appearance")}
-        className={`text-left px-3 py-1.5 rounded text-body text-ink border-l-2 ${
-          activeSubsection === "appearance"
-            ? "bg-line border-l-accent-pink"
-            : "border-l-transparent hover:bg-surface-2"
-        }`}
-      >
-        Appearance
-      </button>
 
       {/* portfolio group */}
       <div className="px-2 pt-2 pb-0.5 text-meta tracking-wide text-ink-muted">

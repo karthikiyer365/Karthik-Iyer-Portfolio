@@ -12,7 +12,6 @@ const MOBILE_NAV: { id: Subsection; label: string }[] = [
   { id: "tools", label: "Tools & TechStack" },
   { id: "skills", label: "Skills" },
   { id: "contact", label: "Contact" },
-  { id: "appearance", label: "Appearance" },
 ];
 
 export default function SettingsView() {

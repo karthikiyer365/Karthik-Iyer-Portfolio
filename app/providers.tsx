@@ -200,9 +200,9 @@ export function useSettings() {
 
 /* =========================
    Theme Context
-   Light is the default. Dark is opt-in (Settings → Appearance), stored in
-   localStorage and applied as <html data-theme="dark">. THEME_INIT_SCRIPT in
-   layout.tsx applies the stored choice before first paint.
+   Dark is the default. Light is opt-in (top-bar toggle), stored in
+   localStorage; dark is applied as <html data-theme="dark">. THEME_INIT_SCRIPT in
+   layout.tsx applies the choice before first paint.
 ========================= */
 
 export type Theme = "light" | "dark";
@@ -217,11 +217,11 @@ interface ThemeContextType {
 const ThemeContext = createContext<ThemeContextType | null>(null);
 
 function ThemeProvider({ children }: { children: ReactNode }) {
-  const [theme, setThemeState] = useState<Theme>("light");
+  const [theme, setThemeState] = useState<Theme>("dark");
 
   // Pick up whatever the init script applied.
   useEffect(() => {
-    if (document.documentElement.dataset.theme === "dark") setThemeState("dark");
+    if (document.documentElement.dataset.theme !== "dark") setThemeState("light");
   }, []);
 
   useEffect(() => {

@@ -72,7 +72,7 @@
   color-scheme: light;
 }
 
-/* Dark theme — opt-in via Settings → Appearance (sets <html data-theme="dark">).
+/* Dark theme — the default (sets <html data-theme="dark">).
    Values are the original dark palette. */
 :root[data-theme="dark"] {
   --bg: #0a0a0a;
@@ -137,6 +137,7 @@ body {
   background: var(--bg);
   color: var(--text);
   font-size: 13px;
+  font-weight: 500;
   line-height: 1.5;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;

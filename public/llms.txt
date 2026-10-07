@@ -36,5 +36,5 @@ Karthik Iyer is an AI & data engineer with 2+ years building ETL pipelines, LLM/
 - [Portfolio](https://karthikiyer.info)
 - [Writing](https://writing.karthikiyer.info)
 - [Projects](https://projects.karthikiyer.info)
-- [LinkedIn](https://linkedin.com/in/ksi365)
+- [LinkedIn](https://linkedin.com/in/karthikiyer365)
 - [GitHub](https://github.com/karthikiyer365)

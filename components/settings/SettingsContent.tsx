@@ -5,7 +5,6 @@ import { useSettings } from "@/app/providers";
 import ToolsSection from "./ToolsSection";
 import SkillsSection from "./SkillsSection";
 import ContactSection from "./ContactSection";
-import AppearanceSection from "./AppearanceSection";
 
 export default function SettingsContent() {
   const { activeSubsection } = useSettings();
@@ -15,7 +14,6 @@ export default function SettingsContent() {
       {activeSubsection === "tools" && <ToolsSection />}
       {activeSubsection === "skills" && <SkillsSection />}
       {activeSubsection === "contact" && <ContactSection />}
-      {activeSubsection === "appearance" && <AppearanceSection />}
     </div>
   );
 }

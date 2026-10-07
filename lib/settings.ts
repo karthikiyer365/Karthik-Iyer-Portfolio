@@ -7,7 +7,7 @@
 export const SETTINGS_PATH = "settings";
 export const SETTINGS_LABEL = "Portfolio Settings";
 
-export type Subsection = "tools" | "skills" | "contact" | "appearance";
+export type Subsection = "tools" | "skills" | "contact";
 
 /* ---------- Tools & TechStack ---------- */
 
@@ -330,8 +330,8 @@ export const CONTACT_DATA: ContactChannel[] = [
   },
     {
     label: "LinkedIn",
-    value: "ksi365",
-    href: "https://linkedin.com/in/ksi365",
+    value: "karthikiyer365",
+    href: "https://linkedin.com/in/karthikiyer365",
     tabs: ["all", "work"],
   },
   {

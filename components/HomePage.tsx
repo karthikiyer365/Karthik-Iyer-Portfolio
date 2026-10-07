@@ -4,6 +4,7 @@ import { useCallback, useEffect, useState } from "react";
 import { MessageSquare } from "lucide-react";
 import LandingPage from "@/components/LandingPage";
 import TopBar from "@/components/TopBar";
+import FooterBar from "@/components/FooterBar";
 import FileExplorer from "@/components/FileExplorer";
 import EditorWorkspace from "@/components/EditorWorkspace";
 import ChatPanel from "@/components/ChatPanel";
@@ -101,6 +102,7 @@ export default function HomePage({
               </button>
             )}
           </div>
+          <FooterBar />
         </div>
       )}
     </ContentProvider>

@@ -1,7 +1,7 @@
 "use client";
 
-import { Menu, LayoutDashboard, PenLine, Settings } from "lucide-react";
-import { useEditor, useSettings } from "@/app/providers";
+import { Menu, LayoutDashboard, PenLine, Settings, Trophy, Sun, Moon } from "lucide-react";
+import { useEditor, useSettings, useTheme } from "@/app/providers";
 import { SETTINGS_PATH, SETTINGS_LABEL } from "@/lib/settings";
 
 const LINK_CLASS =
@@ -15,6 +15,8 @@ type TopBarProps = {
 export default function TopBar({ onClose, onOpenFiles }: TopBarProps) {
   const { openFile } = useEditor();
   const { setActiveSubsection } = useSettings();
+  const { theme, setTheme } = useTheme();
+  const dark = theme === "dark";
 
   const openSettings = () => {
     setActiveSubsection("tools");
@@ -31,7 +33,7 @@ export default function TopBar({ onClose, onOpenFiles }: TopBarProps) {
   };
 
   return (
-    <div className="flex items-center justify-between h-10 px-3 bg-titlebar border-b border-line-subtle select-none shrink-0">
+    <div className="relative flex items-center justify-between h-8 px-3 bg-titlebar border-b border-line-subtle select-none shrink-0">
       {/* Left - Window Controls */}
       <div className="flex items-center gap-2">
         <button
@@ -61,13 +63,8 @@ export default function TopBar({ onClose, onOpenFiles }: TopBarProps) {
         </button>
       </div>
 
-      {/* Center - Repository Name */}
-      <div className="hidden md:block absolute left-1/2 transform -translate-x-1/2 text-ink-muted text-desc">
-        Karthik Iyer's Portfolio
-      </div>
-
-      {/* Right - Links (first word dropped on mobile so all three fit) */}
-      <div className="flex items-center gap-3 md:gap-6 text-xs md:text-desc whitespace-nowrap">
+      {/* Links: centered on desktop; right-aligned on mobile (first word dropped so they fit) */}
+      <div className="flex items-center gap-3 md:gap-6 min-w-0 overflow-x-auto md:overflow-visible text-xs md:text-desc whitespace-nowrap md:absolute md:left-1/2 md:-translate-x-1/2">
         <a
           href="https://projects.karthikiyer.info/"
           target="_blank"
@@ -76,6 +73,15 @@ export default function TopBar({ onClose, onOpenFiles }: TopBarProps) {
         >
           <LayoutDashboard className="w-3.5 h-3.5 shrink-0" aria-hidden="true" />
           <span><span className="hidden md:inline">Live </span>Dashboards</span>
+        </a>
+        <a
+          href="https://sports.karthikiyer.info"
+          target="_blank"
+          rel="noreferrer"
+          className={LINK_CLASS}
+        >
+          <Trophy className="w-3.5 h-3.5 shrink-0" aria-hidden="true" />
+          <span>Sports<span className="hidden md:inline"> Dashboards</span></span>
         </a>
         <a
           href="https://writing.karthikiyer.info"
@@ -95,6 +101,17 @@ export default function TopBar({ onClose, onOpenFiles }: TopBarProps) {
           <span><span className="hidden md:inline">Tech </span>Stack &amp; Contact</span>
         </button>
       </div>
+      {/* Right - Light/Dark toggle */}
+      <button
+        type="button"
+        onClick={() => setTheme(dark ? "light" : "dark")}
+        aria-label={dark ? "Switch to light theme" : "Switch to dark theme"}
+        title={dark ? "Switch to light theme" : "Switch to dark theme"}
+        className={`${LINK_CLASS} shrink-0 ml-2 text-xs md:text-desc`}
+      >
+        {dark ? <Sun className="w-3.5 h-3.5" aria-hidden="true" /> : <Moon className="w-3.5 h-3.5" aria-hidden="true" />}
+        <span className="hidden md:inline">{dark ? "Light" : "Dark"}</span>
+      </button>
     </div>
   );
 }

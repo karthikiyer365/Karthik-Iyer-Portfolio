@@ -63,7 +63,7 @@ const PERSON_JSON_LD = {
     },
   },
   sameAs: [
-    "https://linkedin.com/in/ksi365",
+    "https://linkedin.com/in/karthikiyer365",
     "https://github.com/karthikiyer365",
     "https://writing.karthikiyer.info",
     "https://projects.karthikiyer.info",
@@ -72,12 +72,12 @@ const PERSON_JSON_LD = {
 
 export const viewport = {
   colorScheme: "light dark",
-  themeColor: "#ffffff",
+  themeColor: "#0a0a0a",
 };
 
-// Applies a saved dark-theme choice before first paint (no light flash).
+// Dark is the default; applies it before first paint unless the visitor saved "light".
 // Key must match THEME_STORAGE_KEY in app/providers.tsx.
-const THEME_INIT_SCRIPT = `try{if(localStorage.getItem("theme")==="dark")document.documentElement.dataset.theme="dark"}catch(e){}`;
+const THEME_INIT_SCRIPT = `try{if(localStorage.getItem("theme")!=="light")document.documentElement.dataset.theme="dark"}catch(e){document.documentElement.dataset.theme="dark"}`;
 
 export default function RootLayout({
   children,

@@ -77,6 +77,8 @@ const config: Config = {
         sans: ["var(--font-sans)", "system-ui", "-apple-system", "sans-serif"],
         mono: ["var(--font-mono)", "ui-monospace", "SFMono-Regular", "monospace"],
       },
+      // Heavier than Tailwind defaults: Geist at 400 reads washed out on light surfaces.
+      fontWeight: { normal: "500", medium: "600", semibold: "700" },
       // Semantic type scale (Cursor-like). Defaults remain available.
       fontSize: {
         title: ["15px", { lineHeight: "1.3" }],
