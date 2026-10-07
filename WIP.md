@@ -17,7 +17,7 @@ Snapshot: 2026-10-07. One row per item, deduplicated across platforms. Blank = n
 | MLB Pitcher Perfect | | ✓ | | |
 | Leicester 2015/16 VAEP | ✓ | ✓ | ✓ | Webpage |
 | Indian EcoPolitical Growth | ✓ | ✓ | | Webpage |
-| Demand Forecasting | | ✓ | ✓ | |
+| Demand Forecasting | ✓ | ✓ | ✓ | Webpage |
 | Support Ticket Classifier | ✓ | ✓ | ✓ | Webpage |
 | E-commerce Sales Dashboard | | ✓ | | |
 | WESAD Stress Detection | ✓ | | | GitHub |
