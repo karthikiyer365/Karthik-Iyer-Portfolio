@@ -19,6 +19,7 @@ const SORT_ORDER: Record<string, string[]> = {
     "Financial Analyst - DPSY & Associates.ipynb",
     "SMO Lead - TechAnalogy.ipynb",
   ],
+  "portfolio/projects": ["ML & Statistics", "Sports Analytics", "Business & Public Sector Analytics"],
 };
 
 function buildFileTree(dir: string, prefix: string): FileNode[] {
