@@ -1,0 +1,278 @@
+{
+  "output": "content/projects/Sports Analytics/Leicester 2015-16 VAEP-SPADL Mapping.ipynb",
+  "github_url": "https://sports.karthikiyer.info/team?lg=eng-premier-league-2015&team=22",
+  "meta": {
+    "company": "Soccer Analytics",
+    "role": "Sports Analytics · Action Evaluation",
+    "duration": "October 2026",
+    "location": "Python · XGBoost · socceraction"
+  },
+  "hero": "# Leicester 2015-16: VAEP-SPADL Mapping\n\n**On-ball action valuation of a title run · Python · XGBoost · socceraction**\n\n## Hero Overview\n\nAn analysis of Leicester City's 2015/16 Premier League title: StatsBomb open data for all 380 matches is converted to 758,434 standardized SPADL actions, and every action is valued by how much it changed the team's chance of scoring minus its chance of conceding.\n\nThe result shows Leicester first in value per touch while 18th in touches, and marks where on-ball event data stops explaining the title.",
+  "domain_colors": {
+    "AI / ML": "#dd0077",
+    "Integration": "#c98aa0",
+    "Backend Engineering": "#b8b8b8",
+    "Cloud & Infra": "#a8b8b0",
+    "Data Engineering": "#88c0b4",
+    "Workflow / Ops": "#4ec9b0"
+  },
+  "radar": {
+    "SPADL Event Conversion": 9,
+    "XGBoost": 8,
+    "Feature Engineering": 8,
+    "Swap-Half Validation": 8,
+    "Action-Value Analysis": 8,
+    "Dashboarding": 8
+  },
+  "bubble_chart": {
+    "x_axis": "system",
+    "y_axis": "ownership",
+    "size_metric": "implementation_strength",
+    "color_metric": "domain",
+    "points": [
+      {
+        "system": "SPADL / VAEP",
+        "domain": "Data Engineering",
+        "ownership": 10,
+        "implementation_strength": 9.0,
+        "complexity": 8.0,
+        "impact": 9.0,
+        "maturity": 8.0,
+        "subsystems": [
+          "StatsBomb events → SPADL rows",
+          "Ball location, action type, result, two prior actions",
+          "Score / concede labels (next 10 actions)",
+          "Two XGBoost classifiers"
+        ],
+        "evidence": "Converted 380 matches of StatsBomb open data into 758,434 SPADL actions and trained two XGBoost classifiers, one for scoring and one for conceding."
+      },
+      {
+        "system": "Model Evaluation",
+        "domain": "AI / ML",
+        "ownership": 10,
+        "implementation_strength": 8.0,
+        "complexity": 8.0,
+        "impact": 8.0,
+        "maturity": 7.0,
+        "subsystems": [
+          "Date-split halves: train, rate, swap",
+          "AUC 0.795 scoring / 0.792 conceding",
+          "Team value vs table: 0.768 rank correlation",
+          "Carries-removed and pitch-location checks"
+        ],
+        "evidence": "Valued every action with a model that never saw its game, then checked team value against the league table."
+      },
+      {
+        "system": "Player Analysis",
+        "domain": "AI / ML",
+        "ownership": 10,
+        "implementation_strength": 8.0,
+        "complexity": 7.0,
+        "impact": 9.0,
+        "maturity": 7.0,
+        "subsystems": [
+          "Value per touch",
+          "Mahrez +17.1, Vardy +13.3, Drinkwater +8.5",
+          "52% of value from the final third",
+          "Zone value per 100 actions"
+        ],
+        "evidence": "Leicester led value per touch (0.234 vs 0.162 league average) while ranking 18th in touches; three players created 53% of team value."
+      },
+      {
+        "system": "Calibration",
+        "domain": "AI / ML",
+        "ownership": 10,
+        "implementation_strength": 8.0,
+        "complexity": 7.0,
+        "impact": 7.0,
+        "maturity": 7.0,
+        "subsystems": [
+          "Goals vs predicted probability",
+          "Largest gap 0.5 percentage points",
+          "Player split-half reliability 0.313",
+          "On-ball only: off-ball play invisible"
+        ],
+        "evidence": "Goals landed within 0.5 percentage points of predicted probabilities; player rankings were only weakly reliable across season halves (0.313)."
+      }
+    ]
+  },
+  "network_graph": {
+    "title": "Leicester VAEP Network",
+    "description": "SPADL conversion, probabilistic action valuation, and validation of a title-winning season.",
+    "nodes": [
+      {
+        "id": "SPADL / VAEP",
+        "type": "system",
+        "domain": "Data Engineering"
+      },
+      {
+        "id": "Model Evaluation",
+        "type": "system",
+        "domain": "AI / ML"
+      },
+      {
+        "id": "Player Analysis",
+        "type": "system",
+        "domain": "AI / ML"
+      },
+      {
+        "id": "Calibration",
+        "type": "system",
+        "domain": "AI / ML"
+      },
+      {
+        "id": "Action Valuation",
+        "type": "concept",
+        "domain": "AI / ML"
+      },
+      {
+        "id": "Possession Value",
+        "type": "concept",
+        "domain": "AI / ML"
+      },
+      {
+        "id": "Probability Estimates",
+        "type": "concept",
+        "domain": "AI / ML"
+      },
+      {
+        "id": "Rank Reliability",
+        "type": "concept",
+        "domain": "AI / ML"
+      },
+      {
+        "id": "Off-Ball Blind Spot",
+        "type": "concept",
+        "domain": "AI / ML"
+      },
+      {
+        "id": "Python",
+        "type": "tool",
+        "category": "Language"
+      },
+      {
+        "id": "socceraction",
+        "type": "tool",
+        "category": "Soccer Library"
+      },
+      {
+        "id": "XGBoost",
+        "type": "tool",
+        "category": "ML Library"
+      },
+      {
+        "id": "Scikit-learn",
+        "type": "tool",
+        "category": "ML Library"
+      },
+      {
+        "id": "StatsBomb Open Data",
+        "type": "tool",
+        "category": "Domain Data"
+      }
+    ],
+    "edges": [
+      {
+        "source": "SPADL / VAEP",
+        "target": "Action Valuation",
+        "weight": 3
+      },
+      {
+        "source": "SPADL / VAEP",
+        "target": "Possession Value",
+        "weight": 2
+      },
+      {
+        "source": "Model Evaluation",
+        "target": "Probability Estimates",
+        "weight": 3
+      },
+      {
+        "source": "Model Evaluation",
+        "target": "Rank Reliability",
+        "weight": 2
+      },
+      {
+        "source": "Player Analysis",
+        "target": "Possession Value",
+        "weight": 3
+      },
+      {
+        "source": "Player Analysis",
+        "target": "Action Valuation",
+        "weight": 2
+      },
+      {
+        "source": "Calibration",
+        "target": "Probability Estimates",
+        "weight": 3
+      },
+      {
+        "source": "Calibration",
+        "target": "Rank Reliability",
+        "weight": 3
+      },
+      {
+        "source": "Calibration",
+        "target": "Off-Ball Blind Spot",
+        "weight": 2
+      },
+      {
+        "source": "Action Valuation",
+        "target": "socceraction",
+        "weight": 3
+      },
+      {
+        "source": "Action Valuation",
+        "target": "XGBoost",
+        "weight": 2
+      },
+      {
+        "source": "Action Valuation",
+        "target": "StatsBomb Open Data",
+        "weight": 2
+      },
+      {
+        "source": "Possession Value",
+        "target": "socceraction",
+        "weight": 2
+      },
+      {
+        "source": "Possession Value",
+        "target": "Python",
+        "weight": 1
+      },
+      {
+        "source": "Probability Estimates",
+        "target": "XGBoost",
+        "weight": 3
+      },
+      {
+        "source": "Probability Estimates",
+        "target": "Scikit-learn",
+        "weight": 2
+      },
+      {
+        "source": "Rank Reliability",
+        "target": "Python",
+        "weight": 2
+      },
+      {
+        "source": "Off-Ball Blind Spot",
+        "target": "StatsBomb Open Data",
+        "weight": 2
+      }
+    ]
+  },
+  "outcomes": {
+    "Value per Touch": "1st (0.234 vs 0.162 league)",
+    "Touches": "18th",
+    "Model Rank vs Table": "6th vs 1st (81 pts)",
+    "Top-3 Value Share": "53%",
+    "Team Rank Correlation": "0.768",
+    "Calibration Gap": "≤0.5 percentage points",
+    "Player Reliability": "0.313 (weak)",
+    "Defensive Value": "11th despite 4th-best goals conceded"
+  },
+  "storyline": "# Storyline\n\n## Context\n\nLeicester City won the 2015/16 Premier League with 81 points, 10 clear, yet ranked 18th in touches. Counting possession cannot explain that, so the question was what each on-ball action was worth. See the [write-up](https://writing.karthikiyer.info/leicester-2015-16-vaep/) and the interactive [Team Analysis page](https://sports.karthikiyer.info/team?lg=eng-premier-league-2015&team=22), which shows where a team creates value across 30 pitch zones.\n\n## Workflow\n\nStatsBomb events for 380 matches → SPADL action table → game-state features and score / concede labels → two XGBoost classifiers → per-action value → team, player, and zone aggregates → validation and calibration checks.\n\n## Technical Implementation\n\n- **SPADL:** each action becomes one row with its type, player, start and end location on a 105 × 68 m pitch, and whether it worked (758,434 actions).\n- **Features:** ball location, action type, result, and the two preceding actions.\n- **Labels:** did the team score within the next 10 actions, and did it concede within the next 10.\n- **Models:** two XGBoost classifiers, one for each label. Action value is the change in scoring chance minus the change in conceding chance; a typical action is worth about ±0.01.\n- **Validation:** games split by date into two halves; a model trained on one half rates the other, then they swap, so no action is valued by a model that saw its game.\n\n## Outcomes\n\nLeicester ranked 1st for value per touch (0.234 vs 0.162 league average) and 18th for touches, with 52% of value coming from the final third and shots making up 1.6% of actions against 1.2% league-wide. Mahrez (+17.1), Vardy (+13.3), and Drinkwater (+8.5) produced 53% of team value. The model places Leicester 6th overall, below Arsenal, and 11th for defensive value despite the 4th-best goals-conceded record. Calibration held within 0.5 percentage points and team value correlated 0.768 with the table, but player rankings were weakly reliable across season halves (0.313). Event data is on-ball only, so off-ball play and defensive positioning stay invisible."
+}

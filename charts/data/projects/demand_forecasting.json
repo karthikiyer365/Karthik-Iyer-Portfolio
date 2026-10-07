@@ -1,0 +1,375 @@
+{
+  "output": "content/projects/Business & Public Sector Analytics/E-commerce Demand Forecasting.ipynb",
+  "github_url": "https://projects.karthikiyer.info/#forecast",
+  "meta": {
+    "company": "Forecasting Models",
+    "role": "Demand Forecasting · Promo Planning · Gradient Boosting",
+    "duration": "September 2026",
+    "location": "Python · Scikit-learn · Shiny"
+  },
+  "hero": "# E-commerce Demand Forecasting\n\n**Weekly demand forecasts with a p90 stocking range and a promo planner · Python · Scikit-learn · Shiny**\n\n## Hero Overview\n\nA weekly demand forecaster for 320 products over 131 weeks, predicting 4 weeks and 3 months ahead with a p90 upper range, and cutting error 26% and 21% against the best standard baseline.\n\nFilling stockout weeks in the history removes most of the under-forecasting, and a promo planner lets a product manager test a promotion before running it.",
+  "domain_colors": {
+    "AI / ML": "#dd0077",
+    "Integration": "#c98aa0",
+    "Backend Engineering": "#b8b8b8",
+    "Cloud & Infra": "#a8b8b0",
+    "Data Engineering": "#88c0b4",
+    "Workflow / Ops": "#4ec9b0"
+  },
+  "radar": {
+    "Backtesting": 9,
+    "Data Quality": 9,
+    "Leakage Control": 9,
+    "Feature Engineering": 8,
+    "Quantile Forecasting": 8,
+    "Dashboarding": 8
+  },
+  "bubble_chart": {
+    "x_axis": "system",
+    "y_axis": "ownership",
+    "size_metric": "implementation_strength",
+    "color_metric": "domain",
+    "points": [
+      {
+        "system": "Stockout Demand Recovery",
+        "domain": "Data Engineering",
+        "ownership": 10,
+        "implementation_strength": 9.0,
+        "complexity": 8.0,
+        "impact": 9.0,
+        "maturity": 8.0,
+        "subsystems": [
+          "Stockout weeks detected",
+          "Filled with average of last two in-stock weeks",
+          "Earlier data only",
+          "Bias −4.9% → −1.3%"
+        ],
+        "evidence": "Recorded sales capture only 14% of real demand in stockout weeks; filling them cut 4-week error from 17.6% to 15.2% (perfect history: 14.9%)."
+      },
+      {
+        "system": "Feature Engineering",
+        "domain": "Data Engineering",
+        "ownership": 10,
+        "implementation_strength": 9.0,
+        "complexity": 8.0,
+        "impact": 8.0,
+        "maturity": 8.0,
+        "subsystems": [
+          "Recent sales and trend",
+          "Seasonal pattern and same week last year",
+          "Product age, price, planned promo",
+          "Scrambled-future leakage test"
+        ],
+        "evidence": "Built every feature as of the forecast date; scrambling all later weeks left all 3,380 tested rows unchanged."
+      },
+      {
+        "system": "Gradient Boosting Forecaster",
+        "domain": "AI / ML",
+        "ownership": 10,
+        "implementation_strength": 9.0,
+        "complexity": 8.0,
+        "impact": 9.0,
+        "maturity": 8.0,
+        "subsystems": [
+          "One HistGradientBoosting model across 320 products",
+          "Predicts residuals from a seasonal baseline",
+          "Separate p90 model",
+          "Compared with ETS and spreadsheet rules"
+        ],
+        "evidence": "One model trained across all products reached 15.2% (4 weeks) and 18.9% (3 months) error against 20.5% and 23.8% for the best baseline."
+      },
+      {
+        "system": "Rolling Backtests",
+        "domain": "AI / ML",
+        "ownership": 10,
+        "implementation_strength": 8.0,
+        "complexity": 8.0,
+        "impact": 8.0,
+        "maturity": 7.0,
+        "subsystems": [
+          "Rolling-origin backtests",
+          "Scored against true demand",
+          "Folds include the November peak",
+          "Bias split by product stage"
+        ],
+        "evidence": "Scored forecasts against true demand rather than recorded sales; healthy products ran −3.9% bias while products in final decline ran +42%."
+      },
+      {
+        "system": "p90 Stocking Range",
+        "domain": "Workflow / Ops",
+        "ownership": 10,
+        "implementation_strength": 8.0,
+        "complexity": 7.0,
+        "impact": 9.0,
+        "maturity": 7.0,
+        "subsystems": [
+          "p90 of the horizon total",
+          "Not the sum of weekly p90s",
+          "89.6% and 90.4% coverage",
+          "2–8% less stock planned"
+        ],
+        "evidence": "Planning to the p90 of the total covered about 90% of outcomes; summing weekly p90s covered 96–97% and over-bought."
+      },
+      {
+        "system": "Promo Planner",
+        "domain": "Workflow / Ops",
+        "ownership": 10,
+        "implementation_strength": 7.0,
+        "complexity": 6.0,
+        "impact": 8.0,
+        "maturity": 7.0,
+        "subsystems": [
+          "Promo off / on forecasts precomputed per week",
+          "Weekly demand history and 4-week forecast",
+          "p90 band",
+          "Shiny for Python app"
+        ],
+        "evidence": "A promo planner lets a product manager test a promotion against the forecast and its p90 range before running it."
+      }
+    ]
+  },
+  "network_graph": {
+    "title": "Demand Forecasting Network",
+    "description": "Stockout recovery, leak-free features, gradient-boosted forecasting, and p90 planning for weekly product demand.",
+    "nodes": [
+      {
+        "id": "Stockout Demand Recovery",
+        "type": "system",
+        "domain": "Data Engineering"
+      },
+      {
+        "id": "Feature Engineering",
+        "type": "system",
+        "domain": "Data Engineering"
+      },
+      {
+        "id": "Gradient Boosting Forecaster",
+        "type": "system",
+        "domain": "AI / ML"
+      },
+      {
+        "id": "Rolling Backtests",
+        "type": "system",
+        "domain": "AI / ML"
+      },
+      {
+        "id": "p90 Stocking Range",
+        "type": "system",
+        "domain": "Workflow / Ops"
+      },
+      {
+        "id": "Promo Planner",
+        "type": "system",
+        "domain": "Workflow / Ops"
+      },
+      {
+        "id": "Censored Demand",
+        "type": "concept",
+        "domain": "Data Engineering"
+      },
+      {
+        "id": "Leakage Control",
+        "type": "concept",
+        "domain": "Data Engineering"
+      },
+      {
+        "id": "Seasonal Baseline",
+        "type": "concept",
+        "domain": "AI / ML"
+      },
+      {
+        "id": "Rolling-Origin Backtesting",
+        "type": "concept",
+        "domain": "AI / ML"
+      },
+      {
+        "id": "Bias by Product Stage",
+        "type": "concept",
+        "domain": "AI / ML"
+      },
+      {
+        "id": "Quantile Forecasting",
+        "type": "concept",
+        "domain": "AI / ML"
+      },
+      {
+        "id": "Promo Planning",
+        "type": "concept",
+        "domain": "Workflow / Ops"
+      },
+      {
+        "id": "Python",
+        "type": "tool",
+        "category": "Language"
+      },
+      {
+        "id": "Pandas",
+        "type": "tool",
+        "category": "Data Library"
+      },
+      {
+        "id": "NumPy",
+        "type": "tool",
+        "category": "Data Library"
+      },
+      {
+        "id": "Scikit-learn",
+        "type": "tool",
+        "category": "ML Library"
+      },
+      {
+        "id": "statsforecast",
+        "type": "tool",
+        "category": "Forecasting Library"
+      },
+      {
+        "id": "Shiny for Python",
+        "type": "tool",
+        "category": "App Framework"
+      },
+      {
+        "id": "Matplotlib",
+        "type": "tool",
+        "category": "Visualization"
+      },
+      {
+        "id": "Seaborn",
+        "type": "tool",
+        "category": "Visualization"
+      }
+    ],
+    "edges": [
+      {
+        "source": "Stockout Demand Recovery",
+        "target": "Censored Demand",
+        "weight": 3
+      },
+      {
+        "source": "Stockout Demand Recovery",
+        "target": "Bias by Product Stage",
+        "weight": 1
+      },
+      {
+        "source": "Feature Engineering",
+        "target": "Leakage Control",
+        "weight": 3
+      },
+      {
+        "source": "Feature Engineering",
+        "target": "Seasonal Baseline",
+        "weight": 2
+      },
+      {
+        "source": "Gradient Boosting Forecaster",
+        "target": "Seasonal Baseline",
+        "weight": 3
+      },
+      {
+        "source": "Gradient Boosting Forecaster",
+        "target": "Quantile Forecasting",
+        "weight": 2
+      },
+      {
+        "source": "Rolling Backtests",
+        "target": "Rolling-Origin Backtesting",
+        "weight": 3
+      },
+      {
+        "source": "Rolling Backtests",
+        "target": "Bias by Product Stage",
+        "weight": 3
+      },
+      {
+        "source": "p90 Stocking Range",
+        "target": "Quantile Forecasting",
+        "weight": 3
+      },
+      {
+        "source": "p90 Stocking Range",
+        "target": "Promo Planning",
+        "weight": 1
+      },
+      {
+        "source": "Promo Planner",
+        "target": "Promo Planning",
+        "weight": 3
+      },
+      {
+        "source": "Censored Demand",
+        "target": "Pandas",
+        "weight": 3
+      },
+      {
+        "source": "Censored Demand",
+        "target": "Python",
+        "weight": 1
+      },
+      {
+        "source": "Leakage Control",
+        "target": "Pandas",
+        "weight": 3
+      },
+      {
+        "source": "Leakage Control",
+        "target": "NumPy",
+        "weight": 2
+      },
+      {
+        "source": "Seasonal Baseline",
+        "target": "Scikit-learn",
+        "weight": 3
+      },
+      {
+        "source": "Seasonal Baseline",
+        "target": "statsforecast",
+        "weight": 2
+      },
+      {
+        "source": "Rolling-Origin Backtesting",
+        "target": "Scikit-learn",
+        "weight": 2
+      },
+      {
+        "source": "Rolling-Origin Backtesting",
+        "target": "Matplotlib",
+        "weight": 1
+      },
+      {
+        "source": "Bias by Product Stage",
+        "target": "Seaborn",
+        "weight": 2
+      },
+      {
+        "source": "Bias by Product Stage",
+        "target": "Pandas",
+        "weight": 1
+      },
+      {
+        "source": "Quantile Forecasting",
+        "target": "Scikit-learn",
+        "weight": 3
+      },
+      {
+        "source": "Promo Planning",
+        "target": "Shiny for Python",
+        "weight": 3
+      },
+      {
+        "source": "Promo Planning",
+        "target": "Python",
+        "weight": 1
+      }
+    ]
+  },
+  "outcomes": {
+    "4-Week Error (WAPE)": "15.2% vs 20.5% best baseline (−26%)",
+    "3-Month Error (WAPE)": "18.9% vs 23.8% best baseline (−21%)",
+    "Revenue-Weighted Error": "16.2% (4 wk) / 19.5% (3 mo)",
+    "p90 Coverage of Total": "89.6% (4 wk) / 90.4% (3 mo)",
+    "Stockout Fill": "17.6% → 15.2% 4-week error",
+    "Healthy Product Bias": "−3.9% (4 wk) / −7.2% (3 mo)",
+    "Final-Decline Bias": "+42% (4 wk) / +72% (3 mo)",
+    "Nov–Dec Error": "13.4% (4 wk) / 20.3% (3 mo)"
+  },
+  "storyline": "# Storyline\n\n## Context\n\nA product manager planning promotions and buys needs weekly demand per product, and a forecast that looks strong on average can hide a large error. Here the average hid it: products in final decline were over-forecast by 42% while healthy ones were under-forecast by 3.9%, and the two cancelled to a −1.3% overall bias. The data is a synthetic Kaggle set of 320 products, 8 categories and 5 regions over 131 weeks (24,310 rows), which records true demand including weeks with empty shelves, so forecasts can be scored against what customers actually wanted. See the [write-up](https://writing.karthikiyer.info/demand-forecast-bias/) and the [live project](https://projects.karthikiyer.info/#forecast).\n\n## Workflow\n\nFill stockout weeks → build features as of the forecast date → train one gradient-boosted model across all products → train a p90 model → score with rolling-origin backtests against true demand → plan buys on the p90 of the horizon total → precompute promo-off and promo-on forecasts for the planner.\n\n## Technical Implementation\n\n- **Stockout recovery:** each stockout week is replaced by the average of the product's last two in-stock weeks, using earlier data only. Recorded sales capture only 14% of real demand in those weeks; filling them moved bias from −4.9% to −1.3%.\n- **Features:** recent sales, trend, the usual seasonal pattern for the coming week, same week last year, product age, price, and whether a promotion is planned. Returns and two simulator answer-key columns are excluded. Scrambling every week after the forecast date and rebuilding inputs left all 3,380 tested rows unchanged.\n- **Model:** one HistGradientBoosting model across all 320 products, because per-product ETS needs about two years of history that no product had. Predicting residuals from a seasonal baseline lifted the November rise from 1.22× to 1.40× (the real rise was 1.49×).\n- **Baselines:** three spreadsheet rules and two ETS models; textbook ETS missed 22.0% at 4 weeks and 33.7% at 3 months, and same week last year missed 28.5% and 27.9%.\n- **Stocking range:** a second model predicts the p90, and buys are planned on the p90 of the total, not the sum of weekly p90s, which covered 96–97% of totals instead of 90%.\n- **Promo planner:** a Shiny for Python app over precomputed promo-off and promo-on forecasts.\n\n## Outcomes\n\nThe forecast missed 15.2% of units at 4 weeks and 18.9% at 3 months, against 20.5% and 23.8% for the best baseline (26% and 21% less error). The p90 of the total covered 89.6% and 90.4% of outcomes and plans 2–8% less stock than summing weekly p90s. Limits: the data is synthetic, so the numbers need checking on real sales; products in final decline are still over-forecast (+42% and +72%) even with a slowing-sales warning; the 3-month forecast is weakest in November and December (20.3%); and it forecasts demand, not order size, with no stock on hand, lead times or minimum order quantities."
+}
