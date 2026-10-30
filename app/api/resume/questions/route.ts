@@ -43,7 +43,10 @@ Each question must be:
 - OPEN: invite a real answer, not a bare yes/no.
 - Addressed to the recruiter ("you" / "the role"), framed around positioning Karthik favorably. Lean toward what a ${persona} reader weighs: ${PERSONA_VOICE[persona]}
 
-KARTHIK'S JD-RELEVANT BACKGROUND:
+KARTHIK'S CURRENT RESUME (authoritative titles, dates, skills, metrics):
+${readMaster()}
+
+KARTHIK'S JD-RELEVANT BACKGROUND (retrieved portfolio evidence):
 ${corpus}
 
 Return ONLY JSON: {"questions": string[]} — each element MUST be a plain question string, NOT an object.`,

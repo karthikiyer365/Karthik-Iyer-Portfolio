@@ -1,7 +1,11 @@
 "use client";
 
 import { useEffect, useLayoutEffect, useRef, useState } from "react";
-import type { ResumeData } from "@/lib/resume";
+import { Lato } from "next/font/google";
+import { groupByOrg, type ResumeData } from "@/lib/resume";
+
+// Matches the resume PDF (public/Karthik-Iyer-Resume.pdf) and server/ai/texBuilder.ts.
+const lato = Lato({ subsets: ["latin"], weight: ["400", "700"] });
 
 // US Letter at 96dpi (matches @page size in globals.css).
 const PAGE_W = 816;
@@ -68,8 +72,7 @@ export default function ResumeDocument({ data }: { data: ResumeData }) {
         overflow: "hidden",
         padding: PAD,
         margin: "0 auto",
-        // Jake template preamble: Helvetica (\usepackage{helvet}, \sfdefault)
-        fontFamily: "Helvetica, Arial, sans-serif",
+        fontFamily: lato.style.fontFamily,
       }}
     >
       <div
@@ -85,45 +88,73 @@ export default function ResumeDocument({ data }: { data: ResumeData }) {
           justifyContent: over ? "flex-start" : "space-between",
         }}
       >
-        {/* Jake heading: centered small-caps name, one contact line with | separators */}
+        {/* Centered uppercase name, one contact line with | separators; domains underlined */}
         <header style={{ marginBottom: 5, textAlign: "center" }}>
-          <h1 style={{ fontSize: 28, lineHeight: 1.1, fontWeight: 700, fontVariant: "small-caps", letterSpacing: 0.5 }}>
-            {data.name}
+          <h1 style={{ fontSize: 26, lineHeight: 1.1, fontWeight: 700, letterSpacing: 0.3 }}>
+            {data.name.toUpperCase()}
           </h1>
           {data.contact && (
-            <p style={{ fontSize: 11.5, color: "#333", marginTop: 1 }}>
-              {data.contact.split("·").map((c) => c.trim()).join("  |  ")}
+            <p style={{ fontSize: 11.5, color: "#222", marginTop: 2 }}>
+              {data.contact.split("·").map((c, i) => {
+                const t = c.trim();
+                return (
+                  <span key={i}>
+                    {i > 0 && "  |  "}
+                    {/^[\w-]+(\.[\w-]+)+(\/\S*)?$/.test(t) ? (
+                      <a href={`https://${t}`} style={{ textDecoration: "underline", color: "inherit" }}>{t}</a>
+                    ) : (
+                      t
+                    )}
+                  </span>
+                );
+              })}
             </p>
           )}
         </header>
 
         {data.summary && (
-          <Section title="Summary">
-            <p style={{ fontSize: 12, lineHeight: 1.35 }}>{data.summary}</p>
+          <Section title="Professional Summary">
+            <p style={{ fontSize: 12, lineHeight: 1.35, textAlign: "justify" }}>{data.summary}</p>
           </Section>
         )}
 
         {data.skills?.length > 0 && (
           <Section title="Skills">
-            {data.skills.map((g, i) => (
-              <p key={i} style={{ fontSize: 12, lineHeight: 1.4, marginBottom: 1, whiteSpace: "nowrap", overflow: "hidden", textOverflow: "ellipsis" }}>
-                <strong style={{ color: "#111" }}>{g.group}:</strong> {g.items.join(", ")}
-              </p>
+            <div style={{ display: "grid", gridTemplateColumns: "140px 1fr", rowGap: 1, fontSize: 12, lineHeight: 1.35 }}>
+              {data.skills.map((g, i) => (
+                <div key={i} style={{ display: "contents" }}>
+                  <strong>{g.group}</strong>
+                  <span>{g.items.join(", ")}</span>
+                </div>
+              ))}
+            </div>
+          </Section>
+        )}
+
+        {data.education?.length > 0 && (
+          <Section title="Education">
+            {data.education.map((ed, i) => (
+              <Row
+                key={i}
+                left={<strong>{ed.org}  |  {ed.degree}</strong>}
+                right={[ed.location, ed.dates].filter(Boolean).join("  |  ")}
+              />
             ))}
           </Section>
         )}
 
         {data.experience?.length > 0 && (
-          <Section title="Experience">
-            {data.experience.map((e, i) => (
-              <Entry
-                key={i}
-                topLeft={e.org}
-                topRight={e.location ?? ""}
-                subLeft={e.role}
-                subRight={e.dates}
-                bullets={e.bullets}
-              />
+          <Section title="Work Experience">
+            {groupByOrg(data.experience).map((g, i) => (
+              <div key={i} style={{ marginBottom: 3 }}>
+                <Row left={<strong>{g.org}</strong>} right={g.location ?? ""} />
+                {g.roles.map((e, j) => (
+                  <div key={j}>
+                    <Row left={<strong>{e.role}</strong>} right={e.dates} indent />
+                    <Bullets items={e.bullets} />
+                  </div>
+                ))}
+              </div>
             ))}
           </Section>
         )}
@@ -131,41 +162,27 @@ export default function ResumeDocument({ data }: { data: ResumeData }) {
         {data.projects?.length > 0 && (
           <Section title="Projects">
             {data.projects.map((p, i) => (
-              <Entry
-                key={i}
-                topLeft={p.name}
-                topLeftExtra={p.stack}
-                bullets={p.bullets}
-              />
-            ))}
-          </Section>
-        )}
-
-        {data.education?.length > 0 && (
-          <Section title="Education">
-            {data.education.map((ed, i) => (
-              <Entry
-                key={i}
-                topLeft={ed.org}
-                topRight={ed.location ?? ""}
-                subLeft={ed.degree}
-                subRight={ed.dates}
-              />
+              <div key={i} style={{ marginBottom: 3 }}>
+                <Row left={<strong>{p.stack ? `${p.name}  |  ${p.stack}` : p.name}</strong>} />
+                <Bullets items={p.bullets} />
+              </div>
             ))}
           </Section>
         )}
 
         {((data.leadership?.length ?? 0) > 0 || (data.certifications?.length ?? 0) > 0) && (
-          <Section title="Leadership & Certifications" last>
-            {data.leadership && data.leadership.length > 0 && (
-              <p style={{ fontSize: 12, lineHeight: 1.4, marginBottom: 1 }}>
-                <strong style={{ color: "#111" }}>Leadership:</strong> {data.leadership.join("; ")}
-              </p>
-            )}
+          <Section title="Certifications, Publications & Volunteer Experience" last>
             {data.certifications && data.certifications.length > 0 && (
-              <p style={{ fontSize: 12, lineHeight: 1.4, marginBottom: 1 }}>
-                <strong style={{ color: "#111" }}>Certifications:</strong> {data.certifications.join(", ")}
-              </p>
+              <>
+                <p style={{ fontSize: 12, fontWeight: 700 }}>Certifications</p>
+                <p style={{ fontSize: 12, lineHeight: 1.35, marginBottom: 2 }}>{data.certifications.join("  |  ")}</p>
+              </>
+            )}
+            {data.leadership && data.leadership.length > 0 && (
+              <>
+                <p style={{ fontSize: 12, fontWeight: 700 }}>Volunteer &amp; Leadership</p>
+                <Bullets items={data.leadership} />
+              </>
             )}
           </Section>
         )}
@@ -183,7 +200,7 @@ function renderBold(text: string) {
     .map((seg, i) => (i % 2 ? <strong key={i}>{seg}</strong> : seg));
 }
 
-// Jake \section: small-caps title over a full-width black titlerule.
+// Bold uppercase title over a full-width black rule (texBuilder \section).
 function Section({
   title,
   children,
@@ -194,13 +211,12 @@ function Section({
   last?: boolean;
 }) {
   return (
-    <section style={{ marginBottom: last ? 0 : 4 }}>
+    <section style={{ marginBottom: last ? 0 : 5 }}>
       <h2
         style={{
-          fontSize: 14.5,
-          fontWeight: 600,
-          fontVariant: "small-caps",
-          letterSpacing: 0.4,
+          fontSize: 13,
+          fontWeight: 700,
+          textTransform: "uppercase",
           color: "#000",
           borderBottom: "1px solid #000",
           paddingBottom: 1,
@@ -214,56 +230,25 @@ function Section({
   );
 }
 
-// Jake \resumeSubheading: bold left / plain right, then italic left / italic right.
-// Project headings use topLeftExtra for the " | stack" suffix and no second line.
-function Entry({
-  topLeft,
-  topLeftExtra,
-  topRight,
-  subLeft,
-  subRight,
-  bullets,
-}: {
-  topLeft: string;
-  topLeftExtra?: string;
-  topRight?: string;
-  subLeft?: string;
-  subRight?: string;
-  bullets?: string[];
-}) {
+// Left / right-aligned line (texBuilder \orgline, \roleline, \eduline, \projline).
+function Row({ left, right, indent }: { left: React.ReactNode; right?: string; indent?: boolean }) {
   return (
-    <div style={{ marginBottom: 4 }}>
-      <div style={{ display: "flex", justifyContent: "space-between", alignItems: "baseline" }}>
-        <span style={{ fontSize: 12.5 }}>
-          <strong>{topLeft}</strong>
-          {topLeftExtra ? (
-            <span style={{ color: "#333" }}>
-              {" | "}
-              <em>{topLeftExtra}</em>
-            </span>
-          ) : null}
-        </span>
-        {topRight ? (
-          <span style={{ fontSize: 12, color: "#333", whiteSpace: "nowrap" }}>{topRight}</span>
-        ) : null}
-      </div>
-      {(subLeft || subRight) && (
-        <div style={{ display: "flex", justifyContent: "space-between", alignItems: "baseline" }}>
-          {subLeft ? <em style={{ fontSize: 11.5, color: "#333" }}>{subLeft}</em> : <span />}
-          {subRight ? (
-            <em style={{ fontSize: 11.5, color: "#333", whiteSpace: "nowrap" }}>{subRight}</em>
-          ) : null}
-        </div>
-      )}
-      {bullets && bullets.length > 0 && (
-        <ul style={{ listStyle: "disc", paddingLeft: 18, marginTop: 2 }}>
-          {bullets.map((b, i) => (
-            <li key={i} style={{ fontSize: 12, lineHeight: 1.35, marginBottom: 2 }}>
-              {renderBold(b)}
-            </li>
-          ))}
-        </ul>
-      )}
+    <div style={{ display: "flex", justifyContent: "space-between", alignItems: "baseline", gap: 12, fontSize: 12, paddingLeft: indent ? 19 : 0 }}>
+      <span>{left}</span>
+      {right ? <span style={{ whiteSpace: "nowrap" }}>{right}</span> : null}
     </div>
+  );
+}
+
+function Bullets({ items }: { items?: string[] }) {
+  if (!items?.length) return null;
+  return (
+    <ul style={{ listStyle: "disc", paddingLeft: 36, marginTop: 1, marginBottom: 1 }}>
+      {items.map((b, i) => (
+        <li key={i} style={{ fontSize: 12, lineHeight: 1.35, textAlign: "justify" }}>
+          {renderBold(b)}
+        </li>
+      ))}
+    </ul>
   );
 }

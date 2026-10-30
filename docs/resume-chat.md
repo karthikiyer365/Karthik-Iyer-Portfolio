@@ -9,7 +9,7 @@ Every resume is built only from Karthik's real, verified accomplishments. The sy
 ## Who it's for and when to use it
 
 - **Recruiters / hiring managers** — paste the job posting you're hiring for and get a resume shaped around your role's actual requirements, along with a frank assessment of fit (including where the fit is only partial).
-- **Karthik** — every generated resume also produces a LaTeX file behind the scenes, in the exact format used by the offline resume pipeline, so any version made in chat can be reproduced and fine-tuned there.
+- **Karthik** — every generated resume also produces a LaTeX file behind the scenes, laid out like the current resume PDF, so any version made in chat can be compiled and fine-tuned offline.
 
 ## How it works, step by step
 
@@ -83,7 +83,7 @@ Is it a job description?
         │      the role leans toward X" when it isn't
         └── one-click print to PDF
              (+ a LaTeX copy saved behind the scenes
-                for the offline resume pipeline)
+                matching the resume PDF layout)
 ```
 
 ## What makes it trustworthy
@@ -91,4 +91,4 @@ Is it a job description?
 - **No invented facts.** Bullets come only from a curated bank of real accomplishments; the writing step can rephrase and re-emphasize, never fabricate.
 - **Honesty over salesmanship.** When the fit is weak, the chat says so plainly instead of overselling.
 - **Consistent quality.** The same automatic checks run on every resume, so nothing leaves the pipeline with clichés, missing numbers, or first-person slips.
-- **One source of truth.** The chat version and the offline LaTeX version are built from the same material and the same rules, so they never drift apart.
+- **One source of truth.** The on-screen resume and the LaTeX copy share one layout (the current resume PDF) and one source resume (`server/ai/resumeMaster.md`), so they never drift apart.

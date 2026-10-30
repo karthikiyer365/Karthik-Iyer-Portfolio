@@ -54,25 +54,42 @@ Light humor only when it lands naturally.`;
 // off-narrative and pushes it to issue specific, well-targeted retrieval queries.
 const KNOWLEDGE_MAP = `
 CANONICAL FACTS (never contradict):
-- Karthik Iyer — AI & Data Engineer, 2+ yrs, Washington DC.
-- Now: Data Systems Engineer / AI & ETL Developer at RestoreFast (Jun 2025–present)
-  — Agentic AI with MCP + RAG across Procore/Xero/email/CRM; multi-channel LLM
-  comms (messaging/calls/email); a production Voice Agent.
-- Education: M.S. Data Analytics, GWU (3.68, 2025); B.E. Computer Eng, Univ. Mumbai (2022).
-- Core skills: Python, SQL, ETL (Databricks/Spark/ADF), LLMs/RAG/agentic AI,
-  ML (XGBoost, CNN, PCA, BERT), cloud (AWS/GCP/Azure), BI (Tableau/Power BI), Next.js/tRPC.
+- Karthik Iyer — AI Engineer and Data Analyst, 2+ yrs, Arlington, VA. Puts AI to work
+  for Operations, Sales and Finance teams by unifying siloed systems (CRM, finance,
+  workforce, project management) into one ERP-style data layer for agentic AI.
+- AI Engineer, RestoreFast Operations LLC, North Bethesda MD (Jun 2025 – Jul 2026):
+  LangChain multi-agent orchestration (RAG, MCP for Xero/Procore, NL-to-SQL); 6
+  business systems unified; Pinecone hybrid-search RAG; Twilio × OpenAI Realtime voice
+  agent; DS-CAR crew recommender; compliance hub; Twilio comms layer; PostHog analysis.
+- GWU (Washington DC): Performance Analyst (Volunteer), GWU Soccer (May–Aug 2025);
+  Technical Systems Admin (Aug 2024 – May 2025); Teaching Assistant, Decision Making &
+  Data Analytics (Sep–Dec 2024).
+- Analytics Intern, DPSY & Associates, Mumbai (Apr–Jun 2023).
+- Sales & Marketing Operations Lead, TechAnalogy, Mumbai (Aug–Dec 2021).
+- Education: M.S. Data Analytics, GWU (GPA 3.68, May 2025); B.E. Computer Engineering,
+  University of Mumbai, SIES (CGPA 3.50, May 2022).
+- Core skills: Python, SQL/PostgreSQL, LLMs, RAG, MCP/agentic AI, LangChain, ETL and
+  data modeling, XGBoost/SHAP, PyTorch/Hugging Face, AWS, GCP, Databricks, Spark,
+  Docker, GitHub Actions, Tableau, Power BI, Shiny, Streamlit, Dash.
 
-WHAT YOU CAN RETRIEVE via get_relevant_info (real metrics/tools/dates live here):
-- Roles: RestoreFast, GWU (Systems Analyst; TA), DPSY (analyst), GWU Soccer, Tech Analogy.
-- Projects: T20 cricket prediction, Yelp sentiment (10M+), soccer dashboard, audio-
-  similarity recommendation, train scheduling, panic-attack detection (WESAD), govt
-  salary analysis, insurance lending trends, Google Play analysis, autocorrect,
-  social-distancing tracker, IEEE/College-Connect sites.
-- Extras: leadership (GW Consulting, IEEE), certs, IEEE Xtreme (All-India 55).
+WHAT YOU CAN RETRIEVE via get_relevant_info (exact metrics, tools, dates live here):
+- Every role above, bullet by bullet.
+- Resume projects: Laya vs Traditional ML (ModernBERT support-ticket classifier),
+  Demand Forecasting (gradient boosting inventory planner), SportSignal (sports-data
+  ETL hub), Pitcher Perfect (MLB Statcast pitcher analysis), FIFA × NBA (plus-minus
+  for soccer), Action Valuation (VAEP/SPADL), EcoPolitical Understanding (R Shiny).
+- Portfolio projects: Yelp analytics, WESAD stress detection, audio similarity, train
+  scheduling, crime risk modeling, government salary, Google Play, IPL analytics.
+- Extras: certifications, IJREAM 2022 publication, IEEE leadership, FIFA Club World
+  Cup 2025 volunteer.
 
-HOW TO QUERY: send SPECIFIC terms — a project name, a skill, a company — not vague
-phrases. For multi-part questions, make several targeted calls. Anchor every specific
-claim (numbers, tools, dates) to what retrieval returns; if it's not there, say so.`;
+TOOL USE:
+- Call get_relevant_info BEFORE stating any metric, tool, date or project detail.
+  Skip it only for QUICK facts already listed above.
+- Query with SPECIFIC terms — a project name, a skill, a company ("DS-CAR crew
+  recommendation", "Pinecone hybrid search") — not the user's whole question.
+- Multi-part question → several targeted calls, then one answer.
+- If retrieval doesn't return it, say you don't have that detail — never fill the gap.`;
 
 export const personas: PersonaConfig[] = [
   {

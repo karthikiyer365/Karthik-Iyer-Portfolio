@@ -2,7 +2,7 @@
 #### :mail:  ·  :phone:  ·   :link:
 
 
-AI & Data Engineer with 2+ years building 
+AI Engineer and Data Analyst with 2+ years building 
 - ETL pipelines, LLM/Agentic AI frameworks and connecting multiple CRMs through MCP systems for AIOps. 
 - Skilled in Data Architecture and Design, BI Dashboarding and Agentic Application Development
 - Focusing on Operations and Supply Chain Automation, Resource Managment, Financial analytics and Sports Analytics.
@@ -35,7 +35,7 @@ GCP(Docker)     ▰▰▱▱▱▱▱▱              │   Plotly · Dash   ▰
 ```timeline
 [
   { 
-    "role": "AI & Data Engineer", 
+    "role": "AI Engineer", 
     "org": "RestoreFast", 
     "location": "North Bethesda, MD", 
     "from": null, 
@@ -48,7 +48,7 @@ GCP(Docker)     ▰▰▱▱▱▱▱▱              │   Plotly · Dash   ▰
         "note": " - Designing v0 data schema and ETL pipeline to normalize multichannel input"
       },
       { 
-        "role": "› AI Developmer", 
+        "role": "› AI Development", 
         "note": " - Utilize AI Infra to streamline project compliance checks, worker mathing, and user registration"
       }
     ],
@@ -64,7 +64,7 @@ GCP(Docker)     ▰▰▱▱▱▱▱▱              │   Plotly · Dash   ▰
       },
       { 
         "title": "Hotline Agent", 
-        "note": " -  LLM based Voice Agent · 70% monitoring drop"
+        "note": " - Twilio × OpenAI Realtime voice agent · ~50% of inbound calls automated"
       },
       {
         "title": "Compliance Agent",
@@ -82,12 +82,16 @@ GCP(Docker)     ▰▰▱▱▱▱▱▱              │   Plotly · Dash   ▰
     "concurrent": 
     [
       { 
-        "role": "› Technical Assistant", 
+        "role": "› Technical Systems Admin", 
         "note": " - Inventory & Product Usage Analysis to identify system breakpoints"
       },
       { 
         "role": "› Teaching Assistant", 
-        "note": " - Decision Making & Data Analytics · LLM auto-grader" 
+        "note": " - Decision Making & Data Analytics · BERT auto-grader (400+ assignments)" 
+      },
+      { 
+        "role": "› Performance Analyst · GWU Soccer", 
+        "note": " - TITAN player-load dashboards · Wyscout/Taka scouting (xG, xT, xA)" 
       }
     ],
     "projects": 
@@ -102,12 +106,12 @@ GCP(Docker)     ▰▰▱▱▱▱▱▱              │   Plotly · Dash   ▰
       },
       { 
         "title": "Soccer with NBA", 
-        "note": "OBPM/DBPM · 87% - Multivariate LR · Player Valuation"
+        "note": "OBPM/DBPM · ~0.85 R² - Multivariate LR · Player Valuation"
       }
     ] 
   },
   { 
-    "role": "Financial Analyst", 
+    "role": "Analytics Intern", 
     "org": "DPSY & Associates", 
     "location": "Mumbai, India", 
     "from": null, 
@@ -121,7 +125,7 @@ GCP(Docker)     ▰▰▱▱▱▱▱▱              │   Plotly · Dash   ▰
       },
       {
         "role": "Data Visualization",
-        "note": " - Built 10+ PowerBI dashboards for 3+ clients reports" 
+        "note": " - Built 10+ Tableau & Power BI dashboards for banking, retail & energy clients" 
       }
     ],
     "projects": 
