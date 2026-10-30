@@ -38,6 +38,7 @@ function isJobDescription(text: string) {
   return (signals?.length ?? 0) >= 2 || lines >= 6;
 }
 
+const NO_QUESTIONS = "Can you tell me what domain or specific function the role works in? Since my work is distributed across Tech and Internal Tooling, Supply Chain and Logistics, as well as Financial and Sports Analytics, a better understanding of the business function would help tailor the resume accordingly.";
 const RESUME_FAILED = "I couldn't finish the resume this time. The free AI model is running slow — try again in a minute.";
 
 // Resume steps run as background jobs (the free model can outlast the function time
@@ -319,13 +320,13 @@ export default function ChatPanel() {
       const body = qs.length
         ? "A few quick questions about the role — your answers help me position Karthik's resume for it. Reply with anything that applies (or just send to skip) and I'll generate the resume:\n\n" +
           qs.map((q, i) => `${i + 1}. ${q}`).join("\n")
-        : "Send any notes about the role (or just send to skip) and I'll generate the resume.";
+        : NO_QUESTIONS;
       setMessages((prev) => [...prev, { id: generateId(), role: "assistant" as const, content: body }]);
       setAwaitingAnswers(true);
     } catch {
       setMessages((prev) => [
         ...prev,
-        { id: generateId(), role: "assistant", content: "I couldn't draft tailoring questions this time. Add any notes about the role (or just send) and I'll build the resume." },
+        { id: generateId(), role: "assistant", content: NO_QUESTIONS },
       ]);
       setAwaitingAnswers(true);
     } finally {
