@@ -19,6 +19,20 @@ export interface ResumeData {
   certifications?: string[];
 }
 
+type Experience = ResumeData["experience"][number];
+
+// Consecutive roles at the same org render under one org header (e.g. three GWU
+// roles) — shared by ResumeDocument and texBuilder so both layouts agree.
+export function groupByOrg(exps: Experience[]): { org: string; location?: string; roles: Experience[] }[] {
+  const groups: { org: string; location?: string; roles: Experience[] }[] = [];
+  for (const e of exps) {
+    const last = groups[groups.length - 1];
+    if (last && last.org === e.org) last.roles.push(e);
+    else groups.push({ org: e.org, location: e.location, roles: [e] });
+  }
+  return groups;
+}
+
 export type ResumeState =
   | { status: "loading" }
   | { status: "error"; message: string }

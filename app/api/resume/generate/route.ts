@@ -61,10 +61,10 @@ export async function POST(req: NextRequest) {
 CONTACT (use verbatim as "contact"):
 ${CONTACT}
 
-SKILLS & DATES REFERENCE (use ONLY for the skills list, exact titles/dates/locations, and contact — NOT for bullet content; ignore ASCII bars / JSON timeline formatting):
+MASTER RESUME — the canonical, current resume. AUTHORITATIVE for every title, org, location, date, education entry, skill, and metric. Never contradict it:
 ${master}
 
-RETRIEVED EVIDENCE — the JD-relevant accomplishments, ranked most-relevant first. ALL experience and project bullets come from HERE:
+RETRIEVED EVIDENCE — JD-relevant accomplishments from the portfolio, ranked most-relevant first. Use it to pick WHAT to emphasize and to add supporting detail:
 ${corpus}
 ${gap ? `\nKEYWORD GAP REPORT (script-computed, INTERNAL — never print the score or this report in the resume): missing keywords the JD emphasizes. Weave a missing keyword into skills/bullets ONLY where a real fact from the material supports it (aliases count: Spark covers PySpark need, etc.). Use the role-type and industry to decide what to emphasize.\n${formatReport(gap, industry)}\n` : ""}${answers ? `\nRECRUITER'S ANSWERS to clarifying questions about this role — weight these HEAVILY to decide what to emphasize and how to WORD bullets. In particular, when they confirm an adjacent skill counts (e.g. Supabase satisfies the cloud-data need), position Karthik's real adjacent experience toward that requirement using the role's language. Reposition and reword existing facts — never invent new ones:\n${answers}\n` : ""}
 ${BULLET_RULES}
@@ -87,8 +87,9 @@ Return ONLY a JSON object of this exact shape (no prose, no markdown fences):
 Rules:
 - ${PERSONA_VOICE[persona]}
 - Use ONLY facts from the material above. Invent NO skills, metrics, employers, dates, or projects.
-- EVERY experience and project bullet MUST be built from the RETRIEVED EVIDENCE only. The skills/dates reference is for the skills list, titles, dates, and locations — NEVER lift its summary or phrasing into bullets.
-- Bullets MUST be specific and metric-led. Carry over the exact numbers, named tools/platforms (e.g. Procore, Xero, Twilio, Databricks, Spark, Pinecone), and named systems (e.g. DS-CAR, AFINN) from the retrieved evidence. NEVER flatten a concrete evidence point into vague phrasing like "AI-ready data products" — name the system, the tool, and the number.
+- EVERY experience and project bullet MUST be built from facts in the MASTER RESUME bullets or the RETRIEVED EVIDENCE. Reword toward the JD's language; never change a number. Where the two disagree on a title, date, or metric, the MASTER RESUME wins.
+- Use the exact role titles, org names, locations, and dates from the MASTER RESUME (e.g. "AI Engineer", "June 2025 – July 2026") — never older titles that may appear in the evidence.
+- Bullets MUST be specific and metric-led. Carry over the exact numbers, named tools/platforms (e.g. Procore, Xero, Twilio, Pinecone, LangChain, Supabase), and named systems (e.g. DS-CAR) from the source material. NEVER flatten a concrete evidence point into vague phrasing like "AI-ready data products" — name the system, the tool, and the number.
 - In every bullet, wrap the 1-3 MOST important keywords in **double asterisks** for bold: the feature/concept name and the tool/tech-stack names (e.g. "Built **Databricks** ETL pipelines...", "Productionized a **24/7 LLM-backed hotline agent** on **Twilio**..."). Bold only short keyword phrases — never metrics, never half the sentence.
 - LAYOUT DECISION (do this FIRST, before writing any bullet): decide where Karthik's strongest JD-relevant content lives by weighing the retrieved evidence — the [experience] vs [project] groups are already ranked by relevance. Pick EXACTLY ONE layout and return it as "layout":
    A) 2 experiences (3-4 bullets each) + 3 projects (2 bullets each) — project-heavy: the JD's core requirements are best evidenced by project work (e.g. hands-on stack breadth, research/analytics builds).
@@ -97,7 +98,8 @@ Rules:
    D) 4 experiences (3-4 bullets each) + 1 project (2 bullets) — experience-heavy: the JD prizes professional/industry tenure and progression over side work.
   Choose by where the BEST evidence is, not by symmetry — the role-type signal above is a secondary tiebreaker only (e.g. a project-management-flavored JD leans toward D, tenure/experience-heavy, when evidence strength is otherwise close). Every bullet must still earn its place — never pad a slot with weak material to hit the count; drop to the neighboring layout instead. Order experiences most-recent / most-relevant first; always keep the most recent role, the summary, and education. The document may flow past one page.
 - Pick ONE of two formats: (A) include "leadership" (2-3 one-line items) AND "certifications" (2-4 short items) when the material has them and the role would value them; (B) return BOTH as empty arrays when the page is better spent elsewhere or the material is thin.
-- "skills" MUST include EXACTLY these 5 groups, each on one line with the relevant items from the master resume: "Languages & Data", "Data Engineering", "AI / ML", "Cloud & DevOps", "BI & Visualization". Order them ${skillsOrder.map((g) => `"${g}"`).join(", ")} — the group most relevant to this JD's role-type leads. Never return an empty skills list.
+- "certifications" items come from the MASTER RESUME certifications line (the IJREAM 2022 publication may be one item); "leadership" items from its Volunteer & Leadership entries.
+- "skills" MUST include EXACTLY these 5 groups, each on one line with the relevant items from the master resume's SKILLS (Sports Data / Additional Skills items may be folded into the closest group when the JD values them): "Languages & Data", "Data Engineering", "AI / ML", "Cloud & DevOps", "BI & Visualization". Order them ${skillsOrder.map((g) => `"${g}"`).join(", ")} — the group most relevant to this JD's role-type leads. Never return an empty skills list.
 - "fit_note": 2-4 sentences addressed to the recruiter about how well Karthik fits THIS role — honest, not salesy. Where a requirement isn't explicitly on the resume but adjacent experience covers it, say so and explain why it transfers (name the real experience). If the fit is genuinely weak, be honest and direct — e.g. "candidly this is roughly a ${gap ? gap.score : 70}% match: the role leans further into <X> than Karthik's background does" — and say what DOES align. Never inflate. Mention the % only when the fit is weak.
 - Tailor wording to the job's language only where a real fact already supports it.
 - "summary": EXACTLY 2 sentences, max ~230 characters total — it must render in 2 lines on the page. Dense and specific, no filler openers.`;

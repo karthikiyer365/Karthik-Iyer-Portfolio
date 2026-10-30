@@ -1,8 +1,8 @@
-// Fill the Jake template's content section from ResumeData — preamble vendored
-// verbatim from resume-autopilot/master-1page/resume.tex (do NOT change spacing or
-// commands there). Server-side artifact only: returned by /api/resume/generate for
-// backend formatting / autopilot round-trips, no client download UI.
-import type { ResumeData } from "@/lib/resume";
+// Fill the resume template from ResumeData. Layout mirrors the current resume PDF
+// (public/Karthik-Iyer-Resume.pdf) and components/ResumeDocument.tsx — keep the
+// three in sync. Server-side artifact only: returned by /api/resume/generate for
+// backend formatting, no client download UI. Compiles with tectonic/pdflatex.
+import { groupByOrg, type ResumeData } from "@/lib/resume";
 
 const esc = (s: string) =>
   s
@@ -15,89 +15,43 @@ const esc = (s: string) =>
 // so the marker conversion runs on already-safe text (* is not a LaTeX special).
 const escBold = (s: string) => esc(s).replace(/\*\*(.+?)\*\*/g, "\\textbf{$1}");
 
+// Bare domains in the contact line (linkedin.com/in/…, karthikiyer.info) become
+// underlined links, as on the PDF. Emails/phones/locations stay plain text.
+const contactItem = (c: string) =>
+  /^[\w-]+(\.[\w-]+)+(\/\S*)?$/.test(c)
+    ? `\\href{https://${c}}{\\underline{${esc(c)}}}`
+    : esc(c);
+
 const PREAMBLE = String.raw`%-------------------------
-% Jake's Resume Template
+% Karthik Iyer — resume template (matches public/Karthik-Iyer-Resume.pdf)
 %-------------------------
-% Resume for Karthik Iyer. Do NOT change the preamble, packages, spacing, or commands.
-% Only edit content between \begin{document} and \end{document}.
+\documentclass[letterpaper,10pt]{article}
 
-\documentclass[a4paper,11pt]{article}
-% Force 10.5pt font size for tighter layout
-
-\usepackage{latexsym}
-\usepackage[empty]{fullpage}
-\usepackage{titlesec}
-\usepackage{marvosym}
-\usepackage[usenames,dvipsnames]{color}
-\usepackage{verbatim}
-\usepackage{enumitem}
-\usepackage[hidelinks]{hyperref}
-\usepackage{fancyhdr}
-\usepackage[english]{babel}
-\usepackage{tabularx}
-\input{glyphtounicode}
 \usepackage[T1]{fontenc}
-\usepackage{helvet}
-\renewcommand{\familydefault}{\sfdefault}
+\usepackage[default]{lato}
+\usepackage[margin=0.5in]{geometry}
+\usepackage{titlesec}
+\usepackage{enumitem}
+\usepackage{tabularx}
+\usepackage[hidelinks]{hyperref}
+\usepackage{iftex}
+\ifPDFTeX\input{glyphtounicode}\pdfgentounicode=1\fi % ATS-readable text; pdfTeX-only
 
-\pagestyle{fancy}
-\fancyhf{}
-\fancyfoot{}
-\renewcommand{\headrulewidth}{0pt}
-\renewcommand{\footrulewidth}{0pt}
-
-\addtolength{\oddsidemargin}{-0.5in}
-\addtolength{\evensidemargin}{-0.5in}
-\addtolength{\textwidth}{1in}
-\addtolength{\topmargin}{-.65in}
-\addtolength{\textheight}{1.3in}
-
-\urlstyle{same}
-
+\pagestyle{empty}
+\setlength{\parindent}{0pt}
 \raggedbottom
-\raggedright
-\setlength{\tabcolsep}{0in}
 
-\titleformat{\section}{
-  \vspace{-6pt}\scshape\raggedright\large
-}{}{0em}{}[\color{black}\titlerule \vspace{-5pt}]
+% Bold uppercase section title over a full-width rule.
+\titleformat{\section}{\bfseries}{}{0em}{\MakeUppercase}[\vspace{-4pt}\rule{\textwidth}{0.6pt}]
+\titlespacing*{\section}{0pt}{8pt}{3pt}
 
-\pdfgentounicode=1
+\setlist[itemize]{leftmargin=0.38in, label=\textbullet, itemsep=0pt, parsep=0pt, topsep=0pt, partopsep=0pt}
 
-%-------------------------
-% Custom commands
-\newcommand{\resumeItem}[1]{
-  \item\small{
-    {#1 \vspace{-2pt}}
-  }
-}
-
-\newcommand{\resumeSubheading}[4]{
-  \vspace{-2pt}\item
-    \begin{tabular*}{0.97\textwidth}[t]{l@{\extracolsep{\fill}}r}
-      \textbf{#1} & #2 \\
-      \textit{\small#3} & \textit{\small #4} \\
-    \end{tabular*}\vspace{-7pt}
-}
-
-\newcommand{\resumeProjectHeading}[2]{
-    \item
-    \begin{tabular*}{0.97\textwidth}{l@{\extracolsep{\fill}}r}
-      \small#1 & #2 \\
-    \end{tabular*}\vspace{-5pt}
-}
-
-\renewcommand\labelitemii{$\vcenter{\hbox{\tiny$\bullet$}}$}
-
-\newcommand{\resumeSubHeadingListStart}{\begin{itemize}[leftmargin=0in, label={}]}
-\newcommand{\resumeSubHeadingListEnd}{\end{itemize}}
-\newcommand{\resumeItemListStart}{\begin{itemize}}
-\newcommand{\resumeItemListEnd}{\end{itemize}\vspace{-5pt}}
-
-%-------------------------------------------
-%%%%%%  RESUME STARTS HERE  %%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-\AtBeginDocument{\fontsize{10.5}{12.6}\selectfont}
+% \orgline{org}{location} · \roleline{role}{dates} (indented) · \eduline{org}{degree}{location}{date}
+\newcommand{\orgline}[2]{\textbf{#1}\hfill #2\par}
+\newcommand{\roleline}[2]{\hspace*{0.2in}\textbf{#1}\hfill #2\par}
+\newcommand{\eduline}[4]{\textbf{#1 \ $|$ \ #2}\hfill #3 \ $|$ \ #4\par}
+\newcommand{\projline}[1]{\textbf{#1}\par}
 
 \begin{document}`;
 
@@ -105,115 +59,86 @@ export function buildTex(d: ResumeData): string {
   const parts: string[] = [PREAMBLE];
 
   // Heading — contact line arrives "loc · email · phone · link"; render with $|$.
-  const contact = d.contact.split("·").map((c) => esc(c.trim())).join(" $|$\n    ");
+  const contact = d.contact.split("·").map((c) => contactItem(c.trim())).join(" \\ $|$ \\ ");
   parts.push(`
-%----------HEADING----------
 \\begin{center}
-    \\textbf{\\LARGE \\scshape ${esc(d.name)}} \\\\ \\vspace{2pt}
-    \\small ${contact}
-\\end{center}`);
+  {\\LARGE\\bfseries ${esc(d.name.toUpperCase())}}\\\\[2pt]
+  \\small ${contact}
+\\end{center}
+\\vspace{-8pt}`);
 
   if (d.summary) {
     parts.push(`
-%-----------SUMMARY-----------
-\\section{Summary}
- \\begin{itemize}[leftmargin=0in, label={}]
-    \\small{\\item{${esc(d.summary)}}}
- \\end{itemize}`);
+\\section{Professional Summary}
+${esc(d.summary)}`);
   }
 
   if (d.skills?.length) {
-    const lines = d.skills
-      .map((g) => `     \\textbf{${esc(g.group)}}{: ${g.items.map(esc).join(", ")}}`)
-      .join(" \\\\\n");
+    const rows = d.skills.map((g) => `  \\textbf{${esc(g.group)}} & ${g.items.map(esc).join(", ")} \\\\`).join("\n");
     parts.push(`
-%-----------SKILLS-----------
 \\section{Skills}
- \\begin{itemize}[leftmargin=0in, label={}]
-    \\small{\\item{
-${lines}
-    }}
- \\end{itemize}`);
+\\begin{tabularx}{\\textwidth}{@{}p{1.45in}X@{}}
+${rows}
+\\end{tabularx}`);
+  }
+
+  if (d.education?.length) {
+    const rows = d.education
+      .map((ed) => `\\eduline{${esc(ed.org)}}{${esc(ed.degree)}}{${esc(ed.location ?? "")}}{${esc(ed.dates)}}`)
+      .join("\n");
+    parts.push(`
+\\section{Education}
+${rows}`);
   }
 
   if (d.experience?.length) {
-    const entries = d.experience
-      .map((e) => {
-        const bullets = e.bullets.map((b) => `        \\resumeItem{${escBold(b)}}`).join("\n");
-        return `    \\resumeSubheading
-      {${esc(e.org)}}{${esc(e.location ?? "")}}
-      {${esc(e.role)}}{${esc(e.dates)}}
-      \\resumeItemListStart
+    const entries = groupByOrg(d.experience)
+      .map((g) => {
+        const roles = g.roles
+          .map((e) => {
+            const bullets = e.bullets.map((b) => `  \\item ${escBold(b)}`).join("\n");
+            return `\\roleline{${esc(e.role)}}{${esc(e.dates)}}
+\\begin{itemize}
 ${bullets}
-      \\resumeItemListEnd`;
+\\end{itemize}`;
+          })
+          .join("\n");
+        return `\\orgline{${esc(g.org)}}{${esc(g.location ?? "")}}\n${roles}`;
       })
       .join("\n\n");
     parts.push(`
-%-----------EXPERIENCE-----------
-\\section{Experience}
-  \\resumeSubHeadingListStart
-
-${entries}
-
-  \\resumeSubHeadingListEnd`);
+\\section{Work Experience}
+${entries}`);
   }
 
   if (d.projects?.length) {
     const entries = d.projects
       .map((p) => {
-        const heading = p.stack
-          ? `{\\textbf{${esc(p.name)}} $|$ \\emph{${esc(p.stack)}}}{}`
-          : `{\\textbf{${esc(p.name)}}}{}`;
-        const bullets = p.bullets.map((b) => `            \\resumeItem{${escBold(b)}}`).join("\n");
-        return `      \\resumeProjectHeading
-          ${heading}
-          \\resumeItemListStart
+        const head = p.stack ? `${esc(p.name)} \\ $|$ \\ ${esc(p.stack)}` : esc(p.name);
+        const bullets = p.bullets.map((b) => `  \\item ${escBold(b)}`).join("\n");
+        return `\\projline{${head}}
+\\begin{itemize}
 ${bullets}
-          \\resumeItemListEnd`;
+\\end{itemize}`;
       })
       .join("\n");
     parts.push(`
-%-----------PROJECTS-----------
 \\section{Projects}
-    \\resumeSubHeadingListStart
-${entries}
-    \\resumeSubHeadingListEnd`);
-  }
-
-  if (d.education?.length) {
-    const entries = d.education
-      .map(
-        (ed) => `    \\resumeSubheading
-      {${esc(ed.org)}}{${esc(ed.location ?? "")}}
-      {${esc(ed.degree)}}{${esc(ed.dates)}}`
-      )
-      .join("\n");
-    parts.push(`
-%-----------EDUCATION-----------
-\\section{Education}
-  \\resumeSubHeadingListStart
-${entries}
-  \\resumeSubHeadingListEnd`);
+${entries}`);
   }
 
   if (d.leadership?.length || d.certifications?.length) {
-    const lines: string[] = [];
-    if (d.leadership?.length)
-      lines.push(`     \\textbf{Leadership}{: ${d.leadership.map(esc).join("; ")}}`);
+    const blocks: string[] = [];
     if (d.certifications?.length)
-      lines.push(`     \\textbf{Certifications}{: ${d.certifications.map(esc).join(", ")}}`);
+      blocks.push(`\\textbf{Certifications}\\par\n${d.certifications.map(esc).join(" \\ $|$ \\ ")}\\par`);
+    if (d.leadership?.length)
+      blocks.push(`\\textbf{Volunteer \\& Leadership}\n\\begin{itemize}\n${d.leadership.map((l) => `  \\item ${esc(l)}`).join("\n")}\n\\end{itemize}`);
     parts.push(`
-%-----------LEADERSHIP (optional)-----------
-\\section{Leadership \\& Certifications}
- \\begin{itemize}[leftmargin=0in, label={}]
-    \\small{\\item{
-${lines.join(" \\\\\n")}
-    }}
- \\end{itemize}`);
+\\section{Certifications, Publications \\& Volunteer Experience}
+${blocks.join("\n")}`);
   }
 
   parts.push(`
-%-------------------------------------------
 \\end{document}
 `);
   return parts.join("\n");

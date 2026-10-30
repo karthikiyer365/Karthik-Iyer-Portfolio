@@ -53,6 +53,9 @@ export async function createChatAgent(
           const result = await callOpenRouterChat({
             messages,
             tools: TOOL_DEFS,
+            // Nemotron skips retrieval on "auto" and invents details — force one
+            // lookup before the first answer.
+            tool_choice: round === 0 ? "required" : "auto",
           });
           const toolCalls = result.tool_calls;
 

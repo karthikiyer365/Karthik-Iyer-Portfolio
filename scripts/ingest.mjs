@@ -98,8 +98,49 @@ const files = [
   ...fs.readdirSync("charts/data").filter((f) => f.endsWith(".json")).map((f) => [`charts/data/${f}`, "experience"]),
   ...fs.readdirSync("charts/data/projects").filter((f) => f.endsWith(".json")).map((f) => [`charts/data/projects/${f}`, "project"]),
 ];
-const records = files.flatMap(([f, t]) => recordsFromFile(f, t));
-console.log(`built ${records.length} chunks from ${files.length} files`);
+// Resume chunks: one per bullet from server/ai/resumeMaster.md (the PDF
+// transcription), so current titles/dates and roles/projects without a chart spec
+// (GWU Soccer, Pitcher Perfect) are retrievable. Parses its ##/###/####/- shape.
+function recordsFromResume(file) {
+  const TYPE = { "WORK EXPERIENCE": "experience", PROJECTS: "project", EDUCATION: "education" };
+  const recs = [];
+  let section = "Contact", type = "extra", company = "", location = "", role = "", dates = "", n = 0;
+  const lines = fs.readFileSync(file, "utf8").replace(/<!--[\s\S]*?-->/g, "").split("\n");
+  const push = (system, detail) =>
+    recs.push({
+      _id: `resume#${++n}`,
+      text: `${role || section} at ${company || "Karthik Iyer"} — ${detail}`,
+      type, company, role, dates, location, system,
+    });
+  for (const raw of lines) {
+    const line = raw.trim();
+    const pair = (s) => { const i = s.lastIndexOf(" | "); return i < 0 ? [s, ""] : [s.slice(0, i), s.slice(i + 3)]; };
+    if (line.startsWith("## ")) {
+      section = line.slice(3);
+      type = TYPE[section] ?? "extra";
+      company = location = role = dates = "";
+    } else if (line.startsWith("#### ")) {
+      [role, dates] = pair(line.slice(5));
+      if (type !== "experience") push(section, `${role}${dates ? `, ${dates}` : ""}`);
+    } else if (line.startsWith("### ")) {
+      const [a, b] = pair(line.slice(4));
+      // Projects: heading is "name | stack" — name is the role, stack rides in location.
+      if (type === "project") [company, role, location, dates] = ["Project", a, b, ""];
+      else [company, location, role, dates] = [a, b, "", ""];
+    } else if (line.startsWith("- ")) {
+      push(type === "experience" || type === "project" ? "Resume bullet" : section, line.slice(2));
+    } else if (line && !line.startsWith("#")) {
+      push(section, line);
+    }
+  }
+  return recs;
+}
+
+const records = [
+  ...files.flatMap(([f, t]) => recordsFromFile(f, t)),
+  ...recordsFromResume("server/ai/resumeMaster.md"),
+];
+console.log(`built ${records.length} chunks from ${files.length} files + resume`);
 
 // ponytail self-check: --dry proves the chunkers fire on every spec without
 // touching the live index. Fails loudly if a spec stops producing its sections.

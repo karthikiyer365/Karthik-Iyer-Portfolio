@@ -63,12 +63,12 @@ function ActionButton({ icon, label, disabled, onClick, href }: ActionButtonProp
 
 const RECENT_EXPERIENCE: { title: string; path: string; file: string }[] = [
   {
-    title: "Data Systems Engineer",
+    title: "AI Engineer",
     path: "~/restorefast/ai-dev",
     file: "portfolio/experiences/AI & Data Engineer - RestoreFast.ipynb",
   },
   {
-    title: "Technical Systems Assistant",
+    title: "Technical Systems Admin",
     path: "~/gwu/it",
     file: "portfolio/experiences/Technical Systems Admin - GWU.ipynb",
   },
@@ -78,8 +78,8 @@ const RECENT_EXPERIENCE: { title: string; path: string; file: string }[] = [
     file: "portfolio/education/MSc Data Analytics - GWU.ipynb",
   },
   {
-    title: "Data Analyst",
-    path: "~/dpsy/financial-data-analysis",
+    title: "Analytics Intern",
+    path: "~/dpsy/analytics",
     file: "portfolio/experiences/Financial Analyst - DPSY & Associates.ipynb",
   },
 ];

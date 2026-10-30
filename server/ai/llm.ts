@@ -1,5 +1,5 @@
 const OPENROUTER_BASE = "https://openrouter.ai/api/v1";
-export const OPENROUTER_MODEL = "google/gemini-3-flash-preview";
+export const OPENROUTER_MODEL = "nvidia/nemotron-3.5-super-vl:free";
 
 export function getOpenRouterApiKey(): string | null {
   return process.env.OPENROUTER_API_KEY ?? null;
@@ -22,6 +22,7 @@ export async function callOpenRouterChat(opts: {
   temperature?: number;
   max_tokens?: number;
   tools?: Array<{ type: "function"; function: { name: string; description: string; parameters: object } }>;
+  tool_choice?: "auto" | "required";
 }): Promise<OpenRouterChatResult> {
   const key = getOpenRouterApiKey();
   if (!key) throw new Error("Missing OPENROUTER_API_KEY");
@@ -30,10 +31,13 @@ export async function callOpenRouterChat(opts: {
     messages: opts.messages,
     temperature: opts.temperature ?? 0.4,
     max_tokens: opts.max_tokens ?? 700,
+    // Nemotron reasons by default and spends ~500-600 of max_tokens on it, truncating
+    // replies and JSON. Off = full budget for the answer.
+    reasoning: { enabled: false },
   };
   if (opts.tools?.length) {
     body.tools = opts.tools;
-    body.tool_choice = "auto";
+    body.tool_choice = opts.tool_choice ?? "auto";
   }
   const res = await fetch(`${OPENROUTER_BASE}/chat/completions`, {
     method: "POST",

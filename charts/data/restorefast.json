@@ -2,9 +2,9 @@
   "output": "content/experiences/AI & Data Engineer - RestoreFast.ipynb",
   "meta": {
     "company": "RestoreFast Operations LLC",
-    "role": "AI & Data Engineer",
-    "duration": "Jun 2025 – Present",
-    "location": "North Bethesda, MD"
+    "role": "AI Engineer",
+    "duration": "June 2025 – July 2026",
+    "location": "North Bethesda, MD, USA"
   },
   "hero": "# RestoreFast · AI & Data Engineer\n\n**Jun 2025 – Present · North Bethesda, MD**\n\n## Hero Overview\n\nArchitected and built the operational AI systems behind RestoreFast's workforce platform — agentic worker matching, a retrieval-augmented knowledge layer, a 24/7 hotline triage agent, cross-tool communications routing, and compliance document management.\n\nConnected fragmented tools (Gmail, Drive, Nutshell, Xero, Twilio) into a unified internal data layer, turning manual, siloed workflows into a connected pipeline from worker discovery through project execution.",
   "domain_colors": {
