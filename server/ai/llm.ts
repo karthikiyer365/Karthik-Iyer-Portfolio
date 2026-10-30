@@ -39,11 +39,19 @@ export async function callOpenRouterChat(opts: {
     body.tools = opts.tools;
     body.tool_choice = opts.tool_choice ?? "auto";
   }
-  const res = await fetch(`${OPENROUTER_BASE}/chat/completions`, {
-    method: "POST",
-    headers: { Authorization: `Bearer ${key}`, "Content-Type": "application/json" },
-    body: JSON.stringify(body),
-  });
+  const send = () =>
+    fetch(`${OPENROUTER_BASE}/chat/completions`, {
+      method: "POST",
+      headers: { Authorization: `Bearer ${key}`, "Content-Type": "application/json" },
+      body: JSON.stringify(body),
+    });
+  let res = await send();
+  // Free-tier provider intermittently 503s ("Service is not ready") or 429s — one
+  // retry after a beat keeps the chat off the static fallback answers.
+  if (res.status === 429 || res.status >= 500) {
+    await new Promise((r) => setTimeout(r, 1200));
+    res = await send();
+  }
   if (!res.ok) throw new Error(`OpenRouter error ${res.status}: ${await res.text()}`);
   const data = (await res.json()) as { choices?: Array<{ message?: { content?: string | null; tool_calls?: Array<{ id: string; type: string; function: { name: string; arguments: string } }> } }> };
   const msg = data.choices?.[0]?.message;

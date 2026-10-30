@@ -14,6 +14,7 @@ export async function POST(req: NextRequest) {
     role: "user",
     content: message,
     timestamp: Date.now(),
+    persona,
   });
 
   const encoder = new TextEncoder();
@@ -36,6 +37,7 @@ export async function POST(req: NextRequest) {
           role: "assistant",
           content: response,
           timestamp: Date.now(),
+          persona,
         });
 
         send({ type: "done", response });
