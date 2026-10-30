@@ -38,6 +38,35 @@ function isJobDescription(text: string) {
   return (signals?.length ?? 0) >= 2 || lines >= 6;
 }
 
+const NO_QUESTIONS = "Can you tell me what domain or specific function the role works in? Since my work is distributed across Tech and Internal Tooling, Supply Chain and Logistics, as well as Financial and Sports Analytics, a better understanding of the business function would help tailor the resume accordingly.";
+const RESUME_FAILED = "I couldn't finish the resume this time. The free AI model is running slow — try again in a minute.";
+
+// Resume steps run as background jobs (the free model can outlast the function time
+// limit): start one, then poll every 2s for up to 5 minutes. onTick gets elapsed seconds.
+async function runResumeJob<T>(
+  input: { kind: "questions" | "generate"; jdText: string; persona: Persona; answers?: string },
+  onTick?: (elapsed: number) => void
+): Promise<T> {
+  const start = await fetch("/api/resume/jobs", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify(input),
+  });
+  const { jobId } = (await start.json().catch(() => ({}))) as { jobId?: string };
+  if (!jobId) throw new Error("job did not start");
+  const t0 = Date.now();
+  while (Date.now() - t0 < 5 * 60_000) {
+    await new Promise((r) => setTimeout(r, 2000));
+    onTick?.(Math.round((Date.now() - t0) / 1000));
+    const res = await fetch(`/api/resume/jobs?id=${jobId}`);
+    if (!res.ok) continue; // transient poll failure — keep waiting
+    const state = (await res.json()) as { status: string; result?: T; message?: string };
+    if (state.status === "done") return state.result as T;
+    if (state.status === "error") throw new Error(state.message);
+  }
+  throw new Error("job timed out");
+}
+
 export default function ChatPanel() {
   const { persona, setPersona } = usePersona();
   const { openFile } = useEditor();
@@ -287,23 +316,17 @@ export default function ChatPanel() {
     pendingJdRef.current = { jdText, persona };
     setAwaitingAnswers(false);
     try {
-      const res = await fetch("/api/resume/questions", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ jdText, persona }),
-      });
-      const json = (await res.json()) as { questions?: string[]; error?: string };
-      const qs = json.questions ?? [];
+      const { questions: qs = [] } = await runResumeJob<{ questions?: string[] }>({ kind: "questions", jdText, persona });
       const body = qs.length
         ? "A few quick questions about the role — your answers help me position Karthik's resume for it. Reply with anything that applies (or just send to skip) and I'll generate the resume:\n\n" +
           qs.map((q, i) => `${i + 1}. ${q}`).join("\n")
-        : "Send any notes about the role (or just send to skip) and I'll generate the resume.";
+        : NO_QUESTIONS;
       setMessages((prev) => [...prev, { id: generateId(), role: "assistant" as const, content: body }]);
       setAwaitingAnswers(true);
     } catch {
       setMessages((prev) => [
         ...prev,
-        { id: generateId(), role: "assistant", content: "Something went wrong drafting questions — send anything and I'll generate the resume anyway." },
+        { id: generateId(), role: "assistant", content: NO_QUESTIONS },
       ]);
       setAwaitingAnswers(true);
     } finally {
@@ -321,12 +344,10 @@ export default function ChatPanel() {
     setResume({ status: "loading" });
     openFile(GENERATED_RESUME_PATH, GENERATED_RESUME_LABEL);
     try {
-      const res = await fetch("/api/resume/generate", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ jdText: ctx.jdText, persona: ctx.persona, answers }),
-      });
-      const json = (await res.json()) as { data?: ResumeData; fitNote?: string; error?: string };
+      const json = await runResumeJob<{ data?: ResumeData; fitNote?: string }>(
+        { kind: "generate", jdText: ctx.jdText, persona: ctx.persona, answers },
+        (elapsed) => setResume({ status: "loading", elapsed })
+      );
       if (json.data) {
         setResume({ status: "ready", data: json.data });
         // Honest fit narrative from the same LLM call — adjacency reasoning, or a
@@ -337,9 +358,9 @@ export default function ChatPanel() {
             { id: generateId(), role: "assistant" as const, content: json.fitNote as string },
           ]);
         }
-      } else setResume({ status: "error", message: json.error ?? "generation failed" });
+      } else setResume({ status: "error", message: RESUME_FAILED });
     } catch {
-      setResume({ status: "error", message: "Please try again." });
+      setResume({ status: "error", message: RESUME_FAILED });
     } finally {
       setIsTailoring(false);
     }

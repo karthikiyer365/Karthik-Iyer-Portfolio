@@ -11,6 +11,7 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@netlify/blobs": "^11.1.7",
     "@pinecone-database/pinecone": "^7.0.0",
     "lucide-react": "^0.268.0",
     "mermaid": "^11.4.1",
@@ -21,6 +22,7 @@
     "remark-gfm": "^4.0.1"
   },
   "devDependencies": {
+    "@netlify/functions": "^6.0.3",
     "@types/node": "25.0.10",
     "@types/react": "^18.3.27",
     "@types/react-dom": "^18.3.7",

@@ -1,6 +1,6 @@
 // Fill the resume template from ResumeData. Layout mirrors the current resume PDF
 // (public/Karthik-Iyer-Resume.pdf) and components/ResumeDocument.tsx — keep the
-// three in sync. Server-side artifact only: returned by /api/resume/generate for
+// three in sync. Server-side artifact only: returned by the resume generate job (server/ai/resumeJobs.ts) for
 // backend formatting, no client download UI. Compiles with tectonic/pdflatex.
 import { groupByOrg, type ResumeData } from "@/lib/resume";
 

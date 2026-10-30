@@ -1,8 +1,6 @@
-import fs from "fs";
-import path from "path";
 import { queryPineconeByText, isPineconeConfigured } from "./pinecone";
-// Baked from content/resume.md at build (scripts/bake-master.mjs) so the serverless
-// function bundles it — no runtime fs read (which ENOENTs on Netlify).
+// Baked from server/ai/resumeMaster.md + charts/data at build (scripts/bake-master.mjs)
+// so the serverless functions bundle it — no runtime fs read (which ENOENTs on Netlify).
 import resumeMaster from "./resumeMaster.json";
 
 export const PERSONA_VOICE: Record<string, string> = {
@@ -20,36 +18,10 @@ export function readMaster(): string {
   return resumeMaster.text;
 }
 
-// Mine only the narrative text from the chart JSONs (hero/storyline/outcomes) — the
-// fallback when Pinecone is unavailable.
+// Narrative text from the chart JSONs (hero/storyline/outcomes), baked at build —
+// keyword gap analysis input and the fallback when Pinecone is unavailable.
 export function loadCorpus(): string {
-  const dirs = ["charts/data", "charts/data/projects"];
-  const parts: string[] = [];
-  for (const d of dirs) {
-    const dir = path.join(process.cwd(), d);
-    let files: string[] = [];
-    try {
-      files = fs.readdirSync(dir);
-    } catch {
-      continue;
-    }
-    for (const f of files) {
-      if (!f.endsWith(".json")) continue;
-      try {
-        const j = JSON.parse(fs.readFileSync(path.join(dir, f), "utf8"));
-        const bits: string[] = [];
-        if (typeof j.hero === "string") bits.push(j.hero);
-        if (typeof j.storyline === "string") bits.push(j.storyline);
-        if (j.outcomes && typeof j.outcomes === "object") {
-          bits.push(Object.entries(j.outcomes).map(([k, v]) => `${k}: ${v}`).join("; "));
-        }
-        if (bits.length) parts.push(bits.join("\n"));
-      } catch {
-        /* skip malformed */
-      }
-    }
-  }
-  return parts.join("\n\n---\n\n");
+  return resumeMaster.corpus;
 }
 
 // RAG: retrieve the JD-relevant evidence chunks from Pinecone, grouped by role and
