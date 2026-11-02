@@ -34,6 +34,6 @@ export function groupByOrg(exps: Experience[]): { org: string; location?: string
 }
 
 export type ResumeState =
-  | { status: "loading" }
+  | { status: "loading"; elapsed?: number } // seconds since the job started
   | { status: "error"; message: string }
   | { status: "ready"; data: ResumeData };

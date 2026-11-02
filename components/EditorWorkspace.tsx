@@ -324,7 +324,7 @@ function GeneratedResumeView() {
   if (!resume || resume.status === "loading") {
     return (
       <div className="flex-1 flex items-center justify-center text-ink-muted text-body">
-        Generating tailored resume…
+        Generating tailored resume…{resume?.status === "loading" && resume.elapsed ? ` ${resume.elapsed}s` : ""}
       </div>
     );
   }
@@ -332,7 +332,7 @@ function GeneratedResumeView() {
   if (resume.status === "error") {
     return (
       <div className="flex-1 flex items-center justify-center text-ink-muted text-body">
-        Could not generate resume. {resume.message}
+        {resume.message}
       </div>
     );
   }
