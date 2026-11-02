@@ -878,11 +878,11 @@ def _role_line(role: str, company: str, filename: str) -> str:
 _ROLES_SOURCE = [
     "## Roles\n",
     "\n",
-    _role_line("AI & Data Engineer", "RestoreFast", "AI & Data Engineer - RestoreFast.ipynb"),
+    _role_line("AI Engineer", "RestoreFast", "AI Engineer - RestoreFast.ipynb"),
     "\n",
     _role_line("Teaching Assistant", "George Washington University", "Teaching Assistant - GWU.ipynb"),
     "\n",
-    _role_line("Technical Systems Admin", "George Washington University", "Technical Systems Admin - GWU.ipynb"),
+    _role_line("Data Analyst", "George Washington University", "Data Analyst - GWU.ipynb"),
     "\n",
     _role_line("Financial Analyst", "DPSY & Associates", "Financial Analyst - DPSY & Associates.ipynb"),
     "\n",

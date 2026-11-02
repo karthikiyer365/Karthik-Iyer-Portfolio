@@ -4,7 +4,7 @@ import { useState } from "react";
 import { useEditor, useContent, useSettings, useGeneratedResume } from "@/app/providers";
 import { SETTINGS_PATH, SETTINGS_LABEL } from "@/lib/settings";
 import { GENERATED_RESUME_PATH } from "@/lib/resume";
-import ResumeDocument from "./ResumeDocument";
+import ResumeDocument, { printResume } from "./ResumeDocument";
 import EditorTabs from "./EditorTabs";
 import SettingsView from "./settings/SettingsView";
 import CursorCaret from "./CursorCaret";
@@ -341,7 +341,7 @@ function GeneratedResumeView() {
     <div className="flex-1 flex flex-col overflow-hidden">
       <div className="flex items-center justify-end h-9 px-4 shrink-0 border-b border-line-subtle">
         <button
-          onClick={() => window.print()}
+          onClick={printResume}
           className="flex items-center gap-1.5 px-3 py-1 rounded bg-line text-ink-secondary hover:text-ink text-meta transition-colors"
         >
           <Download className="w-3.5 h-3.5" />

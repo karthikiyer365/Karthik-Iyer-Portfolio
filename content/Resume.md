@@ -82,7 +82,7 @@ GCP(Docker)     ▰▰▱▱▱▱▱▱              │   Plotly · Dash   ▰
     "concurrent": 
     [
       { 
-        "role": "› Technical Systems Admin", 
+        "role": "› Data Analyst", 
         "note": " - Inventory & Product Usage Analysis to identify system breakpoints"
       },
       { 
@@ -111,7 +111,7 @@ GCP(Docker)     ▰▰▱▱▱▱▱▱              │   Plotly · Dash   ▰
     ] 
   },
   { 
-    "role": "Analytics Intern", 
+    "role": "Financial Analyst", 
     "org": "DPSY & Associates", 
     "location": "Mumbai, India", 
     "from": null, 

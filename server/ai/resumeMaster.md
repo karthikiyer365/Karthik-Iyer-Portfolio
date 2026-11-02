@@ -1,5 +1,5 @@
 # KARTHIK IYER
-Arlington, VA | +1 (202) 713-1699 | karthikiyer365@gmail.com | linkedin.com/in/karthikiyer365 | karthikiyer.info
+Arlington, VA | +1 (202) 713-1699 | karthikiyer365@gmail.com | github.com/karthikiyer365 | linkedin.com/in/karthikiyer365 | karthikiyer.info
 
 <!-- Source of truth for the AI: transcribed from the current resume PDF
      (public/Karthik-Iyer-Resume.pdf). Baked into resumeMaster.json for the resume
@@ -51,7 +51,7 @@ Coursework: Image Processing, Database Management, ERP Systems, NLP, Web Develop
 - Analyzed per-session training performance to surface fatigue inflection points and high-load drills, informing week-to-week coach-side training adjustments.
 - Built position-specific scouting workflows on Wyscout and Taka, integrating 3 seasons of A-10 match-by-match event and tracking data, helping to rank prospects by xG, xT and xA metrics.
 
-#### Technical Systems Admin, Software Support | August 2024 – May 2025
+#### Data Analyst | August 2024 – May 2025
 - Conducted inventory audits and supported demand forecasting using BMC Helix, ensuring resource allocation and procurement.
 - Built Power BI feedback dashboards tracking usage and sentiment across 10+ academic tools on Mac, Linux, and Windows, driving 90%+ user satisfaction through data-informed support.
 - Analyzed support ticket trends and operational data to identify system bottlenecks, contributing to a 97% issue resolution rate and improving team response workflows.
@@ -63,7 +63,7 @@ Coursework: Image Processing, Database Management, ERP Systems, NLP, Web Develop
 - Validated the grading model against 200 hand-graded submissions (~80% agreement), recalibrating per assignment and hand-checking borderline cases.
 
 ### DPSY & Associates | Mumbai, India
-#### Analytics Intern | April 2023 – June 2023
+#### Financial Analyst | April 2023 – June 2023
 - Built data cleansing, data-quality checks and reconciliation routines for a banking client with SQL and Python (Pandas, NumPy), cleaning and filtering 80% of routine records to surface high-risk cases and cut audit cycles from 2 to 1.5 months.
 - Aggregated market and product-segment statistics in Excel (pivot tables, lookups) on costing, profit margins and inventory holding levels, showing which segments justified their carrying cost.
 - Built and presented 10+ Tableau and Power BI dashboards and decks internally, feeding client presentations that helped banking, retail and energy clients pinpoint stocking levels and ROI thresholds.
@@ -87,6 +87,13 @@ Coursework: Image Processing, Database Management, ERP Systems, NLP, Web Develop
 - Forecasted weekly SKU demand for 320 products with scikit-learn HistGradientBoosting so a planning manager could size stock and buys, cutting 4-week WAPE to 15.2% vs 20.5% for the best standard method.
 - Diagnosed forecast bias where a neutral-looking −1.3% average hid end-of-life products over-forecast by 42%, and added a decline warning so planners see where forecasts are weakest.
 - Shipped a quantile inventory planner in Shiny for Python that stocks to the p90 of total demand rather than summed weekly p90s, keeping ~90% coverage with 2–8% less inventory.
+
+### Olist E-commerce – Financial and Supply Chain Analysis | Tableau
+- Built financial dashboards in Tableau on Olist's public Brazilian e-commerce data (~99K orders, 2016–2018), tracking monthly revenue, order volume and average order value.
+- Broke down revenue by product category and customer state, showing which categories and regions carry the business and where sales are concentrated.
+- Measured freight cost share, freight as a percentage of order value by state and category, showing where shipping cost eats into margin on distant or low-price orders.
+- Analyzed seller performance across ~3,100 sellers on shipping time and late shipments by seller state, flagging the regions where fulfillment slows down.
+- Built customer cohort views tracking repeat-purchase rates by first-order month, so retention can be compared across cohorts alongside revenue.
 
 ### SportSignal – ETL Ingestion Pipeline for Unifying Disjointed Sports Data | Python, SQL, Supabase, GitHub Actions
 - Built a multi-sport data hub loading 18 seasons of big-five European football (FBref, Transfermarkt, Understat, StatsBomb, ClubElo) and MLB Statcast into Supabase PostgreSQL behind public dashboards.

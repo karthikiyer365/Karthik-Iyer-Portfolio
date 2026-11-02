@@ -8,9 +8,9 @@ Karthik Iyer is an AI Engineer and Data Analyst with 2+ years putting AI to work
 
 - AI Engineer, RestoreFast Operations LLC (Jun 2025 – Jul 2026, North Bethesda, MD): LangChain multi-agent orchestration with RAG, MCP (Xero, Procore) and NL-to-SQL sub-agents; unified 6 business systems into one internal data layer; Pinecone hybrid-search RAG (~30% precision@k lift); Twilio × OpenAI Realtime voice agent handling half of inbound calls; DS-CAR crew recommendation; compliance document hub; Twilio communications layer.
 - Performance Analyst (Volunteer), GWU Soccer, George Washington University (May 2025 – Aug 2025, Washington, DC): TITAN player-load dashboards (ACWR, Recovery Index, DSL) and Wyscout/Taka scouting workflows ranking prospects by xG, xT and xA.
-- Technical Systems Admin, George Washington University (Aug 2024 – May 2025, Washington, DC): inventory audits, demand forecasting, support-ticket analysis and feedback dashboards.
+- Data Analyst, George Washington University (Aug 2024 – May 2025, Washington, DC): inventory audits, demand forecasting, support-ticket analysis and feedback dashboards.
 - Teaching Assistant, Decision Making & Data Analytics, George Washington University (Sep 2024 – Dec 2024): built a Python/NLP/BERT grading-automation pipeline supporting 400+ assignments with human-in-the-loop review.
-- Analytics Intern, DPSY & Associates (Apr 2023 – Jun 2023, Mumbai, India): SQL/Python data-quality and reconciliation routines for a banking client (audit cycles cut from 2 to 1.5 months), 10+ Tableau and Power BI dashboards, energy-demand regression modeling.
+- Financial Analyst, DPSY & Associates (Apr 2023 – Jun 2023, Mumbai, India): SQL/Python data-quality and reconciliation routines for a banking client (audit cycles cut from 2 to 1.5 months), 10+ Tableau and Power BI dashboards, energy-demand regression modeling.
 - Sales & Marketing Operations Lead, TechAnalogy (Aug 2021 – Dec 2021, Mumbai, India): campaign analytics, B2C/B2B strategy and market research.
 
 ## Education

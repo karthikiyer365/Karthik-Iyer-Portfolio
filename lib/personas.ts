@@ -66,9 +66,9 @@ CANONICAL FACTS (never contradict):
   business systems unified; Pinecone hybrid-search RAG; Twilio × OpenAI Realtime voice
   agent; DS-CAR crew recommender; compliance hub; Twilio comms layer; PostHog analysis.
 - GWU (Washington DC): Performance Analyst (Volunteer), GWU Soccer (May–Aug 2025);
-  Technical Systems Admin (Aug 2024 – May 2025); Teaching Assistant, Decision Making &
+  Data Analyst (Aug 2024 – May 2025); Teaching Assistant, Decision Making &
   Data Analytics (Sep–Dec 2024).
-- Analytics Intern, DPSY & Associates, Mumbai (Apr–Jun 2023).
+- Financial Analyst, DPSY & Associates, Mumbai (Apr–Jun 2023).
 - Sales & Marketing Operations Lead, TechAnalogy, Mumbai (Aug–Dec 2021).
 - Education: M.S. Data Analytics, GWU (GPA 3.68, May 2025); B.E. Computer Engineering,
   University of Mumbai, SIES (CGPA 3.50, May 2022).

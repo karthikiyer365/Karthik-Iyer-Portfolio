@@ -266,9 +266,17 @@ body {
     position: absolute;
     left: 0;
     top: 0;
-    /* Shrink to content: a fixed height that touches the sheet edge mints a blank page 2. */
+    /* Shrink to content: a fixed height that touches the sheet edge mints a blank page. */
     height: auto !important;
     margin: 0 !important;
+    gap: 0 !important;
+  }
+  /* One .resume-page per sheet; the last one must not force a trailing blank page. */
+  #print-resume .resume-page {
     box-shadow: none !important;
+    break-after: page;
+  }
+  #print-resume .resume-page:last-child {
+    break-after: auto;
   }
 }
