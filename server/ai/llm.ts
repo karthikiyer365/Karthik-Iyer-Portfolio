@@ -23,6 +23,7 @@ export async function callOpenRouterChat(opts: {
   max_tokens?: number;
   tools?: Array<{ type: "function"; function: { name: string; description: string; parameters: object } }>;
   tool_choice?: "auto" | "required";
+  json?: boolean; // ask for a syntactically valid JSON object (response_format)
 }): Promise<OpenRouterChatResult> {
   const key = getOpenRouterApiKey();
   if (!key) throw new Error("Missing OPENROUTER_API_KEY");
@@ -35,6 +36,7 @@ export async function callOpenRouterChat(opts: {
     // replies and JSON. Off = full budget for the answer.
     reasoning: { enabled: false },
   };
+  if (opts.json) body.response_format = { type: "json_object" };
   if (opts.tools?.length) {
     body.tools = opts.tools;
     body.tool_choice = opts.tool_choice ?? "auto";

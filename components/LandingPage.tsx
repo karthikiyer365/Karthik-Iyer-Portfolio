@@ -65,12 +65,12 @@ const RECENT_EXPERIENCE: { title: string; path: string; file: string }[] = [
   {
     title: "AI Engineer",
     path: "~/restorefast/ai-dev",
-    file: "portfolio/experiences/AI & Data Engineer - RestoreFast.ipynb",
+    file: "portfolio/experiences/AI Engineer - RestoreFast.ipynb",
   },
   {
-    title: "Technical Systems Admin",
+    title: "Data Analyst",
     path: "~/gwu/it",
-    file: "portfolio/experiences/Technical Systems Admin - GWU.ipynb",
+    file: "portfolio/experiences/Data Analyst - GWU.ipynb",
   },
   {
     title: "M.Sc Data Analytics",
@@ -78,7 +78,7 @@ const RECENT_EXPERIENCE: { title: string; path: string; file: string }[] = [
     file: "portfolio/education/MSc Data Analytics - GWU.ipynb",
   },
   {
-    title: "Analytics Intern",
+    title: "Financial Analyst",
     path: "~/dpsy/analytics",
     file: "portfolio/experiences/Financial Analyst - DPSY & Associates.ipynb",
   },

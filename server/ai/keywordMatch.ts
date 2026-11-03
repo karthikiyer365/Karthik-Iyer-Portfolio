@@ -168,7 +168,7 @@ const countWord = (text: string, kw: string) =>
 // Score every group's signal words against `text`, return the group with the
 // highest hit count. Shared by role-type and industry scoring — both are the
 // same "which labeled bucket does this JD's language match best" operation.
-function pickBestMatch(
+export function pickBestMatch(
   text: string,
   groups: Record<string, string[]>
 ): { key: string; signals: string[]; score: number } {

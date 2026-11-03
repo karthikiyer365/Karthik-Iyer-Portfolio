@@ -13,9 +13,9 @@ const SORT_ORDER: Record<string, string[]> = {
     "projects",
   ],
   "portfolio/experiences": [
-    "AI & Data Engineer - RestoreFast.ipynb",
+    "AI Engineer - RestoreFast.ipynb",
     "Teaching Assistant - GWU.ipynb",
-    "Technical Systems Admin - GWU.ipynb",
+    "Data Analyst - GWU.ipynb",
     "Financial Analyst - DPSY & Associates.ipynb",
     "SMO Lead - TechAnalogy.ipynb",
   ],

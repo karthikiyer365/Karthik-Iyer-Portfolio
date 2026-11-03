@@ -12,10 +12,91 @@ export const PERSONA_VOICE: Record<string, string> = {
 // Real contact lives in lib/settings.ts, not resume.md — pass it verbatim so the
 // model stops emitting [Email]/[Phone] placeholders.
 export const CONTACT =
-  "Arlington, VA · karthikiyer365@gmail.com · +1 (202) 713-1699 · linkedin.com/in/karthikiyer365 · karthikiyer.info";
+  "Arlington, VA · karthikiyer365@gmail.com · +1 (202) 713-1699 · github.com/karthikiyer365 · linkedin.com/in/karthikiyer365 · karthikiyer.info";
 
 export function readMaster(): string {
   return resumeMaster.text;
+}
+
+// The master resume as structured entries — the only source of titles, orgs, dates,
+// education, volunteer and certifications in a generated resume. Parses
+// resumeMaster.md's shape: "## SECTION", "### org | location" (projects:
+// "### name – subtitle | stack"), "#### role, subtitle | dates", "- bullet".
+export interface MasterRole { org: string; location: string; role: string; subtitle?: string; dates: string; bullets: string[] }
+export interface MasterProject { id: string; name: string; subtitle?: string; stack: string; bullets: string[] }
+export interface Master {
+  contact: string;
+  summary: string;
+  experience: MasterRole[];
+  projects: MasterProject[];
+  education: { org: string; degree: string; gpa: string; dates: string }[];
+  volunteer: { org: string; role: string; dates: string; bullets: string[] }[];
+  certifications: string[];
+  publication: string;
+}
+
+export function parseMaster(text = resumeMaster.text): Master {
+  const m: Master = { contact: "", summary: "", experience: [], projects: [], education: [], volunteer: [], certifications: [], publication: "" };
+  const pair = (s: string): [string, string] => {
+    const i = s.lastIndexOf(" | ");
+    return i < 0 ? [s.trim(), ""] : [s.slice(0, i).trim(), s.slice(i + 3).trim()];
+  };
+  const splitFirst = (s: string, sep: string): [string, string | undefined] => {
+    const i = s.indexOf(sep);
+    return i < 0 ? [s, undefined] : [s.slice(0, i), s.slice(i + sep.length)];
+  };
+  let section = "";
+  let sub = ""; // ### heading inside CERTIFICATIONS…
+  let org = "";
+  let location = "";
+  let bullets: string[] | null = null;
+  for (const raw of text.split("\n")) {
+    const line = raw.trim();
+    if (!line) continue;
+    if (line.startsWith("# ")) continue;
+    if (line.startsWith("## ")) {
+      section = line.slice(3);
+      bullets = null;
+    } else if (line.startsWith("### ")) {
+      const [a, b] = pair(line.slice(4));
+      bullets = null;
+      if (section === "PROJECTS") {
+        const [name, subtitle] = splitFirst(a, " – ");
+        const p: MasterProject = { id: name, name, subtitle, stack: b, bullets: [] };
+        m.projects.push(p);
+        bullets = p.bullets;
+      } else {
+        [org, location, sub] = [a, b, a];
+      }
+    } else if (line.startsWith("#### ")) {
+      const [head, dates] = pair(line.slice(5));
+      const [role, subtitle] = splitFirst(head, ", ");
+      if (section === "WORK EXPERIENCE") {
+        const r: MasterRole = { org, location, role, subtitle, dates, bullets: [] };
+        m.experience.push(r);
+        bullets = r.bullets;
+      } else if (section === "EDUCATION") {
+        const gpa = head.match(/\((C?GPA [^)]+)\)/)?.[1] ?? "";
+        m.education.push({ org, degree: head.replace(/\s*\(C?GPA [^)]+\)/, "").trim(), gpa, dates });
+      } else {
+        // Volunteer: "#### org, role | dates"
+        const v = { org: role, role: subtitle ?? "", dates, bullets: [] as string[] };
+        m.volunteer.push(v);
+        bullets = v.bullets;
+      }
+    } else if (line.startsWith("- ")) {
+      bullets?.push(line.slice(2));
+    } else if (!m.contact && section === "") {
+      m.contact = line.split(" | ").join(" · ");
+    } else if (section === "PROFESSIONAL SUMMARY") {
+      m.summary = line;
+    } else if (sub === "Certifications") {
+      m.certifications = line.split(" | ").map((c) => c.trim());
+    } else if (sub === "Publication") {
+      m.publication = line;
+    }
+  }
+  return m;
 }
 
 // Narrative text from the chart JSONs (hero/storyline/outcomes), baked at build —
