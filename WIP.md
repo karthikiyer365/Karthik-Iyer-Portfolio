@@ -2,7 +2,7 @@
 
 Internal working doc. Not hosted. Lives in repo root only (outside `content/` and `public/`, so the site never loads or serves it).
 
-Snapshot: 2026-10-07. One row per item, deduplicated across platforms. Blank = not present.
+Snapshot: 2026-11-25. One row per item, deduplicated across platforms. Blank = not present.
 
 - **Portfolio**: notebooks under `content/` (karthikiyer.info)
 - **Projects + Sports**: `projects.karthikiyer.info` or `sports.karthikiyer.info`
@@ -19,6 +19,7 @@ Snapshot: 2026-10-07. One row per item, deduplicated across platforms. Blank = n
 | Indian EcoPolitical Growth | ✓ | ✓ | | Webpage |
 | Demand Forecasting | ✓ | ✓ | ✓ | Webpage |
 | Support Ticket Classifier | ✓ | ✓ | ✓ | Webpage |
+| Laya vs Logistic Regression | | ✓ | | |
 | E-commerce Sales Dashboard | | ✓ | | |
 | WESAD Stress Detection | ✓ | | | GitHub |
 | Audio Similarity Recommender | ✓ | | | Webpage |
@@ -37,3 +38,4 @@ Snapshot: 2026-10-07. One row per item, deduplicated across platforms. Blank = n
 - Google Play Store Analytics and the MSc notebook had links to the private `storage` repo (404 for visitors); dropped.
 - Excluded: in-progress sports sections (Scouting Screens, Bat Tracking, Stuff+/Pitching+, Hitter Analysis).
 - MLB Pitcher Perfect Portfolio left blank: not confirmed that the SportSignal notebook covers baseball.
+- Laya vs Logistic Regression (7 Oct 2026) is a follow-up to the Support Ticket Classifier on the same routing task; no article or notebook yet.
